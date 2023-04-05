@@ -1,7 +1,6 @@
-function Y = nnm(data, M)
-    n1 = size(M, 1);
-    n2 = size(M, 2);
-    m = sum( M , "all" ); %stevilo omejitev
+function Y = nnm(data, mask)
+    [n1, n2] = size(mask);
+    m = sum( mask , "all" ); %stevilo omejitev
     b = zeros(m, 1);
 
     A = zeros((n1 + n2)^2, m);
@@ -9,7 +8,7 @@ function Y = nnm(data, M)
     count = 1;
     for i = 1:n1
         for j = 1:n2
-            if(M(i, j) == 1)
+            if(mask(i, j) == 1)
                 X = zeros(n1+n2);
                 X(i,j+n1) = 1;
                 A(:,count)= vec(X);
