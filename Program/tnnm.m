@@ -7,11 +7,9 @@ function X = tnnm(data, mask, rank)
         k = k + 1
 
         oldX = X;
-        [U, S, V] = svd(X);
-        A = U(:, 1:rank)';
-        B = V(:, 1:rank)';
+        [U, S, V] = svds(X, rank);
 
-        X = ADMM(A, B, data, mask);
+        X = ADMM(U', V', data, mask);
         stopCriteria = canStop(X, oldX, 1);
     end
 
@@ -59,6 +57,6 @@ function b = canStop(A, B, print)
     if print
         parameter
     end
-    b = parameter < 1e-4;
+    b = parameter < 1e-3;
 
 end
