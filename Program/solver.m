@@ -16,8 +16,10 @@ function Y = matrixMinimization(data, mask, method, rank)
     switch method 
         case 'nnm'
             Y = nnm(data, mask);
+            return
         case 'svt'
             Y = svt(data, mask);
+            return
     end
 
 
@@ -28,6 +30,7 @@ function Y = matrixMinimization(data, mask, method, rank)
     switch method 
         case 'tnnm'
             Y = tnnm(data, mask, rank)
+            return
 
         otherwise
             error('Taka metoda ne obstaja')

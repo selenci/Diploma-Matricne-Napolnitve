@@ -4,14 +4,14 @@ function Y = svt(data, mask)
 
     step = 1.2*n1*n2/m;
     reg = 5*n1;
-
-    k0 = floor(reg / (step * norm(data .* mask) ))
+    k0 = floor(reg / (step * normest(data .* mask) ));
+    k0 = 0;
     Y = k0 * step * (data .* mask);
     stopCriteria = false;
 
     k = 0;
     while ~stopCriteria
-        [U, D, V] = svd(Y);
+        [U, D, V] = svdTrial(Y, reg);
 
         X = U * regulate(D, reg) * V';
         Y = Y + step * ( (data .* mask) - (X .* mask) );
@@ -20,6 +20,22 @@ function Y = svt(data, mask)
     end
 
     Y = X;
+end
+
+function [U, D, V] = svdTrial(M, reg)
+    [n1, n2] = size(M);
+    step = 10;
+    p = step;
+    [U, D, V] = svds(M, p);
+
+    while (p <= min(n1, n2) && D(p, p) > reg)
+        p = p + step;
+        [U, D, V] = svds(M, p);
+    end
+
+    if(p > min(n1, n2))
+        [U, D, V] = svd(M);
+    end
 end
 
 function data = regulate(data, reg)
@@ -31,7 +47,7 @@ end
 
 function b = canStop(data, X, mask)
    
-    parameter = norm( (X - data) .* mask, "fro") / norm(data .* mask, "fro") ;
+    parameter = normest( (X - data) .* mask) / normest(data .* mask) 
     b = parameter < 1e-4;
     
 end
