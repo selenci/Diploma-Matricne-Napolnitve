@@ -1,11 +1,10 @@
 function Y = svt(data, mask)
     [n1, n2] = size(mask);
-    m = sum( mask , "all" ); %stevilo omejitev
+    m = sum( mask , "all" ) %stevilo omejitev
 
     step = 1.2*n1*n2/m;
-    reg = 5*n1;
-    k0 = floor(reg / (step * normest(data .* mask) ));
-    k0 = 0;
+    reg = 5*(n1 + n2)/2;
+    k0 = floor(reg / (step * normest(data .* mask) ))
     Y = k0 * step * (data .* mask);
     stopCriteria = false;
 
@@ -22,6 +21,11 @@ function Y = svt(data, mask)
     Y = X;
 end
 
+function x = normfro(A)
+    [~,~,x] = find(A);
+    x = sqrt(x'*x)
+end
+
 function [U, D, V] = svdTrial(M, reg)
     [n1, n2] = size(M);
     step = 10;
@@ -29,13 +33,16 @@ function [U, D, V] = svdTrial(M, reg)
     [U, D, V] = svds(M, p);
 
     while (p <= min(n1, n2) && D(p, p) > reg)
-        p = p + step;
+        p = 2*p;
         [U, D, V] = svds(M, p);
     end
 
     if(p > min(n1, n2))
-        [U, D, V] = svd(M);
+        [U, D, V] = svds(M, min(n1, n2));
     end
+
+    p
+
 end
 
 function data = regulate(data, reg)
@@ -47,7 +54,7 @@ end
 
 function b = canStop(data, X, mask)
    
-    parameter = normest( (X - data) .* mask) / normest(data .* mask) 
+    parameter = normfro( (X - data) .* mask) / normfro(data .* mask) 
     b = parameter < 1e-4;
     
 end
