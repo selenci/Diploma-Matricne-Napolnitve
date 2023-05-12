@@ -1,0 +1,45 @@
+\chapter{Algoritmi}
+
+\section{Pomembe definicije}
+Nekatere definicije so uporabljene čez več algoritmov. Z namenom preglednosti, te opisujem v tem poglavju
+\begin{enumerate}
+    \item $\Omega$ je definirana množica znanih vrednosti
+    \item \[ [P_\Omega(A)]_{i,j} = \begin{cases} 
+        a_{ij} & (i, j) \in \Omega \\
+        0 & \textrm{drugače}
+     \end{cases}
+  \]
+\end{enumerate}
+
+\section{Minimizacija nuklearne norme}
+Minimizacija nuklearne norme (Nuclear Norm Minimization oziroma NNM) se zanaša na dejstvo, da je rang matrike povezan z nuklearno normo matrike. Ta je definirana kot 
+
+\[
+||A||_* = \sum_{i = 0}^{n} \sigma_i
+\].
+
+Minimizacijo nuklearne norme je možno pretvoriti v semidefinitni problem, ki ga lahko rešujemo z različnimi pripomočki, na primer SeDuMi \cite{SeDuMi}.
+
+Po \cite{CR08} lahko problem definiramo kot
+
+\begin{align*}
+    \textrm{min }& \hspace{0.5cm} tr(Y)\\
+    \textrm{tako da }& \hspace{0.5cm} (Y, A_k) = b_k, k = 1, \cdots , |\Omega|\\
+    &\hspace{0.5cm} Y \succcurlyeq 0
+\end{align*}
+
+kjer
+\[
+  Y = \begin{bmatrix}
+    W_1 & X \\
+    X^T & W_2
+  \end{bmatrix}  
+\] tak problem pa lahko že rešujemo z semidefinitnimi programi.
+
+
+\section{Prag singularnih vrednosti}
+
+Algoritem praga singularnih pri svoji implementaciji uporablja $\mathcal{D}_\tau(Z) = U \textrm{diag}\{(\sigma_i(\Sigma)-\tau)_+\}_i V^T$, kjer je $t_+ = max(t, 0)$.
+$\theta$ je regulacijski parameter, ki nam pomaga pri konvergenci do rešitve. \cite{CCS}
+
+Algoritem je iterativen, in se zanaša na matriki $X$ in $Y$, kjer velja $X_k = \mathcal{D}_\tau(Y_{k-1})$ ter $Y_k = Y_{k-1} + \delta_k(P_\Omega(M) - P_\Omega(X_k))$. $\delta$ predstavlja zaporedje pozitivnih korakov, v smeri katerih se premikamo pri iskanju rešitve. 

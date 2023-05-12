@@ -31,6 +31,12 @@ function Y = matrixMinimization(data, mask, method, rank)
         case 'tnnm'
             Y = tnnm(data, mask, rank)
             return
+        case 'lmafit'
+            Y = lmafit(data, mask, rank)
+            return
+        case 'asd'
+            Y = asd(data, mask, rank)
+            return
 
         otherwise
             error('Taka metoda ne obstaja')

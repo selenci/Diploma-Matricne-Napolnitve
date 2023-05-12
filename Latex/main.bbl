@@ -68,6 +68,42 @@
       \verb https://doi.org/10.1145/1345448.1345465
       \endverb
     \endentry
+    \entry{CCS}{misc}{}
+      \name{author}{3}{}{%
+        {{hash=5dfd9c597425ebbe4330801e972b5b56}{%
+           family={Cai},
+           familyi={C\bibinitperiod},
+           given={Jian-Feng},
+           giveni={J\bibinithyphendelim F\bibinitperiod}}}%
+        {{hash=204f23c4cd71374a68afa533fd9c9d74}{%
+           family={Candes},
+           familyi={C\bibinitperiod},
+           given={Emmanuel\bibnamedelima J.},
+           giveni={E\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=2cd3ea243f4dcf2b2a4b31d163fcf02e}{%
+           family={Shen},
+           familyi={S\bibinitperiod},
+           given={Zuowei},
+           giveni={Z\bibinitperiod}}}%
+      }
+      \strng{namehash}{1531a91a33fd4da7ca15dba2b4b7cf86}
+      \strng{fullhash}{1531a91a33fd4da7ca15dba2b4b7cf86}
+      \strng{bibnamehash}{1531a91a33fd4da7ca15dba2b4b7cf86}
+      \strng{authorbibnamehash}{1531a91a33fd4da7ca15dba2b4b7cf86}
+      \strng{authornamehash}{1531a91a33fd4da7ca15dba2b4b7cf86}
+      \strng{authorfullhash}{1531a91a33fd4da7ca15dba2b4b7cf86}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{math.OC}
+      \field{eprinttype}{arXiv}
+      \field{title}{A Singular Value Thresholding Algorithm for Matrix Completion}
+      \field{year}{2008}
+      \verb{eprint}
+      \verb 0810.3286
+      \endverb
+    \endentry
     \entry{CR08}{article}{}
       \name{author}{2}{}{%
         {{hash=ae404faac8c8429af059d0185dcc9643}{%
@@ -134,6 +170,41 @@
       \verb 10.1137/1.9781611971446
       \endverb
       \keyw{courant-fischer eigenvalues linear.algebra matrix numerical.analysis textbook}
+    \endentry
+    \entry{SeDuMi}{article}{}
+      \name{author}{1}{}{%
+        {{hash=fe1ced4ee77685732ac1a8aa62e7d6ac}{%
+           family={Sturm},
+           familyi={S\bibinitperiod},
+           given={Jos\bibnamedelima F.},
+           giveni={J\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+      }
+      \strng{namehash}{fe1ced4ee77685732ac1a8aa62e7d6ac}
+      \strng{fullhash}{fe1ced4ee77685732ac1a8aa62e7d6ac}
+      \strng{bibnamehash}{fe1ced4ee77685732ac1a8aa62e7d6ac}
+      \strng{authorbibnamehash}{fe1ced4ee77685732ac1a8aa62e7d6ac}
+      \strng{authornamehash}{fe1ced4ee77685732ac1a8aa62e7d6ac}
+      \strng{authorfullhash}{fe1ced4ee77685732ac1a8aa62e7d6ac}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Optimization Methods and Software}
+      \field{number}{1-4}
+      \field{title}{Using SeDuMi 1.02, A {MATLAB} toolbox for optimization over symmetric cones}
+      \field{volume}{11}
+      \field{year}{1999}
+      \field{pages}{625\bibrangedash 653}
+      \range{pages}{29}
+      \verb{doi}
+      \verb 10.1080/10556789908805766
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1080/10556789908805766
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1080/10556789908805766
+      \endverb
     \endentry
     \entry{VV20}{online}{}
       \name{author}{1}{}{%

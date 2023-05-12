@@ -1,9 +1,0 @@
-\babel@toc {english}{}\relax 
-\babel@toc {slovene}{}\relax 
-\contentsline {chapter}{Povzetek}{}{section*.3}%
-\babel@toc {english}{}\relax 
-\contentsline {chapter}{Abstract}{}{section*.5}%
-\babel@toc {slovene}{}\relax 
-\contentsline {chapter}{\numberline {1}Uvod}{1}{chapter.1}%
-\contentsline {chapter}{\numberline {2}Pregled sorodnih del}{3}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Singularni razcep}{4}{section.2.1}%
