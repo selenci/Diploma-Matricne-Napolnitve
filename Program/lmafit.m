@@ -5,11 +5,14 @@ function Y = lmafit(data, mask, rank)
     Z = data .* mask;
 
     stopCriteria = false;
+    k = 0;
     while ~stopCriteria
+        k = k + 1
+        oldXY = X*Y;
         X = Z*pinv(Y);
         Y = pinv(X)*Z;
         Z = X*Y + ((data - X*Y) .* mask);
-        stopCriteria = canStop(data, X*Y, mask);
+        stopCriteria = canStop(X*Y, oldXY);
     end
 
     Y = X*Y;
@@ -17,9 +20,9 @@ end
 
 
 
-function b = canStop(data, X, mask)
+function b = canStop(A, B)
    
-    parameter = normest( (X - data) .* mask) / normest(data .* mask) 
+    parameter = norm(A-B, "fro")
     b = parameter < 1e-4;
         
 end

@@ -29,13 +29,13 @@ function Y = matrixMinimization(data, mask, method, rank)
 
     switch method 
         case 'tnnm'
-            Y = tnnm(data, mask, rank)
+            Y = tnnm(data, mask, rank);
             return
         case 'lmafit'
-            Y = lmafit(data, mask, rank)
+            Y = lmafit(data, mask, rank);
             return
         case 'asd'
-            Y = asd(data, mask, rank)
+            Y = asd(data, mask, rank);
             return
 
         otherwise

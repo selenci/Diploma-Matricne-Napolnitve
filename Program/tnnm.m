@@ -3,43 +3,52 @@ function X = tnnm(data, mask, rank)
     passRank = rank;
 
 
-    X = data;
+    X = data .* mask;
     stopCriteria = false;
-     k = 0;
+    k = 0;
     while ~stopCriteria
         k = k + 1
 
-        oldX = X;
         [U, S, V] = svds(X, rank);
+        oldX = X;
+        % X = ADMM(U', V', data, mask, 90 + k*10);
+        para.admm_iter = 600 + k*10;
+        para.admm_tol = 1e-4;
+        para.admm_rho = 5e-2;
 
-        X = ADMM(U', V', data, mask);
-        stopCriteria = canStop(X, oldX, 1);
+        [X, ~] = admmAXB(U', V', data, data, mask, para);
+        stopCriteria = canStop(X, oldX, 1, 5.312856700495526e+04);
+
     end
 
 end
 
 
-function X = ADMM(A, B, data, mask)
+function X = ADMM(A, B, data, mask, stevilo)
     X = data; 
     W = data;
     Y = data;
 
-    beta = 1/100;
+    beta = 1;
     stopCriteria = false;
 
     k = 0;
     while ~stopCriteria
-        k = 1 + k;
+        k = 1 + k
         oldX = X;
         
-        X = D(W - (1/beta)*Y, 1/beta);
+        X = D(W - (Y/beta), 1/beta); 
 
-        W = X + (1/beta)*(A' * B + Y);
-        W = W .* ~mask + data .* mask;
+        W = X + ((A' * B + Y)/beta);
+        W = (W .* ~mask) + (data .* mask);
 
         Y = Y + beta*(X - W);
 
         stopCriteria = canStop(X, oldX, 1);
+
+        if(k > stevilo)
+            break
+        end
     end
 
 end
@@ -67,16 +76,21 @@ function [U, D, V] = svdTrial(M, reg)
     end
 
     if(p > min(n1, n2))
-        [U, D, V] = svd(M);
+        [U, D, V] = svds(M, min(n1, n2));
     end
 end
 
-function b = canStop(A, B, print)
+function x = normfro(A)
+    [~,~,x] = find(A);
+    x = sqrt(x'*x)
+end
 
-    parameter = norm(A - B, "fro");
-    if print
-        parameter
+function b = canStop(A, B, print, norma)
+
+    parameter = norm(A - B, "fro")/ norma
+    if(print == 1)
+        disp(parameter)
     end
-    b = parameter < 1e-3;
+    b = parameter < 3e-4;
 
 end

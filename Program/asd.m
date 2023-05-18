@@ -4,14 +4,17 @@ function Y = asd(data, mask, rank)
     Y = rand(rank, n2) * 255;
 
     stopCriteria = false;
+    k = 0;
     while ~stopCriteria
+        k = k + 1
+        oldXY = X*Y;
         gradient = gradX(X, Y, data, mask); 
         X = X - stepsizeX(gradient, Y, mask) * gradient;
 
         gradient = gradY(X, Y, data, mask);
         Y = Y - stepsizeY(gradient, X, mask) * gradient;
 
-        stopCriteria = canStop(data, X*Y, mask);
+        stopCriteria = canStop(oldXY, X*Y);
     end
 
     Y = X*Y;
@@ -37,9 +40,9 @@ function t = stepsizeY(grad, X, mask)
     t = a / b;
 end
 
-function b = canStop(data, X, mask)
+function b = canStop(A, B)
    
-    parameter = normest( (X - data) .* mask) / normest(data .* mask) 
+    parameter = norm(A-B, "fro")
     b = parameter < 1e-4;
         
 end

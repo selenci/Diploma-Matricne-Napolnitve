@@ -13,7 +13,7 @@ M = zeros(n1, n2);
 for i = 1:n1
     i
     for j = 1:n2
-        if(rand() <= 0.3)
+        if(rand() <= 0.8)
             A(i, j) = x1(i, j);
             M(i, j) = 1;
         end
@@ -22,6 +22,6 @@ end
 
 % Y = solver(sparse(A), sparse(M), "svt");
 
-Y = solver(sparse(A), sparse(M), "asd", 10)
+Y = solver(sparse(A), sparse(M), "tnnm", 10)
 lowrank = sum(svd(x1))
 gotten = sum(svd(Y))
