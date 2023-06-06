@@ -2,8 +2,8 @@ function Y = svt(data, mask)
     [n1, n2] = size(mask);
     m = sum( mask , "all" ) %stevilo omejitev
 
-    step = 0.9*n1*n2/m;
-    reg = 5*(n1 + n2)/2;
+    step = 1.2*n1*n2/m;
+    reg = 10.0*(n1 + n2);
     k0 = floor(reg / (step * normest(data .* mask) ))
     Y = k0 * step * (data .* mask);
     stopCriteria = false;
@@ -40,8 +40,6 @@ function [U, D, V] = svdTrial(M, reg)
     if(p > min(n1, n2))
         [U, D, V] = svds(M, min(n1, n2));
     end
-
-    p
 
 end
 
