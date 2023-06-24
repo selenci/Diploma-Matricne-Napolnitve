@@ -19,55 +19,6 @@
 
 \refsection{0}
   \datalist[entry]{nty/global//global/global}
-    \entry{BK07}{article}{}
-      \name{author}{2}{}{%
-        {{hash=59318255011087905fce87822b4aded1}{%
-           family={Bell},
-           familyi={B\bibinitperiod},
-           given={Robert\bibnamedelima M.},
-           giveni={R\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
-        {{hash=fce0a5d2aa4ba307f448e452e68fdbcb}{%
-           family={Koren},
-           familyi={K\bibinitperiod},
-           given={Yehuda},
-           giveni={Y\bibinitperiod}}}%
-      }
-      \list{location}{1}{%
-        {New York, NY, USA}%
-      }
-      \list{publisher}{1}{%
-        {Association for Computing Machinery}%
-      }
-      \strng{namehash}{1de5aa17386e7d4a67ca22b5a0e7ef06}
-      \strng{fullhash}{1de5aa17386e7d4a67ca22b5a0e7ef06}
-      \strng{bibnamehash}{1de5aa17386e7d4a67ca22b5a0e7ef06}
-      \strng{authorbibnamehash}{1de5aa17386e7d4a67ca22b5a0e7ef06}
-      \strng{authornamehash}{1de5aa17386e7d4a67ca22b5a0e7ef06}
-      \strng{authorfullhash}{1de5aa17386e7d4a67ca22b5a0e7ef06}
-      \field{sortinit}{B}
-      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{abstract}{This article outlines the overall strategy and summarizes a few key innovations of the team that won the first Netflix progress prize.}
-      \field{issn}{1931-0145}
-      \field{journaltitle}{SIGKDD Explor. Newsl.}
-      \field{month}{12}
-      \field{number}{2}
-      \field{title}{Lessons from the Netflix Prize Challenge}
-      \field{volume}{9}
-      \field{year}{2007}
-      \field{pages}{75\bibrangedash 79}
-      \range{pages}{5}
-      \verb{doi}
-      \verb 10.1145/1345448.1345465
-      \endverb
-      \verb{urlraw}
-      \verb https://doi.org/10.1145/1345448.1345465
-      \endverb
-      \verb{url}
-      \verb https://doi.org/10.1145/1345448.1345465
-      \endverb
-    \endentry
     \entry{CCS}{misc}{}
       \name{author}{3}{}{%
         {{hash=5dfd9c597425ebbe4330801e972b5b56}{%
@@ -142,35 +93,6 @@
       \verb http://arxiv.org/abs/0805.4471
       \endverb
     \endentry
-    \entry{D97}{book}{}
-      \name{author}{1}{}{%
-        {{hash=e695aa321898b526ee50457fe1e0e9cc}{%
-           family={Demmel},
-           familyi={D\bibinitperiod},
-           given={James\bibnamedelima W.},
-           giveni={J\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
-      }
-      \list{publisher}{1}{%
-        {SIAM}%
-      }
-      \strng{namehash}{e695aa321898b526ee50457fe1e0e9cc}
-      \strng{fullhash}{e695aa321898b526ee50457fe1e0e9cc}
-      \strng{bibnamehash}{e695aa321898b526ee50457fe1e0e9cc}
-      \strng{authorbibnamehash}{e695aa321898b526ee50457fe1e0e9cc}
-      \strng{authornamehash}{e695aa321898b526ee50457fe1e0e9cc}
-      \strng{authorfullhash}{e695aa321898b526ee50457fe1e0e9cc}
-      \field{sortinit}{D}
-      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{month}{1}
-      \field{title}{Applied Numerical Linear Algebra}
-      \field{year}{1997}
-      \verb{doi}
-      \verb 10.1137/1.9781611971446
-      \endverb
-      \keyw{courant-fischer eigenvalues linear.algebra matrix numerical.analysis textbook}
-    \endentry
     \entry{SeDuMi}{article}{}
       \name{author}{1}{}{%
         {{hash=fe1ced4ee77685732ac1a8aa62e7d6ac}{%
@@ -206,38 +128,8 @@
       \verb https://doi.org/10.1080/10556789908805766
       \endverb
     \endentry
-    \entry{VV20}{online}{}
-      \name{author}{1}{}{%
-        {{hash=a29a642c8a18d9e1fdb25e9061f50b63}{%
-           family={Veen},
-           familyi={V\bibinitperiod},
-           given={Barry\bibnamedelima Van},
-           giveni={B\bibinitperiod\bibinitdelim V\bibinitperiod}}}%
-      }
-      \strng{namehash}{a29a642c8a18d9e1fdb25e9061f50b63}
-      \strng{fullhash}{a29a642c8a18d9e1fdb25e9061f50b63}
-      \strng{bibnamehash}{a29a642c8a18d9e1fdb25e9061f50b63}
-      \strng{authorbibnamehash}{a29a642c8a18d9e1fdb25e9061f50b63}
-      \strng{authornamehash}{a29a642c8a18d9e1fdb25e9061f50b63}
-      \strng{authorfullhash}{a29a642c8a18d9e1fdb25e9061f50b63}
-      \field{sortinit}{V}
-      \field{sortinithash}{afb52128e5b4dc4b843768c0113d673b}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{Matrix Completion}
-      \field{urlday}{12}
-      \field{urlmonth}{3}
-      \field{urlyear}{2023}
-      \field{year}{2020}
-      \field{urldateera}{ce}
-      \verb{urlraw}
-      \verb https://www.youtube.com/watch?v=lS0FVKJ4Xfg
-      \endverb
-      \verb{url}
-      \verb https://www.youtube.com/watch?v=lS0FVKJ4Xfg
-      \endverb
-    \endentry
   \enddatalist
+  \missing{survey}
 \endrefsection
 \endinput
 
