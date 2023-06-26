@@ -1,0 +1,31 @@
+\section{Izmenjajoč gradientni spust}
+Ker je računanje SVD razcepa zahtevna operacija, saj ima časovno zahtevnost
+$O(n^3)$, je bilo predlaganih nekaj algoritmov, ki za svoje delovanje ne potrebujejo SVD-ja. Algoritem Izmenjajočega gradientnega spusta, oziroma v nadaljevnu ASD (Alternating Steepest Descent) sloni na računanju gradienta in premikanju po njem. Glavni cilj algoritma je, najti dve matriki $X \in \mathbb{R}^{n_1 \times r}$ ter $Y \in \mathbb{R}^{r \times n_2}$, tako da bo veljalo $M = XY$. Vidimo lahko, da ponovno potrebujemo informacijo o rangu matrike, ki jo rekonstruiramo. Ker imata tako $X$ in $Y$ kvečjemu rang $r$, vemo, da tudi njun produkt $XY$ ne bo imel ranga večjega od $r$. 
+
+Cilj algoritma je minimizirati \todo{zakaj 1/2}
+\[
+    \min_{X, Y} \hspace{0.5cm} \frac{1}{2}\, ||\proj(M) - \proj(XY)||^2_F
+\] 
+Algoritem minimizacijo razdeli na dve, nato pa izmenično rešuje eno in nato drugo kot 
+\begin{align*}
+    X_{i+1} &= \arg \min_{X} \hspace{0.3cm} ||\proj(M) - \proj(XY_i)||^2_F \\
+    Y_{i+1} &= \arg \min_{Y} \hspace{0.3cm} ||\proj(M) - \proj(X_{i+1}Y)||^2_F
+\end{align*}
+\cite{AST-TK15}
+
+Za uporabo algoritma ASD potrebujemo odvoda funkcije $f(X,Y) = \frac{1}{2}\, ||\proj(M) - \proj(XY)||^2_F$ 
+\todo{Zakaj pride $Y^T$}
+\begin{align*}
+    \frac{\partial}{\partial X} f &= \frac{\partial}{\partial X} \frac{1}{2}\, ||\proj(M) - \proj(XY)||^2_F = \\
+    &= \frac{\partial}{\partial X} \frac{1}{2}\, \sum_{i,j}(\delta_{i,j}m_{i,j} - \delta_{i,j}\sum_{k}(x_{i,k}y_{k,j}))^2 = \\
+    &= \sum_{i,j}(\delta_{i,j}m_{i,j} - \delta_{i,j}\sum_{k}(x_{i,k}y_{k,j}))
+    (\sum_{k}y_{k,j}) = \\
+    &= (P(M) - P(XY))Y^T
+\end{align*}
+kjer 
+\[
+    \delta_{i,j} = \begin{cases}
+        1, (i, j) \in \Omega \\
+        0, (i, j) \notin \Omega
+    \end{cases}
+\]

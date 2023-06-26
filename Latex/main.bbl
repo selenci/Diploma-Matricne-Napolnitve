@@ -177,6 +177,49 @@
       \verb https://doi.org/10.1080/10556789908805766
       \endverb
     \endentry
+    \entry{AST-TK15}{article}{}
+      \name{author}{2}{}{%
+        {{hash=2986dec3987751cebdce2cba42d199eb}{%
+           family={Tanner},
+           familyi={T\bibinitperiod},
+           given={Jared},
+           giveni={J\bibinitperiod}}}%
+        {{hash=52d45a717cc51f834c981c4e2890c040}{%
+           family={Wei},
+           familyi={W\bibinitperiod},
+           given={Ke},
+           giveni={K\bibinitperiod}}}%
+      }
+      \strng{namehash}{e7ee4efb2bf62ad54776579033215b07}
+      \strng{fullhash}{e7ee4efb2bf62ad54776579033215b07}
+      \strng{bibnamehash}{e7ee4efb2bf62ad54776579033215b07}
+      \strng{authorbibnamehash}{e7ee4efb2bf62ad54776579033215b07}
+      \strng{authornamehash}{e7ee4efb2bf62ad54776579033215b07}
+      \strng{authorfullhash}{e7ee4efb2bf62ad54776579033215b07}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Matrix completion involves recovering a matrix from a subset of its entries by utilizing interdependency between the entries, typically through low rank structure. Despite matrix completion requiring the global solution of a non-convex objective, there are many computationally efficient algorithms which are effective for a broad class of matrices. In this paper, we introduce an alternating steepest descent algorithm (ASD) and a scaled variant, ScaledASD, for the fixed-rank matrix completion problem. Empirical evaluation of ASD and ScaledASD on both image inpainting and random problems show they are competitive with other state-of-the-art matrix completion algorithms in terms of recoverable rank and overall computational time. In particular, their low per iteration computational complexity makes ASD and ScaledASD efficient for large size problems, especially when computing the solutions to moderate accuracy such as in the presence of model misfit, noise, and/or as an initialization strategy for higher order methods. A preliminary convergence analysis is also presented.}
+      \field{issn}{1063-5203}
+      \field{journaltitle}{Applied and Computational Harmonic Analysis}
+      \field{number}{2}
+      \field{title}{Low rank matrix completion by alternating steepest descent methods}
+      \field{volume}{40}
+      \field{year}{2016}
+      \field{pages}{417\bibrangedash 429}
+      \range{pages}{13}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.acha.2015.08.003
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S1063520315001062
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S1063520315001062
+      \endverb
+      \keyw{Matrix completion,Alternating minimization,Gradient descent,Exact line-search}
+    \endentry
   \enddatalist
   \missing{survey}
 \endrefsection
