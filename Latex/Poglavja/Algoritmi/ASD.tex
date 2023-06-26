@@ -13,14 +13,16 @@ Algoritem minimizacijo razdeli na dve, nato pa izmenično rešuje eno in nato dr
 \end{align*}
 \cite{AST-TK15}
 
-Za uporabo algoritma ASD potrebujemo odvoda funkcije $f(X,Y) = \frac{1}{2}\, ||\proj(M) - \proj(XY)||^2_F$ 
-\todo{Zakaj pride $Y^T$}
+Za uporabo algoritma ASD potrebujemo odvoda funkcije $f(X,Y) = \frac{1}{2}\, ||\proj(M) - \proj(XY)||^2_F$, ki ga izračunamo za vsak element posebej.
+\todo{Zakaj pride $Y^T$ \href{https://math.stackexchange.com/questions/2128462/gradient-of-squared-frobenius-norm-of-a-matrix}{math stackexchange}} 
 \begin{align*}
-    \frac{\partial}{\partial X} f &= \frac{\partial}{\partial X} \frac{1}{2}\, ||\proj(M) - \proj(XY)||^2_F = \\
-    &= \frac{\partial}{\partial X} \frac{1}{2}\, \sum_{i,j}(\delta_{i,j}m_{i,j} - \delta_{i,j}\sum_{k}(x_{i,k}y_{k,j}))^2 = \\
-    &= \sum_{i,j}(\delta_{i,j}m_{i,j} - \delta_{i,j}\sum_{k}(x_{i,k}y_{k,j}))
-    (\sum_{k}y_{k,j}) = \\
-    &= (P(M) - P(XY))Y^T
+    \frac{\partial}{\partial x_{a,b}} f &= \frac{\partial}{\partial x_{a,b}} \frac{1}{2}\, ||\proj(M) - \proj(XY)||^2_F = \\
+    &= \frac{\partial}{\partial x_{a,b}} \frac{1}{2}\, \sum_{i}^{n_1}\sum_{j}^{n_2}(\delta_{i,j}m_{i,j} - \delta_{i,j}\sum_{k}^{r}(x_{i,k}y_{k,j}))^2 = \\
+    &= \, \sum_{j}^{n_2}(\delta_{a,j}m_{a,j} - \delta_{i,j}\sum_{k}^{r}(x_{a,k}y_{k,j}))(-y_{b,j}) \implies \\
+    &\implies \frac{\partial}{\partial X}f = -(\proj(M) - \proj(XY))Y^T
+    % &= \sum_{i,j}(\delta_{i,j}m_{i,j} - \delta_{i,j}\sum_{k}(x_{i,k}y_{k,j}))
+    % (\sum_{k}y_{k,j}) = \\
+    % &= (P(M) - P(XY))Y^T
 \end{align*}
 kjer 
 \[
@@ -28,4 +30,9 @@ kjer
         1, (i, j) \in \Omega \\
         0, (i, j) \notin \Omega
     \end{cases}
+\]
+
+Na podoben način bi lahko pokazali tudi
+\[
+    \frac{\partial}{\partial Y} = -X^T (\proj(M) - \proj(XY))
 \]
