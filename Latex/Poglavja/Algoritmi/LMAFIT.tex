@@ -1,0 +1,28 @@
+\section{LMaFit}
+LMaFit je algoritem, ki podobno kot ASD, rešuje problem matričnih napolnitev z uporabo dveh manjših matrik $X^{n_1 \times r}$ in $Y^{n_1 \times r}$. Podobno kot v prejšnjih algoritmih rešujemo problem 
+\begin{align*}
+    \min_{X, Y, Z}& \hspace{0.5cm} \frac{1}{2}||XY - Z||_F^2\\
+    \text{tako da}& \hspace{0.5cm} \proj(M) = \proj(Z)
+\end{align*}
+le da sam problem rešujemo s pomočjo Moore-Penrose inverza (Označen z $\dagger$).
+
+Lahko je videti, da bo funkcija $f(X,Y,Z) = frac{1}{2}||XY - Z||_F^2$ imela najmanjšo vrednost, ko bo $XY = Z$. Zato uvedemo iterativni algoritem, ki izmenično posodablja $X, Y$ in $Z$ tako, da fiksira dve izmed matrik. Minimizacijo matrik $X$ in $Y$ torej dosežemo na naslednji način.
+\begin{align*}
+    X^{i+1}Y^{i} &= Z^{i} \hspace{0.5cm} / \cdot (Y^i)^\dagger \\
+    X^{i+1} &= Z^{i}(Y^i)^\dagger
+\end{align*}
+\todo{Ali se lahko zanasam na to?}
+Kjer se zanašamo na dejstvo, da ima matrika $Y$ linearno neodvisne vrstice, zaradi česar velja $YY^\dagger = I_{r}$.
+
+Podobno posodobimo matriko $Y$.
+\begin{align*}
+    (X^{i+1})^\dagger \cdot / \hspace{0.5cm} X^{i+1}Y^{i+1} &= Z^{i}   \\
+    Y^{i+1} &= (X^{i+1})^\dagger Z^{i}
+\end{align*}
+Kjer se podobno kot prej zanašamo na dejstvo, da ima matrika $X$ linearno neodvisne stolpce, zaradi česar velja $X^\dagger X = I_{r}$.
+
+Sedaj le še posodobimo matriko Z, kot
+\[
+    Z^{i+1} = X^{i+1}Y^{i+1} + \proj(M - X^{i+1}Y^{i+1})
+\]
+Torej podobno kot prej poskušamo doseči $XY = Z$, vendar zaradi omejitve znanih vrednosti matrike M, na tistem mestu vrednosti popravimo. \cite{LMaFit-WY12}

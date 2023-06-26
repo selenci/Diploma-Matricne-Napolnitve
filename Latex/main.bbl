@@ -220,6 +220,43 @@
       \endverb
       \keyw{Matrix completion,Alternating minimization,Gradient descent,Exact line-search}
     \endentry
+    \entry{LMaFit-WY12}{article}{}
+      \name{author}{3}{}{%
+        {{hash=b257549c0241ec91ca377b25dd98623b}{%
+           family={Wen},
+           familyi={W\bibinitperiod},
+           given={Zaiwen},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=283c439ffb0015e38107aa1c35da9a6b}{%
+           family={Yin},
+           familyi={Y\bibinitperiod},
+           given={Wotao},
+           giveni={W\bibinitperiod}}}%
+        {{hash=5d6038c292fe254b531b0db4830097e3}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Yin},
+           giveni={Y\bibinitperiod}}}%
+      }
+      \strng{namehash}{7ba8fe952a68b7ba116594458c5b9bbf}
+      \strng{fullhash}{7ba8fe952a68b7ba116594458c5b9bbf}
+      \strng{bibnamehash}{7ba8fe952a68b7ba116594458c5b9bbf}
+      \strng{authorbibnamehash}{7ba8fe952a68b7ba116594458c5b9bbf}
+      \strng{authornamehash}{7ba8fe952a68b7ba116594458c5b9bbf}
+      \strng{authorfullhash}{7ba8fe952a68b7ba116594458c5b9bbf}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Mathematical Programming Computation}
+      \field{month}{12}
+      \field{title}{Solving a low-rank factorization model for matrix completion by a nonlinear successive over-relaxation algorithm}
+      \field{volume}{4}
+      \field{year}{2012}
+      \verb{doi}
+      \verb 10.1007/s12532-012-0044-1
+      \endverb
+    \endentry
   \enddatalist
   \missing{survey}
 \endrefsection

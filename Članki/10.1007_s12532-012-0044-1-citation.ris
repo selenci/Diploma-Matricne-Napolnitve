@@ -1,0 +1,18 @@
+TY  - JOUR
+AU  - Wen, Zaiwen
+AU  - Yin, Wotao
+AU  - Zhang, Yin
+PY  - 2012
+DA  - 2012/12/01
+TI  - Solving a low-rank factorization model for matrix completion by a nonlinear successive over-relaxation algorithm
+JO  - Mathematical Programming Computation
+SP  - 333
+EP  - 361
+VL  - 4
+IS  - 4
+AB  - The matrix completion problem is to recover a low-rank matrix from a subset of its entries. The main solution strategy for this problem has been based on nuclear-norm minimization which requires computing singular value decompositions—a task that is increasingly costly as matrix sizes and ranks increase. To improve the capacity of solving large-scale problems, we propose a low-rank factorization model and construct a nonlinear successive over-relaxation (SOR) algorithm that only requires solving a linear least squares problem per iteration. Extensive numerical experiments show that the algorithm can reliably solve a wide range of problems at a speed at least several times faster than many nuclear-norm minimization algorithms. In addition, convergence of this nonlinear SOR algorithm to a stationary point is analyzed.
+SN  - 1867-2957
+UR  - https://doi.org/10.1007/s12532-012-0044-1
+DO  - 10.1007/s12532-012-0044-1
+ID  - Wen2012
+ER  - 
