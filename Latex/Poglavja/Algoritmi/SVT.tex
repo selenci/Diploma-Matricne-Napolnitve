@@ -4,7 +4,7 @@ Algoritem praga singularnih vrednosti, oziroma v nadaljevanju SVT (Singular Valu
 \[
     \begin{cases}
         X^k = \shrink_\tau(Y^{k-1}) \\
-        Y^k = Y^{k-1} + \delta_k \proj_\Omega(A - X^k) 
+        Y^k = Y^{k-1} + \delta_k \proj(M - X^k) 
     \end{cases}
 \]
 kjer $\tau > 0$ predstavlja prag, $\delta_k$ predstavlja $k$-ti premik, $X \in \mathbb{R}^{n_1 \times n_2}$ ter
@@ -15,19 +15,19 @@ Smiselnost algoritma lahko pokažemo s pomočjo Lagrangeovega multiplikatorja. P
 Uvedimo funkcijo $f_\tau(X) = \tau||X||_* + \frac{1}{2}||X||^2_F$. Problem lahko tako zapišemo kot 
 \begin{align*}
     \textrm{min} & \hspace{0.5cm} f_\tau(X) \\
-    \textrm{tako da} & \hspace{0.5cm} \proj_\Omega(X) = \proj_\Omega(M)
+    \textrm{tako da} & \hspace{0.5cm} \proj(X) = \proj(M)
 \end{align*}
 Lahko je videti, da za velike vrednosti $\tau$ velja $f_\tau(X) \approx \tau||X||_*$, kar pokaže, da bo s primerno velikim $\tau$, algoritem res skoraj minimiziral nuklearno normo.
 
 Lagrangeov multiplikator je definiran kot $\mathcal{L}(x, \lambda) = f(x) + \lambda \cdot g(x)$, kjer je $f(x)$ funkcija, ki jo minimiziramo, pod pogojem da velja $g(x) = 0$. Naš problem tako prevedemo v
 \[
-    \mathcal{L}(X, Y) = f_\tau(X) + \left< Y, \proj_\Omega(M - X) \right>
+    \mathcal{L}(X, Y) = f_\tau(X) + \left< Y, \proj(M - X) \right>
 \] 
 S pomočjo tako imenovanega Uzawoega algoritma, pa lahko problem pretvorimo v iterativni algoritem 
 \[
     \begin{cases}
         \mathcal{L}(X^k, Y^{k-1}) =  \arg \min_{X} \mathcal{L}(X^k, Y^{k-1}) \\
-        Y^k = Y^{k-1} + \delta_k \proj_\Omega(M - X^k) 
+        Y^k = Y^{k-1} + \delta_k \proj(M - X^k) 
     \end{cases}
 \] \cite{CCS}
 
@@ -76,18 +76,20 @@ Prav tako lahko sedaj zapišemo algoritem kot
 \[
     \begin{cases}
         X^k = \shrink_\tau(Y^{k-1}) \\
-        Y^k = Y^{k-1} + \delta_k \proj_\Omega(M - X^k) 
+        Y^k = Y^{k-1} + \delta_k \proj(M - X^k) 
     \end{cases}
 \] \cite{CCS}.
 
 \subsection{Nastavljanje parametrov}
 Medtem, ko so koraki v samem algoritmu definirani kot množica korakov, 
 sem sam za premik uporabljal konstanto, ter korak nastavil na 
-\[\delta = 1.2\frac{(n_1 * n_2)}{m}\] po priporočilih \cite{CCS}. 
+\[
+    \delta = 1.2\, \dfrac{n_1 n_2}{m}
+\] po priporočilih \cite{CCS}. 
 
 Prav tako članek navaja, da je za matrike velikosti $\mathbb{R}^{n \times n}$ smiselno nastaviti $\tau = 5n$, vendar sem v moji implementaciji zaradi posploševanja na nekvadratne matrike, za matrike velikosti $\mathbb{R}^{n_1 \times n_2}$ parameter nastavil na
 \[
-    \tau = 5 \frac{n_1+n_2}{2}
-\].
+    \tau = 5\, \frac{n_1+n_2}{2}
+\]
 
 Medtem ko so taki parametri dobri za večje matrike, jih ne smemo uporabljati kot definitivno najboljše vrednosti. Med mojimi testiranji sem ugotovil, da je vrednost premika velikokrat treba zmanjšati, posebno za manjše matrike z več neznanimi vrednostmi, saj drugače program ni konvergiral. Prav tako, se je večkrat zgodilo, da je bil pridobljen rezultat še vedno zelo zašumljen. Takrat je bilo smiselno prag $\tau$ povečati. To je sicer upočasnilo program, vendar izboljšalo rezultat.

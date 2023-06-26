@@ -93,6 +93,55 @@
       \verb http://arxiv.org/abs/0805.4471
       \endverb
     \endentry
+    \entry{HZYLH12}{article}{}
+      \name{author}{5}{}{%
+        {{hash=ff7d1e4dfbba21607e36a4a60f476055}{%
+           family={Hu},
+           familyi={H\bibinitperiod},
+           given={Yao},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=da81cd144d20fd4493b3cd3766ff6d54}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Debing},
+           giveni={D\bibinitperiod}}}%
+        {{hash=45f8892411700a9b1d4fcd3acaeeefd0}{%
+           family={Ye},
+           familyi={Y\bibinitperiod},
+           given={Jieping},
+           giveni={J\bibinitperiod}}}%
+        {{hash=750adebf12ff1b4140470407f82e2b40}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Xuelong},
+           giveni={X\bibinitperiod}}}%
+        {{hash=eca9094f921d211c414272ea48cb7866}{%
+           family={He},
+           familyi={H\bibinitperiod},
+           given={Xiaofei},
+           giveni={X\bibinitperiod}}}%
+      }
+      \strng{namehash}{ca965cbed49c42e05f8add6c392dc046}
+      \strng{fullhash}{f58264e59fcdf42c4d32d14399000e33}
+      \strng{bibnamehash}{ca965cbed49c42e05f8add6c392dc046}
+      \strng{authorbibnamehash}{ca965cbed49c42e05f8add6c392dc046}
+      \strng{authornamehash}{ca965cbed49c42e05f8add6c392dc046}
+      \strng{authorfullhash}{f58264e59fcdf42c4d32d14399000e33}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Transactions on Pattern Analysis and Machine Intelligence}
+      \field{number}{9}
+      \field{title}{Fast and Accurate Matrix Completion via Truncated Nuclear Norm Regularization}
+      \field{volume}{35}
+      \field{year}{2013}
+      \field{pages}{2117\bibrangedash 2130}
+      \range{pages}{14}
+      \verb{doi}
+      \verb 10.1109/TPAMI.2012.271
+      \endverb
+    \endentry
     \entry{SeDuMi}{article}{}
       \name{author}{1}{}{%
         {{hash=fe1ced4ee77685732ac1a8aa62e7d6ac}{%

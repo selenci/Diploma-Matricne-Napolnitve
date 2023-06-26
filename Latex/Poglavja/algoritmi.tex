@@ -4,7 +4,7 @@
 Nekatere definicije so uporabljene čez več algoritmov. Z namenom preglednosti, te opisujem v tem poglavju
 \begin{enumerate}
   \item $\Omega$ je definirana množica znanih vrednosti
-  \item \[ [\proj_\Omega(A)]_{i,j} = \begin{cases}
+  \item \[ [\proj]_{i,j} = \begin{cases}
             a_{ij} & (i, j) \in \Omega \\
             0      & \textrm{drugače}
           \end{cases}
@@ -12,13 +12,15 @@ Nekatere definicije so uporabljene čez več algoritmov. Z namenom preglednosti,
   \item Operator $\shrink_\tau$ kot \[
             \shrink_\tau(A) := U \shrink_\tau(\Sigma) V^T, \hspace{0.3cm} \shrink_\tau(\Sigma) = diag(max(\sigma_i - \tau, 0))
         \] \cite{CCS}
+  \item Z oznako $M \in \mathbb{R}^{n_1 \times n_2}$ označujemo vhodno matriko, torej tisto, ki ima nekatere podatke neznane. {\vspace{-10cm}\todo{V programu nato uporabljamo oznako M za bitno matriko, vendar te v samih dokazih ne potrebujemo, je potem tukaj oznaka M vredu?}\vspace{10cm}}
+  % \item Z oznako $M \in \mathbb{R}^{n_1 \times n_2}$ označujemo bitno matriko M, ki predstavlja masko, s katero označimo katere vrednosti poznamo in katere ne. Vrednost 1 označuje, da je vrednost na tisti poziciji znana, medtem ko 0 označuje, da ni. 
 \end{enumerate}
 
 \section{Minimizacija nuklearne norme}
 Minimizacija nuklearne norme (Nuclear Norm Minimization oziroma NNM) se zanaša na dejstvo, da je rang matrike povezan z nuklearno normo matrike. Ta je definirana kot
 
 \[
-  ||A||_* = \sum_{i = 0}^{n} \sigma_i
+  ||A||_* = \sum_{i = 0}^{n} \sigma_i(A)
 \].
 
 Minimizacijo nuklearne norme je možno pretvoriti v semidefinitni problem, ki ga lahko rešujemo z različnimi pripomočki, na primer SeDuMi \cite{SeDuMi}.
@@ -41,3 +43,4 @@ kjer
 
 
 \input{Poglavja/Algoritmi/SVT.tex}
+\input{Poglavja/Algoritmi/TNNM.tex}
