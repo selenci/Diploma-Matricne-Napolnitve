@@ -1,5 +1,4 @@
 \section{Prag singularnih vrednosti}
-
 Algoritem praga singularnih vrednosti, oziroma v nadaljevanju SVT (Singular Value Thresholding) sloni na dejstvu, da imamo pri matrikah z majhnim rangom nekaj velikih singularnih vrednosti, ostale pa blizu ničli. Za svoje delovanje uvede dva nova pomembna koncepta, prvi je premik, drugi pa prag, potreben za uporabo operatorja $\shrink_\tau$. Algoritem lahko na kratko povzamemo z zapisom
 \[
     \begin{cases}
@@ -13,10 +12,13 @@ $Y^0 = 0 \in \mathbb{R}^{n_1 \times n_2}$. \cite{CCS}
 Smiselnost algoritma lahko pokažemo s pomočjo Lagrangeovega multiplikatorja. Ponovno rešujemo minimizacijski problem, le da dodamo dodatne parametre in s tem minimizacijo omilimo. 
 
 Uvedimo funkcijo $f_\tau(X) = \tau||X||_* + \frac{1}{2}||X||^2_F$. Problem lahko tako zapišemo kot 
-\begin{align*}
+\begin{align}
+\label{2706-0957}
+\begin{split}
     \textrm{min} & \hspace{0.5cm} f_\tau(X) \\
     \textrm{tako da} & \hspace{0.5cm} \proj(X) = \proj(M)
-\end{align*}
+\end{split}
+\end{align}
 Lahko je videti, da za velike vrednosti $\tau$ velja $f_\tau(X) \approx \tau||X||_*$, kar pokaže, da bo s primerno velikim $\tau$, algoritem res skoraj minimiziral nuklearno normo.
 
 Lagrangeov multiplikator je definiran kot $\mathcal{L}(x, \lambda) = f(x) + \lambda \cdot g(x)$, kjer je $f(x)$ funkcija, ki jo minimiziramo, pod pogojem da velja $g(x) = 0$. Naš problem tako prevedemo v
@@ -26,7 +28,7 @@ Lagrangeov multiplikator je definiran kot $\mathcal{L}(x, \lambda) = f(x) + \lam
 S pomočjo tako imenovanega Uzawoega algoritma, pa lahko problem pretvorimo v iterativni algoritem 
 \[
     \begin{cases}
-        \mathcal{L}(X^k, Y^{k-1}) =  \arg \min_{X} \mathcal{L}(X^k, Y^{k-1}) \\
+        X^k =  \arg \min_{X} \mathcal{L}(X^k, Y^{k-1}) \\
         Y^k = Y^{k-1} + \delta_k \proj(M - X^k) 
     \end{cases}
 \] \cite{CCS}

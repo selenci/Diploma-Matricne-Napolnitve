@@ -1,5 +1,7 @@
 \chapter{Algoritmi}
 
+\CB{Na koncu napisati kratek odstavek o tem, kaj je vsebina poglavja.}
+
 \section{Pomembe definicije}
 Nekatere definicije so uporabljene čez več algoritmov. Z namenom preglednosti, te opisujem v tem poglavju
 \begin{enumerate}
@@ -26,20 +28,18 @@ Minimizacija nuklearne norme (Nuclear Norm Minimization oziroma NNM) se zanaša 
 Minimizacijo nuklearne norme je možno pretvoriti v semidefinitni problem, ki ga lahko rešujemo z različnimi pripomočki, na primer SeDuMi \cite{SeDuMi}.
 
 Po \cite{CR08} lahko problem definiramo kot
-
 \begin{align*}
-  \textrm{min }     & \hspace{0.5cm} tr(Y)                                    \\
+  \textrm{min }     & \hspace{0.5cm} \text{tr}(Y)                                    \\
   \textrm{tako da } & \hspace{0.5cm} (Y, A_k) = b_k, k = 1, \cdots , |\Omega| \\
                     & \hspace{0.5cm} Y \succcurlyeq 0
 \end{align*}
-
 kjer
 \[
   Y = \begin{bmatrix}
     W_1 & X   \\
     X^T & W_2
   \end{bmatrix}
-\] tak problem pa lahko že rešujemo z semidefinitnimi programi.
+\] tak problem pa lahko že rešujemo s semidefinitnimi programi.
 
 
 \input{Poglavja/Algoritmi/SVT.tex}
