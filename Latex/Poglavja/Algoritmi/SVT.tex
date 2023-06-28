@@ -42,8 +42,8 @@ Ker je $h(X) := \frac{1}{2} ||X - Y||^2_F + \tau||X||_*$ strogo konveksna funkci
 Pri iskanju minimuma torej iščemo tako točko $X'$, da bo subgradient v točki $X'$ enak 0. Problem sedaj zapišemo kot $0 \in X' - Y + \tau \partial||X'||_*$. Izkaže se, da je množica subgradientov nuklearne norme definirana kot
 \[
     \partial||X||_* = \{UV^* + W: W \in \mathbb{R}^{n_1 \times n_2}, U^*W = 0, WV = 0, ||W||_2 \leq 1 \}.
-\] \todo{Preveri kako se to citira}
-kjer $U \Sigma V^T$ predstavlja SVD razcep matrike X.
+\]
+kjer $U \Sigma V^T$ predstavlja SVD razcep matrike X. \cite{CCS}
 
 Cilj dokaza je pokazati, da velja $X' = \shrink_\tau(Y)$ Najprej razčlenimo SVD razcep matrike $Y$ kot 
 \[
@@ -71,16 +71,15 @@ in
 \end{align*}
 
 Sedaj je zgolj potrebno pokazati, da veljajo potrebne lastnosti matrike $W$.
-\todo{je to res pravilen razlog?} Po sami definiciji SVD vemo, da so vsi stolpci matrik U in V ortogonalni. Torej velja $U_0^TW = 0$ in $WV_0 = 0$. Ker pa ima matrika $\Sigma_1$ vse elemente manjše od $\tau$ velja tudi $||W||_2 \leq 1$. S tem smo pokazali, da $Y - X' \in \tau \partial ||X'||_*$.
+Po sami definiciji SVD vemo, da so vsi stolpci matrik U in V ortogonalni. Torej velja $U_0^TW = 0$ in $WV_0 = 0$. Ker pa ima matrika $\Sigma_1$ vse elemente manjše od $\tau$ velja tudi $||W||_2 \leq 1$. S tem smo pokazali, da $Y - X' \in \tau \partial ||X'||_*$.
 
-Prav tako lahko sedaj zapišemo algoritem kot
-\todo{zakaj lahko zapisemo $\mathcal{L}(X^k, Y^{k-1}) = X^k? $ }
+Prav tako lahko sedaj zapišemo algoritem kot \cite{CCS}
 \[
     \begin{cases}
         X^k = \shrink_\tau(Y^{k-1}) \\
         Y^k = Y^{k-1} + \delta_k \proj(M - X^k) 
     \end{cases}
-\] \cite{CCS}.
+\]
 
 \subsection{Nastavljanje parametrov}
 Medtem, ko so koraki v samem algoritmu definirani kot množica korakov, 

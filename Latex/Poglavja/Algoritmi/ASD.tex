@@ -2,7 +2,7 @@
 Ker je računanje SVD razcepa zahtevna operacija, saj ima časovno zahtevnost
 $O(n^3)$, je bilo predlaganih nekaj algoritmov, ki za svoje delovanje ne potrebujejo SVD-ja. Algoritem Izmenjajočega gradientnega spusta, oziroma v nadaljevnu ASD (Alternating Steepest Descent) sloni na računanju gradienta in premikanju po njem. Glavni cilj algoritma je, najti dve matriki $X \in \mathbb{R}^{n_1 \times r}$ ter $Y \in \mathbb{R}^{r \times n_2}$, tako da bo veljalo $M = XY$. Vidimo lahko, da ponovno potrebujemo informacijo o rangu matrike, ki jo rekonstruiramo. Ker imata tako $X$ in $Y$ kvečjemu rang $r$, vemo, da tudi njun produkt $XY$ ne bo imel ranga večjega od $r$. 
 
-Cilj algoritma je minimizirati \todo{zakaj 1/2}
+Cilj algoritma je minimizirati
 \[
     \min_{X, Y} \hspace{0.5cm} \frac{1}{2}\, ||\proj(M) - \proj(XY)||^2_F
 \] 
@@ -14,7 +14,6 @@ Algoritem minimizacijo razdeli na dve, nato pa izmenično rešuje eno in nato dr
 \cite{AST-TK15}
 
 Za uporabo algoritma ASD potrebujemo odvoda funkcije $f(X,Y) = \frac{1}{2}\, ||\proj(M) - \proj(XY)||^2_F$, ki ga izračunamo za vsak element posebej.
-\todo{Zakaj pride $Y^T$ \href{https://math.stackexchange.com/questions/2128462/gradient-of-squared-frobenius-norm-of-a-matrix}{math stackexchange}} 
 \begin{align*}
     \frac{\partial}{\partial x_{a,b}} f &= \frac{\partial}{\partial x_{a,b}} \frac{1}{2}\, ||\proj(M) - \proj(XY)||^2_F = \\
     &= \frac{\partial}{\partial x_{a,b}} \frac{1}{2}\, \sum_{i}^{n_1}\sum_{j}^{n_2}(\delta_{i,j}m_{i,j} - \delta_{i,j}\sum_{k}^{r}(x_{i,k}y_{k,j}))^2 = \\
@@ -46,7 +45,8 @@ Ker želimo, da bodo znane vrednosti produkta $X^{k+1}Y^{k}$ kar se da podobne z
     t_x &= \arg \min_t \hspace{0.3cm} g(t)
 \end{align*} kjer
 \begin{align*}
-    g(t) &= \frac{1}{2} ||\proj(M) - \proj((X - t\nabla f_Y(X))Y)||_F^2
+    g(t) &= \frac{1}{2} ||\proj(M) - \proj((X - t\nabla f_Y(X))Y)||_F^2 \\
+    g(t) &= \frac{1}{2} ||\proj(M - XY)||_F^2 - t\tr(\proj(M - XY)\proj(\nabla f_Y(X)Y)^T) + \frac{t^2}{2}||\proj(\nabla f_Y(X)Y)||_F^2
 \end{align*}
 Ker je \cite{AST-TK15} \todo{ali lahko tako?}
 \[
@@ -60,20 +60,3 @@ Podobno velja za korak v smeri gradientnega spusta matrike $Y$, kjer
 \[
   t_y = \frac{||\nabla f_X(Y)||_F^2}{||\proj(X \nabla f_X(Y))||_F^2}  
 \]
-
-% \begin{align*}
-%     g'(t) &=  \proj(M - XY) \proj(X'Y)^T = \\
-%     &= \proj(M - XY) \proj((\proj(XY) - \proj(M))Y^T Y)^T = \\
-%     &= \proj(M - XY) (\proj(\proj(XY)Y^TY)^T - \proj(\proj(M)Y^TY)^T) = \\
-%     &= (\proj(M) - \proj(XY)) (\proj(\proj(XY)Y^TY)^T - \proj(\proj(M)Y^TY)^T) = \\
-%     &= \proj(M)\proj(\proj(XY)Y^TY)^T - \proj(M)\proj(\proj(M)Y^TY)^T \\ &- \proj(XY)\proj(\proj(XY)Y^TY)^T + \proj(XY)\proj(\proj(M)Y^TY)^T = \\
-%     &= (\proj(M) - \proj(XY))\proj(\proj(XY)Y^TY)^T + (\proj(XY) - \proj(M))(\proj(\proj(M)Y^TY)^T)
-% \end{align*}
-
-% % \begin{align*}
-% %     g'(t) &= \sum_{i}^{n_1}\sum_{j}^{n_2}(m_{i,j} - \sum_{k}^{r} x_{i,r}y_{r,j} + t \sum_{k}^{r}f_{i,r}y_{r,j})(\sum_{k}^{r}f_{i,r}y_{r,j}) = \\
-% % \end{align*}
-
-% % &= \tr(\proj(M - XY) \proj(-(\proj(M) - \proj(XY))Y^T Y)^T) + t||X'Y||^2_F = \\
-% % &= -\tr(\proj(M - XY) \proj((\proj(M)Y^T - \proj(XY)Y^T) Y)^T) + t||X'Y||^2_F = \\
-% % &= -\tr(\proj(M - XY) \proj(Y^T(\proj(M)Y^T - \proj(XY)Y^T)^T)) + t||X'Y||^2_F = \\

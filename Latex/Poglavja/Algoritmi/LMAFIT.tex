@@ -8,18 +8,17 @@ le da sam problem rešujemo s pomočjo Moore-Penrose inverza (Označen z $\dagge
 
 Lahko je videti, da bo funkcija $f(X,Y,Z) = frac{1}{2}||XY - Z||_F^2$ imela najmanjšo vrednost, ko bo $XY = Z$. Zato uvedemo iterativni algoritem, ki izmenično posodablja $X, Y$ in $Z$ tako, da fiksira dve izmed matrik. Minimizacijo matrik $X$ in $Y$ torej dosežemo na naslednji način.
 \begin{align*}
-    X^{i+1}Y^{i} &= Z^{i} \hspace{0.5cm} / \cdot (Y^i)^\dagger \\
+    X^{i+1}Y^{i} &= Z^{i} \hspace{0.5cm} \\
     X^{i+1} &= Z^{i}(Y^i)^\dagger
 \end{align*}
-\todo{Ali se lahko zanasam na to?}
-Kjer se zanašamo na dejstvo, da ima matrika $Y$ linearno neodvisne vrstice, zaradi česar velja $YY^\dagger = I_{r}$.
+Kjer se zanašamo na dejstvo, da nam množenje z Moore-Penrose inverzom z desne 
+da najboljši možen rezultat.
 
 Podobno posodobimo matriko $Y$.
 \begin{align*}
-    (X^{i+1})^\dagger \cdot / \hspace{0.5cm} X^{i+1}Y^{i+1} &= Z^{i}   \\
+    \hspace{0.5cm} X^{i+1}Y^{i+1} &= Z^{i}   \\
     Y^{i+1} &= (X^{i+1})^\dagger Z^{i}
 \end{align*}
-Kjer se podobno kot prej zanašamo na dejstvo, da ima matrika $X$ linearno neodvisne stolpce, zaradi česar velja $X^\dagger X = I_{r}$.
 
 Sedaj le še posodobimo matriko Z, kot
 \[

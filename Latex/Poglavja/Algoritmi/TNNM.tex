@@ -5,11 +5,11 @@ Sam algoritem uvede tako imenovano skrajšano nuklearno normo, ki je za matriko 
 \[
     ||X||_r = \sum^{\min(n_1, n_2)}_{i = r + 1} \delta_i(X)
 \] torej vsoto $\min(n_1,n_2) - r$ najmanjših singularnih vrednosti, ter z 
-njeno pomočjo definira problem
+njeno pomočjo definira problem \cite{HZYLH12}
 \begin{align*}
     \min_X & \hspace{0.5cm} ||X||_r \\
     \textrm{tako da} & \hspace{0.5cm} \proj(X) = \proj(M)
-\end{align*}\cite{HZYLH12}.
+\end{align*}
 
 
 Cilj algoritma je torej čim bolj zmanjšati najmanjše singularne vrednosti, medtem ko velikih ne omejujemo. S tem problem minimizacije omilimo.
@@ -22,62 +22,57 @@ Za reševanje minimizacije bomo uporabljali algoritem ADMM, vendar moramo prej s
 
 Za nadaljne korake bomo potrebovali teorem
 \[
-    Tr(AXB^T) \leq \sum_{i=1}^{r}
+    \tr(AXB^T) \leq \sum_{i=1}^{r}
 \]
 kjer velja $X \in \mathbb{R}^{n_1 \times n_2}$, $A \in \mathbb{R}^{r \times n_1}$, $B \in \mathbb{R}^{r \times n_2}$ in $r \in \mathbb{N}, r \leq min(n_1, n_2)$, kot tudi $AA^T = I_{r}, BB^T = I_{r}$.
 
 Za dokaz uporabljamo Von Neumannovo neenakost sledi, s katero lahko zapišemo 
 \[
-    Tr(AXB^T) = Tr(XB^TA) \leq \sum^{\min(n_1, n_2)}_{i=1} \sigma_i(X) \sigma_i(B^TA)
+    \tr(AXB^T) = \tr(XB^TA) \leq \sum^{\min(n_1, n_2)}_{i=1} \sigma_i(X) \sigma_i(B^TA)
 \]
-Enakost $Tr(AXB^T) = Tr(XB^TA)$ sledi iz dejstva, da je sled produkta matrik invariantna pod cikličnimi permutacijami.
+Enakost $\tr(AXB^T) = \tr(XB^TA)$ sledi iz dejstva, da je sled produkta matrik invariantna pod cikličnimi permutacijami.
 
 Po definiciji lahko singularne vrednosti matrike $Y$ najdemo tako, da najdemo korene nenegativnih lastnih vrednosti matrike $Y^TY$. Tako lahko povemo, da so singularne vrednosti matrike $B^TA$ enake lastnim vrednostim matrike $A^TBB^TA$. Izraz razpišemo v
 \[
 A^TBB^TA = A^TI_rA = A^TA
 \]
 %https://shorturl.at/pqrRX
-\todo{ali je to treba dokazati?} Ker pa velja, da imata matriki $XY$ in $YX$ enake neničelne lastne vrednosti, ter vemo da $AA^T = I_r$, lahko povemo, da ima produkt $B^TA$ $r$ singularnih vrednosti enakih 1, saj ima $I_n$ $n$ lastnih vrednosti enakih 1.
-\todo{Članek navaja uvedbo s, ker $rank(B^TA) \leq r$, vendar bi lahko tako pokazali da je kar enak r?}
-
+Ker pa velja, da imata matriki $XY$ in $YX$ enake neničelne lastne vrednosti, ter vemo da $AA^T = I_r$, lahko povemo, da ima produkt $B^TA$ $r$ singularnih vrednosti enakih 1, saj ima $I_n$ $n$ lastnih vrednosti enakih 1.
 Tako lahko sedaj razpišemo izraz 
 \[
     \sum^{\min(n_1, n_2)}_{i=1} \sigma_i(X) \sigma_i(B^TA) = \sum^{r}_{i=1} \sigma_i(X)
 \]
-
 Ugotovili smo, da velja 
-\[
-    Tr(AXB^T) \leq \sum^{r}_{i=1} \sigma_i(Xs)
-\]
+\begin{equation}
+    \label{2806-1320}
+    \tr(AXB^T) \leq \sum^{r}_{i=1} \sigma_i(Xs)
+\end{equation}
+
 
 Če definiramo SVD razcep $X = U \Sigma V^T$, ter matriki 
 $A = (u_1, \hdots , u_r)^T$ in $B = (v_1, \hdots , v_r)^T$,
-kjer je $u_i$ i-ti stolpec matrike $U$ ter $v_i$ i-ti stolpec 
-matrike $V$, lahko pokažemo da velja $Tr(AXB^T) = \sum^{r}_{i=1} \sigma_i(X)$.
-\todo{Zakaj je pomembno pokazati in <= in =}
+kjer je $u_i$ $i$-ti stolpec matrike $U$ ter $v_i$ $i$-ti stolpec 
+matrike $V$, lahko pokažemo da velja $\tr(AXB^T) = \sum^{r}_{i=1} \sigma_i(X)$.
 \begin{align*}
-    Tr(AXB^T) &= Tr((u_1, \hdots , u_r)^T X (u_1, \hdots , u_r)^T) = \\
-    &= Tr((u_1, \hdots , u_r)^T U \Sigma V^T (u_1, \hdots , u_r)^T) = \\
+    \tr(AXB^T) &= \tr((u_1, \hdots , u_r)^T X (u_1, \hdots , u_r)^T) = \\
+    &= \tr((u_1, \hdots , u_r)^T U \Sigma V^T (u_1, \hdots , u_r)^T) = \\
     &= \begin{bmatrix} I_r & 0 \\ 0 & 0 \end{bmatrix} \Sigma \begin{bmatrix} I_r & 0 \\ 0 & 0 \end{bmatrix} = \\
-    &= Tr(\begin{bmatrix} \sigma_1 \\[-8pt] & \ddots & & \\[-8pt] & & \sigma_r \\[-8pt] & &  & 0 \\[-8pt]  & & & & \ddots \\[-8pt] & & & & & 0 \end{bmatrix}) = \sum_{i = 1}^{r} \sigma_i(X)
+    &= \tr(\begin{bmatrix} \sigma_1 \\[-8pt] & \ddots & & \\[-8pt] & & \sigma_r \\[-8pt] & &  & 0 \\[-8pt]  & & & & \ddots \\[-8pt] & & & & & 0 \end{bmatrix}) = \sum_{i = 1}^{r} \sigma_i(X)  \numberthis \label{2806-1321}
 \end{align*}
-Tako smo sedaj pokazali, da velja 
+Z združitvijo dokazov \ref{2806-1320} in \ref{2806-1321} zapišemo
 \[
-    \max_{AA^T = I, BB^T = I} Tr(AXB^T) = \sum^{r}_{i = 1} \sigma_i(X)
+    \max_{AA^T = I, BB^T = I} \tr(AXB^T) = \sum^{r}_{i = 1} \sigma_i(X)
 \]
 Torej je problem, ki ga minimizarmo lahko podan kot 
 \begin{align*}
-    \min_X \hspace{0.5cm} &||X||_* - \max_{AA^T = I, BB^T = I} Tr(AXB^T)\\
+    \min_X \hspace{0.5cm} &||X||_* - \max_{AA^T = I, BB^T = I} \tr(AXB^T)\\
     \text{tako da} \hspace{0.5cm} &\proj(X) = \proj(M)
 \end{align*}
 
-Glede na vse ugotovitve, nato nastavimo iterativni algoritem, tako da, izračunamo $X^0 = \proj(M)$. V $i$-ti iteraciji izračunamo $A^i$ in $B^i$, tako da izračunamo SVD razcep $X^i = U \Sigma V^T$, ter $A$ nastavimo kot prvih $r$ stolpcev matrike $U$, $B$ pa kot prvih $r$ stolpcev matrike $V$. $X^{i+1}$ lahko sedaj izračunamo kot 
+Glede na vse ugotovitve, nato nastavimo iterativni algoritem, tako da, izračunamo $X^0 = \proj(M)$. V $i$-ti iteraciji izračunamo $A^i$ in $B^i$, tako da izračunamo SVD razcep $X^i = U \Sigma V^T$, ter $A$ nastavimo kot prvih $r$ stolpcev matrike $U$, $B$ pa kot prvih $r$ stolpcev matrike $V$. $X^{i+1}$ lahko sedaj izračunamo kot \cite{HZYLH12}
 \begin{align*}
-    \min_X \hspace{0.5cm} &||X||_* - Tr(A^iX(B^i)^T)\\
+    \min_X \hspace{0.5cm} &||X||_* - \tr(A^iX(B^i)^T)\\
     \text{tako da} \hspace{0.5cm} &\proj(X) = \proj(M)
 \end{align*}
-\cite{HZYLH12}
-
 To minimizacijo pa lahko rešujemo z uporabo algoritma ADMM.
-
-\todo{ADMM vprasanja: kako smo nastavili lagrangeovo funkcijo, iz kje pride izracun $Y^{i+1}$, zakaj $\tau$ postane $\frac{1}{\beta}$}
+\todo{iz kje pride izracun $Y^{i+1}$}

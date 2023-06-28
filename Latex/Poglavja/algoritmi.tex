@@ -14,7 +14,7 @@ Nekatere definicije so uporabljene čez več algoritmov. Z namenom preglednosti,
   \item Operator $\shrink_\tau$ kot \[
             \shrink_\tau(A) := U \shrink_\tau(\Sigma) V^T, \hspace{0.3cm} \shrink_\tau(\Sigma) = diag(max(\sigma_i - \tau, 0))
         \] \cite{CCS}
-  \item Z oznako $M \in \mathbb{R}^{n_1 \times n_2}$ označujemo vhodno matriko, torej tisto, ki ima nekatere podatke neznane. {\vspace{-10cm}\todo{V programu nato uporabljamo oznako M za bitno matriko, vendar te v samih dokazih ne potrebujemo, je potem tukaj oznaka M vredu?}\vspace{10cm}}
+  \item Z oznako $M \in \mathbb{R}^{n_1 \times n_2}$ označujemo vhodno matriko, torej tisto, ki ima nekatere podatke neznane.
   % \item Z oznako $M \in \mathbb{R}^{n_1 \times n_2}$ označujemo bitno matriko M, ki predstavlja masko, s katero označimo katere vrednosti poznamo in katere ne. Vrednost 1 označuje, da je vrednost na tisti poziciji znana, medtem ko 0 označuje, da ni. 
 \end{enumerate}
 
@@ -29,17 +29,17 @@ Minimizacijo nuklearne norme je možno pretvoriti v semidefinitni problem, ki ga
 
 Po \cite{CR08} lahko problem definiramo kot
 \begin{align*}
-  \textrm{min }     & \hspace{0.5cm} \text{tr}(Y)                                    \\
-  \textrm{tako da } & \hspace{0.5cm} (Y, A_k) = b_k, k = 1, \cdots , |\Omega| \\
+  \min    & \hspace{0.5cm} \tr(Y)                                    \\
+  \text{tako da} & \hspace{0.5cm} (Y, A_k) = b_k, k = 1, \cdots , |\Omega| \\
                     & \hspace{0.5cm} Y \succcurlyeq 0
 \end{align*}
 kjer
-\[
-  Y = \begin{bmatrix}
+\begin{align*}
+  &Y = \begin{bmatrix}
     W_1 & X   \\
     X^T & W_2
   \end{bmatrix}
-\] tak problem pa lahko že rešujemo s semidefinitnimi programi.
+\end{align*} tak problem pa lahko že rešujemo s semidefinitnimi programi.
 
 
 \input{Poglavja/Algoritmi/SVT.tex}
