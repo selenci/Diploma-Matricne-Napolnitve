@@ -31,10 +31,49 @@ kjer
         0, (i, j) \notin \Omega
     \end{cases}
 \]
-
 Na podoben način bi lahko pokazali tudi
 \[
     \frac{\partial}{\partial Y} = -X^T (\proj(M) - \proj(XY))
 \]
+Poiščimo še najboljši korak gradientnega spusta.
+Cilj je pokazati, da je premik po gradientu s korakom $t_x$ najboljši.
+Najprej definirajmo sam premik, kot
+\[
+    X^{k+1} = X^k - t_X \nabla f_Y(X)
+\]
+Ker želimo, da bodo znane vrednosti produkta $X^{k+1}Y^{k}$ kar se da podobne znanim vrednostim matrike $M$, nastavimo $t_x$ kot 
+\begin{align*}
+    t_x &= \arg \min_t \hspace{0.3cm} g(t)
+\end{align*} kjer
+\begin{align*}
+    g(t) &= \frac{1}{2} ||\proj(M) - \proj((X - t\nabla f_Y(X))Y)||_F^2
+\end{align*}
+Ker je \cite{AST-TK15} \todo{ali lahko tako?}
+\[
+  g'(t) = -||\nabla f_Y(X)||_F^2 + t||\proj(f_Y(X)Y)||_F^2 
+\]
+vidimo, da funkcija $g(t)$ doseže minimum pri 
+\[
+  t_x = \frac{||\nabla f_Y(X)||_F^2}{||\proj(\nabla f_Y(X)Y)||_F^2}  
+\]
+Podobno velja za korak v smeri gradientnega spusta matrike $Y$, kjer
+\[
+  t_y = \frac{||\nabla f_X(Y)||_F^2}{||\proj(X \nabla f_X(Y))||_F^2}  
+\]
 
-\todo{Kako pokazati korak}
+% \begin{align*}
+%     g'(t) &=  \proj(M - XY) \proj(X'Y)^T = \\
+%     &= \proj(M - XY) \proj((\proj(XY) - \proj(M))Y^T Y)^T = \\
+%     &= \proj(M - XY) (\proj(\proj(XY)Y^TY)^T - \proj(\proj(M)Y^TY)^T) = \\
+%     &= (\proj(M) - \proj(XY)) (\proj(\proj(XY)Y^TY)^T - \proj(\proj(M)Y^TY)^T) = \\
+%     &= \proj(M)\proj(\proj(XY)Y^TY)^T - \proj(M)\proj(\proj(M)Y^TY)^T \\ &- \proj(XY)\proj(\proj(XY)Y^TY)^T + \proj(XY)\proj(\proj(M)Y^TY)^T = \\
+%     &= (\proj(M) - \proj(XY))\proj(\proj(XY)Y^TY)^T + (\proj(XY) - \proj(M))(\proj(\proj(M)Y^TY)^T)
+% \end{align*}
+
+% % \begin{align*}
+% %     g'(t) &= \sum_{i}^{n_1}\sum_{j}^{n_2}(m_{i,j} - \sum_{k}^{r} x_{i,r}y_{r,j} + t \sum_{k}^{r}f_{i,r}y_{r,j})(\sum_{k}^{r}f_{i,r}y_{r,j}) = \\
+% % \end{align*}
+
+% % &= \tr(\proj(M - XY) \proj(-(\proj(M) - \proj(XY))Y^T Y)^T) + t||X'Y||^2_F = \\
+% % &= -\tr(\proj(M - XY) \proj((\proj(M)Y^T - \proj(XY)Y^T) Y)^T) + t||X'Y||^2_F = \\
+% % &= -\tr(\proj(M - XY) \proj(Y^T(\proj(M)Y^T - \proj(XY)Y^T)^T)) + t||X'Y||^2_F = \\
