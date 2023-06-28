@@ -1,0 +1,78 @@
+\section{Minimizacija nuklearne norme}
+Ker je minimizacija ranga matrike NP-poln problem, so se razvile druge metode, ki samo kompleksnost problema zmanjšujejo. Minimizacija nuklearne norme (Nuclear Norm Minimization) se zanaša na dejstvo, da je rang matrike povezan z nuklearno normo matrike. Ta je definirana kot
+\[
+  ||X||_* = \sum_{i = i}^{n} \sigma_i(X)
+\] \todo{se lahko sklicujem?}
+Dokazano je bilo, da nuklearna norma predstavlja konveksno ovojnico ranga. \cite{NNM-PHD} Konveksna ovojnica funkcije $f : \mathcal{C} \rightarrow \mathbb{R}$ je največja konveksna funkcija $g$ tako da velja $f(x) \geq g(x)$ za vse $x \in \mathcal{C}$. \cite{Survey-NKS19}
+
+Minimizacijo nuklearne norme je možno pretvoriti v semidefinitni problem, ki ga lahko rešujemo z različnimi pripomočki, na primer SeDuMi \cite{SeDuMi}.
+
+Standardna oblika semidefinitnega programa je
+\begin{align*}
+    \min_Y \hspace{0.5cm} &\trOp{C}{Y} \\
+    \text{tako da} \hspace{0.5cm} &\trOp{A_k}{Y} = b_k, \hspace{0.5cm} k = 1, \hdots , l\\
+    &Y \succeq 0
+\end{align*}
+Kjer je $C$ dana matrika, $\{A_k\}$ in $\{b_k\}$ pa množici matrik in vektorjev. 
+
+Problem minimizacije nuklearne norme lahko zapišemo kot 
+\begin{align*}
+    \min_{X, t} \hspace{0.5cm} &t \\
+    \text{tako da} \hspace{0.5cm} &||X||_* \leq t,\\
+    &\proj(X) = \proj(M)
+\end{align*}
+Trdimo, da za matriko $X \in \mathbb{R}^{n_1 \times n_2}$ in $t \in \mathbb{R}$ 
+velja $||X||_* \leq t \iff \exists W_1\in \mathbb{R}^{n_1 \times n_1}, W_2 \in \mathbb{R}^{n_2 \times n_2}$ tako da \cite{NNM-PHD} \todo{se lahko sklicujem?}
+\begin{align*}
+    &Y = \begin{bmatrix}
+        W_1 & X \\
+        X^T & W_2
+    \end{bmatrix}, \\
+    &Y \succeq 0, \hspace{0.2cm} \tr(Y) \leq 2t
+\end{align*} 
+
+Minimizacijski problem lahko tako redefiniramo kot 
+\begin{align*}
+    \min_{Y,t} \hspace{0.5cm} &2t\\
+    \text{tako da} \hspace{0.5cm} & Y \succeq 0,\\
+    &\trOp{Y}{A_{a,b}} = b_{a,b}
+\end{align*} 
+kjer je $A_{a,b} \in \mathbb{R}^{(n_1 + n_2) \times (n_1 + n_2)}$ matrika v množici $A$. Velja 
+$A_{a, b} \in A \iff (a, b) \in \Omega$. Matrika $A_{a,b}$ ima vse elemente ničelne, razen na mestu $(a, n_1 + b)$, kjer ima vrednost $1$.
+Podobno je definiran tudi $b_{a,b} \in \mathbb{R}$, ki ima vrednost $M_{a, b}$.
+Ker velja 
+\[
+    \trOp{A}{B} = \sum_{i}^{n_1} \sum_{j}^{n_2} a_{i,j}b_{i,j}
+\] je lahko videti, da je tak pogoj smiselen. Programi za reševanje SDP pa lahko tako obliko že sprejmejo.
+\cite{Survey-NKS19}
+
+
+% Za SVD razcep matrike $X = U\Sigma V^T$ velja 
+% \[
+%     \tr \begin{bmatrix}
+%         UU^T & -UV^T \\
+%         -VU^T & VV^T
+%     \end{bmatrix}
+%     \begin{bmatrix}
+%         Y & X \\
+%         X^T & Z
+%     \end{bmatrix} \geq 0
+% \] \todo{zakaj je prva matrika pozitivno semidefinitna?}
+% ker je vsota diagonalnih elementov produkta dveh pozitivnih semidefinitnih matrik vedno nenegativna. Tako vemo, da 
+% \[
+%     \tr(UU^TY) - \tr(UV^TX^T) - \tr(VU^TX) + \tr(VV^TZ) \geq 0
+% \]
+
+% Po \cite{CR08} lahko problem definiramo kot
+% \begin{align*}
+%   \min    & \hspace{0.5cm} \tr(Y)                                    \\
+%   \text{tako da} & \hspace{0.5cm} (Y, A_k) = b_k, k = 1, \cdots , |\Omega| \\
+%                     & \hspace{0.5cm} Y \succcurlyeq 0
+% \end{align*}
+% kjer
+% \begin{align*}
+%   &Y = \begin{bmatrix}
+%     W_1 & X   \\
+%     X^T & W_2
+%   \end{bmatrix}
+% \end{align*} tak problem pa lahko že rešujemo s semidefinitnimi programi.

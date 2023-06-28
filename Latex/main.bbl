@@ -55,43 +55,34 @@
       \verb 0810.3286
       \endverb
     \endentry
-    \entry{CR08}{article}{}
-      \name{author}{2}{}{%
-        {{hash=ae404faac8c8429af059d0185dcc9643}{%
-           family={Candès},
-           familyi={C\bibinitperiod},
-           given={Emmanuel\bibnamedelima J.},
-           giveni={E\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
-        {{hash=3503059e1c0c778913607c87d8c5173a}{%
-           family={Recht},
-           familyi={R\bibinitperiod},
-           given={Benjamin},
-           giveni={B\bibinitperiod}}}%
+    \entry{NNM-PHD}{thesis}{}
+      \name{author}{1}{}{%
+        {{hash=fe2ff113d4fc01739b0dae0b7a60ba37}{%
+           family={Fazel},
+           familyi={F\bibinitperiod},
+           given={Maryam},
+           giveni={M\bibinitperiod}}}%
       }
-      \strng{namehash}{e197331efafbfa719d8603e624ebab5c}
-      \strng{fullhash}{e197331efafbfa719d8603e624ebab5c}
-      \strng{bibnamehash}{e197331efafbfa719d8603e624ebab5c}
-      \strng{authorbibnamehash}{e197331efafbfa719d8603e624ebab5c}
-      \strng{authornamehash}{e197331efafbfa719d8603e624ebab5c}
-      \strng{authorfullhash}{e197331efafbfa719d8603e624ebab5c}
-      \field{sortinit}{C}
-      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \list{institution}{1}{%
+        {Stanford University}%
+      }
+      \list{location}{1}{%
+        {Stanford, CA}%
+      }
+      \strng{namehash}{fe2ff113d4fc01739b0dae0b7a60ba37}
+      \strng{fullhash}{fe2ff113d4fc01739b0dae0b7a60ba37}
+      \strng{bibnamehash}{fe2ff113d4fc01739b0dae0b7a60ba37}
+      \strng{authorbibnamehash}{fe2ff113d4fc01739b0dae0b7a60ba37}
+      \strng{authornamehash}{fe2ff113d4fc01739b0dae0b7a60ba37}
+      \strng{authorfullhash}{fe2ff113d4fc01739b0dae0b7a60ba37}
+      \field{sortinit}{F}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{eprinttype}{arXiv}
-      \field{journaltitle}{CoRR}
-      \field{title}{Exact Matrix Completion via Convex Optimization}
-      \field{volume}{abs/0805.4471}
-      \field{year}{2008}
-      \verb{eprint}
-      \verb 0805.4471
-      \endverb
-      \verb{urlraw}
-      \verb http://arxiv.org/abs/0805.4471
-      \endverb
-      \verb{url}
-      \verb http://arxiv.org/abs/0805.4471
-      \endverb
+      \field{month}{3}
+      \field{title}{Matrix rank minimization with applications}
+      \field{type}{PhD dezertacija}
+      \field{year}{2002}
     \endentry
     \entry{HZYLH12}{article}{}
       \name{author}{5}{}{%
@@ -140,6 +131,44 @@
       \range{pages}{14}
       \verb{doi}
       \verb 10.1109/TPAMI.2012.271
+      \endverb
+    \endentry
+    \entry{Survey-NKS19}{article}{}
+      \name{author}{3}{}{%
+        {{hash=b4428b4f1db590618fbdc233f8e797f9}{%
+           family={Nguyen},
+           familyi={N\bibinitperiod},
+           given={Luong\bibnamedelima Trung},
+           giveni={L\bibinitperiod\bibinitdelim T\bibinitperiod}}}%
+        {{hash=91f59d28404416251bfdafcf52e2c2f5}{%
+           family={Kim},
+           familyi={K\bibinitperiod},
+           given={Junhan},
+           giveni={J\bibinitperiod}}}%
+        {{hash=963fb1fa8d31cc5dcfec82d3a0bd12c1}{%
+           family={Shim},
+           familyi={S\bibinitperiod},
+           given={Byonghyo},
+           giveni={B\bibinitperiod}}}%
+      }
+      \strng{namehash}{0e7ab880526de68097fdde6898617cf9}
+      \strng{fullhash}{0e7ab880526de68097fdde6898617cf9}
+      \strng{bibnamehash}{0e7ab880526de68097fdde6898617cf9}
+      \strng{authorbibnamehash}{0e7ab880526de68097fdde6898617cf9}
+      \strng{authornamehash}{0e7ab880526de68097fdde6898617cf9}
+      \strng{authorfullhash}{0e7ab880526de68097fdde6898617cf9}
+      \field{sortinit}{N}
+      \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Access}
+      \field{title}{Low-Rank Matrix Completion: A Contemporary Survey}
+      \field{volume}{7}
+      \field{year}{2019}
+      \field{pages}{94215\bibrangedash 94237}
+      \range{pages}{23}
+      \verb{doi}
+      \verb 10.1109/ACCESS.2019.2928130
       \endverb
     \endentry
     \entry{SeDuMi}{article}{}
