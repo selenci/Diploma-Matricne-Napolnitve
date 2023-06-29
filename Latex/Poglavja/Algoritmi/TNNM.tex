@@ -1,11 +1,11 @@
-\section{Minimizacija skrajšane nuklearne norme}
-Že samo ime nam pove, da bo algoritem minimizacije skrajšane nuklearne norme, oziroma TNNM (Truncated Nuclear Norm Minimization) podoben algoritmu NNM. Vendar tu privzamemo, da imamo o samem algoritmu še neko dodatno informacijo $r \in \mathbb{N}$, ki je povezana z rangom originalne, nezašumljene matrike.
+\section{Minimizacija prirezane nuklearne norme}
+Že samo ime nam pove, da bo algoritem minimizacije prirezane nuklearne norme, oziroma TNNM (Truncated Nuclear Norm Minimization) podoben algoritmu NNM. Vendar tu privzamemo, da imamo o samem algoritmu še neko dodatno informacijo $r \in \mathbb{N}$, ki je povezana z rangom originalne, nezašumljene matrike.
 
 Sam algoritem uvede tako imenovano skrajšano nuklearno normo, ki je za matriko $X \in \mathbb{R}^{n_1 \times n_2}$ definirana kot
 \[
     ||X||_r = \sum^{\min(n_1, n_2)}_{i = r + 1} \delta_i(X)
 \] torej vsoto $\min(n_1,n_2) - r$ najmanjših singularnih vrednosti, ter z 
-njeno pomočjo definira problem \cite{HZYLH12}
+njeno pomočjo definira problem \cite{TNNM-HZYLH12}
 \begin{align*}
     \min_X & \hspace{0.5cm} ||X||_r \\
     \textrm{tako da} & \hspace{0.5cm} \proj(X) = \proj(M)
@@ -69,10 +69,47 @@ Torej je problem, ki ga minimizarmo lahko podan kot
     \text{tako da} \hspace{0.5cm} &\proj(X) = \proj(M)
 \end{align*}
 
-Glede na vse ugotovitve, nato nastavimo iterativni algoritem, tako da, izračunamo $X^0 = \proj(M)$. V $i$-ti iteraciji izračunamo $A^i$ in $B^i$, tako da izračunamo SVD razcep $X^i = U \Sigma V^T$, ter $A$ nastavimo kot prvih $r$ stolpcev matrike $U$, $B$ pa kot prvih $r$ stolpcev matrike $V$. $X^{i+1}$ lahko sedaj izračunamo kot \cite{HZYLH12}
+Glede na vse ugotovitve, nato nastavimo iterativni algoritem, tako da, izračunamo $X^0 = \proj(M)$. V $i$-ti iteraciji izračunamo $A^i$ in $B^i$, tako da izračunamo SVD razcep $X^i = U \Sigma V^T$, ter $A$ nastavimo kot prvih $r$ stolpcev matrike $U$, $B$ pa kot prvih $r$ stolpcev matrike $V$. $X^{i+1}$ lahko sedaj izračunamo kot \cite{TNNM-HZYLH12}
 \begin{align*}
     \min_X \hspace{0.5cm} &||X||_* - \tr(A^iX(B^i)^T)\\
     \text{tako da} \hspace{0.5cm} &\proj(X) = \proj(M)
 \end{align*}
-To minimizacijo pa lahko rešujemo z uporabo algoritma ADMM.
-\todo{iz kje pride izracun $Y^{i+1}$}
+Če minimizacijo še malo obrnemo, pa lahko problem rešujemo z uporabo algoritma ADMM. \todo{iz kje pride izracun $Y^{i+1}$} 
+\begin{align*}
+    \min_X \hspace{0.5cm} &||X||_* - \tr(A^iW(B^i)^T)\\
+    \text{tako da} \hspace{0.5cm} &W=X, \hspace{0.2cm} \proj(W) = \proj(M)
+\end{align*}
+Ta problem ponovno zapišemo s pomočjo Lagrangeove funkcije, le da algoritem ADMM definira še kazenski parameter $\beta$. \cite{TNNM-HZYLH12} \todo{kazenski parameter?}
+\[ 
+\mathcal{L}(X, Y, W, \beta) = ||X||_* - Tr(A_l W B_l^T) + \frac{\beta}{2} ||X - W||_F^2 + Tr(Y^T(X-W))
+\]
+Opazimo lahko, da funkcija definira zgolj pogoj $X = W$. Videli bomo, da algoritem pogoj $\proj(X) = \proj(M)$ definira posredno, s popravljanjem znanih vrednosti. \ref{2906-1248}
+
+Matriko $X^{k+1}$ ponovno definiramo kot 
+\[
+  X^{k+1} = \arg \min_X \mathcal{L}(X, Y^k, W^k, \beta)  
+\]
+Z ignoriranjem konstantnih členov, pa lahko tako zapišemo \todo{Kako smo naredili preobrnitev}
+\begin{align*}
+  X^{k+1} &= \arg \min_X ||X||_* + \frac{\beta}{2} ||X-(W^k - \frac{1}{\beta}Y^k)||^2_F = \\
+  &= \arg \min_X \frac{1}{\beta}||X||_* +  \frac{1}{2}||X-(W^k - \frac{1}{\beta}Y^k)||^2_F
+\end{align*}
+Po teoremu \ref{2906-1056} pa tako lahko zapišemo 
+\[
+    X^{k+1} = \shrink_\frac{1}{\beta}(W_k - \frac{1}{\beta} Y_k)
+\]
+
+Matriko $W$ podobno izračunamo kot 
+\begin{align*}
+    W^{k+1} &= \arg \min_{W} \mathcal{L}(X^{k+1}, Y^k, W, \beta) \\ 
+    &= \arg \min_W \frac{\beta}{2} ||W - (X^{k+1} + \frac{1}{\beta}(A_l^T B_l + Y_k)) ||^2_F
+\end{align*}
+Lahko je videti, da velja
+\[
+    W^{k+1} = X^{k+1} + \frac{1}{\beta}(A_l^T B_l + Y_k)
+\]
+zaradi pogoja $\proj(W) = \proj(M)$ pa tiste elemente, ki poznamo, popravimo. \cite{TNNM-HZYLH12}\todo{malo spremenjeno iz clanka}
+\begin{equation}
+    \label{2906-1248}
+    W_{k+1} = W_{k+1} + \proj(M - W_{k+1})
+\end{equation}

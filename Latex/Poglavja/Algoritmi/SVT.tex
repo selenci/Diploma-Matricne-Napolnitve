@@ -25,18 +25,19 @@ Lagrangeov multiplikator je definiran kot $\mathcal{L}(x, \lambda) = f(x) + \lam
 \[
     \mathcal{L}(X, Y) = f_\tau(X) + \left< Y, \proj(M - X) \right>
 \] 
-S pomočjo tako imenovanega Uzawoega algoritma, pa lahko problem pretvorimo v iterativni algoritem 
+S pomočjo tako imenovanega Uzawoega algoritma, pa lahko problem pretvorimo v iterativni algoritem. \cite{CCS}
 \[
     \begin{cases}
         X^k =  \arg \min_{X} \mathcal{L}(X^k, Y^{k-1}) \\
         Y^k = Y^{k-1} + \delta_k \proj(M - X^k) 
     \end{cases}
-\] \cite{CCS}
-
+\] 
 Za reševanje minimizacijskega problema dokažimo teorem
-\[
+\begin{equation}
+    \label{2906-1056}
     \shrink_\tau(Y) = \arg \min_{X} \{ \frac{1}{2} ||X - Y||^2_F + \tau||X||_* \}
-\]
+\end{equation}
+
 Ker je $h(X) := \frac{1}{2} ||X - Y||^2_F + \tau||X||_*$ strogo konveksna funkcija, lahko za subgradient $Z$ v točki $X_0$ rečemo, da velja $\forall X: f(X) \geq  f(X_0) + \left< Z, X - X_0 \right>$. Ali drugače povedano, vse točke na vseh tangentah na funckijo $h(X)$ bodo pod ali na funkciji $h(X)$. To velja po sami definiciji, saj je to zahtevan pogoj subgradienta v neki točki.
 
 Pri iskanju minimuma torej iščemo tako točko $X'$, da bo subgradient v točki $X'$ enak 0. Problem sedaj zapišemo kot $0 \in X' - Y + \tau \partial||X'||_*$. Izkaže se, da je množica subgradientov nuklearne norme definirana kot
