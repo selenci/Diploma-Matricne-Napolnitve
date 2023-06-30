@@ -96,8 +96,8 @@ Z ignoriranjem konstantnih členov, pa lahko tako zapišemo
 \end{align*}
 Z namenom faktorizacije dodamo konstantne člene.
 \begin{align*}
-    &\arg \min_X ||X||_* + \frac{\beta}{2}\tr(X^TX - X^TW^k + \frac{1}{\beta}X^TY^k - W^{k^T}X + W^{k^T}W^k - \frac{1}{\beta}W^{k^T}Y^k \\
-    &+\frac{1}{\beta}Y^{k^T}X - \frac{1}{\beta}Y^{k^T}W^k + \frac{1}{\beta^2}Y^{k^T}Y^k) =\\ 
+    &\arg \min_X ||X||_* + \frac{\beta}{2}\tr(X^T(X - W^k + \frac{1}{\beta}Y^k) - W^{k^T} (X - W^k + \frac{1}{\beta}Y^k)\\
+    &+\frac{1}{\beta}Y^{k^T}(X - W^k + \frac{1}{\beta}Y^k)) =\\ 
   &= \arg \min_X ||X||_* + \frac{\beta}{2} ||X-W^k + \frac{1}{\beta}Y^k||^2_F = \\
   &= \arg \min_X \frac{1}{\beta}||X||_* +  \frac{1}{2}||X-(W^k - \frac{1}{\beta}Y^k)||^2_F
 \end{align*}
