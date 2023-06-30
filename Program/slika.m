@@ -1,5 +1,5 @@
-img = imread('knjiga.jpg');
-znanihVrednosti = 0.45;
+img = imread('slika.jpg');
+znanihVrednosti = 0.6;
 
 img = rgb2gray(img);
 norma = norm(cast(img,"double"), "fro")
@@ -17,10 +17,20 @@ for i = 1:n1
 end
 
 tic
-Y = solver(A, M, "svt");
+Y = solver(A, M, "lmafit", 77);
 casIzvajanja = toc
 
 napaka = norm(Y - cast(img,"double") , "fro")
+% bestNapaka = inf
+% bestInd = 0
+% for i = 1:100
+%     Y = solver(A, M, "asd", i);
+%     napaka = norm(Y - cast(img,"double") , "fro")
+%     if(napaka < bestNapaka)
+%         bestNapaka = napaka
+%         bestInd = i
+%     end
+% end
 
 Aimg = cast(A, "uint8");
 Yimg = cast(Y, "uint8");

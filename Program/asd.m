@@ -1,7 +1,7 @@
 function Y = asd(data, mask, rank)
     [n1, n2] = size(data);
-    X = rand(n1, rank) * 255;
-    Y = rand(rank, n2) * 255;
+    X = sqrt(rand(n1, rank) * 255);
+    Y = sqrt(rand(rank, n2) * 255);
 
     stopCriteria = false;
     k = 0;
