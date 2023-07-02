@@ -2,17 +2,17 @@
 V tem poglavju bom opisal rezultate, ki sem jih pridobil. Kot sem že omenil, bo večji del preizkušanja programa opravljen na slikah, kjer bodo nekateri piksli manjkali. Gre za problem, ki ga je moč lepo vizualizirati, saj pogosto pri surovih podatkih ni lahko definirati njihovo točnost, zaradi česar težko interpretiramo, kako koristen je sam algoritem.
 
 Prav tako bom opisal točnost rezulatov različnih metod kot tudi čas izvajanja posameznih metod. Probleme bom zagnal tudi na različnih vrst podatkov, npr. podatkih ki so generirani normalno kot tudi enakomerno porazdeljeno.
-
-
 Zaradi interpretacije, slike razdelimo v več skupin, za katere opišemo ugotovitve.
+
+Vse slike si je mogoče v boljši kakovosti ogledati na povezavi \url{https://tinyurl.com/yb7cjdv7}. 
 
 \section{Velika črno-bela slika}
 Same teste algoritmov najprej poženemo na veliki, črno-beli sliki, velikosti $1000\times1000$ pikslov. Taka izbira je smiselna, iz vidika, da imamo dovolj podatkov, potrebnih za rekonstrukcijo. Ker je časovna zahtevnost algoritmov pri večjih slikah, kot bomo videli v nadaljevanju že precej velika, nam ta faza testiranja služi kot preverjanje delovanja samih algoritmov. Same podrobnosti razlik med rezultati si bomo zato podrobneje pogledali na manjših slikah v nadaljevanju. Algoritme preizkušamo trikrat, na podatkih z deleži znanih vrednosti $0.35, 0.45$ in $0.6$. \todo{Smiselna postavitev teskst-slik in velikosti}
 \input{Poglavja/Rezultati/grayscale1000.tex}
 \FloatBarrier
 
-Same slike si je mogoče v boljši kakovosti pogledati na povezavi \url{https://tinyurl.com/2xunwvwb}. Kot vidimo, je med rezultati velika razlika. Očitno je, da algoritmi TNNM, SVT in LMaFit delujejo najbolje, medtem ko ima algoritem ADDM vprašljive rezultate. Te si lahko interpretiramo kot posledico lastnosti, da lahko algoritem končata v lokalnem minimumu. Prav tako algoritem ADMM ni našel rešitve, ko je imel poznanih $0.60$ podatkov. Zato je ta algoritma smiselno uporabljati, kadar imamo dober začeten približek matrik $X$ in $Y$ ter manj poznanih vrednosti. Algoritem NNM smo med rezultati izpustili, saj je zaradi velikega števila matrik, potrebnih za definicijo omejitev, algoritem preveč prostorsko kompleksen. Ta algoritem bomo zato obravnavali posebej. Zaradi teh opazk se v naslednjih podpoglavjih v večini osredotočamo na algoritme SVT, TNNM in LMaFit.
-
+Kot vidimo, je med rezultati velika razlika. Očitno je, da algoritmi TNNM, SVT in LMaFit delujejo najbolje, medtem ko ima algoritem ADDM vprašljive rezultate. Te si lahko interpretiramo kot posledico lastnosti, da lahko algoritem končata v lokalnem minimumu. Prav tako algoritem ADMM ni našel rešitve, ko je imel poznanih $0.60$ podatkov. Zato je ta algoritma smiselno uporabljati, kadar imamo dober začeten približek matrik $X$ in $Y$ ter manj poznanih vrednosti. Algoritem NNM smo med rezultati izpustili, saj je zaradi velikega števila matrik, potrebnih za definicijo omejitev, algoritem preveč prostorsko kompleksen. Ta algoritem bomo zato obravnavali posebej. Zaradi teh opazk se v naslednjih podpoglavjih v večini osredotočamo na algoritme SVT, TNNM in LMaFit.
+\todo{je potrebno in graf in tabelo?}
 \begin{table}[h]
     \centering
     \begin{tabular}{|c|c|c|c|c|}
@@ -22,11 +22,11 @@ Same slike si je mogoče v boljši kakovosti pogledati na povezavi \url{https://
     0.45 & $3.15 \times 10^4$ & $5.30 \times 10^3$ & $6.40 \times 10^3$ & $6.0910 \times 10^7$ \\ \hline
     0.6 & $1.25 \times 10^4$ & $3.58 \times 10^3$ & $5.35 \times 10^3$ & - \\ \hline
     \end{tabular}
-    \caption{Napake algoritmov glede na delež znanih vrednosti}
 \end{table}
 \begin{figure}[!ht]
     \centering
     \includegraphics[width=0.95\linewidth]{Poglavja/Slike/grayscale1000/grafNapake.png}
+    \caption{Napake algoritmov glede na delež znanih vrednosti}
 \end{figure}
 
 \begin{table}[h]
@@ -38,9 +38,15 @@ Same slike si je mogoče v boljši kakovosti pogledati na povezavi \url{https://
     0.45 & 510s & 498s & 342s & 328s\\ \hline
     0.6 & 1674s & 350s & 48s & - \\ \hline
     \end{tabular}
-    \caption{Časi izvajanja algoritmov glede na delež znanih vrednosti}
 \end{table}
 \begin{figure}[!ht]
     \centering
     \includegraphics[width=0.95\linewidth]{Poglavja/Slike/grayscale1000/grafCas.png}
+    \caption{Časi izvajanja algoritmov glede na delež znanih vrednosti}
 \end{figure}
+
+\section{Vpliv kompleksnosti slik na napolnjevanje}
+Eno izmed glavnih vprašanj, ki se nam lahko porodi pri implementaciji algoritmov za napolnitev matrik je, kako sama kompleksnost slik vpliva na točnost rezultatov. Ker slike naključnih vrednosti ni mogoče rekonstruirati, lahko sklepamo, da bodo slike s preprostimi motivi napolnjene bolje. Za namene testiranja je torej smiselno izbrati preprosto ter vizualno nasičeno sliko. V naših testiranjih uporabljamo sliki knjige in mesta.
+\input{Poglavja/Rezultati/kompleksnost.tex}
+
+
