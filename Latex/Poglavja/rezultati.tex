@@ -25,7 +25,7 @@ Kot vidimo, je med rezultati velika razlika. Očitno je, da algoritmi TNNM, SVT 
 \end{table}
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.95\linewidth]{Poglavja/Slike/grayscale1000/grafNapake.png}
+    \includegraphics[width=\linewidth]{Poglavja/Slike/grayscale1000/grafNapake.png}
     \caption{Napake algoritmov glede na delež znanih vrednosti}
 \end{figure}
 
@@ -41,12 +41,29 @@ Kot vidimo, je med rezultati velika razlika. Očitno je, da algoritmi TNNM, SVT 
 \end{table}
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.95\linewidth]{Poglavja/Slike/grayscale1000/grafCas.png}
+    \includegraphics[width=\linewidth]{Poglavja/Slike/grayscale1000/grafCas.png}
     \caption{Časi izvajanja algoritmov glede na delež znanih vrednosti}
 \end{figure}
 
 \section{Vpliv kompleksnosti slik na napolnjevanje}
-Eno izmed glavnih vprašanj, ki se nam lahko porodi pri implementaciji algoritmov za napolnitev matrik je, kako sama kompleksnost slik vpliva na točnost rezultatov. Ker slike naključnih vrednosti ni mogoče rekonstruirati, lahko sklepamo, da bodo slike s preprostimi motivi napolnjene bolje. Za namene testiranja je torej smiselno izbrati preprosto ter vizualno nasičeno sliko. V naših testiranjih uporabljamo sliki knjige in mesta.
+Eno izmed glavnih vprašanj, ki se nam lahko porodi pri implementaciji algoritmov za napolnitev matrik je, kako sama kompleksnost slik vpliva na točnost rezultatov. Ker slike naključnih vrednosti ni mogoče rekonstruirati, lahko sklepamo, da bodo slike s preprostimi motivi napolnjene bolje. Za namene testiranja je torej smiselno izbrati tako preprosto kot tudi vizualno nasičeno sliko. V naših testiranjih uporabljamo sliki knjige in mesta. Sliki sta velikosti $300 \times 300$ pikslov
 \input{Poglavja/Rezultati/kompleksnost.tex}
+\todo{Lmafit vcasih potrebno zagnati veckat}
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=\linewidth]{Poglavja/Slike/kompleksna grayscale 300/kompleksnost.png}
+    \caption{Graf napak algoritmov}
+\end{figure}
 
+Kot smo pričakovali, so rezultati rekonstrukcije slike s preprostim motivom boljše. Prav tako lahko opazimo, da ima delež znanih vrednosti močnejši vpliv pri sliki s kompleksnim motivom. Napake z dodajanjem informacij torej hitreje padajo pri matrikah večjega ranga. Spomnimo se, da algoritma LMaFit in TNNM za svoje delovanje potrebujeta informacijo o rangu. Pri testiranju je bilo zato potrebno kompleksni sliki podati večjo vrednost ranga, da sta lahko algoritma prišla do dobrih rezultatov.
 
+Sama točnost algoritmov pa ostaja zelo podobna rekonstrukciji velike slike, torej z najboljšimi rezultati pridobljenimi z algoritmom TNNM, nato LMaFit in z najslabšimi rezultati algoritem SVT.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=\linewidth]{Poglavja/Slike/kompleksna grayscale 300/cas.png}
+    \caption{Graf časov izvajanja algoritmov}
+\end{figure}
+Sami časi izvajanja pa tu niso tako intuitivni. Prva glavna opazka je, da algoritem SVT potrebuje veliko več časa pri preprostem motivu kot pri kompleksem. \todo{razmisli to interpretacijo} To si lahko razlagamo kot posledico praga. Za dobre rezultate smo pri tako majhni matriki prag nastavili visoko. V našem primeru je imel ta vrednost $3600$. V primeru preprostega motiva, lahko pričakujemo, da bomo imeli malo zelo velikih singularnih vrednosti. Zaradi tega se algoritem težko premika in išče rešitev. Iz tega sledi opazka, da je algoritem SVT bolj smiselno uporabljati za kompleksne motive.
+
+Naslednja pomembna opazka pa je, da delež znanih vrednosti različno vpliva na sam čas izvajanja. Tudi ta faktor je torej lahko pomemben pri izbiri algoritma za reševanje problema. Algoritma SVT in LMaFit potrebujeta za rekonstrukcijo več časa, kadar imata poznanih več vrednosti, medtem ko se algoritmu TNNM z deležem znanih vrednosti čas izvajanja manjša.

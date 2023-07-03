@@ -3,7 +3,7 @@ function Y = svt(data, mask)
     m = sum( mask , "all" ) %stevilo omejitev
 
     step = 0.7*n1*n2/m;
-    reg = 5*(n1 + n2);
+    reg = 12*(n1 + n2);
     k0 = floor(reg / (step * normest(data .* mask) ))
     Y = k0 * step * (data .* mask);
     stopCriteria = false;
