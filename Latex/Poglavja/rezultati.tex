@@ -51,7 +51,7 @@ Eno izmed glavnih vprašanj, ki se nam lahko porodi pri implementaciji algoritmo
 \todo{Lmafit vcasih potrebno zagnati veckat}
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=\linewidth]{Poglavja/Slike/kompleksna grayscale 300/kompleksnost.png}
+    \includegraphics[width=\linewidth]{Poglavja/Slike/kompleksnost/kompleksna grayscale 300/kompleksnost.png}
     \caption{Graf napak algoritmov}
 \end{figure}
 
@@ -61,9 +61,44 @@ Sama točnost algoritmov pa ostaja zelo podobna rekonstrukciji velike slike, tor
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=\linewidth]{Poglavja/Slike/kompleksna grayscale 300/cas.png}
+    \includegraphics[width=\linewidth]{Poglavja/Slike/kompleksnost/kompleksna grayscale 300/cas.png}
     \caption{Graf časov izvajanja algoritmov}
 \end{figure}
 Sami časi izvajanja pa tu niso tako intuitivni. Prva glavna opazka je, da algoritem SVT potrebuje veliko več časa pri preprostem motivu kot pri kompleksem. \todo{razmisli to interpretacijo} To si lahko razlagamo kot posledico praga. Za dobre rezultate smo pri tako majhni matriki prag nastavili visoko. V našem primeru je imel ta vrednost $3600$. V primeru preprostega motiva, lahko pričakujemo, da bomo imeli malo zelo velikih singularnih vrednosti. Zaradi tega se algoritem težko premika in išče rešitev. Iz tega sledi opazka, da je algoritem SVT bolj smiselno uporabljati za kompleksne motive.
 
-Naslednja pomembna opazka pa je, da delež znanih vrednosti različno vpliva na sam čas izvajanja. Tudi ta faktor je torej lahko pomemben pri izbiri algoritma za reševanje problema. Algoritma SVT in LMaFit potrebujeta za rekonstrukcijo več časa, kadar imata poznanih več vrednosti, medtem ko se algoritmu TNNM z deležem znanih vrednosti čas izvajanja manjša.
+Naslednja pomembna opazka pa je, da delež znanih vrednosti različno vpliva na sam čas izvajanja. Tudi ta faktor je torej lahko pomemben pri izbiri algoritma za reševanje problema. Algoritem SVT potrebuje za rekonstrukcijo več časa, kadar ima poznanih več vrednosti, medtem ko se algoritmu TNNM z deležem znanih vrednosti čas izvajanja manjša. Algoritmu LMaFit težko določimo pravilo, saj najpočasnejše izvede rekonstrukcijo pri $0.45$ znanih podatkov. Iz tega sklepamo, da je pri nekem deležu med $0.35$ in $0.6$ rekonstrukcija najpočasnejša. Tu pa je vredno tudi omeniti, da zaradi naključnega generiranja začetne matrike algoritem lahko različno dolgo rekonstruira isti primer. \todo{Preveri znova} Ker pa smo teste pognali večkrat ter v povprečju vedno najdlje čakali pri vrednosti $0.45$ lahko sklepamo, da je v takih primerih rekonstrukcija res bolj zahtevna.
+
+\section{Rekonstrukcija barvnih slik}
+Naslednje vprašanje, ki se nam lahko porodi pri testiranju algoritmov je, kako vplivajo barvne slike na samo rekonstrukcijo. Barvne slike so podatkovno podane kot kombinacija barvnih kanalov rdeče, zelene in modre barve. Glavno vprašanje, na katerega bomo poskušali odgovoriti v tem poglavju je, ali je bolje napolnjevati vsak barvni kanal posebej, ali sliko kot celotno. V prvem primeru torej algoritem zaženemo trikrat, medtem ko v drugem sestavimo veliko matriko sestavljeno kot 
+\[
+    A = \begin{bmatrix}
+        R\\G\\B
+    \end{bmatrix} 
+\] 
+kjer $R$ predstavlja matriko z vrednostmi rdečega kanala, G vrednosti zelenega kanala ter B vrednosti modrega kanala.
+Vsi testi v tej fazi so bili izvedeni na podatkih, kjer imamo poznanih $0.35$ informacij.
+\todo{kako omeniti da je frobenius}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|c|c|c|c|}
+    \hline
+    & SVT & TNNM & LMAFIT \\
+    \hline
+    Enojna rekonstrukcija & $1,50 \times 10^4$ & $9,60\times 10^3$ & $1,15\times 10^4$ \\
+    Trojna rekonstrukcija & $1,66\times 10^4$ & $9,79\times 10^3$ & $1,14\times 10^4$ \\
+    \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|c|c|c|c|}
+    \hline
+    & SVT & TNNM & LMAFIT \\
+    \hline
+    Enojna rekonstrukcija & 352s & 124s & 66s \\
+    Trojna rekonstrukcija & 112s & 100s & 42s \\
+    \hline
+    \end{tabular}
+\end{table}
+Lahko je videti, da medtem ko obe metodi vrnete približno enako dobre rezultate, je rekonstrukcija pri vseh algoritmih hitrejša, če ločene barvne kanale rekonstruiramo posebej. Iz tu je lahko videti, da je smiselno med sabo neodvisne podatke ločiti, ter jih reševati samostojno. Rezultat je smiselen, saj nam iskanje podobnosti med nepodobnimi podatki poveča količino dela. 

@@ -15,12 +15,29 @@ for i = 1:n1
     end
 end
 imshow(cast(A, "uint8"))
+algoritem = "tnnm"
+r = 1
+tic
+R = solver(sparse(A(:, :, 1)), sparse(M), algoritem, r);
+G = solver(sparse(A(:, :, 2)), sparse(M), algoritem, r);
+B = solver(sparse(A(:, :, 3)), sparse(M), algoritem, r);
+Y = cat(3, R, G, B);
+casIzvajanja = toc
+napaka = norm(Y - cast(img,"double") , "fro")
+% bestNapaka = inf
+% bestInd = 0
+% for r = 1:100
+%     R = solver(sparse(A(:, :, 1)), sparse(M), algoritem, r);
+%     G = solver(sparse(A(:, :, 2)), sparse(M), algoritem, r);
+%     B = solver(sparse(A(:, :, 3)), sparse(M), algoritem, r);
+%     Y = cat(3, R, G, B)
+%     napaka = norm(Y - cast(img,"double") , "fro")
+%     if(napaka < bestNapaka)
+%         bestNapaka = napaka
+%         bestInd = r
+%     end
+% end
 
-R = solver(sparse(A(:, :, 1)), sparse(M), "tnnm", 1);
-G = solver(sparse(A(:, :, 2)), sparse(M), "tnnm", 1);
-B = solver(sparse(A(:, :, 3)), sparse(M), "tnnm", 1);
-
-Y = cat(3, R, G, B)
 
 imshow(cast(A, "uint8"))
 imshow(cast(Y, "uint8"))

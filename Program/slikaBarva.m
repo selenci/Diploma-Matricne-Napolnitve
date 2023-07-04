@@ -1,5 +1,5 @@
 img = imread('mesto.jpg');
-znanihVrednosti = 0.6;
+znanihVrednosti = 0.35;
 [n1, n2, n3] = size(img)
 A = zeros(n1*n3, n2);
 M = zeros(n1*n3, n2);
@@ -21,11 +21,23 @@ end
 Aimg = transform(A, n3);
 
 tic
-Y = solver(sparse(A), sparse(M), "svt");
+Y = solver(sparse(A), sparse(M), "tnnm", 1);
 casIzvajanja = toc
 
 Yimg = transform(Y, n3);
 napaka = norm(Yimg - cast(img, "double"), "fro")
+
+% bestNapaka = inf
+% bestInd = 0
+% for r = 21:100
+%     Y = solver(sparse(A), sparse(M), "lmafit", r);
+%     Yimg = transform(Y, n3);
+%     napaka = norm(Yimg - cast(img, "double"), "fro")
+%     if(napaka < bestNapaka)
+%         bestNapaka = napaka
+%         bestInd = r
+%     end
+% end
 
 Aimg = cast(Aimg, "uint8");
 Yimg = cast(Yimg, "uint8");
