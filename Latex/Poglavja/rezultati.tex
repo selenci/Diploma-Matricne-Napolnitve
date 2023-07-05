@@ -102,3 +102,19 @@ Vsi testi v tej fazi so bili izvedeni na podatkih, kjer imamo poznanih $0.35$ in
     \end{tabular}
 \end{table}
 Lahko je videti, da medtem ko obe metodi vrnete približno enako dobre rezultate, je rekonstrukcija pri vseh algoritmih hitrejša, če ločene barvne kanale rekonstruiramo posebej. Iz tu je lahko videti, da je smiselno med sabo neodvisne podatke ločiti, ter jih reševati samostojno. Rezultat je smiselen, saj nam iskanje podobnosti med nepodobnimi podatki poveča količino dela. 
+
+\section{Vpliv podatka o rangu na rezultate}
+Kot smo omenili že nekajkrat, algoritma TNNM in LMaFit za svoje izvajanje potrebujeta informacijo o rangu (v nadaljevanju parameter). V tem podpoglavju bomo poskušali odgovoriti na vprašanje, kako pri obeh algoritmih ta informacija vpliva na same rezultate in izvajanje. Za namene testiranja smo algoritem na isti sliki pognali večkrat, ter postopoma večali rang. Ponovno smo teste izvajali na sliki mesta, z znanim deležem podatkov nastavljenim na $0,35$.
+
+\subsection{LMaFit}
+V tej fazi smo algoritem testirali štirikrat, z rangom rezultata določenega na
+$1, 5, 10, 22, 25$ in $60$. Vrednost $22$ je bila izbrana, ker je ob večkratnem zagonu programa na različnih parametrih, ta dala najboljši rezultat. Posledično sta bili vrednosti $25$ in $60$ izbrani z namenom opazovanja, kakšne rezultate pridobimo s precenitvijo ranga rekonstruirane matrike. 
+\input{Poglavja/Rezultati/rangLMaFit.tex}
+
+Opazimo lahko izboljševanje podrobnosti slike, vse do parametra $22$. Vidimo pa lahko tudi, da pride pri prevelikem parametru do preobrata. Rezultati se ponovno slabšajo, algoritem pa postane počasnejši. Iz tega lahko razberemo, da je pravilna izbira parametra ključna. Vredno je omeniti, da za vrednosti parametra na nekem intervalu algoritem ne konvergira. V primeru zgornje slike in parametra $30$, algoritem LMaFit ni našel rešitve. 
+
+\subsection{TNNM}
+Zaradi večje časovne zahtevnosti, algoritem TNNM testiramo zgolj trikrat, na deležih informacij $1, 5$ in $12$. Za večje parametre je algoritem konvergiral zelo počasi, zaradi česar se testiranjem teh izognemo. Tukaj se je pomembno spomniti, da parameter pri algoritmu TNNM ne določa samega ranga rezultata, vendar je zgolj povezan z njim pri reševanju, saj uporablja matriki $A_l$ in $B_l$. Zaradi tega je težje določiti pravilo, kateri parameter je najboljši.
+\input{Poglavja/Rezultati/rangTNNM.tex}
+
+Sami rezultati med seboj delujejo podobni. Izračun napak nam pokaže, da medtem ko se napaka zmanjšuje s povečevanjem ranga, se hitreje povečuje tudi sam čas reševanja. Torej je treba razmisliti, kako dober rezultat potrebujemo, saj je sama točnost rekonstrukcije časovno draga. Seveda pa velja povedati, da je že pri parametru $1$ TNNM dosegel najboljše rezultate izmed algoritmov v tej diplomski nalogi.

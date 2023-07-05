@@ -35,7 +35,7 @@ function X = ADMM(A, B, data, mask)
     stopCriteria = false;
 
     k = 0;
-    while ~stopCriteria && k < 50
+    while ~stopCriteria && k < 150
         k = 1 + k;
         oldX = X;
         

@@ -1,5 +1,5 @@
 img = imread('mesto.jpg');
-znanihVrednosti = 0.45;
+znanihVrednosti = 0.35;
 
 img = rgb2gray(img);
 norma = norm(cast(img,"double"), "fro")
@@ -17,14 +17,14 @@ for i = 1:n1
 end
 
 tic
-Y = solver(A, M, "lmafit", 28);
+Y = solver(A, M, "tnnm", 90);
 casIzvajanja = toc
 
 napaka = norm(Y - cast(img,"double") , "fro")
 % bestNapaka = inf
 % bestInd = 0
-% for i = 27:100
-%     Y = solver(A, M, "lmafit", i);
+% for i = 8:100
+%     Y = solver(A, M, "tnnm", i);
 %     napaka = norm(Y - cast(img,"double") , "fro")
 %     if(napaka < bestNapaka)
 %         bestNapaka = napaka
