@@ -118,3 +118,28 @@ Zaradi večje časovne zahtevnosti, algoritem TNNM testiramo zgolj trikrat, na d
 \input{Poglavja/Rezultati/rangTNNM.tex}
 
 Sami rezultati med seboj delujejo podobni. Izračun napak nam pokaže, da medtem ko se napaka zmanjšuje s povečevanjem ranga, se hitreje povečuje tudi sam čas reševanja. Torej je treba razmisliti, kako dober rezultat potrebujemo, saj je sama točnost rekonstrukcije časovno draga. Seveda pa velja povedati, da je že pri parametru $1$ TNNM dosegel najboljše rezultate izmed algoritmov v tej diplomski nalogi.
+
+\section{Primerjava rezultatov z algoritmom za reševanje Poissonove enačbe}
+\todo{Preveri}
+Slike se v praksi pogosto rekonstruira z reševanjem Poissonove enačbe
+\[
+    -\frac{\partial^2v(x, y)}{x^2} - \frac{\partial^2v(x, y)}{y^2} = f(x,y)
+\]
+kjer odvode zaradi diskretnosti aproksimiramo kot 
+\begin{align*}
+    -\frac{\partial^2v(x, y)}{x^2} \approx \frac{2v_{i,j} - v_{i-1, j} - v_{i+1, j}}{h^2} \\
+    -\frac{\partial^2v(x, y)}{y^2} \approx \frac{2v_{i,j} - v_{i, j-1} - v_{i, j-1}}{h^2}
+\end{align*}
+
+Z uporabo Jacobijeve iteracije, lahko problem rešujemo iterativno, tako da neznane vrednosti v vsaki iteraciji posodobimo.
+\[
+  u_{i, j}^{k+1} = \frac{1}{4}(u_{i - 1, j}^k +  u_{i, j - 1}^k + u_{i + 1, j}^k + u_{i, j + 1}^k)
+\]
+Spodaj si lahko ogledamo rezultate slik, ponovno preizkušene na sliki mesta.
+\input{Poglavja/Rezultati/poisson.tex}
+
+Vidimo, da je algoritem tako hitrejši, kot bolj točen. Vendar, je pri primerjavi potrebno upoštevati, da se tak algoritem zanaša na podobnost lokalnih podatkov. Pri problemu minimizacije ranga, pa se na take podobnosti ne moremo vedno zanašati. Omenili smo že, da lahko algoritem uporabljamo v priporočilnih sistemih. V takem primeru ne moremo uporabljati sosednosti, saj imata lahko uporabnika v sosednjih vrsticah povsem različne preference. Prav tako si je lahko zamisliti sliko, kjer bi reševanje Poissonove enačbe vrnilo slab rezultat. Tak primer je lahko preprosta dvobarvna slika, sestavljena iz več pasov. Očitno je, da ima originalna slika rang 1. 
+
+\input{Poglavja/Rezultati/dvobarvna.tex}
+\FloatBarrier
+Medtem ko so algoritmi SVT, TNNM in LMaFit sliko rekonstruirali točno, je algoritem za reševanje Poissonove enačbe, kot pričakovano, tu imel več težav. Prav tako je algoritem za reševanje v večini primerov potreboval več časa.
