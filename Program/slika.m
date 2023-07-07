@@ -1,5 +1,5 @@
-img = imread('mesto.jpg');
-znanihVrednosti = 0.35;
+img = imread('dvobarvna.png');
+znanihVrednosti = 0.6;
 
 img = rgb2gray(img);
 norma = norm(cast(img,"double"), "fro")
@@ -17,7 +17,7 @@ for i = 1:n1
 end
 
 tic
-Y = solver(A, M, "tnnm", 90);
+Y = solver(A, M, "tnnm", 1);
 casIzvajanja = toc
 
 napaka = norm(Y - cast(img,"double") , "fro")
