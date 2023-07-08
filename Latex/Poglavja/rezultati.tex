@@ -119,6 +119,14 @@ Zaradi večje časovne zahtevnosti, algoritem TNNM testiramo zgolj trikrat, na d
 
 Sami rezultati med seboj delujejo podobni. Izračun napak nam pokaže, da medtem ko se napaka zmanjšuje s povečevanjem ranga, se hitreje povečuje tudi sam čas reševanja. Torej je treba razmisliti, kako dober rezultat potrebujemo, saj je sama točnost rekonstrukcije časovno draga. Seveda pa velja povedati, da je že pri parametru $1$ TNNM dosegel najboljše rezultate izmed algoritmov v tej diplomski nalogi.
 
+\section{Rekonstrukcija slike z besedilom}
+V tem podpoglavju bomo preizkušali učinkovitost algoritmov na slikah, kjer se želimo znebiti besedila na sliki. Gre za drugačno vrsto šuma, kjer namesto da bi bili neznani podatki enakomerno razporejeni, so ti zgoščeni na določenem delu. V našem primeru je bil delež znanih podatkov enak $0.92$, več kot v primerih, ki smo si jih ogledali do sedaj.
+\input{Poglavja/Rezultati/besedilo.tex}
+
+Ponovno lahko opazimo, da je najboljši rezultat vrnil algoritem TNNM. Pri algoritmu SVT lahko opazimo sledi besedila, zaradi česar je tudi sama napaka pri tem algoritmu večja. Algoritem LMaFit ni skonvergiral za parameter ranga večjega od 16, zaradi česar je tudi sam rezultat slab. Ta algoritem torej ni smiselno uporabljati pri problemih, kjer so neznane vrednosti zgoščene.
+
+Rezultati teh testov nam pokažejo pomembnost vrste šuma, saj kljub velikemu deležu znanih podatkov, algoritmi večine podatkov ne morejo kakovostno uporabiti.
+
 \section{Primerjava rezultatov z algoritmom za reševanje Poissonove enačbe}
 \todo{Preveri}
 Slike se v praksi pogosto rekonstruira z reševanjem Poissonove enačbe
@@ -137,6 +145,7 @@ Z uporabo Jacobijeve iteracije, lahko problem rešujemo iterativno, tako da nezn
 \]
 Spodaj si lahko ogledamo rezultate slik, ponovno preizkušene na sliki mesta.
 \input{Poglavja/Rezultati/poisson.tex}
+\FloatBarrier
 
 Vidimo, da je algoritem tako hitrejši, kot bolj točen. Vendar, je pri primerjavi potrebno upoštevati, da se tak algoritem zanaša na podobnost lokalnih podatkov. Pri problemu minimizacije ranga, pa se na take podobnosti ne moremo vedno zanašati. Omenili smo že, da lahko algoritem uporabljamo v priporočilnih sistemih. V takem primeru ne moremo uporabljati sosednosti, saj imata lahko uporabnika v sosednjih vrsticah povsem različne preference. Prav tako si je lahko zamisliti sliko, kjer bi reševanje Poissonove enačbe vrnilo slab rezultat. Tak primer je lahko preprosta dvobarvna slika, sestavljena iz več pasov. Očitno je, da ima originalna slika rang 1. 
 
