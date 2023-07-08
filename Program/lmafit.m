@@ -16,7 +16,7 @@ function Y = lmafit(data, mask, rank)
         stopCriteria = canStop(newXY, oldXY);
     end
 
-    Y = X*Y;
+    Y = Z;
 end
 
 

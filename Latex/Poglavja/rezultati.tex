@@ -107,7 +107,7 @@ Lahko je videti, da medtem ko obe metodi vrnete približno enako dobre rezultate
 Kot smo omenili že nekajkrat, algoritma TNNM in LMaFit za svoje izvajanje potrebujeta informacijo o rangu (v nadaljevanju parameter). V tem podpoglavju bomo poskušali odgovoriti na vprašanje, kako pri obeh algoritmih ta informacija vpliva na same rezultate in izvajanje. Za namene testiranja smo algoritem na isti sliki pognali večkrat, ter postopoma večali rang. Ponovno smo teste izvajali na sliki mesta, z znanim deležem podatkov nastavljenim na $0,35$.
 
 \subsection{LMaFit}
-V tej fazi smo algoritem testirali štirikrat, z rangom rezultata določenega na
+V tej fazi smo algoritem testirali šestkrat, z rangom rezultata določenega na
 $1, 5, 10, 22, 25$ in $60$. Vrednost $22$ je bila izbrana, ker je ob večkratnem zagonu programa na različnih parametrih, ta dala najboljši rezultat. Posledično sta bili vrednosti $25$ in $60$ izbrani z namenom opazovanja, kakšne rezultate pridobimo s precenitvijo ranga rekonstruirane matrike. 
 \input{Poglavja/Rezultati/rangLMaFit.tex}
 
@@ -123,8 +123,7 @@ Sami rezultati med seboj delujejo podobni. Izračun napak nam pokaže, da medtem
 V tem podpoglavju bomo preizkušali učinkovitost algoritmov na slikah, kjer se želimo znebiti besedila na sliki. Gre za drugačno vrsto šuma, kjer namesto da bi bili neznani podatki enakomerno razporejeni, so ti zgoščeni na določenem delu. V našem primeru je bil delež znanih podatkov enak $0.92$, več kot v primerih, ki smo si jih ogledali do sedaj.
 \input{Poglavja/Rezultati/besedilo.tex}
 
-Ponovno lahko opazimo, da je najboljši rezultat vrnil algoritem TNNM. Pri algoritmu SVT lahko opazimo sledi besedila, zaradi česar je tudi sama napaka pri tem algoritmu večja. Algoritem LMaFit ni skonvergiral za parameter ranga večjega od 16, zaradi česar je tudi sam rezultat slab. Ta algoritem torej ni smiselno uporabljati pri problemih, kjer so neznane vrednosti zgoščene.
-
+Ponovno lahko opazimo, da je najboljši rezultat vrnil algoritem TNNM. Pri algoritmu SVT lahko opazimo sledi besedila, zaradi česar je tudi sama napaka pri tem algoritmu večja. Algoritem LMaFit ni skonvergiral za parameter ranga večjega od 16, zaradi česar je sam rezultat produkta matrik $X$ in $Y$ slab. Po vstavitvi  manjkajočih vrednosti seveda večina slike izgleda pravilno, še vedno pa je mogoče razvideti besedilo. 
 Rezultati teh testov nam pokažejo pomembnost vrste šuma, saj kljub velikemu deležu znanih podatkov, algoritmi večine podatkov ne morejo kakovostno uporabiti.
 
 \section{Primerjava rezultatov z algoritmom za reševanje Poissonove enačbe}
