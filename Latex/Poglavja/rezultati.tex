@@ -12,15 +12,15 @@ Same teste algoritmov najprej poženemo na veliki, črno-beli sliki, velikosti $
 \FloatBarrier
 
 Kot vidimo, je med rezultati velika razlika. Očitno je, da algoritmi TNNM, SVT in LMaFit delujejo najbolje, medtem ko ima algoritem ADDM vprašljive rezultate. Te si lahko interpretiramo kot posledico lastnosti, da lahko algoritem končata v lokalnem minimumu. Prav tako algoritem ADMM ni našel rešitve, ko je imel poznanih $0.60$ podatkov. Zato je ta algoritma smiselno uporabljati, kadar imamo dober začeten približek matrik $X$ in $Y$ ter manj poznanih vrednosti. Algoritem NNM smo med rezultati izpustili, saj je zaradi velikega števila matrik, potrebnih za definicijo omejitev, algoritem preveč prostorsko kompleksen. Ta algoritem bomo zato obravnavali posebej. Zaradi teh opazk se v naslednjih podpoglavjih v večini osredotočamo na algoritme SVT, TNNM in LMaFit.
-\todo{je potrebno in graf in tabelo?}
+\todo{je potrebno in graf in tabelo?} 
 \begin{table}[h]
     \centering
     \begin{tabular}{|c|c|c|c|c|}
     \hline
     & SVT & TNNM & LMAFIT & ASD \\ \hline
-    0.35 & $4.69 \times 10^4$ & $7.70 \times 10^3$ & $8.03 \times 10^3$ & $3.9743 \times 10^7$ \\ \hline
-    0.45 & $3.15 \times 10^4$ & $5.30 \times 10^3$ & $6.40 \times 10^3$ & $6.0910 \times 10^7$ \\ \hline
-    0.6 & $1.25 \times 10^4$ & $3.58 \times 10^3$ & $5.35 \times 10^3$ & - \\ \hline
+    0.35 & $4.69 \times 10^4$ & $7.70 \times 10^3$ & $7.50 \times 10^3$ & $3.9743 \times 10^7$ \\ \hline
+    0.45 & $3.15 \times 10^4$ & $5.30 \times 10^3$ & $5.87 \times 10^3$ & $6.0910 \times 10^7$ \\ \hline
+    0.6 & $1.25 \times 10^4$ & $3.58 \times 10^3$ & $4.20 \times 10^3$ & - \\ \hline
     \end{tabular}
 \end{table}
 \begin{figure}[!ht]
@@ -34,9 +34,9 @@ Kot vidimo, je med rezultati velika razlika. Očitno je, da algoritmi TNNM, SVT 
     \begin{tabular}{|c|c|c|c|c|}
     \hline
     & SVT & TNNM & LMAFIT & ASD \\ \hline
-    0.35 & 338s & 824s & 235s & 1012s \\ \hline
-    0.45 & 510s & 498s & 342s & 328s\\ \hline
-    0.6 & 1674s & 350s & 48s & - \\ \hline
+    0.35 & 338s & 824s & 275s & 1012s \\ \hline
+    0.45 & 510s & 498s & 248s & 328s\\ \hline
+    0.6 & 1674s & 350s & 45,6s & - \\ \hline
     \end{tabular}
 \end{table}
 \begin{figure}[!ht]
@@ -62,7 +62,7 @@ Sama točnost algoritmov pa ostaja zelo podobna rekonstrukciji velike slike, tor
 \begin{figure}[!ht]
     \centering
     \includegraphics[width=\linewidth]{Poglavja/Slike/kompleksnost/kompleksna grayscale 300/cas.png}
-    \caption{Graf časov izvajanja algoritmov}
+    \caption{Graf časov izvajanja algoritmov na logaritmični skali}
 \end{figure}
 Sami časi izvajanja pa tu niso tako intuitivni. Prva glavna opazka je, da algoritem SVT potrebuje veliko več časa pri preprostem motivu kot pri kompleksem. \todo{razmisli to interpretacijo} To si lahko razlagamo kot posledico praga. Za dobre rezultate smo pri tako majhni matriki prag nastavili visoko. V našem primeru je imel ta vrednost $3600$. V primeru preprostega motiva, lahko pričakujemo, da bomo imeli malo zelo velikih singularnih vrednosti. Zaradi tega se algoritem težko premika in išče rešitev. Iz tega sledi opazka, da je algoritem SVT bolj smiselno uporabljati za kompleksne motive.
 
@@ -84,8 +84,8 @@ Vsi testi v tej fazi so bili izvedeni na podatkih, kjer imamo poznanih $0.35$ in
     \hline
     & SVT & TNNM & LMAFIT \\
     \hline
-    Enojna rekonstrukcija & $1,50 \times 10^4$ & $9,60\times 10^3$ & $1,15\times 10^4$ \\
-    Trojna rekonstrukcija & $1,66\times 10^4$ & $9,79\times 10^3$ & $1,14\times 10^4$ \\
+    Enojna rekonstrukcija & $1,50 \times 10^4$ & $9,60\times 10^3$ & $1,10 \times 10^4$ \\
+    Trojna rekonstrukcija & $1,66\times 10^4$ & $9,79\times 10^3$ & $1,06 \times 10^4$ \\
     \hline
     \end{tabular}
 \end{table}
@@ -97,7 +97,7 @@ Vsi testi v tej fazi so bili izvedeni na podatkih, kjer imamo poznanih $0.35$ in
     & SVT & TNNM & LMAFIT \\
     \hline
     Enojna rekonstrukcija & 352s & 124s & 66s \\
-    Trojna rekonstrukcija & 112s & 100s & 42s \\
+    Trojna rekonstrukcija & 112s & 100s & 46s \\
     \hline
     \end{tabular}
 \end{table}

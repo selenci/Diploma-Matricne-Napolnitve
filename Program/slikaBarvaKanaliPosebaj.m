@@ -15,8 +15,8 @@ for i = 1:n1
     end
 end
 imshow(cast(A, "uint8"))
-algoritem = "tnnm"
-r = 1
+algoritem = "lmafit"
+r = 20
 tic
 R = solver(sparse(A(:, :, 1)), sparse(M), algoritem, r);
 G = solver(sparse(A(:, :, 2)), sparse(M), algoritem, r);

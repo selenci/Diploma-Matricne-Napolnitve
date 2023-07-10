@@ -21,7 +21,7 @@ end
 Aimg = transform(A, n3);
 
 tic
-Y = solver(sparse(A), sparse(M), "tnnm", 1);
+Y = solver(sparse(A), sparse(M), "lmafit", 22);
 casIzvajanja = toc
 
 Yimg = transform(Y, n3);

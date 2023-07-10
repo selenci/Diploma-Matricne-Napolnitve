@@ -17,7 +17,7 @@ for i = 1:n1
 end
 
 tic
-Y = solver(A, M, "tnnm", 1);
+Y = solver(A, M, "lmafit", 1);
 casIzvajanja = toc
 
 napaka = norm(Y - cast(img,"double") , "fro")
