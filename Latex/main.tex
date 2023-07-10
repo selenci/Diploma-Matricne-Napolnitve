@@ -57,7 +57,9 @@ sorting=nty,
 \newcommand{\tauthor}{Matej Klančar}
 \newcommand{\tkeywords}{računalnik, računalnik, računalnik}
 \newcommand{\tkeywordsEn}{computer, computer, computer}
-
+\newcommand{\nnorm}[1]{\left\lVert#1\right\rVert_*}
+\newcommand{\fnorm}[1]{\left\lVert#1\right\rVert_F}
+\DeclareMathOperator{\diag}{diag}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -204,27 +206,27 @@ sorting=nty,
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %naslovnica
- \thispagestyle{empty}%
-   \begin{center}
+\thispagestyle{empty}%
+\begin{center}
     {\large\sc Univerza v Ljubljani\\%
-%      Fakulteta za elektrotehniko\\% za študijski program Multimedija
-%      Fakulteta za upravo\\% za študijski program Upravna informatika
-      Fakulteta za računalništvo in informatiko\\%
-%      Fakulteta za matematiko in fiziko\\% za študijski program Računalništvo in matematika
-     }
+        %      Fakulteta za elektrotehniko\\% za študijski program Multimedija
+        %      Fakulteta za upravo\\% za študijski program Upravna informatika
+        Fakulteta za računalništvo in informatiko\\%
+        %      Fakulteta za matematiko in fiziko\\% za študijski program Računalništvo in matematika
+    }
     \vskip 10em%
-    {\autfont \tauthor\par}%
-    {\titfont \ttitle \par}%
-    {\vskip 3em \textsc{DIPLOMSKO DELO\\[5mm]         % dodal Solina za ostale študijske programe
-%    VISOKOŠOLSKI STROKOVNI ŠTUDIJSKI PROGRAM\\ PRVE STOPNJE\\ RAČUNALNIŠTVO IN INFORMATIKA}\par}%
-     UNIVERZITETNI  ŠTUDIJSKI PROGRAM\\ PRVE STOPNJE\\ RAČUNALNIŠTVO IN INFORMATIKA}\par}%
-%    INTERDISCIPLINARNI UNIVERZITETNI\\ ŠTUDIJSKI PROGRAM PRVE STOPNJE\\ MULTIMEDIJA}\par}%
-%    INTERDISCIPLINARNI UNIVERZITETNI\\ ŠTUDIJSKI PROGRAM PRVE STOPNJE\\ UPRAVNA INFORMATIKA}\par}%
-%    INTERDISCIPLINARNI UNIVERZITETNI\\ ŠTUDIJSKI PROGRAM PRVE STOPNJE\\ RAČUNALNIŠTVO IN MATEMATIKA}\par}%
+        {\autfont \tauthor\par}%
+        {\titfont \ttitle \par}%
+        {\vskip 3em \textsc{DIPLOMSKO DELO\\[5mm]         % dodal Solina za ostale študijske programe
+                %    VISOKOŠOLSKI STROKOVNI ŠTUDIJSKI PROGRAM\\ PRVE STOPNJE\\ RAČUNALNIŠTVO IN INFORMATIKA}\par}%
+                UNIVERZITETNI  ŠTUDIJSKI PROGRAM\\ PRVE STOPNJE\\ RAČUNALNIŠTVO IN INFORMATIKA}\par}%
+    %    INTERDISCIPLINARNI UNIVERZITETNI\\ ŠTUDIJSKI PROGRAM PRVE STOPNJE\\ MULTIMEDIJA}\par}%
+    %    INTERDISCIPLINARNI UNIVERZITETNI\\ ŠTUDIJSKI PROGRAM PRVE STOPNJE\\ UPRAVNA INFORMATIKA}\par}%
+    %    INTERDISCIPLINARNI UNIVERZITETNI\\ ŠTUDIJSKI PROGRAM PRVE STOPNJE\\ RAČUNALNIŠTVO IN MATEMATIKA}\par}%
     \vfill\null%
-% izberite pravi habilitacijski naziv mentorja!
-    {\large \textsc{Mentor}: doc.\ dr.\ 
-    Aljaž Zalar\par}%
+    % izberite pravi habilitacijski naziv mentorja!
+    {\large \textsc{Mentor}: doc.\ dr.\
+        Aljaž Zalar\par}%
     {\vskip 2em \large Ljubljana, \the\year \par}%
 \end{center}
 % prazna stran
@@ -239,32 +241,32 @@ sorting=nty,
 
 \vspace*{5cm}
 {\small \noindent
-To delo je ponujeno pod licenco \textit{Creative Commons Priznanje avtorstva-Deljenje pod enakimi pogoji 2.5 Slovenija} (ali novej\v so razli\v cico).
-To pomeni, da se tako besedilo, slike, grafi in druge sestavine dela kot tudi rezultati diplomskega dela lahko prosto distribuirajo,
-reproducirajo, uporabljajo, priobčujejo javnosti in predelujejo, pod pogojem, da se jasno in vidno navede avtorja in naslov tega
-dela in da se v primeru spremembe, preoblikovanja ali uporabe tega dela v svojem delu, lahko distribuira predelava le pod
-licenco, ki je enaka tej.
-Podrobnosti licence so dostopne na spletni strani \href{http://creativecommons.si}{creativecommons.si} ali na Inštitutu za
-intelektualno lastnino, Streliška 1, 1000 Ljubljana.
+    To delo je ponujeno pod licenco \textit{Creative Commons Priznanje avtorstva-Deljenje pod enakimi pogoji 2.5 Slovenija} (ali novej\v so razli\v cico).
+    To pomeni, da se tako besedilo, slike, grafi in druge sestavine dela kot tudi rezultati diplomskega dela lahko prosto distribuirajo,
+    reproducirajo, uporabljajo, priobčujejo javnosti in predelujejo, pod pogojem, da se jasno in vidno navede avtorja in naslov tega
+    dela in da se v primeru spremembe, preoblikovanja ali uporabe tega dela v svojem delu, lahko distribuira predelava le pod
+    licenco, ki je enaka tej.
+    Podrobnosti licence so dostopne na spletni strani \href{http://creativecommons.si}{creativecommons.si} ali na Inštitutu za
+    intelektualno lastnino, Streliška 1, 1000 Ljubljana.
 
-\vspace*{1cm}
-\begin{center}% 0.66 / 0.89 = 0.741573033707865
-\CcImageCc{0.741573033707865}\hspace*{1ex}\CcImageBy{1}\hspace*{1ex}\CcImageSa{1}%
-\end{center}
+    \vspace*{1cm}
+    \begin{center}% 0.66 / 0.89 = 0.741573033707865
+        \CcImageCc{0.741573033707865}\hspace*{1ex}\CcImageBy{1}\hspace*{1ex}\CcImageSa{1}%
+    \end{center}
 }
 
 \vspace*{1cm}
 {\small \noindent
-Izvorna koda diplomskega dela, njeni rezultati in v ta namen razvita programska oprema je ponujena pod licenco GNU General Public License,
-različica 3 (ali novejša). To pomeni, da se lahko prosto distribuira in/ali predeluje pod njenimi pogoji.
-Podrobnosti licence so dostopne na spletni strani \url{http://www.gnu.org/licenses/}.
+    Izvorna koda diplomskega dela, njeni rezultati in v ta namen razvita programska oprema je ponujena pod licenco GNU General Public License,
+    različica 3 (ali novejša). To pomeni, da se lahko prosto distribuira in/ali predeluje pod njenimi pogoji.
+    Podrobnosti licence so dostopne na spletni strani \url{http://www.gnu.org/licenses/}.
 }
 
 \vfill
-\begin{center} 
-\ \\ \vfill
-{\em
-Besedilo je oblikovano z urejevalnikom besedil \LaTeX.}
+\begin{center}
+    \ \\ \vfill
+    {\em
+        Besedilo je oblikovano z urejevalnikom besedil \LaTeX.}
 \end{center}
 
 % prazna stran
@@ -286,8 +288,8 @@ Besedilo je oblikovano z urejevalnikom besedil \LaTeX.}
 
 \bigskip
 \noindent\textbf{Opis:}\\
-Besedilo teme diplomskega dela študent prepiše iz študijskega informacijskega sistema, kamor ga je vnesel mentor. 
-V nekaj stavkih bo opisal, kaj pričakuje od kandidatovega diplomskega dela. 
+Besedilo teme diplomskega dela študent prepiše iz študijskega informacijskega sistema, kamor ga je vnesel mentor.
+V nekaj stavkih bo opisal, kaj pričakuje od kandidatovega diplomskega dela.
 Kaj so cilji, kakšne metode naj uporabi, morda bo zapisal tudi ključno literaturo.
 
 \bigskip
@@ -318,8 +320,8 @@ Na tem mestu zapišite, komu se zahvaljujete za pomoč pri izdelavi diplomske na
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % posvetilo, če sama zahvala ne zadošča :-)
 \thispagestyle{empty}\mbox{}{\vskip0.20\textheight}\mbox{}\hfill\begin{minipage}{0.55\textwidth}%
-Svoji dragi Alenčici.
-\normalfont\end{minipage}
+    Svoji dragi Alenčici.
+    \normalfont\end{minipage}
 
 % prazna stran
 \clearemptydoublepage
@@ -341,11 +343,14 @@ Svoji dragi Alenčici.
 \chapter*{Seznam uporabljenih kratic}
 
 \noindent\begin{tabular}{p{0.11\textwidth}|p{.39\textwidth}|p{.39\textwidth}}    % po potrebi razširi prvo kolono tabele na račun drugih dveh!
-  {\bf kratica} & {\bf angleško}                              & {\bf slovensko} \\ \hline
-  {\bf CA}      & classification accuracy               & klasifikacijska točnost \\
-  {\bf DBMS} & database management system & sistem za upravljanje podatkovnih baz \\
-  {\bf SVM}   & support vector machine              & metoda podpornih vektorjev \\
-%  \dots & \dots & \dots \\
+    {\bf kratica} & {\bf angleško}                      & {\bf slovensko}                        \\ \hline
+    {\bf SVT }    & Singular Value Thresholding         & Prag singularnih vrednosti             \\
+    {\bf NNM}     & Nuclear norm minimization           & Minimizacija nuklearne norme           \\
+    {\bf TNNM}    & Truncated nuclear norm minimization & Minimizacija prirezane nuklearne norme \\
+    {\bf ASD}     & Alternating Steepest Descent        & Izmenjajoč gradientni spust            \\
+    {\bf NP}     & Nondeterministic polynomial time       & Nedeterministični polinomni čas            \\
+    {\bf SDP}     & Semidefinite programming        & Semidefinitno programiranje            \\
+    %  \dots & \dots & \dots \\
 \end{tabular}
 
 
@@ -388,7 +393,7 @@ Dober povzetek vključuje: (1) kratek opis obravnavanega problema, (2) kratek op
 \bigskip
 
 %\noindent\textbf{Abstract:} 
-\noindent This sample document presents an approach to typesetting your BSc thesis using \LaTeX. 
+\noindent This sample document presents an approach to typesetting your BSc thesis using \LaTeX.
 A proper abstract should contain around 100 words which makes this one way too short.
 \bigskip
 

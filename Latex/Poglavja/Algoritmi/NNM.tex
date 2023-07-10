@@ -1,48 +1,46 @@
 \section{Minimizacija nuklearne norme}
-Ker je minimizacija ranga matrike NP-poln problem, so se razvile druge metode, ki samo kompleksnost problema zmanjšujejo. Minimizacija nuklearne norme (Nuclear Norm Minimization) se zanaša na dejstvo, da je rang matrike povezan z nuklearno normo matrike. Ta je definirana kot
-\[
-  ||X||_* = \sum_{i = i}^{n} \sigma_i(X)
-\] \todo{se lahko sklicujem?}
-Dokazano je bilo, da nuklearna norma predstavlja konveksno ovojnico ranga. \cite{NNM-PHD} Konveksna ovojnica funkcije $f : \mathcal{C} \rightarrow \mathbb{R}$ je največja konveksna funkcija $g$ tako da velja $f(x) \geq g(x)$ za vse $x \in \mathcal{C}$. \cite{Survey-NKS19}
+Ker je minimizacija ranga matrike NP-poln problem \cite{NNM-PHD}, so se razvile druge metode, ki samo kompleksnost problema zmanjšujejo. Minimizacija nuklearne norme (NNM) uporabi idejo, da je rang matrike povezan z \textbf{nuklearno normo} matrike. 
+Dokazano je bilo \cite{NNM-PHD}, da nuklearna norma predstavlja konveksno ovojnico ranga.  \todo{premisliti kako je misljeno} \textbf{Konveksna ovojnica funkcije} $f : \mathcal{C} \rightarrow \mathbb{R}$ je največja konveksna funkcija $g$ tako da velja $f(x) \geq g(x)$ za vse $x \in \mathcal{C}$. \cite{Survey-NKS19}
 
-Minimizacijo nuklearne norme je možno pretvoriti v semidefinitni problem, ki ga lahko rešujemo z različnimi pripomočki, na primer SeDuMi \cite{SeDuMi}.
+Problem minimizacije nuklearne norme je možno pretvoriti v optimizacijski problem iz področja semidefinitnega programiranja (SDP), za katere obstajajo različna orodja za reševanje, na primer SeDuMi \cite{SeDuMi}.
 
-Standardna oblika semidefinitnega programa je
+\textbf{Standardna oblika semidefinitnega programa} je podana kot
 \begin{align*}
     \min_Y \hspace{0.5cm} &\trOp{C}{Y} \\
-    \text{tako da} \hspace{0.5cm} &\trOp{A_k}{Y} = b_k, \hspace{0.5cm} k = 1, \hdots , l\\
+    \text{pri pogojih} \hspace{0.5cm} &\trOp{A_k}{Y} = b_k, \hspace{0.5cm} k = 1, \hdots , l \numberthis \label{1007-1829} \\
     &Y \succeq 0
 \end{align*}
-Kjer je $C$ dana matrika, $\{A_k\}$ in $\{b_k\}$ pa množici matrik in vektorjev. 
+Kjer je $C \in \mathbb{R}^{n_1 \times n_2}$ dana matrika, $\{A_k \in \mathbb{R}^{n_1 \times n_2} \}$ in $\{b_k\}$ pa množici matrik in števil. 
 
 Problem minimizacije nuklearne norme lahko zapišemo kot 
 \begin{align*}
     \min_{X, t} \hspace{0.5cm} &t \\
-    \text{tako da} \hspace{0.5cm} &||X||_* \leq t,\\
+    \text{pri pogojih} \hspace{0.5cm} &\nnorm{X} \leq t, \numberthis \label{1007-1830}\\
     &\proj(X) = \proj(M)
 \end{align*}
-Trdimo, da za matriko $X \in \mathbb{R}^{n_1 \times n_2}$ in $t \in \mathbb{R}$ 
-velja $||X||_* \leq t \iff \exists W_1\in \mathbb{R}^{n_1 \times n_1}, W_2 \in \mathbb{R}^{n_2 \times n_2}$ tako da \cite{NNM-PHD} \todo{se lahko sklicujem?}
+
+
+Dokazano je bilo \cite{NNM-PHD}, da za matriko $X \in \mathbb{R}^{n_1 \times n_2}$ in $t \in \mathbb{R}$ 
+velja $\nnorm{X} \leq t \iff \exists W_1\in \mathbb{R}^{n_1 \times n_1}, W_2 \in \mathbb{R}^{n_2 \times n_2}$ tako da \cite{NNM-PHD}
 \begin{align*}
     &Y = \begin{bmatrix}
         W_1 & X \\
-        X^T & W_2
+        X^T & W_2 \label{1007-1835}
     \end{bmatrix}, \\
     &Y \succeq 0, \hspace{0.2cm} \tr(Y) \leq 2t
 \end{align*} 
-
-Minimizacijski problem lahko tako redefiniramo kot 
+Minimizacijski problem \eqref{1007-1830} lahko tako redefiniramo kot 
 \begin{align*}
     \min_{Y,t} \hspace{0.5cm} &2t\\
     \text{tako da} \hspace{0.5cm} & Y \succeq 0,\\
-    &\trOp{Y}{A_{a,b}} = b_{a,b}
+    &\trOp{Y}{A_{ab}} = c_{ab}
 \end{align*} 
-kjer je $A_{a,b} \in \mathbb{R}^{(n_1 + n_2) \times (n_1 + n_2)}$ matrika v množici $A$. Velja 
-$A_{a, b} \in A \iff (a, b) \in \Omega$. Matrika $A_{a,b}$ ima vse elemente ničelne, razen na mestu $(a, n_1 + b)$, kjer ima vrednost $1$.
-Podobno je definiran tudi $b_{a,b} \in \mathbb{R}$, ki ima vrednost $M_{a, b}$.
+kjer je $A_{ab} \in \mathbb{R}^{(n_1 + n_2) \times (n_1 + n_2)}$ matrika v množici $A$. Velja 
+$A_{ab} \in A \iff (a, b) \in \Omega$. Matrika $A_{ab}$ ima vse elemente ničelne, razen na mestu $(a, n_1 + b)$, kjer ima vrednost $1$.
+Podobno je definiran tudi $c_{ab} \in \mathbb{R}$, ki ima vrednost $M_{ab}$.
 Ker velja 
 \[
-    \trOp{A}{B} = \sum_{i}^{n_1} \sum_{j}^{n_2} a_{i,j}b_{i,j}
+    \trOp{A}{B} = \sum_{i}^{n_1} \sum_{j}^{n_2} a_{ij}b_{ij}
 \] je lahko videti, da je tak pogoj smiselen. Programi za reševanje SDP pa lahko tako obliko že sprejmejo.
 \cite{Survey-NKS19}
 
