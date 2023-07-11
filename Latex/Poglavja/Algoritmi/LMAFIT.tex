@@ -1,12 +1,12 @@
 \section{LMaFit}
 LMaFit je algoritem, ki podobno kot ASD, rešuje problem matričnih napolnitev z uporabo dveh manjših matrik $X^{n_1 \times r}$ in $Y^{n_1 \times r}$. Podobno kot v prejšnjih algoritmih rešujemo problem 
 \begin{align*}
-    \min_{X, Y, Z}& \hspace{0.5cm} \frac{1}{2}||XY - Z||_F^2\\
+    \min_{X, Y, Z}& \hspace{0.5cm} \frac{1}{2}\fnorm{XY - Z}^2\\
     \text{tako da}& \hspace{0.5cm} \proj(M) = \proj(Z)
 \end{align*}
 le da sam problem rešujemo s pomočjo Moore-Penrose inverza (Označen z $\dagger$).
 
-Lahko je videti, da bo funkcija $f(X,Y,Z) = frac{1}{2}||XY - Z||_F^2$ imela najmanjšo vrednost, ko bo $XY = Z$. Zato uvedemo iterativni algoritem, ki izmenično posodablja $X, Y$ in $Z$ tako, da fiksira dve izmed matrik. Minimizacijo matrik $X$ in $Y$ torej dosežemo na naslednji način.
+Lahko je videti, da bo funkcija $f(X,Y,Z) = \frac{1}{2}\fnorm{XY - Z}^2$ imela najmanjšo vrednost, ko bo $XY = Z$. Zato uvedemo iterativni algoritem, ki izmenično posodablja $X, Y$ in $Z$ tako, da fiksira dve izmed matrik. Minimizacijo matrik $X$ in $Y$ torej dosežemo na naslednji način.
 \begin{align*}
     X^{i+1}Y^{i} &= Z^{i} \hspace{0.5cm} \\
     X^{i+1} &= Z^{i}(Y^i)^\dagger

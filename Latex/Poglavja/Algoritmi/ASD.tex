@@ -4,18 +4,18 @@ $O(n^3)$, je bilo predlaganih nekaj algoritmov, ki za svoje delovanje ne potrebu
 
 Cilj algoritma je minimizirati
 \[
-    \min_{X, Y} \hspace{0.5cm} \frac{1}{2}\, ||\proj(M) - \proj(XY)||^2_F
+    \min_{X, Y} \hspace{0.5cm} \frac{1}{2}\, \fnorm{\proj(M) - \proj(XY)}^2
 \] 
 Algoritem minimizacijo razdeli na dve, nato pa izmenično rešuje eno in nato drugo kot 
 \begin{align*}
-    X_{i+1} &= \arg \min_{X} \hspace{0.3cm} ||\proj(M) - \proj(XY_i)||^2_F \\
-    Y_{i+1} &= \arg \min_{Y} \hspace{0.3cm} ||\proj(M) - \proj(X_{i+1}Y)||^2_F
+    X_{i+1} &= \arg \min_{X} \hspace{0.3cm} \fnorm{\proj(M) - \proj(XY_i)}^2 \\
+    Y_{i+1} &= \arg \min_{Y} \hspace{0.3cm} \fnorm{\proj(M) - \proj(X_{i+1}Y)}^2
 \end{align*}
 \cite{AST-TK15}
 
-Za uporabo algoritma ASD potrebujemo odvoda funkcije $f(X,Y) = \frac{1}{2}\, ||\proj(M) - \proj(XY)||^2_F$, ki ga izračunamo za vsak element posebej.
+Za uporabo algoritma ASD potrebujemo odvoda funkcije $f(X,Y) = \frac{1}{2}\, \fnorm{\proj(M) - \proj(XY)}^2$, ki ga izračunamo za vsak element posebej.
 \begin{align*}
-    \frac{\partial}{\partial x_{a,b}} f &= \frac{\partial}{\partial x_{a,b}} \frac{1}{2}\, ||\proj(M) - \proj(XY)||^2_F = \\
+    \frac{\partial}{\partial x_{a,b}} f &= \frac{\partial}{\partial x_{a,b}} \frac{1}{2}\, \fnorm{\proj(M) - \proj(XY)}^2 = \\
     &= \frac{\partial}{\partial x_{a,b}} \frac{1}{2}\, \sum_{i}^{n_1}\sum_{j}^{n_2}(\delta_{i,j}m_{i,j} - \delta_{i,j}\sum_{k}^{r}(x_{i,k}y_{k,j}))^2 = \\
     &= \, \sum_{j}^{n_2}(\delta_{a,j}m_{a,j} - \delta_{i,j}\sum_{k}^{r}(x_{a,k}y_{k,j}))(-y_{b,j}) \implies \\
     &\implies \frac{\partial}{\partial X}f = -(\proj(M) - \proj(XY))Y^T
@@ -45,18 +45,18 @@ Ker želimo, da bodo znane vrednosti produkta $X^{k+1}Y^{k}$ kar se da podobne z
     t_x &= \arg \min_t \hspace{0.3cm} g(t)
 \end{align*} kjer
 \begin{align*}
-    g(t) &= \frac{1}{2} ||\proj(M) - \proj((X - t\nabla f_Y(X))Y)||_F^2 \\
-    g(t) &= \frac{1}{2} ||\proj(M - XY)||_F^2 - t\tr(\proj(M - XY)\proj(\nabla f_Y(X)Y)^T) + \frac{t^2}{2}||\proj(\nabla f_Y(X)Y)||_F^2
+    g(t) &= \frac{1}{2} \fnorm{\proj(M) - \proj((X - t\nabla f_Y(X))Y)}^2 \\
+    g(t) &= \frac{1}{2} \fnorm{\proj(M - XY)}^2 - t\tr(\proj(M - XY)\proj(\nabla f_Y(X)Y)^T) + \frac{t^2}{2}\fnorm{\proj(\nabla f_Y(X)Y)}^2
 \end{align*}
 Ker je \cite{AST-TK15} \todo{ali lahko tako?}
 \[
-  g'(t) = -||\nabla f_Y(X)||_F^2 + t||\proj(f_Y(X)Y)||_F^2 
+  g'(t) = -\fnorm{\nabla f_Y(X)}^2 + t\fnorm{\proj(f_Y(X)Y)}^2 
 \]
 vidimo, da funkcija $g(t)$ doseže minimum pri 
 \[
-  t_x = \frac{||\nabla f_Y(X)||_F^2}{||\proj(\nabla f_Y(X)Y)||_F^2}  
+  t_x = \frac{\fnorm{\nabla f_Y(X)}^2}{\fnorm{\proj(\nabla f_Y(X)Y)}^2}  
 \]
 Podobno velja za korak v smeri gradientnega spusta matrike $Y$, kjer
 \[
-  t_y = \frac{||\nabla f_X(Y)||_F^2}{||\proj(X \nabla f_X(Y))||_F^2}  
+  t_y = \frac{\fnorm{\nabla f_X(Y)}^2}{\fnorm{\proj(X \nabla f_X(Y))}^2}  
 \]
