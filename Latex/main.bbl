@@ -19,6 +19,36 @@
 
 \refsection{0}
   \datalist[entry]{nty/global//global/global}
+    \entry{UnsplashGora}{online}{}
+      \name{author}{1}{}{%
+        {{hash=1aaa17a0f734a674f1d4a42e3105f800}{%
+           family={Bean},
+           familyi={B\bibinitperiod},
+           given={Jonathan},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{1aaa17a0f734a674f1d4a42e3105f800}
+      \strng{fullhash}{1aaa17a0f734a674f1d4a42e3105f800}
+      \strng{bibnamehash}{1aaa17a0f734a674f1d4a42e3105f800}
+      \strng{authorbibnamehash}{1aaa17a0f734a674f1d4a42e3105f800}
+      \strng{authornamehash}{1aaa17a0f734a674f1d4a42e3105f800}
+      \strng{authorfullhash}{1aaa17a0f734a674f1d4a42e3105f800}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Unsplash}
+      \field{urlday}{9}
+      \field{urlmonth}{2}
+      \field{urlyear}{2023}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://unsplash.com/photos/5ulmc8IHdLc
+      \endverb
+      \verb{url}
+      \verb https://unsplash.com/photos/5ulmc8IHdLc
+      \endverb
+    \endentry
     \entry{CCS}{misc}{}
       \name{author}{3}{}{%
         {{hash=5dfd9c597425ebbe4330801e972b5b56}{%
@@ -55,6 +85,36 @@
       \verb 0810.3286
       \endverb
     \endentry
+    \entry{UnsplashKnjiga}{online}{}
+      \name{author}{1}{}{%
+        {{hash=461789315b97ec3beab60f3869a3bd2e}{%
+           family={Escamilla},
+           familyi={E\bibinitperiod},
+           given={Alejandro},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{461789315b97ec3beab60f3869a3bd2e}
+      \strng{fullhash}{461789315b97ec3beab60f3869a3bd2e}
+      \strng{bibnamehash}{461789315b97ec3beab60f3869a3bd2e}
+      \strng{authorbibnamehash}{461789315b97ec3beab60f3869a3bd2e}
+      \strng{authornamehash}{461789315b97ec3beab60f3869a3bd2e}
+      \strng{authorfullhash}{461789315b97ec3beab60f3869a3bd2e}
+      \field{sortinit}{E}
+      \field{sortinithash}{8da8a182d344d5b9047633dfc0cc9131}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Unsplash}
+      \field{urlday}{9}
+      \field{urlmonth}{2}
+      \field{urlyear}{2023}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://unsplash.com/photos/cZhUxIQjILg
+      \endverb
+      \verb{url}
+      \verb https://unsplash.com/photos/cZhUxIQjILg
+      \endverb
+    \endentry
     \entry{NNM-PHD}{thesis}{}
       \name{author}{1}{}{%
         {{hash=fe2ff113d4fc01739b0dae0b7a60ba37}{%
@@ -83,6 +143,34 @@
       \field{title}{Matrix rank minimization with applications}
       \field{type}{PhD dezertacija}
       \field{year}{2002}
+    \endentry
+    \entry{UnsplashMesto}{online}{}
+      \name{author}{1}{}{%
+        {{hash=0ac42ef754a8b92773a98306e8a384f6}{%
+           family={Gabe},
+           familyi={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{0ac42ef754a8b92773a98306e8a384f6}
+      \strng{fullhash}{0ac42ef754a8b92773a98306e8a384f6}
+      \strng{bibnamehash}{0ac42ef754a8b92773a98306e8a384f6}
+      \strng{authorbibnamehash}{0ac42ef754a8b92773a98306e8a384f6}
+      \strng{authornamehash}{0ac42ef754a8b92773a98306e8a384f6}
+      \strng{authorfullhash}{0ac42ef754a8b92773a98306e8a384f6}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Unsplash}
+      \field{urlday}{9}
+      \field{urlmonth}{2}
+      \field{urlyear}{2023}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://unsplash.com/photos/bIZrEK-Z_cI
+      \endverb
+      \verb{url}
+      \verb https://unsplash.com/photos/bIZrEK-Z_cI
+      \endverb
     \endentry
     \entry{TNNM-HZYLH12}{article}{}
       \name{author}{5}{}{%

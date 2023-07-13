@@ -83,7 +83,7 @@ Glede na vse ugotovitve, nato nastavimo iterativni algoritem, tako da, izračuna
 \end{align*}
 Če minimizacijo še malo obrnemo, pa lahko problem rešujemo z uporabo algoritma ADMM. \todo{iz kje pride izracun $Y^{i+1}$}
 \begin{align*}
-    \min_X \hspace{0.5cm}         & \nnorm{X} - \tr(A^iW(B^i)^T)              \\
+    \min_X \hspace{0.5cm}         & \nnorm{X} - \tr(A^iW(B^i)^T) \numberthis\label{1307-1527}             \\
     \text{tako da} \hspace{0.5cm} & W=X, \hspace{0.2cm} \proj(W) = \proj(M)
 \end{align*}
 Ta problem ponovno zapišemo s pomočjo Lagrangeove funkcije, le da algoritem ADMM definira še kazenski parameter $\beta$. \cite{TNNM-HZYLH12} \todo{kazenski parameter?}

@@ -1,5 +1,6 @@
 \section{Minimizacija nuklearne norme}
 Ker je minimizacija ranga matrike NP-poln problem \cite{NNM-PHD}, so se razvile druge metode, ki samo kompleksnost problema zmanjšujejo. Minimizacija nuklearne norme (NNM) uporabi idejo, da je rang matrike povezan z \textbf{nuklearno normo} matrike. 
+
 Dokazano je bilo \cite{NNM-PHD}, da nuklearna norma predstavlja konveksno ovojnico ranga.  \todo{premisliti kako je misljeno} \textbf{Konveksna ovojnica funkcije} $f : \mathcal{C} \rightarrow \mathbb{R}$ je največja konveksna funkcija $g$ tako da velja $f(x) \geq g(x)$ za vse $x \in \mathcal{C}$. \cite{Survey-NKS19}
 
 Problem minimizacije nuklearne norme je možno pretvoriti v optimizacijski problem iz področja semidefinitnega programiranja (SDP), za katere obstajajo različna orodja za reševanje, na primer SeDuMi \cite{SeDuMi}.
@@ -18,8 +19,6 @@ Problem minimizacije nuklearne norme lahko zapišemo kot
     \text{pri pogojih} \hspace{0.5cm} &\nnorm{X} \leq t, \numberthis \label{1007-1830}\\
     &\proj(X) = \proj(M)
 \end{align*}
-
-
 Dokazano je bilo \cite{NNM-PHD}, da za matriko $X \in \mathbb{R}^{n_1 \times n_2}$ in $t \in \mathbb{R}$ 
 velja $\nnorm{X} \leq t \iff \exists W_1\in \mathbb{R}^{n_1 \times n_1}, W_2 \in \mathbb{R}^{n_2 \times n_2}$ tako da \cite{NNM-PHD}
 \begin{align*}

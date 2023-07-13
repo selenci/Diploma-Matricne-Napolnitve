@@ -18,17 +18,20 @@ V tem razdelku uvedemo definicije in oznake, ki se bodo pojavljale v preostanku 
           \label{1007-1959}
           \shrink_\tau(A) := U \shrink_\tau(\Sigma) V^T, \hspace{0.3cm} \shrink_\tau(\Sigma) = \diag(\max(\sigma_i - \tau, 0)),
         \end{align}
-        imenujemo \textbf{pragovni operator} \todo{pražni operator?}\cite{CCS}
+        imenujemo \textbf{pragovni operator}. \todo{pražni operator?}\cite{CCS}
   \item Matriko $\tilde{M} \in \mathbb{R}^{n_1 \times n_2}$ imenujemo \textbf{delno določena matrika}. $\tilde{M}$ označuje vhodno matriko, ki ima nekatere elemente neznane.
-  \item Nuklearna norma je definirana kot \[
+  \item \textbf{Nuklearna norma} je definirana kot \[
           \nnorm{X} = \sum_{i = 1}^{n} \sigma_i(X),
         \] pri čemer $\sigma_i(X)$ označuje $i$-to največjo singularno vrednost matrike $X$.
   \item Produkt $\trOp{A}{B}$ je definiran kot \[
           \trOp{A}{B} = \tr(AB^T)
         \]
   \item Oznaka $A \succeq 0$ označuje, da je matrika $A$ pozitivno semidefinitna. Velja $A \succeq 0 \iff x^TAx \ge 0 \text{ za vsak } x \in \mathbb{R}^n$
-
-        % \item Z oznako $M \in \mathbb{R}^{n_1 \times n_2}$ označujemo bitno matriko M, ki predstavlja masko, s katero označimo katere vrednosti poznamo in katere ne. Vrednost 1 označuje, da je vrednost na tisti poziciji znana, medtem ko 0 označuje, da ni. 
+  \item Za množico subgradientov v točki $x_0$, označeno z $A_{x_0}$ konveksne funkcije $f: \mathbb{R}^n \rightarrow \mathbb{R}$ velja 
+  \[
+    c \in A_{x_0} \iff \forall x: f(x) - f(x_0) \geq c^T(x - x_0),
+  \] kjer $c \in \mathbb{R}^n$.
+         % \item Z oznako $M \in \mathbb{R}^{n_1 \times n_2}$ označujemo bitno matriko M, ki predstavlja masko, s katero označimo katere vrednosti poznamo in katere ne. Vrednost 1 označuje, da je vrednost na tisti poziciji znana, medtem ko 0 označuje, da ni. 
 \end{enumerate}
 
 \input{Poglavja/Algoritmi/NNM.tex}
