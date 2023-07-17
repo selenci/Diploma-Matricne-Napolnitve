@@ -4,11 +4,10 @@
 
 \section{Definicije in oznake}
 V tem razdelku uvedemo definicije in oznake, ki se bodo pojavljale v preostanku dela.
-\todo{dodaj subgradient}
 \begin{enumerate}
   \item $\Omega$ je podmnožica urejenih parov $\{ (i, j) : i = 1, \hdots , n_1, \hspace{0.3cm} j = 1, \hdots, n_2 \}$ V delu je poimenujemo kot \textbf{množica znanih vrednosti}.
   \item Naj bo matrika $A$ definirana kot $A = [a_{ij}]_{i,j}$. Z $\proj(A)$ označimo preslikavo \todo{preveri oznako}
-        \[ [\proj(A)]_{i,j} = \begin{cases}
+        \[ [\proj(A)_{ij}]_{i,j} = \begin{cases}
             a_{ij}, & (i, j) \in \Omega \\
             0,      & \text{sicer}
           \end{cases}
@@ -19,7 +18,7 @@ V tem razdelku uvedemo definicije in oznake, ki se bodo pojavljale v preostanku 
           \shrink_\tau(A) := U \shrink_\tau(\Sigma) V^T, \hspace{0.3cm} \shrink_\tau(\Sigma) = \diag(\max(\sigma_i - \tau, 0)),
         \end{align}
         imenujemo \textbf{pragovni operator}. \todo{pražni operator?}\cite{CCS}
-  \item Matriko $\tilde{M} \in \mathbb{R}^{n_1 \times n_2}$ imenujemo \textbf{delno določena matrika}. $\tilde{M}$ označuje vhodno matriko, ki ima nekatere elemente neznane.
+  \item Matriko $M \in \mathbb{R}^{n_1 \times n_2}$ imenujemo \textbf{delno določena matrika}. $M$ označuje vhodno matriko, ki ima nekatere elemente neznane.
   \item \textbf{Nuklearna norma} je definirana kot \[
           \nnorm{X} = \sum_{i = 1}^{n} \sigma_i(X),
         \] pri čemer $\sigma_i(X)$ označuje $i$-to največjo singularno vrednost matrike $X$.

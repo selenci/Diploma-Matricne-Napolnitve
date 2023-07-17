@@ -141,7 +141,7 @@
       \field{labeltitlesource}{title}
       \field{month}{3}
       \field{title}{Matrix rank minimization with applications}
-      \field{type}{PhD dezertacija}
+      \field{type}{PhD disertacija}
       \field{year}{2002}
     \endentry
     \entry{UnsplashMesto}{online}{}
@@ -220,6 +220,31 @@
       \verb{doi}
       \verb 10.1109/TPAMI.2012.271
       \endverb
+    \endentry
+    \entry{MCPAS}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=dac60894a8d7e4e7a13519d50f5fbf9a}{%
+           family={Johnson},
+           familyi={J\bibinitperiod},
+           given={Charles\bibnamedelima R},
+           giveni={C\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+      }
+      \strng{namehash}{dac60894a8d7e4e7a13519d50f5fbf9a}
+      \strng{fullhash}{dac60894a8d7e4e7a13519d50f5fbf9a}
+      \strng{bibnamehash}{dac60894a8d7e4e7a13519d50f5fbf9a}
+      \strng{authorbibnamehash}{dac60894a8d7e4e7a13519d50f5fbf9a}
+      \strng{authornamehash}{dac60894a8d7e4e7a13519d50f5fbf9a}
+      \strng{authorfullhash}{dac60894a8d7e4e7a13519d50f5fbf9a}
+      \field{sortinit}{J}
+      \field{sortinithash}{b2f54a9081ace9966a7cb9413811edb4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Matrix theory and applications}
+      \field{title}{Matrix completion problems: a survey}
+      \field{volume}{40}
+      \field{year}{1990}
+      \field{pages}{171\bibrangedash 198}
+      \range{pages}{28}
     \endentry
     \entry{Survey-NKS19}{article}{}
       \name{author}{3}{}{%
