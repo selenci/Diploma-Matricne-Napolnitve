@@ -85,6 +85,37 @@
       \verb 0810.3286
       \endverb
     \endentry
+    \entry{ERZAR_2023}{thesis}{}
+      \name{author}{1}{}{%
+        {{hash=82b4161494ab8eb3ead52e408c62617d}{%
+           family={Erzar},
+           familyi={E\bibinitperiod},
+           given={Blaž},
+           giveni={B\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {Univerza v Ljubljani}%
+      }
+      \strng{namehash}{82b4161494ab8eb3ead52e408c62617d}
+      \strng{fullhash}{82b4161494ab8eb3ead52e408c62617d}
+      \strng{bibnamehash}{82b4161494ab8eb3ead52e408c62617d}
+      \strng{authorbibnamehash}{82b4161494ab8eb3ead52e408c62617d}
+      \strng{authornamehash}{82b4161494ab8eb3ead52e408c62617d}
+      \strng{authorfullhash}{82b4161494ab8eb3ead52e408c62617d}
+      \field{sortinit}{E}
+      \field{sortinithash}{8da8a182d344d5b9047633dfc0cc9131}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Inkrementalna rekonstrukcija slike iz razpršenih podatkov}
+      \field{type}{phdthesis}
+      \field{year}{2023}
+      \verb{urlraw}
+      \verb https://repozitorij.uni-lj.si/IzpisGradiva.php?lang=slv&id=144588
+      \endverb
+      \verb{url}
+      \verb https://repozitorij.uni-lj.si/IzpisGradiva.php?lang=slv&id=144588
+      \endverb
+    \endentry
     \entry{UnsplashKnjiga}{online}{}
       \name{author}{1}{}{%
         {{hash=461789315b97ec3beab60f3869a3bd2e}{%

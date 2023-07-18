@@ -49,7 +49,7 @@ Izkaže se, da je rešitev \eqref{1007-2018} enaka $\shrink_\tau(Y^{k-1})$.
 \end{theorem}
 
 \begin{proof}
-Ker je $h(X) := \frac{1}{2} \fnorm{X-Y}^2 + \tau\nnorm{X} $ strogo konveksna funkcija, lahko za subgradient $Z$ v točki $X_0$ rečemo, da velja $\forall X: f(X) \geq  f(X_0) + \left< Z, X - X_0 \right>$. Ali drugače povedano, vse točke na vseh tangentah na funckijo $h(X)$ bodo pod ali na funkciji $h(X)$. To velja po sami definiciji, saj je to zahtevan pogoj subgradienta v neki točki.
+Ker je $h(X) := \frac{1}{2} \fnorm{X-Y}^2 + \tau\nnorm{X} $ strogo konveksna funkcija, lahko za subgradient $Z$ v točki $X_0$ rečemo, da velja $\forall X: f(X) \geq  f(X_0) + \left< Z, X - X_0 \right>$. Ali drugače povedano, vse točke na vseh \CR{tangentah} na funckijo $h(X)$ bodo pod ali na funkciji $h(X)$. To velja po sami definiciji, saj je to zahtevan pogoj subgradienta v neki točki.
 
 Pri iskanju minimuma torej iščemo tako točko $X'$, da bo subgradient v točki $X'$ enak 0. Problem sedaj zapišemo kot $0 \in X' - Y + \tau \partial\nnorm{X'}$. Izkaže se, da je množica subgradientov nuklearne norme definirana kot
 \[
@@ -98,12 +98,12 @@ Po trditvi lahko sedaj zapišemo algoritem \eqref{1007-2018} - \eqref{1007-2019}
 Opazimo lahko, da algoritem SVT potrebuje dva parametra, $\tau$ in $\delta$, ki ju moramo izbrati v naprej.
 
 Medtem, ko so koraki v samem algoritmu definirani kot množica korakov, 
-smo v okviru rezultatov diplomske naloge za premik uporabljali konstanto, ter korak nastavili na 
+smo v okviru rezultatov diplomske naloge, \CG{prvotno} za premik uporabljali konstanto, ter korak nastavili na 
 \[
     \delta = 1.2\, \dfrac{n_1 n_2}{m}
 \] po priporočilih \cite{CCS}. 
 
-Prav tako članek navaja, da je za matrike velikosti $\mathbb{R}^{n \times n}$ smiselno nastaviti $\tau = 5n$, vendar sem v moji implementaciji zaradi posploševanja na nekvadratne matrike, za matrike velikosti $\mathbb{R}^{n_1 \times n_2}$ parameter nastavil na
+Prav tako članek \cite{CCS} navaja, da je za matrike velikosti $\mathbb{R}^{n \times n}$ smiselno nastaviti $\tau = 5n$, vendar sem v moji implementaciji zaradi posploševanja na nekvadratne matrike, za matrike velikosti $\mathbb{R}^{n_1 \times n_2}$ parameter nastavil na
 \[
     \tau = 5\, \frac{n_1+n_2}{2}
 \]
