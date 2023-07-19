@@ -1,4 +1,4 @@
-\section{Minimizacija prirezane nuklearne norme}
+\section{Algoritem minimizacije prirezane nuklearne norme}
 Že samo ime nam pove, da bo algoritem minimizacije prirezane nuklearne norme, oziroma TNNM podoben algoritmu NNM. Ideja tega algoritma pa je, da uporabimo dodatno informacijo $r \in \mathbb{N}$ o rangu originalne, nezašumljene matrike.
 
 Sam algoritem uvede tako imenovano \textbf{$r$-prirezano nuklearno normo}, ki je za matriko $X \in \mathbb{R}^{n_1 \times n_2}$ definirana kot vsota $\min(n_1,n_2) - r$ najmanjših singularnih vrednosti
@@ -18,17 +18,15 @@ Problem \eqref{1107-1305} je ekvivalenten
     \textrm{pri pogojih} & \hspace{0.5cm} \proj(X) = \proj(M)
 \end{align*}
 Za nadaljnje korake bomo potrebovali naslednji izrek
-\todo{begin theorem naredi postrani}
 \begin{theorem}
-    Za $X \in \mathbb{R}^{n_1 \times n_2}$, $A \in \mathbb{R}^{r \times n_1}$, $B \in \mathbb{R}^{r \times n_2}$ in $r \in \mathbb{N}$, pri pogojih $r \leq min(n_1, n_2)$, $AA^T = I_{r}, BB^T = I_{r}$ velja.
-
+    Za $X \in \mathbb{R}^{n_1 \times n_2}$, $A \in \mathbb{R}^{r \times n_1}$, $B \in \mathbb{R}^{r \times n_2}$ in $r \in \mathbb{N}$, pri pogojih $r \leq min(n_1, n_2)$, $AA^T = I_{r}, BB^T = I_{r}$ velja:
     \begin{align*}
         \tr(AXB^T) \leq \sum_{i=1}^{r} \sigma_i(X)
     \end{align*}
 \end{theorem}
 
 \begin{proof}
-    Za dokaz uporabljamo Von Neumannovo neenakost sledi, s katero lahko zapišemo
+    Za dokaz uporabljamo von Neumannovo neenakost sledi \cite{TNNM-HZYLH12}, s katero lahko zapišemo
     \[
         \tr(AXB^T) = \tr(XB^TA) \leq \sum^{\min(n_1, n_2)}_{i=1} \sigma_i(X) \sigma_i(B^TA)
     \]
@@ -52,19 +50,19 @@ Za nadaljnje korake bomo potrebovali naslednji izrek
 \end{proof}
 
 \begin{theorem}
-Za SVD razcep matrike $X = U \Sigma V^T$, ter matriki
-$A = (u_1, \hdots , u_r)^T$ in $B = (v_1, \hdots , v_r)^T$,
-kjer je $u_i$ $i$-ti stolpec matrike $U$ ter $v_i$ $i$-ti stolpec
-matrike $V$, velja \[\tr(AXB^T) = \sum^{r}_{i=1} \sigma_i(X)\]
+    Za SVD razcep matrike $X = U \Sigma V^T$, ter matriki
+    $A = (u_1, \hdots , u_r)^T$ in $B = (v_1, \hdots , v_r)^T$,
+    kjer je $u_i$ $i$-ti stolpec matrike $U$ ter $v_i$ $i$-ti stolpec
+    matrike $V$, velja \[\tr(AXB^T) = \sum^{r}_{i=1} \sigma_i(X)\]
 \end{theorem}
 
 \begin{proof}
-\begin{align*}
-    \tr(AXB^T) & = \tr((u_1, \hdots , u_r)^T X (u_1, \hdots , u_r)^T) =                                                                                                                                                                 \\
-               & = \tr((u_1, \hdots , u_r)^T U \Sigma V^T (u_1, \hdots , u_r)^T) =                                                                                                                                                      \\
-               & = \begin{bmatrix} I_r & 0 \\ 0 & 0 \end{bmatrix} \Sigma \begin{bmatrix} I_r & 0 \\ 0 & 0 \end{bmatrix} =                                                                                                               \\
-               & = \tr(\begin{bmatrix} \sigma_1 \\[-8pt] & \ddots & & \\[-8pt] & & \sigma_r \\[-8pt] & &  & 0 \\[-8pt]  & & & & \ddots \\[-8pt] & & & & & 0 \end{bmatrix}) = \sum_{i = 1}^{r} \sigma_i(X)  \numberthis\label{2806-1321}
-\end{align*}
+    \begin{align*}
+        \tr(AXB^T) & = \tr((u_1, \hdots , u_r)^T X (u_1, \hdots , u_r)^T)                                                                                                                                                                   \\
+                   & = \tr((u_1, \hdots , u_r)^T U \Sigma V^T (u_1, \hdots , u_r)^T)                                                                                                                                                        \\
+                   & = \begin{bmatrix} I_r & 0 \\ 0 & 0 \end{bmatrix} \Sigma \begin{bmatrix} I_r & 0 \\ 0 & 0 \end{bmatrix}                                                                                                                 \\
+                   & = \tr(\begin{bmatrix} \sigma_1 \\[-8pt] & \ddots & & \\[-8pt] & & \sigma_r \\[-8pt] & &  & 0 \\[-8pt]  & & & & \ddots \\[-8pt] & & & & & 0 \end{bmatrix}) = \sum_{i = 1}^{r} \sigma_i(X)  \numberthis\label{2806-1321}
+    \end{align*}
 \end{proof}
 Z združitvijo dokazov \eqref{2806-1320} in \eqref{2806-1321} zapišemo
 \[
@@ -72,7 +70,7 @@ Z združitvijo dokazov \eqref{2806-1320} in \eqref{2806-1321} zapišemo
 \]
 Torej je optimizacijski problem ekvivalenten
 \begin{align*}
-    \min_X \hspace{0.5cm}         & \nnorm{X} - \max_{AA^T = I, BB^T = I} \tr(AXB^T) \\
+    \min_X \hspace{0.5cm}             & \nnorm{X} - \max_{AA^T = I, BB^T = I} \tr(AXB^T) \\
     \text{pri pogojih} \hspace{0.5cm} & \proj(X) = \proj(M)
 \end{align*}
 
@@ -83,38 +81,38 @@ Glede na vse ugotovitve, nato nastavimo iterativni algoritem, tako da, izračuna
 \end{align*}
 Če minimizacijo še malo obrnemo, pa lahko problem rešujemo z uporabo algoritma ADMM. \todo{iz kje pride izracun $Y^{i+1}$}
 \begin{align*}
-    \min_X \hspace{0.5cm}         & \nnorm{X} - \tr(A^iW(B^i)^T) \numberthis\label{1307-1527}             \\
+    \min_X \hspace{0.5cm}         & \nnorm{X} - \tr(A^iW(B^i)^T) \numberthis\label{1307-1527} \\
     \text{tako da} \hspace{0.5cm} & W=X, \hspace{0.2cm} \proj(W) = \proj(M)
 \end{align*}
-Ta problem ponovno zapišemo s pomočjo Lagrangeove funkcije, le da algoritem ADMM definira še kazenski parameter $\beta$. \cite{TNNM-HZYLH12} \todo{kazenski parameter?}
+Ta problem ponovno zapišemo s pomočjo Lagrangeove funkcije, le da algoritem ADMM definira še regularizacijski parameter $\beta$. \cite{TNNM-HZYLH12}
 \[
     \mathcal{L}(X, Y, W, \beta) = \nnorm{X} - \tr(A_l W B_l^T) + \frac{\beta}{2} \fnorm{X - W}^2 + \tr(Y^T(X-W))
 \]
-Opazimo lahko, da funkcija definira zgolj pogoj $X = W$. Videli bomo, da algoritem pogoj $\proj(X) = \proj(M)$ definira posredno, s popravljanjem znanih vrednosti. \eqref{2906-1248} \todo{ali lahko citiram naprej}
+Opazimo lahko, da funkcija definira zgolj pogoj $X = W$. Videli bomo, da algoritem pogoj $\proj(X) = \proj(M)$ definira posredno, s popravljanjem znanih vrednosti (korak \eqref{2906-1248} spodaj).%\todo{ali lahko citiram naprej}
 
 Matriko $X^{k+1}$ ponovno definiramo kot
 \[
     X^{k+1} = \arg \min_X \mathcal{L}(X, Y^k, W^k, \beta)
 \]
-Z ignoriranjem konstantnih členov, pa lahko tako zapišemo \todo{kako se pise enacaje}
+Z ignoriranjem konstantnih členov, pa lahko tako zapišemo
 \begin{align*}
-    X^{k+1} & = \arg \min_X \nnorm{X} + \frac{\beta}{2}\trOp{X-W^k}{X-W^k} + \frac{\beta}{2}\trOp{\frac{2}{\beta}Y}{X} =     \\
-            & = \arg \min_X \nnorm{X} + \frac{\beta}{2}\tr(X^TX - X^TW^k - W^{k^T}X - W^{k^T}W^k + \frac{2}{\beta}Y^{k^T}X )
+    X^{k+1} & = \arg \min_X \hspace{0.2cm} \nnorm{X} + \frac{\beta}{2}\trOp{X-W^k}{X-W^k} + \frac{\beta}{2}\trOp{\frac{2}{\beta}Y}{X}       \\
+            & = \arg \min_X \hspace{0.2cm} \nnorm{X} + \frac{\beta}{2}\tr(X^TX - X^TW^k - W^{k^T}X - W^{k^T}W^k + \frac{2}{\beta}Y^{k^T}X )
 \end{align*}
 Z namenom faktorizacije dodamo konstantne člene.
 \begin{align*}
-     & \arg \min_X \nnorm{X} + \frac{\beta}{2}\tr(X^T(X - W^k + \frac{1}{\beta}Y^k) - W^{k^T} (X - W^k + \frac{1}{\beta}Y^k) \\
-     & +\frac{1}{\beta}Y^{k^T}(X - W^k + \frac{1}{\beta}Y^k)) =                                                            \\
-     & = \arg \min_X \nnorm{X} + \frac{\beta}{2} \fnorm{X-W^k + \frac{1}{\beta}Y^k}^2 =                                        \\
-     & = \arg \min_X \frac{1}{\beta}\nnorm{X} +  \frac{1}{2}\fnorm{X-(W^k - \frac{1}{\beta}Y^k)}^2
+     & \arg \min_X \hspace{0.2cm} \nnorm{X} + \frac{\beta}{2}\tr(X^T(X - W^k + \frac{1}{\beta}Y^k) - W^{k^T} (X - W^k + \frac{1}{\beta}Y^k) \\
+     & +\frac{1}{\beta}Y^{k^T}(X - W^k + \frac{1}{\beta}Y^k))                                                               \\
+     & = \arg \min_X \hspace{0.2cm} \nnorm{X} + \frac{\beta}{2} \fnorm{X-W^k + \frac{1}{\beta}Y^k}^2                                       \\
+     & = \arg \min_X \hspace{0.2cm} \frac{1}{\beta}\nnorm{X} +  \frac{1}{2}\fnorm{X-(W^k - \frac{1}{\beta}Y^k)}^2
 \end{align*}
-Po izreku \eqref{2906-1056} pa tako lahko zapišemo
+\CB{Po enakkosti v izreku ... ali po izreku ...} Po izreku \ref{1907-2240} pa tako lahko zapišemo
 \[
     X^{k+1} = \shrink_\frac{1}{\beta}(W_k - \frac{1}{\beta} Y_k)
 \]
 Matriko $W$ podobno izračunamo kot
 \begin{align*}
-    W^{k+1} & = \arg \min_{W} \mathcal{L}(X^{k+1}, Y^k, W, \beta)                                     \\
+    W^{k+1} & = \arg \min_{W} \mathcal{L}(X^{k+1}, Y^k, W, \beta)                                       \\
             & = \arg \min_W \frac{\beta}{2} \fnorm{W - (X^{k+1} + \frac{1}{\beta}(A_l^T B_l + Y_k)) }^2
 \end{align*}
 Lahko je videti, da velja
@@ -126,3 +124,4 @@ Zaradi pogoja $\proj(W) = \proj(M)$ pa tiste elemente, ki poznamo, popravimo. \c
     \label{2906-1248}
     W_{k+1} = W_{k+1} + \proj(M - W_{k+1})
 \end{equation}
+\CG{Korak preprosto spremeni mesta, kjer vrednosti poznamo na znane vrednosti, ostale pa pusti, kakršne so.}

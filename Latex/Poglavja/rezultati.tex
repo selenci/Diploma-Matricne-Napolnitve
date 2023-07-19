@@ -23,10 +23,10 @@ Algoritme najprej testiramo na veliki, črno-beli sliki, velikosti $1000\times10
 \todo{Ali je spodnji rob premajhen pri prejšnji sliki}
 
 Opazimo lahko, da je med rezultati velika razlika. Že na pogled lahko rečemo, da algoritma TNNM in LMaFit delujeta najbolje, SVT nekoliko slabše, medtem ko
-ASD vrne slabe rezultate. Te si lahko interpretiramo kot posledico lastnosti, da lahko algoritem konča v lokalnem minimumu. Prav tako algoritem ASD ni našel rešitve, ko je imel znanih 60\% podatkov. Zato je ta algoritma smiselno uporabljati, kadar imamo dober začetni približek matrik $X$ in $Y$ ter manj poznanih vrednosti.
-\CR{Te dve informaciji si nasprotujeta. Če imamo dober začetni približek, potem je to v nasprotju z manj znanimi vhodi. Malo bolje razloži.}
+ASD vrne slabe rezultate. Te si lahko interpretiramo kot posledico lastnosti, da lahko algoritem konča v lokalnem minimumu. Prav tako algoritem ASD ni našel rešitve, ko je imel znanih 60\% podatkov. Zato je ta algoritma smiselno uporabljati, kadar imamo manj poznanih vrednosti in dober začetni približek matrik $X$ in $Y$.
+
 Algoritem NNM smo med rezultati izpustili, saj je zaradi velikega števila matrik, potrebnih za definicijo omejitev, algoritem preveč prostorsko kompleksen. 
-\CG{Ta algoritem je zato smiselno uporabljati, kadar imamo matrike manjših dimenzij (algoritem lahko še rešuje probleme, za matrike velikosti $100 \times 100$). Prednost tega algoritma je, da vrne točno tisto rešitev, kjer je nuklearna norma najmanjša. Zaradi konveksne ovojnice (omenjene v razdelku \ref{1707-1755}), bi moral torej ta algoritem vrniti najboljše rezultate. } Zaradi teh opazk se v naslednjih razdelkih osredotočamo na algoritme SVT, TNNM in LMaFit.
+\CG{Ta algoritem je zato smiselno uporabljati, kadar imamo matrike manjših dimenzij \cite{NNM-Candes} (algoritem lahko še rešuje probleme, za matrike velikosti $100 \times 100$). Prednost tega algoritma je, da vrne točno tisto rešitev, kjer je nuklearna norma najmanjša. Zaradi konveksne ovojnice (omenjene v razdelku \ref{1707-1755}), bi moral torej ta algoritem vrniti najboljše rezultate. } Zaradi teh opazk se v naslednjih razdelkih osredotočamo na algoritme SVT, TNNM in LMaFit.
 \begin{table}[h]
     \centering
     \begin{tabular}{|c|c|c|c|c|}
@@ -91,7 +91,7 @@ Točnost algoritmov pa ostaja zelo podobna rekonstrukciji velike slike, torej z 
 
 
 
-Časi izvajanja pa tu niso tako intuitivni. Prva glavna ugotovitev je, da algoritem SVT potrebuje veliko več časa pri preprostem motivu kot pri kompleksnem. \CG{To si lahko razlagamo kot posledico praga, ki je bila pri obeh nastavljena na vrednost 7200. V primeru preprostega motiva lahko pričakujemo, da bomo imeli manj zelo velikih singularnih vrednosti v primerjavi s kompleksnim. Zaradi tega se algoritem počasneje premika in dolgo išče rešitev.} Iz tega sledi ugotovitev, da je algoritem SVT bolj smiselno uporabljati za kompleksne motive. \CG{Seveda pa bi lahko, zaradi manjše napake pri preprostem motivu prag nastavili nižje. S tem bi algoritem pospešili, vendar s tem dobili slabši rezultat.}
+Časi izvajanja pa tu niso tako intuitivni. Prva glavna ugotovitev je, da algoritem SVT potrebuje veliko več časa pri preprostem motivu kot pri kompleksnem. \CG{V razdelku \ref{1907-1648} smo omenili priporočen prag \cite{CCS}, vendar je v tem primeru ta vrnil slabe rezultate. S preizkušanjem smo prag večali in prišli do vrednosti 7200, ki je dala primerljive rezultate z ostalimi algoritmi. Prav tako je bilo za slike z manj znanimi vrednostmi potrebno korak zmanjšati, sicer algoritem ni konvergiral. V primeru preprostega motiva lahko pričakujemo, da bomo imeli manj zelo velikih singularnih vrednosti v primerjavi s kompleksnim.  Zaradi tega se algoritem počasneje premika in dolgo išče rešitev.} Iz tega sledi ugotovitev, da je algoritem SVT bolj smiselno uporabljati za kompleksne motive. \CG{Seveda pa bi lahko, zaradi manjše napake pri preprostem motivu prag nastavili nižje. S tem bi algoritem pospešili, vendar s tem dobili slabši rezultat.}
 
 Naslednja pomembna ugotovitev je, da delež znanih vrednosti različno vpliva na čas izvajanja. Tudi ta faktor je torej lahko pomemben pri izbiri algoritma za reševanje problema. Algoritem SVT potrebuje za rekonstrukcijo več časa, kadar ima poznanih več vrednosti, medtem ko se algoritmu TNNM z deležem znanih vrednosti čas izvajanja manjša. Algoritmu LMaFit težko določimo pravilo, saj \CG{je njegovo obnašanje odvisno od primera do primera. To je razvidno že iz slike \ref{1707-1504}, kjer je kompleksen motiv potreboval najmanj časa za rekonstrukcijo slike s $35\%$ znanih podatkov, preprost pa s $45\%$. Ker pa algoritem LMaFit začne iteracije z naključnima matrikama $X$ in $Y$, je sam čas izvajanja lahko zelo različen med različnimi zagoni. Smiselno bi bilo razmisliti o implementaciji algoritma, kjer bi začeli z več pari matrik $X$ in $Y$, ter po nekaj iteracijah na vseh parih, algoritem nadaljevali zgolj na paru, ki najhitreje konvergira.}
 
@@ -134,9 +134,7 @@ Vsi testi v tej fazi so bili izvedeni na podatkih, kjer imamo poznanih 35\% info
     \label{1307-1551}
 \end{table}
 
-Iz rezultatov v  tabelah \ref{1307-1550} in \ref{1307-1551} opazimo, da obe metodi vrnete približno enako dobre rezultate, vendar pa je rekonstrukcija pri vseh testiranih algoritmih hitrejša, če ločene barvne kanale rekonstruiramo posebej. Zaključimo lahko, da je smiselno med sabo neodvisne podatke ločiti, ter jih obravnavati samostojno. Rezultat je smiseln, saj nam iskanje podobnosti med nepodobnimi podatki poveča količino dela.
-
-\CR{Vprašanje: Ali so rekonstrukcije tudi vizualno enako dobre ali enojna rekonstrukcija konča v kakšnem drugem lokalnem ekstremu?}
+Iz rezultatov v  tabelah \ref{1307-1550} in \ref{1307-1551} opazimo, da obe metodi vrnete približno enako dobre rezultate, vendar pa je rekonstrukcija pri vseh testiranih algoritmih hitrejša, če ločene barvne kanale rekonstruiramo posebej. \CG{Prav tako vizualno med rezultati težko opazimo razlike.}  Zaključimo lahko, da je smiselno med sabo neodvisne podatke ločiti, ter jih obravnavati samostojno. Rezultat je smiseln, saj nam iskanje podobnosti med nepodobnimi podatki poveča količino dela.
 
 \section{Vpliv podatka o rangu na rezultate} \label{1307-2253}
 Spomnimo se, da algoritma TNNM in LMaFit za svoje izvajanje potrebujeta informacijo o rangu (v nadaljevanju jo bomo imenovali \textit{parameter}). V tem podpoglavju bomo poskušali odgovoriti na vprašanje, kako pri obeh algoritmih ta informacija vpliva na rezultate in hitrost izvajanja. Za namene testiranja smo algoritem na isti sliki pognali večkrat, pri čemer smo postopoma povečevali rang. Ponovno smo teste izvajali na sliki mesta, z znanim deležem podatkov nastavljenim na 0.35.
@@ -167,7 +165,7 @@ Ponovno lahko opazimo, da je najboljši rezultat vrnil algoritem TNNM. Pri algor
 Rezultati teh testov nam pokažejo pomembnost vrste šuma, saj kljub velikemu deležu znanih podatkov, algoritmi večine podatkov ne morejo kakovostno uporabiti.
 
 \section{Primerjava rezultatov z algoritmom za reševanje Poissonovih enačb} \label{1307-2255} \todo{Preveri}
-\CG{Diplomsko delo \cite{ERZAR_2023} opisuje ter preizkusi postopek rekonstrukcije slik z reševanjem sistemov Poissonovih enačb. Ta način rekonstrukcije je v praksi pogosto uporabljen, sploh na zašumljenih slikah ter odstranjevanju motivov s slik. Smiselno je primerjati rezultate \CR{naših metod} s sistemi za reševanje Poissonovih enačb.  Poissonova enačba je definirana kot}
+\CG{Diplomsko delo \cite{ERZAR_2023} opisuje ter preizkusi postopek rekonstrukcije slik z reševanjem sistemov Poissonovih enačb. Ta način rekonstrukcije je v praksi pogosto uporabljen, sploh na zašumljenih slikah ter odstranjevanju motivov s slik. Smiselno je primerjati rezultate naših metod s sistemi za reševanje Poissonovih enačb.  Poissonova enačba je definirana kot}
 \[
     -\frac{\partial^2v(x, y)}{x^2} - \frac{\partial^2v(x, y)}{y^2} = f(x,y).
 \]

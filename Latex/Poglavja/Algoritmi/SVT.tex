@@ -1,4 +1,4 @@
-\section{Prag singularnih vrednosti}
+\section{Algoritem praga singularnih vrednosti}
 Algoritem praga singularnih vrednosti, oziroma v nadaljevanju SVT uporabi idejo, da imamo pri matrikah z majhnim rangom nekaj velikih singularnih vrednosti, ostale pa blizu 0. Za svoje delovanje uvede dva nova pomembna koncepta, prvi je premik, drugi pa prag, potreben za uporabo operatorja $\shrink_\tau$ \eqref{1007-1959}. Algoritem temelji na iteraciji
 \[
     \begin{cases}
@@ -32,7 +32,6 @@ kjer je $f(x)$ \eqref{2706-0957} funkcija, ki jo minimiziramo, pod pogojem, da v
 \[
     \mathcal{L}(X, Y) = f_\tau(X) + \left< Y, \proj(M - X) \right>
 \] 
-\todo{Je ta citat smiselen?}
 S pomočjo tako imenovanega Uzawoega algoritma \cite{CCS}, pa lahko problem pretvorimo v iterativni algoritem. 
 \begin{align}
         X^k =  \arg \min_{X} \mathcal{L}(X^k, Y^{k-1}) \label{1007-2018}\\
@@ -40,8 +39,30 @@ S pomočjo tako imenovanega Uzawoega algoritma \cite{CCS}, pa lahko problem pret
 \end{align}
 Izkaže se, da je rešitev \eqref{1007-2018} enaka $\shrink_\tau(Y^{k-1})$.
 
-\todo{Poglej SVT clanek 2.14}
 \begin{theorem}
+\begin{align}
+    \arg \min_X \hspace{0.2cm} \mathcal{L}(X, Y)
+    = \arg \min_X \hspace{0.2cm} \tau\nnorm{X} + \frac{1}{2}\fnorm{X - Y}^2
+\end{align}
+\end{theorem}
+
+\begin{proof}
+\begin{align*}
+    &\arg \min_X \hspace{0.2cm} \tau\nnorm{X} + \frac{1}{2}\fnorm{X - Y}^2 \\
+    &\arg \min_X \hspace{0.2cm} \tau\nnorm{X} + \frac{1}{2}\trOp{X - Y}{X - Y}\\
+    &\arg \min_X \hspace{0.2cm} \tau\nnorm{X} + \frac{1}{2}(\fnorm{X}^2 - 2\trOp{X}{Y} + \fnorm{Y}^2) \\ 
+    &\arg \min_X \hspace{0.2cm} \tau\nnorm{X} + \frac{1}{2}\fnorm{X}^2 - \trOp{X} {\proj(Y)} \numberthis \label{1907-2012}\\
+    &\arg \min_X \hspace{0.2cm} \tau\nnorm{X} + \frac{1}{2}\fnorm{X}^2 + \tr(- \proj(X)Y^T) + \tr(\proj(M)Y^T)\\
+    &\arg \min_X \hspace{0.2cm} \tau\nnorm{X} + \frac{1}{2}\fnorm{X}^2 + \tr(\proj(M - X)Y^T)\\
+    &\arg \min_X \tau\nnorm{X} + \frac{1}{2}\fnorm{X}^2 + \trOp{Y}{\proj(M - X)} = \arg \min_X \hspace{0.2cm} \mathcal{L}(X, Y)
+\end{align*}
+\CG{kjer je korak \eqref{1907-2012} dovoljen, saj velja $\proj(Y^k) = Y^k$ za vse $k \in \mathbb{N}$. To je razvidno iz koraka \eqref{1007-2019}, velja pa $Y^0 = 0$. Prav tako velja $\trOp{X}{\proj(Y)} = \trOp{\proj(X)}{Y}$, kar je lahko videti, ko se spomnimo, da za skalarni produkt $\trOp{A}{B}$ matrik $A, B \in \mathbb{R}^{n_1 \times n_2}$ velja 
+\[
+    \trOp{A}{B} = \sum_{i = 1}^{n_1}\sum_{j = 1}^{n_2} a_{ij}b_{ij}
+\]
+}
+\end{proof}
+\begin{theorem} \label{1907-2240}
 \begin{align}
     \label{2906-1056}
     \shrink_\tau(Y) = \arg \min_{X} \{ \frac{1}{2} \fnorm{X-Y}^2 + \tau\nnorm{X} \}
@@ -49,7 +70,7 @@ Izkaže se, da je rešitev \eqref{1007-2018} enaka $\shrink_\tau(Y^{k-1})$.
 \end{theorem}
 
 \begin{proof}
-Ker je $h(X) := \frac{1}{2} \fnorm{X-Y}^2 + \tau\nnorm{X} $ strogo konveksna funkcija, lahko za subgradient $Z$ v točki $X_0$ rečemo, da velja $\forall X: f(X) \geq  f(X_0) + \left< Z, X - X_0 \right>$. Ali drugače povedano, vse točke na vseh \CR{tangentah} na funckijo $h(X)$ bodo pod ali na funkciji $h(X)$. To velja po sami definiciji, saj je to zahtevan pogoj subgradienta v neki točki.
+Ker je $h(X) := \frac{1}{2} \fnorm{X-Y}^2 + \tau\nnorm{X} $ strogo konveksna funkcija, lahko za subgradient $Z$ v točki $X_0$ rečemo, da velja $\forall X: f(X) \geq  f(X_0) + \left< Z, X - X_0 \right>$. \CG{Ali drugače povedano, premica na točko $X_0$ s smernim koeficientom $Z$ je povsod na ali pod funkcijo $h(X)$.} To velja po sami definiciji, saj je to zahtevan pogoj subgradienta v neki točki.
 
 Pri iskanju minimuma torej iščemo tako točko $X'$, da bo subgradient v točki $X'$ enak 0. Problem sedaj zapišemo kot $0 \in X' - Y + \tau \partial\nnorm{X'}$. Izkaže se, da je množica subgradientov nuklearne norme definirana kot
 \[
@@ -59,7 +80,7 @@ kjer $U \Sigma V^T$ predstavlja SVD razcep matrike X. \cite{CCS}
 
 Cilj dokaza je pokazati, da velja $X' = \shrink_\tau(Y)$ Najprej razčlenimo SVD razcep matrike $Y$ kot 
 \[
-    Y = U_0\Sigma_0V_0^T + U_1\Sigma_1V_1^T,s
+    Y = U_0\Sigma_0V_0^T + U_1\Sigma_1V_1^T
 \]
 kjer $U_0, \Sigma_0$ in $V_0$ predstavljajo lastne vrednosti ter njihove lastne vektorje večje od $\tau$, $U_1, \Sigma_1$ in $V_1$ pa tiste manjše od $\tau$. Ustrezno je torej pokazati, da velja 
 \[
@@ -72,8 +93,8 @@ kjer $U_0, \Sigma_0$ in $V_0$ predstavljajo lastne vrednosti ter njihove lastne 
 \end{align*}
 primerna izbira za $W = \tau^{-1} U_1 \Sigma_1 V_1^T$, saj
 \begin{align*}
-    Y-X' &= U_0\Sigma_0V_0^T + U_1\Sigma_1V_1^T - U_0(\Sigma_0 - \tau I)V_0^T =\\ 
-    &= U_0V_0^T(\Sigma_0 - \Sigma_0 + \tau I) + U_1\Sigma_1 V_1^T = \\
+    Y-X' &= U_0\Sigma_0V_0^T + U_1\Sigma_1V_1^T - U_0(\Sigma_0 - \tau I)V_0^T \\ 
+    &= U_0V_0^T(\Sigma_0 - \Sigma_0 + \tau I) + U_1\Sigma_1 V_1^T  \\
     &= \tau U_0 V_0^T + U_1\Sigma_1 V_1^T
 \end{align*}
 in 
@@ -94,11 +115,11 @@ Po trditvi lahko sedaj zapišemo algoritem \eqref{1007-2018} - \eqref{1007-2019}
     \end{cases}
 \]
 
-\subsection{Nastavljanje parametrov $\tau$ in $\delta$}
+\subsection{Nastavljanje parametrov $\tau$ in $\delta$} \label{1907-1648}
 Opazimo lahko, da algoritem SVT potrebuje dva parametra, $\tau$ in $\delta$, ki ju moramo izbrati v naprej.
 
 Medtem, ko so koraki v samem algoritmu definirani kot množica korakov, 
-smo v okviru rezultatov diplomske naloge, \CG{prvotno} za premik uporabljali konstanto, ter korak nastavili na 
+smo v okviru rezultatov diplomske naloge, prvotno za premik uporabljali konstanto, ter korak nastavili na 
 \[
     \delta = 1.2\, \dfrac{n_1 n_2}{m}
 \] po priporočilih \cite{CCS}. 
@@ -108,4 +129,4 @@ Prav tako članek \cite{CCS} navaja, da je za matrike velikosti $\mathbb{R}^{n \
     \tau = 5\, \frac{n_1+n_2}{2}
 \]
 
-Medtem, ko so taki parametri dobri za večje matrike, jih ne smemo uporabljati kot definitivno najboljše vrednosti. Med mojimi testiranji sem ugotovil, da je vrednost premika velikokrat treba zmanjšati, posebno za manjše matrike z več neznanimi vrednostmi, saj drugače program ni konvergiral. Prav tako, se je večkrat zgodilo, da je bil pridobljen rezultat še vedno zelo zašumljen. Takrat je bilo smiselno prag $\tau$ povečati. To je sicer upočasnilo program, vendar izboljšalo rezultat.
+\CG{Medtem, ko so taki parametri dobri za večje matrike, bomo v razdelku \ref{1307-2251} videli, da moramo pri manjših matrikah pogosto zmanjšati premik in povečati prag.}

@@ -1,36 +1,47 @@
 \chapter{Algoritmi} \label{1407-1011}
 
-\CG{V tem poglavju obravnavamo algoritme, ki rešujejo problem matričnih napolnitev. V posebnih razdelkih predstavimo različne algoritme, povzamemo idejo algoritma za iskanje rešitve, ter razložimo, zakaj deluje. Vrstni red predstavitve algoritmov je postavljen tako, da kjer algoritem razširja idejo prejšnjega, tega predstavimo kasneje. }
+\CG{V tem poglavju predstavimo teoretične ozadje algoritmov, ki rešujejo problem matričnih napolnitev. V posameznih razdelkih predstavimo različne algoritme, povzamemo idejo algoritma za iskanje rešitve, ter razložimo, zakaj deluje. Vrstni red predstavitve algoritmov je postavljen tako, da kjer algoritem razširja idejo prejšnjega, tega predstavimo kasneje. }
 
 \section{Definicije in oznake}
 V tem razdelku uvedemo definicije in oznake, ki se bodo pojavljale v preostanku dela.
 \begin{enumerate}
-  \item $\Omega$ je podmnožica urejenih parov $\{ (i, j) : i = 1, \hdots , n_1, \hspace{0.3cm} j = 1, \hdots, n_2 \}$ V delu je poimenujemo kot \textbf{množica znanih vrednosti}.
-  \item Naj bo matrika $A$ definirana kot $A = [a_{ij}]_{i,j}$. Z $\proj(A)$ označimo preslikavo \todo{preveri oznako}
+  \item Z $\mathbb{R}^{n_1\times n_2}$ označujemo množico $n_1\times n_2$ realnih matrik. Matriko $A\in \mathbb{R}^{n_1\times n_2}$ pišemo kot $A=[a_{ij}]_{i,j}$.
+  \item $\Omega$ je podmnožica urejenih parov $\{ (i, j) : i = 1, \hdots , n_1, \hspace{0.3cm} j = 1, \hdots, n_2 \}.$ V delu je imenujemo \textbf{množica znanih vrednosti}.
+  \item
+        Z $\proj:\mathbb{R}^{n_1\times n_2}\to \mathbb{R}^{n_1\times n_2}$
+        označimo preslikavo, definirano kot
         \[ [\proj(A)_{ij}]_{i,j} = \begin{cases}
-            a_{ij}, & (i, j) \in \Omega \\
-            0,      & \text{sicer}
+            a_{ij}, & (i, j) \in \Omega, \\
+            0,      & \text{sicer}.
           \end{cases}
         \]
+        Z besedami, preslikava $\proj$ ohrani vrednosti matrike na mestih iz množice $\Omega$, ostale pa postavi na 0.
   \item Naj bo $\tau > 0$ pozitivno realno število. Operator $\shrink_\tau: \mathbb{R}^{n_1 \times n_2} \rightarrow \mathbb{R}^{n_1 \times n_2}$ definiran kot
         \begin{align}
           \label{1007-1959}
           \shrink_\tau(A) := U \shrink_\tau(\Sigma) V^T, \hspace{0.3cm} \shrink_\tau(\Sigma) = \diag(\max(\sigma_i - \tau, 0)),
         \end{align}
-        imenujemo \textbf{pragovni operator}. \todo{pražni operator?}\cite{CCS}
-  \item Matriko $M \in \mathbb{R}^{n_1 \times n_2}$ imenujemo \textbf{delno določena matrika}. $M$ označuje vhodno matriko, ki ima nekatere elemente neznane.
-  \item \textbf{Nuklearna norma} je definirana kot \[
-          \nnorm{X} = \sum_{i = 1}^{n} \sigma_i(X),
-        \] pri čemer $\sigma_i(X)$ označuje $i$-to največjo singularno vrednost matrike $X$.
-  \item Produkt $\trOp{A}{B}$ je definiran kot \[
+        imenujemo \textbf{operator praga}.\cite{CCS}
+  \item Matriko $M \in \mathbb{R}^{n_1 \times n_2}$, ki ima določene samo nekatere elemente, imenujemo \textbf{delno določena matrika}.
+  \item \CG{Sled matrike $A \in \mathbb{R}^{n \times n}$ definiramo kot \[
+    \tr(A) = \sum_{i = 1}^{n} a_{ii},
+  \] oziroma z besedami, kot vsoto diagonalnih elementov kvadratne matrike.}
+  \item Skalarni produkt $\trOp{A}{B}$ je definiran kot \[
           \trOp{A}{B} = \tr(AB^T)
         \]
-  \item Oznaka $A \succeq 0$ označuje, da je matrika $A$ pozitivno semidefinitna. Velja $A \succeq 0 \iff x^TAx \ge 0 \text{ za vsak } x \in \mathbb{R}^n$
-  \item Za množico subgradientov v točki $x_0$, označeno z $A_{x_0}$ konveksne funkcije $f: \mathbb{R}^n \rightarrow \mathbb{R}$ velja 
-  \[
-    c \in A_{x_0} \iff \forall x: f(x) - f(x_0) \geq c^T(x - x_0),
-  \] kjer $c \in \mathbb{R}^n$.
-         % \item Z oznako $M \in \mathbb{R}^{n_1 \times n_2}$ označujemo bitno matriko M, ki predstavlja masko, s katero označimo katere vrednosti poznamo in katere ne. Vrednost 1 označuje, da je vrednost na tisti poziciji znana, medtem ko 0 označuje, da ni. 
+  \item \CG{\textbf{Frobeniusova norma} je za matriko $A \in \mathbb{R}^{n_1 \times n_2}$ definirana kot \[
+            \fnorm{A} = \sqrt{\sum_{i = 1}^{n_1} \sum_{j = 1}^{n_2} a_{ij}^2}
+          \] Definicija je ekvivalentna zapisu \[
+            \fnorm{A} = \sqrt{\trOp{A}{A}} \]}
+  \item \textbf{Nuklearna norma} je definirana kot \[
+          \nnorm{A} = \sum_{i = 1}^{n} \sigma_i(A),
+        \] pri čemer $\sigma_i(A)$ označuje $i$-to največjo singularno vrednost matrike $A$.
+  \item Oznaka $A \succeq 0$ označuje, da je matrika $A \in \mathbb{R}^{n \times n}$ pozitivno semidefinitna. Velja $A \succeq 0 \iff x^TAx \ge 0 \text{ za vsak } x \in \mathbb{R}^n$. \CG{Z drugimi besedami, matrika $A$ je pozitivno semidefinitna, če so vse njene lastne vrednosti nenegativne.}
+  \item Za subgradient $c$ v točki $x_0$ konveksne funkcije $f: \mathbb{R}^n \rightarrow \mathbb{R}$ velja
+        \[
+          \forall x: f(x) - f(x_0) \geq c^T(x - x_0),
+        \] kjer $c \in \mathbb{R}^n$. \CG{Z drugimi besedami, $c$ je subgradient na točko $x_0$, če je premica na točko $x_0$ s smernim koeficientom $c$ vedno pod ali na funkciji $f$.}
+        % \item Z oznako $M \in \mathbb{R}^{n_1 \times n_2}$ označujemo bitno matriko M, ki predstavlja masko, s katero označimo katere vrednosti poznamo in katere ne. Vrednost 1 označuje, da je vrednost na tisti poziciji znana, medtem ko 0 označuje, da ni. 
 \end{enumerate}
 
 \input{Poglavja/Algoritmi/NNM.tex}

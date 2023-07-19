@@ -17,7 +17,7 @@ Za uporabo algoritma ASD potrebujemo odvoda funkcije $f(X,Y) = \frac{1}{2}\, \fn
 \begin{align*}
     \frac{\partial}{\partial x_{a,b}} f &= \frac{\partial}{\partial x_{a,b}} \frac{1}{2}\, \fnorm{\proj(M) - \proj(XY)}^2  \\
     &= \frac{\partial}{\partial x_{a,b}} \frac{1}{2}\, \sum_{i}^{n_1}\sum_{j}^{n_2}(\delta_{i,j}m_{i,j} - \delta_{i,j}\sum_{k}^{r}(x_{i,k}y_{k,j}))^2  \\
-    &= \, \sum_{j}^{n_2}(\delta_{a,j}m_{a,j} - \delta_{i,j}\sum_{k}^{r}(x_{a,k}y_{k,j}))(-y_{b,j}) \implies \\
+    &= \, \sum_{j}^{n_2}(\delta_{a,j}m_{a,j} - \delta_{i,j}\sum_{k}^{r}(x_{a,k}y_{k,j}))(-y_{b,j}) \\
     &\implies \frac{\partial}{\partial X}f = -(\proj(M) - \proj(XY))Y^T
     % &= \sum_{i,j}(\delta_{i,j}m_{i,j} - \delta_{i,j}\sum_{k}(x_{i,k}y_{k,j}))
     % (\sum_{k}y_{k,j}) = \\
@@ -47,11 +47,7 @@ Ker želimo, da bodo znane vrednosti produkta $X^{k+1}Y^{k}$ kar se da podobne z
 \begin{align*}
     g(t) &= \frac{1}{2} \fnorm{\proj(M) - \proj((X - t\nabla f_Y(X))Y)}^2
 \end{align*}
-\CG{
-\begin{align*}
-    g(t) &= \frac{1}{2} \fnorm{\proj(M - XY)}^2 - t\tr(\proj(M - XY)\proj(\nabla f_Y(X)Y)^T) + \frac{t^2}{2}\fnorm{\proj(\nabla f_Y(X)Y)}^2
-\end{align*}}
-Ker je \cite{AST-TK15} \todo{ali lahko tako?}
+\CG{Kot v \cite{AST-TK15} se izkaže}
 \[
   g'(t) = -\fnorm{\nabla f_Y(X)}^2 + t\fnorm{\proj(f_Y(X)Y)}^2 
 \]

@@ -85,6 +85,49 @@
       \verb 0810.3286
       \endverb
     \endentry
+    \entry{NNM-Candes}{article}{}
+      \name{author}{2}{}{%
+        {{hash=ae404faac8c8429af059d0185dcc9643}{%
+           family={Candès},
+           familyi={C\bibinitperiod},
+           given={Emmanuel\bibnamedelima J.},
+           giveni={E\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=3503059e1c0c778913607c87d8c5173a}{%
+           family={Recht},
+           familyi={R\bibinitperiod},
+           given={Benjamin},
+           giveni={B\bibinitperiod}}}%
+      }
+      \strng{namehash}{e197331efafbfa719d8603e624ebab5c}
+      \strng{fullhash}{e197331efafbfa719d8603e624ebab5c}
+      \strng{bibnamehash}{e197331efafbfa719d8603e624ebab5c}
+      \strng{authorbibnamehash}{e197331efafbfa719d8603e624ebab5c}
+      \strng{authornamehash}{e197331efafbfa719d8603e624ebab5c}
+      \strng{authorfullhash}{e197331efafbfa719d8603e624ebab5c}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{We consider a problem of considerable practical interest: the recovery of a data matrix from a sampling of its entries. Suppose that we observe m entries selected uniformly at random from a matrix M. Can we complete the matrix and recover the entries that we have not seen?}
+      \field{issn}{1615-3383}
+      \field{journaltitle}{Foundations of Computational Mathematics}
+      \field{month}{12}
+      \field{number}{6}
+      \field{title}{Exact Matrix Completion via Convex Optimization}
+      \field{volume}{9}
+      \field{year}{2009}
+      \field{pages}{717\bibrangedash 772}
+      \range{pages}{56}
+      \verb{doi}
+      \verb 10.1007/s10208-009-9045-5
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1007/s10208-009-9045-5
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1007/s10208-009-9045-5
+      \endverb
+    \endentry
     \entry{ERZAR_2023}{thesis}{}
       \name{author}{1}{}{%
         {{hash=82b4161494ab8eb3ead52e408c62617d}{%
@@ -107,7 +150,7 @@
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Inkrementalna rekonstrukcija slike iz razpršenih podatkov}
-      \field{type}{phdthesis}
+      \field{type}{Diplomsko delo}
       \field{year}{2023}
       \verb{urlraw}
       \verb https://repozitorij.uni-lj.si/IzpisGradiva.php?lang=slv&id=144588
@@ -172,7 +215,7 @@
       \field{labeltitlesource}{title}
       \field{month}{3}
       \field{title}{Matrix rank minimization with applications}
-      \field{type}{PhD disertacija}
+      \field{type}{Doktorska disertacija}
       \field{year}{2002}
     \endentry
     \entry{UnsplashMesto}{online}{}
