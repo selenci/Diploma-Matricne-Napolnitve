@@ -45,9 +45,12 @@ Ker želimo, da bodo znane vrednosti produkta $X^{k+1}Y^{k}$ kar se da podobne z
     t_x &= \arg \min_t \hspace{0.3cm} g(t)
 \end{align*} kjer
 \begin{align*}
-    g(t) &= \frac{1}{2} \fnorm{\proj(M) - \proj((X - t\nabla f_Y(X))Y)}^2 \\
-    g(t) &= \frac{1}{2} \fnorm{\proj(M - XY)}^2 - t\tr(\proj(M - XY)\proj(\nabla f_Y(X)Y)^T) + \frac{t^2}{2}\fnorm{\proj(\nabla f_Y(X)Y)}^2
+    g(t) &= \frac{1}{2} \fnorm{\proj(M) - \proj((X - t\nabla f_Y(X))Y)}^2
 \end{align*}
+\CG{
+\begin{align*}
+    g(t) &= \frac{1}{2} \fnorm{\proj(M - XY)}^2 - t\tr(\proj(M - XY)\proj(\nabla f_Y(X)Y)^T) + \frac{t^2}{2}\fnorm{\proj(\nabla f_Y(X)Y)}^2
+\end{align*}}
 Ker je \cite{AST-TK15} \todo{ali lahko tako?}
 \[
   g'(t) = -\fnorm{\nabla f_Y(X)}^2 + t\fnorm{\proj(f_Y(X)Y)}^2 

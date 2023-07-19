@@ -1,5 +1,5 @@
 \section{Minimizacija nuklearne norme} \label{1707-1755}
-Ker je minimizacija ranga matrike NP-poln problem \cite{NNM-PHD}, so se razvile druge metode, ki samo kompleksnost problema zmanjšujejo. Minimizacija nuklearne norme (NNM) uporabi idejo, da je rang matrike povezan z \textbf{nuklearno normo} matrike. 
+Ker je minimizacija ranga matrike NP-poln problem \cite{NNM-PHD}, so se razvile druge metode, ki samo kompleksnost problema zmanjšujejo. Minimizacija nuklearne norme (NNM) uporabi idejo, da je rang matrike povezan z \textbf{nuklearno normo} matrike.
 
 Dokazano je bilo \cite{NNM-PHD}, da nuklearna norma predstavlja konveksno ovojnico ranga. \todo{premisliti kako je misljeno} \textbf{Konveksna ovojnica funkcije} $f : \mathcal{C} \rightarrow \mathbb{R}$ je največja konveksna funkcija $g$ tako da velja $f(x) \geq g(x)$ za vse $x \in \mathcal{C}$. \cite{Survey-NKS19}
 
@@ -7,37 +7,39 @@ Problem minimizacije nuklearne norme je možno pretvoriti v optimizacijski probl
 
 \textbf{Standardna oblika semidefinitnega programa} je podana kot
 \begin{align*}
-    \min_Y \hspace{0.5cm} &\trOp{C}{Y} \\
-    \text{pri pogojih} \hspace{0.5cm} &\trOp{A_k}{Y} = b_k, \hspace{0.5cm} k = 1, \hdots , l \numberthis \label{1007-1829} \\
-    &Y \succeq 0
+    \min_Y \hspace{0.5cm}             & \trOp{C}{Y}                                                                         \\
+    \text{pri pogojih} \hspace{0.5cm} & \trOp{A_k}{Y} = b_k, \hspace{0.5cm} k = 1, \hdots , l \numberthis \label{1007-1829} \\
+                                      & Y \succeq 0
 \end{align*}
-Kjer je $C \in \mathbb{R}^{n_1 \times n_2}$ dana matrika, $\{A_k \in \mathbb{R}^{n_1 \times n_2} \}$ in $\{b_k\}$ pa množici matrik in števil. 
+Kjer je $C \in \mathbb{R}^{n_1 \times n_2}$ dana matrika, $\{A_k \in \mathbb{R}^{n_1 \times n_2} \}$ in $\{b_k\}$ pa množici matrik in števil.
 
-Problem minimizacije nuklearne norme lahko zapišemo kot 
+Problem minimizacije nuklearne norme lahko zapišemo kot
 \begin{align*}
-    \min_{X, t} \hspace{0.5cm} &t \\
-    \text{pri pogojih} \hspace{0.5cm} &\nnorm{X} \leq t, \numberthis \label{1007-1830}\\
-    &\proj(X) = \proj(M)
+    \min_{X, t} \hspace{0.5cm}        & t                                               \\
+    \text{pri pogojih} \hspace{0.5cm} & \nnorm{X} \leq t, \numberthis \label{1007-1830} \\
+                                      & \proj(X) = \proj(M),
 \end{align*}
-Dokazano je bilo \cite{NNM-PHD}, da za matriko $X \in \mathbb{R}^{n_1 \times n_2}$ in $t \in \mathbb{R}$ 
-velja $\nnorm{X} \leq t \iff \exists W_1\in \mathbb{R}^{n_1 \times n_1}, W_2 \in \mathbb{R}^{n_2 \times n_2}$ tako da \cite{NNM-PHD}
+\CG{kjer je $M \in \mathbb{R}^{n_1 \times n_2}$ zašumljena matrika, $\Omega$ pa množica urejenih parov, ki predstavljajo mesta, kjer vrednosti matrike poznamo.}
+Dokazano je bilo \cite{NNM-PHD}, da za matriko $X \in \mathbb{R}^{n_1 \times n_2}$ in $t \in \mathbb{R}$
+velja $\nnorm{X} \leq t \iff \exists W_1\in \mathbb{R}^{n_1 \times n_1}, W_2 \in \mathbb{R}^{n_2 \times n_2}$ tako da
 \begin{align*}
-    &Y = \begin{bmatrix}
-        W_1 & X \\
-        X^T & W_2 \label{1007-1835}
-    \end{bmatrix}, \\
-    &Y \succeq 0, \hspace{0.2cm} \tr(Y) \leq 2t
-\end{align*} 
-Minimizacijski problem \eqref{1007-1830} lahko tako redefiniramo kot 
+     & Y = \begin{bmatrix}
+               W_1 & X                     \\
+               X^T & W_2 \label{1007-1835}
+           \end{bmatrix},            \\
+     & Y \succeq 0, \hspace{0.2cm} \tr(Y) \leq 2t
+\end{align*}
+Minimizacijski problem \eqref{1007-1830} lahko tako redefiniramo kot
 \begin{align*}
-    \min_{Y,t} \hspace{0.5cm} &2t\\
-    \text{tako da} \hspace{0.5cm} & Y \succeq 0,\\
-    &\trOp{Y}{A_{ab}} = c_{ab}
-\end{align*} 
-kjer je $A_{ab} \in \mathbb{R}^{(n_1 + n_2) \times (n_1 + n_2)}$ matrika v množici $A$. Velja 
+    \min_{Y,t}     \hspace{0.5cm} & 2t                        \\
+    \text{tako da} \hspace{0.5cm} & \tr(Y) \leq 2t,           \\
+                                  & Y \succeq 0,              \\
+                                  & \trOp{Y}{A_{ab}} = c_{ab}
+\end{align*}
+kjer je $A_{ab} \in \mathbb{R}^{(n_1 + n_2) \times (n_1 + n_2)}$ matrika v množici $A$. Velja
 $A_{ab} \in A \iff (a, b) \in \Omega$. Matrika $A_{ab}$ ima vse elemente ničelne, razen na mestu $(a, n_1 + b)$, kjer ima vrednost $1$.
 Podobno je definiran tudi $c_{ab} \in \mathbb{R}$, ki ima vrednost $M_{ab}$.
-Ker velja 
+Ker velja
 \[
     \trOp{A}{B} = \sum_{i}^{n_1} \sum_{j}^{n_2} a_{ij}b_{ij}
 \] je lahko videti, da je tak pogoj smiselen. Programi za reševanje SDP pa lahko tako obliko že sprejmejo.
