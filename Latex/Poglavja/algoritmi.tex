@@ -1,12 +1,12 @@
 \chapter{Algoritmi} \label{1407-1011}
 
-\CG{V tem poglavju predstavimo teoretične ozadje algoritmov, ki rešujejo problem matričnih napolnitev. V posameznih razdelkih predstavimo različne algoritme, povzamemo idejo algoritma za iskanje rešitve, ter razložimo, zakaj deluje. Vrstni red predstavitve algoritmov je postavljen tako, da kjer algoritem razširja idejo prejšnjega, tega predstavimo kasneje. }
+\CG{V tem poglavju predstavimo teoretično ozadje algoritmov za reševanje problema matričnih napolnitev. V posameznih razdelkih predstavimo različne algoritme, povzamemo idejo algoritma za iskanje rešitve, ter razložimo, zakaj deluje. Vrstni red predstavitve algoritmov je postavljen tako, da kjer algoritem razširja idejo prejšnjega, tega predstavimo kasneje. }
 
 \section{Definicije in oznake}
 V tem razdelku uvedemo definicije in oznake, ki se bodo pojavljale v preostanku dela.
 \begin{enumerate}
   \item Z $\mathbb{R}^{n_1\times n_2}$ označujemo množico $n_1\times n_2$ realnih matrik. Matriko $A\in \mathbb{R}^{n_1\times n_2}$ pišemo kot $A=[a_{ij}]_{i,j}$.
-  \item $\Omega$ je podmnožica urejenih parov $\{ (i, j) : i = 1, \hdots , n_1, \hspace{0.3cm} j = 1, \hdots, n_2 \}.$ V delu je imenujemo \textbf{množica znanih vrednosti}.
+  \item $\Omega$ je podmnožica množice vseh urejenih parov $\{ (i, j) : i = 1, \hdots , n_1, \hspace{0.3cm} j = 1, \hdots, n_2 \}.$ V delu je imenujemo \textbf{množica znanih vrednosti}.
   \item
         Z $\proj:\mathbb{R}^{n_1\times n_2}\to \mathbb{R}^{n_1\times n_2}$
         označimo preslikavo, definirano kot
@@ -16,32 +16,47 @@ V tem razdelku uvedemo definicije in oznake, ki se bodo pojavljale v preostanku 
           \end{cases}
         \]
         Z besedami, preslikava $\proj$ ohrani vrednosti matrike na mestih iz množice $\Omega$, ostale pa postavi na 0.
-  \item Naj bo $\tau > 0$ pozitivno realno število. Operator $\shrink_\tau: \mathbb{R}^{n_1 \times n_2} \rightarrow \mathbb{R}^{n_1 \times n_2}$ definiran kot
+  \item Naj bo $\tau > 0$ pozitivno realno število. 
+  \textbf{Operator praga} (\cite{CCS}) $\shrink_\tau: \mathbb{R}^{n_1 \times n_2} \rightarrow \mathbb{R}^{n_1 \times n_2}$ je definiran kot
         \begin{align}
           \label{1007-1959}
-          \shrink_\tau(A) := U \shrink_\tau(\Sigma) V^T, \hspace{0.3cm} \shrink_\tau(\Sigma) = \diag(\max(\sigma_i - \tau, 0)),
+          \begin{split}
+          \shrink_\tau(A) &:= U \shrink_\tau(\Sigma) V^T, \\ \shrink_\tau(\Sigma) &= \diag\big(\max(\sigma_1 - \tau, 0),
+          \max(\sigma_2-\tau,0),\ldots,\\
+          &\hspace{1.5cm}
+          \max(\sigma_{\min(n_1,n_2)}-\tau,0)\big),
+          \end{split}
         \end{align}
-        imenujemo \textbf{operator praga}.\cite{CCS}
+    kjer je $A=U\Sigma V^T$
+    singularni razcep matrike $A$, pri čemer sta $U\in \mathbb{R}^{n_1\times n_1}$
+    in $V\in \mathbb R^{n_2\times n_2}$ ortogonalni matriki,
+    $$\Sigma=\diag(\sigma_1,\sigma_2,\ldots,\sigma_{\min(n_1,n_2)})\in \mathbb R^{n_1\times n_2}$$ pa je diagonalna matrika singularnih vrednosti $\sigma_i$ matrike $A$.
   \item Matriko $M \in \mathbb{R}^{n_1 \times n_2}$, ki ima določene samo nekatere elemente, imenujemo \textbf{delno določena matrika}.
-  \item \CG{Sled matrike $A \in \mathbb{R}^{n \times n}$ definiramo kot \[
-    \tr(A) = \sum_{i = 1}^{n} a_{ii},
-  \] oziroma z besedami, kot vsoto diagonalnih elementov kvadratne matrike.}
-  \item Skalarni produkt $\trOp{A}{B}$ je definiran kot \[
-          \trOp{A}{B} = \tr(AB^T)
+  \item \textbf{Sled} kvadratne  matrike $A=[a_{ij}]_{i,j}\in \mathbb R^{n\times n}$ je vsota njenih diagonalnih elementov
+  oz.\ s formulo
+\[
+    \tr(A) = \sum_{i = 1}^{n} a_{ii}.
+  \] 
+  \item Skalarni produkt
+    $\langle\cdot,\cdot\rangle$ na vektorskem prostoru pravokotnih $n_1\times n_2$ matrik je definiran kot \[
+          \trOp{A}{B} = \tr(AB^T).
         \]
-  \item \CG{\textbf{Frobeniusova norma} je za matriko $A \in \mathbb{R}^{n_1 \times n_2}$ definirana kot \[
-            \fnorm{A} = \sqrt{\sum_{i = 1}^{n_1} \sum_{j = 1}^{n_2} a_{ij}^2}
-          \] Definicija je ekvivalentna zapisu \[
-            \fnorm{A} = \sqrt{\trOp{A}{A}} \]}
-  \item \textbf{Nuklearna norma} je definirana kot \[
+  \item \textbf{Frobeniusova norma} matrike $A \in \mathbb{R}^{n_1 \times n_2}$ izhaja iz zgornjega skalarnega produkta in je enaka \[
+            \fnorm{A} = 
+            \sqrt{\trOp{A}{A}}=
+            \sqrt{\sum_{i = 1}^{n_1} \sum_{j = 1}^{n_2} a_{ij}^2}.
+          \] 
+  \item \textbf{Nuklearna norma} matrike $A\in \mathbb R^{n_1\times n_2}$ je definirana kot \[
           \nnorm{A} = \sum_{i = 1}^{n} \sigma_i(A),
         \] pri čemer $\sigma_i(A)$ označuje $i$-to največjo singularno vrednost matrike $A$.
-  \item Oznaka $A \succeq 0$ označuje, da je matrika $A \in \mathbb{R}^{n \times n}$ pozitivno semidefinitna. Velja $A \succeq 0 \iff x^TAx \ge 0 \text{ za vsak } x \in \mathbb{R}^n$. \CG{Z drugimi besedami, matrika $A$ je pozitivno semidefinitna, če so vse njene lastne vrednosti nenegativne.}
-  \item Za subgradient $c$ v točki $x_0$ konveksne funkcije $f: \mathbb{R}^n \rightarrow \mathbb{R}$ velja
+        \CR{Premisliti, zakaj je to res norma, tj. zakaj zadošča trikotniški neenakosti. To ni čisto očitno in bi lahko kdo v komisiji vprašal. Če je dokaz kratek, lahko dodaš.}
+  \item Matrika $A \in \mathbb{R}^{n \times n}$ je \textbf{pozitivno semidefinitna}, če velja $x^TAx \ge 0 \text{ za vsak } x \in \mathbb{R}^n$. To lastnost matrike $A$ označimo z $A \succeq 0$. 
+    Spomnimo se še, da je $A \succeq 0$ ekvivalentno dejstvu, da so vse  lastne vrednosti matrike $A$ nenegativne.
+  \item Vektor $c\in \mathbb R^n$ je \textbf{subgradient} konveksne funkcije $f: \mathbb{R}^n \rightarrow \mathbb{R}$ v točki $x_0$, če velja
         \[
-          \forall x: f(x) - f(x_0) \geq c^T(x - x_0),
-        \] kjer $c \in \mathbb{R}^n$. \CG{Z drugimi besedami, $c$ je subgradient na točko $x_0$, če je premica na točko $x_0$ s smernim koeficientom $c$ vedno pod ali na funkciji $f$.}
-        % \item Z oznako $M \in \mathbb{R}^{n_1 \times n_2}$ označujemo bitno matriko M, ki predstavlja masko, s katero označimo katere vrednosti poznamo in katere ne. Vrednost 1 označuje, da je vrednost na tisti poziciji znana, medtem ko 0 označuje, da ni. 
+          \forall x\in\mathbb R^n: f(x) - f(x_0) \geq c^T(x - x_0).
+        \] 
+        Z besedami: $c$ je subgradient funkcije $f$ v točki $x_0$, če premica skozi točko $(x_0,f(x_0))$ s smernim koeficientom $c$ leži pod grafom funkcije $f$ (in se ga dotika v točki $(x_0,f(x_0))$).
 \end{enumerate}
 
 \input{Poglavja/Algoritmi/NNM.tex}

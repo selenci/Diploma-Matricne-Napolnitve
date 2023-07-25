@@ -1,26 +1,34 @@
 \section{LMaFit}
-LMaFit je algoritem, ki podobno kot ASD, rešuje problem matričnih napolnitev z uporabo dveh manjših matrik $X^{n_1 \times r}$ in $Y^{n_1 \times r}$. Podobno kot v prejšnjih algoritmih rešujemo problem 
+\textbf{LMaFit} je algoritem, ki podobno kot ASD, rešuje problem matričnih napolnitev z uporabo dveh manjših matrik $X^{n_1 \times r}$ in $Y^{n_1 \times r}$.
+Optimizacijski problem, ki ga rešuje LMaFit je
 \begin{align*}
-    \min_{X, Y, Z}& \hspace{0.5cm} \frac{1}{2}\fnorm{XY - Z}^2\\
-    \text{pri pogojih}& \hspace{0.5cm} \proj(M) = \proj(Z)
+    \min_{X, Y, Z}& \hspace{0.5cm} \frac{1}{2}\fnorm{XY - Z}^2,\\
+    \text{pri pogoju}& \hspace{0.5cm} \proj(M) = \proj(Z).
 \end{align*}
-le da sam problem rešujemo s pomočjo Moore-Penrose inverza (Označen z $\dagger$).
+LMaFit za rešrevanje tega problema uporabi
+Moore-Penroseov (MP) inverz. V nadaljevanju bomo MP inverz matrike $A$ označevali z $A^\dagger$.
 
-Lahko je videti, da bo funkcija $f(X,Y,Z) = \frac{1}{2}\fnorm{XY - Z}^2$ imela najmanjšo vrednost, ko bo $XY = Z$. Zato uvedemo iterativni algoritem, ki izmenično posodablja $X, Y$ in $Z$ tako, da fiksira dve izmed matrik. Minimizacijo matrik $X$ in $Y$ torej dosežemo na naslednji način.
+Očitno bo imela funkcija $f(X,Y,Z) = \frac{1}{2}\fnorm{XY - Z}^2$ najmanjšo vrednost natanko tedaj, ko bo $XY = Z$. 
+LMaFit izmenično posodablja matrike $X, Y$ in $Z$, pri čemer eno spreminja, preostali dve pa fiksira. Matriko $X$ posodobi po formuli
 \begin{align*}
-    X^{i+1}Y^{i} &= Z^{i} \hspace{0.5cm} \\
-    X^{i+1} &= Z^{i}(Y^i)^\dagger
+    X^{i+1}Y^{i}&= Z^{i}
+    \qquad 
+    \Rightarrow
+    \qquad
+    X^{i+1} = Z^{i}(Y^i)^\dagger,
 \end{align*}
-Kjer se zanašamo na dejstvo, da nam množenje z Moore-Penrose inverzom z desne 
-da najboljši možen rezultat.
+pri čemer uporablja dejstvo, da množenje z MP inverzom z desne 
+da najboljši rezultat po metodi najmanjših kvadratov \CR{Lahko dodaš citat.}
 Podobno posodobimo matriko $Y$.
 \begin{align*}
-    \hspace{0.5cm} X^{i+1}Y^{i+1} &= Z^{i}   \\
-    Y^{i+1} &= (X^{i+1})^\dagger Z^{i}
+    \hspace{0.5cm} X^{i+1}Y^{i+1} &= Z^{i}    \qquad 
+    \Rightarrow
+    \qquad
+    Y^{i+1} = (X^{i+1})^\dagger Z^{i}.
 \end{align*}
 
-Sedaj le še posodobimo matriko Z, kot
+Na koncu le še posodobimo matriko $Z$, kot
 \[
-    Z^{i+1} = X^{i+1}Y^{i+1} + \proj(M - X^{i+1}Y^{i+1})
+    Z^{i+1} = X^{i+1}Y^{i+1} + \proj(M - X^{i+1}Y^{i+1}).
 \]
-Torej podobno kot prej poskušamo doseči $XY = Z$, vendar zaradi omejitve znanih vrednosti matrike M, na tistem mestu vrednosti popravimo. \cite{LMaFit-WY12}
+Torej podobno kot prej poskušamo doseči $XY = Z$, vendar zaradi omejitve znanih vrednosti matrike $M$, na tistem mestu vrednosti popravimo.

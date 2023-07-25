@@ -1,127 +1,176 @@
 \section{Algoritem minimizacije prirezane nuklearne norme}
-Že samo ime nam pove, da bo algoritem minimizacije prirezane nuklearne norme, oziroma TNNM podoben algoritmu NNM. Ideja tega algoritma pa je, da uporabimo dodatno informacijo $r \in \mathbb{N}$ o rangu originalne, nezašumljene matrike.
+Kot nam že samo ime pove, je \textbf{algoritem minimizacije prirezane nuklearne norme (TNNM)} \cite{TNNM-HZYLH12} soroden algoritmu NNM. Dodatna informacija, ki pa jo uporabi TNNM, je rang $r$ originalne, nezašumljene matrike.
 
-Sam algoritem uvede tako imenovano \textbf{$r$-prirezano nuklearno normo}, ki je za matriko $X \in \mathbb{R}^{n_1 \times n_2}$ definirana kot vsota $\min(n_1,n_2) - r$ najmanjših singularnih vrednosti
+Osrednjo vlogo v algoritmu ima \textbf{$r$-prirezana nuklearna norma}, ki za dano matriko $X \in \mathbb{R}^{n_1 \times n_2}$ vrne vsoto njenih $\min(n_1,n_2) - r$ najmanjših singularnih vrednosti:
 \[
-    \norm{X}_r = \sum^{\min(n_1, n_2)}_{i = r + 1} \sigma_i(X)
+    \norm{X}_r = \sum^{\min(n_1, n_2)}_{i = r + 1} \sigma_i(X).
 \]
-TNNM rešuje problem \cite{TNNM-HZYLH12}
-\begin{align*}
-    \min_X               & \hspace{0.5cm} \norm{X}_r \numberthis \label{1107-1305} \\
-    \textrm{pri pogojih} & \hspace{0.5cm} \proj(X) = \proj(M)
-\end{align*}
+TNNM rešuje optimizacijski problem 
+\begin{align}
+\label{1107-1305}
+\begin{split}
+    \min_{X\in  \mathbb{R}^{n_1 \times n_2}}              & \hspace{0.5cm} \norm{X}_r, \\
+    \textrm{pri pogoju} & \hspace{0.5cm} \proj(X) = \proj(M).
+    \end{split}
+\end{align}
 Cilj algoritma je torej čim bolj zmanjšati najmanjše singularne vrednosti, medtem ko velikih ne omejujemo. S tem problem minimizacije omilimo.
 
-Problem \eqref{1107-1305} je ekvivalenten
-\begin{align*}
-    \min_X               & \hspace{0.5cm} \nnorm{X} - \sum_{i=1}^{r} \sigma_i \\
+Problem \eqref{1107-1305} lahko zapišemo v ekvivalentni obliki
+\begin{align}
+\label{2507-0835}
+\begin{split}
+    \min_{X\in  \mathbb{R}^{n_1 \times n_2}}              & \hspace{0.5cm} \nnorm{X} - \sum_{i=1}^{r} \sigma_i(X), \\
     \textrm{pri pogojih} & \hspace{0.5cm} \proj(X) = \proj(M)
-\end{align*}
-Za nadaljnje korake bomo potrebovali naslednji izrek
+\end{split}
+\end{align}
+V izpeljavah, ki sledijo, bomo potrebovali naslednji izrek.
+
 \begin{theorem}
-    Za $X \in \mathbb{R}^{n_1 \times n_2}$, $A \in \mathbb{R}^{r \times n_1}$, $B \in \mathbb{R}^{r \times n_2}$ in $r \in \mathbb{N}$, pri pogojih $r \leq min(n_1, n_2)$, $AA^T = I_{r}, BB^T = I_{r}$ velja:
-    \begin{align*}
+\label{2507-0850}
+    Za matrike $X \in \mathbb{R}^{n_1 \times n_2}$, $A \in \mathbb{R}^{r \times n_1}$ in $B \in \mathbb{R}^{r \times n_2}$,
+    ter naravno število $r \in \mathbb{N}$, ki zadoščajo pogojem $r \leq \min(n_1, n_2)$, $AA^T = I_{r}$  in $BB^T = I_{r}$, velja neenakost
+    \begin{align}
+    \label{2507-0836}
         \tr(AXB^T) \leq \sum_{i=1}^{r} \sigma_i(X)
-    \end{align*}
+    \end{align}
 \end{theorem}
 
 \begin{proof}
-    Za dokaz uporabljamo von Neumannovo neenakost sledi \cite{TNNM-HZYLH12}, s katero lahko zapišemo
-    \[
-        \tr(AXB^T) = \tr(XB^TA) \leq \sum^{\min(n_1, n_2)}_{i=1} \sigma_i(X) \sigma_i(B^TA)
-    \]
-    Enakost $\tr(AXB^T) = \tr(XB^TA)$ sledi iz dejstva, da je sled produkta matrik invariantna pod cikličnimi permutacijami.
+    Velja
+    \begin{align}
+    \label{2507-0839}
+        \tr(AXB^T) = \tr(XB^TA) \leq \sum^{\min(n_1, n_2)}_{i=1} \sigma_i(X) \sigma_i(B^TA),
+    \end{align}
+    kjer smo v enakosti uporabili komutativnost $\tr(ZW)=\tr(WZ)$ sledi,
+    v neenakosti pa von Neumannovo neenakost za sled \cite{TNNM-HZYLH12}.
 
-    Po definiciji lahko singularne vrednosti matrike $Y$ najdemo tako, da najdemo korene nenegativnih lastnih vrednosti matrike $Y^TY$. Tako lahko povemo, da so singularne vrednosti matrike $B^TA$ enake lastnim vrednostim matrike $A^TBB^TA$. Izraz razpišemo v
-    \[
-        A^TBB^TA = A^TI_rA = A^TA
-    \]
+    Po definiciji so singularne vrednosti matrike $Y$ enake korenom lastnih vrednosti matrike $Y^TY$. Torej so singularne vrednosti matrike $B^TA$ enake korenom lastnih vrednosti matrike $A^TBB^TA=A^TI_rA = A^TA$. 
     %https://shorturl.at/pqrRX
-    Ker pa velja, da imata matriki $XY$ in $YX$ enake neničelne lastne vrednosti, ter vemo da $AA^T = I_r$, lahko povemo, da ima produkt $B^TA$ $r$ singularnih vrednosti enakih 1, saj ima $I_n$ $n$ lastnih vrednosti enakih 1.
-    Tako lahko sedaj razpišemo izraz
+    Ker imata matriki $XY$ in $YX$ enake neničelne lastne vrednosti in po predpostavki velja $AA^T = I_r$, lahko
+    od tod sklepamo, da ima produkt $B^TA$ $r$ singularnih vrednosti enakih 1.
+    Zato velja
     \[
-        \sum^{\min(n_1, n_2)}_{i=1} \sigma_i(X) \sigma_i(B^TA) = \sum^{r}_{i=1} \sigma_i(X)
+        \sum^{\min(n_1, n_2)}_{i=1} \sigma_i(X) \sigma_i(B^TA) = \sum^{r}_{i=1} \sigma_i(X),
     \]
-    Ugotovili smo, da velja
-    \begin{equation}
-        \label{2806-1320}
-        \tr(AXB^T) \leq \sum^{r}_{i=1} \sigma_i(X)
-    \end{equation}
+    kar skupaj z \eqref{2507-0839}
+    dokaže neenakost \eqref{2507-0836}
+    v izreku.
 \end{proof}
 
 \begin{theorem}
-    Za SVD razcep matrike $X = U \Sigma V^T$, ter matriki
+\label{2507-0851}
+    Naj bo $X = U \Sigma V^T$
+    SVD razcep matrike $X$.
+    Naj bosta $A$ in $B$ matriki, sestavljeni
+    iz prvih $r$ stolpcev matrik $U$ in $V$.
+    Velja 
+    \[\tr(AXB^T) = \sum^{r}_{i=1} \sigma_i(X).\]
+\end{theorem}
+
+\begin{proof}
+    Označimo matriki $A$ in $B$ z
     $A = (u_1, \hdots , u_r)^T$ in $B = (v_1, \hdots , v_r)^T$,
     kjer je $u_i$ $i$-ti stolpec matrike $U$ ter $v_i$ $i$-ti stolpec
-    matrike $V$, velja \[\tr(AXB^T) = \sum^{r}_{i=1} \sigma_i(X)\]
-\end{theorem}
-
-\begin{proof}
+    matrike $V$.
     \begin{align*}
-        \tr(AXB^T) & = \tr((u_1, \hdots , u_r)^T X (u_1, \hdots , u_r)^T)                                                                                                                                                                   \\
-                   & = \tr((u_1, \hdots , u_r)^T U \Sigma V^T (u_1, \hdots , u_r)^T)                                                                                                                                                        \\
-                   & = \begin{bmatrix} I_r & 0 \\ 0 & 0 \end{bmatrix} \Sigma \begin{bmatrix} I_r & 0 \\ 0 & 0 \end{bmatrix}                                                                                                                 \\
-                   & = \tr(\begin{bmatrix} \sigma_1 \\[-8pt] & \ddots & & \\[-8pt] & & \sigma_r \\[-8pt] & &  & 0 \\[-8pt]  & & & & \ddots \\[-8pt] & & & & & 0 \end{bmatrix}) = \sum_{i = 1}^{r} \sigma_i(X)  \numberthis\label{2806-1321}
+        \tr(AXB^T) & = \tr\big((u_1, \hdots , u_r)^T X (u_1, \hdots , u_r)^T\big)                                                                                                                                                                   \\
+                   & = \tr\big((u_1, \hdots , u_r)^T U \Sigma V^T (u_1, \hdots , u_r)^T\big)                                                                                                                                                        \\
+                   & =\tr\Big( \begin{bmatrix} I_r & 0 \\ 0 & 0 \end{bmatrix} \Sigma \begin{bmatrix} I_r & 0 \\ 0 & 0 \end{bmatrix}\Big)                                                                                                                 \\
+                   & = \tr\Big(\begin{bmatrix} \sigma_1 \\[-8pt] & \ddots & & \\[-8pt] & & \sigma_r \\[-8pt] & &  & 0 \\[-8pt]  & & & & \ddots \\[-8pt] & & & & & 0 \end{bmatrix}\Big) \\
+                   &= \sum_{i = 1}^{r} \sigma_i(X),
     \end{align*}
+kar dokaže trditev izreka.
 \end{proof}
-Z združitvijo dokazov \eqref{2806-1320} in \eqref{2806-1321} zapišemo
+Po izrekih \ref{2507-0850} in \ref{2507-0851}
+velja
 \[
-    \max_{AA^T = I, BB^T = I} \tr(AXB^T) = \sum^{r}_{i = 1} \sigma_i(X)
+    \max_{
+    \substack{AA^T = I,\\ BB^T = I}} \tr(AXB^T) = \sum^{r}_{i = 1} \sigma_i(X)
 \]
-Torej je optimizacijski problem ekvivalenten
+Torej je optimizacijski problem
+\eqref{2507-0835} ekvivalenten
+problemu
 \begin{align*}
-    \min_X \hspace{0.5cm}             & \nnorm{X} - \max_{AA^T = I, BB^T = I} \tr(AXB^T) \\
-    \text{pri pogojih} \hspace{0.5cm} & \proj(X) = \proj(M)
+    \min_{X\in  \mathbb{R}^{n_1 \times n_2}}\hspace{0.5cm}             & \nnorm{X} - \max_{\substack{AA^T = I,\\ BB^T = I}} \tr(AXB^T), \\
+    \text{pri pogoju} \hspace{0.5cm} & \proj(X) = \proj(M).
 \end{align*}
 
-Glede na vse ugotovitve, nato nastavimo iterativni algoritem, tako da, izračunamo $X^0 = \proj(M)$. V $i$-ti iteraciji izračunamo $A^i$ in $B^i$, tako da izračunamo SVD razcep $X^i = U \Sigma V^T$, ter $A$ nastavimo kot prvih $r$ stolpcev matrike $U$, $B$ pa kot prvih $r$ stolpcev matrike $V$. $X^{i+1}$ lahko sedaj izračunamo kot \cite{TNNM-HZYLH12}
-\begin{align*}
-    \min_X \hspace{0.5cm}         & \nnorm{X} - \tr(A^iX(B^i)^T) \\
-    \text{tako da} \hspace{0.5cm} & \proj(X) = \proj(M)
-\end{align*}
-Če minimizacijo še malo obrnemo, pa lahko problem rešujemo z uporabo algoritma ADMM. \todo{iz kje pride izracun $Y^{i+1}$}
-\begin{align*}
-    \min_X \hspace{0.5cm}         & \nnorm{X} - \tr(A^iW(B^i)^T) \numberthis\label{1307-1527} \\
-    \text{tako da} \hspace{0.5cm} & W=X, \hspace{0.2cm} \proj(W) = \proj(M)
-\end{align*}
-Ta problem ponovno zapišemo s pomočjo Lagrangeove funkcije, le da algoritem ADMM definira še regularizacijski parameter $\beta$. \cite{TNNM-HZYLH12}
-\[
-    \mathcal{L}(X, Y, W, \beta) = \nnorm{X} - \tr(A_l W B_l^T) + \frac{\beta}{2} \fnorm{X - W}^2 + \tr(Y^T(X-W))
-\]
-Opazimo lahko, da funkcija definira zgolj pogoj $X = W$. Videli bomo, da algoritem pogoj $\proj(X) = \proj(M)$ definira posredno, s popravljanjem znanih vrednosti (korak \eqref{2906-1248} spodaj).%\todo{ali lahko citiram naprej}
+Sedaj lahko opišemo idejo algoritma TNNM:
+\begin{enumerate}
+    \item Izračunamo $X^{(0)} = \proj(M)$.
+    \item Za $k=0,1,2,\ldots$ ponavljamo iteracijo:
+    \begin{enumerate}
+        \item Izračunamo SVD razcep
+            $X^{(k)} = U^{(k)} \Sigma^{(k)} (V^{(k)})^T$.
+        \item $A^{(k)}$ definiramo kot prvih    $r$ stolpcev matrike $U^{(k)}$,   
+            $B^{(k)}$ pa kot prvih    
+            $r$ stolpcev matrike $V^{(k)}$.
+        \item $X^{(k+1)}$ je enak rešitvi 
+            optimizacijskega problema 
+    \begin{align}
+    \label{2507-0900}
+    \begin{split}
+    \min_{X\in  \mathbb{R}^{n_1 \times n_2}} \hspace{0.5cm}         & \nnorm{X} - \tr(A^{(k)}X(B^{(k)})^T), \\
+    \text{pri pogoju} \hspace{0.5cm} & \proj(X) = \proj(M).
+    \end{split}
+    \end{align}
+    \end{enumerate}
+\end{enumerate}
+Z nadaljnjim preoblikovanjem problema 
+\eqref{2507-0900} v ekvivalentnega 
+\todo{iz kje pride izracun $Y^{i+1}$}
+\begin{align}
+\label{1307-1527} 
+\begin{split}
+    \min_{X\in  \mathbb{R}^{n_1 \times n_2}}  \hspace{0.5cm}         & \nnorm{X} - \tr(A^{(k)}W(B^{(k)})^T),  \\
+    \text{pri pogojih} \hspace{0.5cm} & W=X, \hspace{0.2cm} \proj(W) = \proj(M),
+\end{split}
+\end{align}
+lahko za reševanje uporabimo \textbf{algoritem ADMM} \cite{TNNM-HZYLH12}.
 
-Matriko $X^{k+1}$ ponovno definiramo kot
+Gre za reševanje problema vezanih ekstremov, ki ga lahko zapišemo s pomočjo Lagrangeove funkcije, pri čemer algoritem ADMM doda še 
+člen, pomnožen z \textit{regularizacijskim parametrom} $\beta$. 
 \[
-    X^{k+1} = \arg \min_X \mathcal{L}(X, Y^k, W^k, \beta)
+    \mathcal{L}(X, Y, W, \beta) = \nnorm{X} - \tr(A W B^T) + \frac{\beta}{2} \fnorm{X - W}^2 + \tr(Y^T(X-W)).
 \]
-Z ignoriranjem konstantnih členov, pa lahko tako zapišemo
-\begin{align*}
-    X^{k+1} & = \arg \min_X \hspace{0.2cm} \nnorm{X} + \frac{\beta}{2}\trOp{X-W^k}{X-W^k} + \frac{\beta}{2}\trOp{\frac{2}{\beta}Y}{X}       \\
-            & = \arg \min_X \hspace{0.2cm} \nnorm{X} + \frac{\beta}{2}\tr(X^TX - X^TW^k - W^{k^T}X - W^{k^T}W^k + \frac{2}{\beta}Y^{k^T}X )
-\end{align*}
-Z namenom faktorizacije dodamo konstantne člene.
-\begin{align*}
-     & \arg \min_X \hspace{0.2cm} \nnorm{X} + \frac{\beta}{2}\tr(X^T(X - W^k + \frac{1}{\beta}Y^k) - W^{k^T} (X - W^k + \frac{1}{\beta}Y^k) \\
-     & +\frac{1}{\beta}Y^{k^T}(X - W^k + \frac{1}{\beta}Y^k))                                                               \\
-     & = \arg \min_X \hspace{0.2cm} \nnorm{X} + \frac{\beta}{2} \fnorm{X-W^k + \frac{1}{\beta}Y^k}^2                                       \\
-     & = \arg \min_X \hspace{0.2cm} \frac{1}{\beta}\nnorm{X} +  \frac{1}{2}\fnorm{X-(W^k - \frac{1}{\beta}Y^k)}^2
-\end{align*}
-\CB{Po enakkosti v izreku ... ali po izreku ...} Po izreku \ref{1907-2240} pa tako lahko zapišemo
+\CG{Matriki $A$ in $B$ sta v okviru algoritma ADMM konstantni. Ti na začetku nastavimo na vrednost $A^{(k)}$ in $B^{(k)}$ prejšnjega iterativnega algoritma.} Opazimo lahko, da funkcija upošteva zgolj pogoj $X = W$. Videli bomo, da algoritem pogoj $\proj(X) = \proj(M)$ definira posredno, s popravljanjem znanih vrednosti (korak \eqref{2906-1248} spodaj).%\todo{ali lahko citiram naprej}
+
+Matriko $X^{(k+1)}$ definiramo kot
 \[
-    X^{k+1} = \shrink_\frac{1}{\beta}(W_k - \frac{1}{\beta} Y_k)
+    X^{(k+1)} = \arg \min_X \mathcal{L}(X, Y^{(k)}, W^{(k)}, \beta)
 \]
-Matriko $W$ podobno izračunamo kot
+Z ignoriranjem konstantnih členov, pa lahko zapišemo
 \begin{align*}
-    W^{k+1} & = \arg \min_{W} \mathcal{L}(X^{k+1}, Y^k, W, \beta)                                       \\
-            & = \arg \min_W \frac{\beta}{2} \fnorm{W - (X^{k+1} + \frac{1}{\beta}(A_l^T B_l + Y_k)) }^2
+    X^{(k+1)} & = \arg \min_X \hspace{0.2cm} \nnorm{X} + \frac{\beta}{2}\trOp{X-W^{(k)}}{X-W^{(k)}} + \frac{\beta}{2}\trOp{\frac{2}{\beta}Y}{X}       \\
+            & = \arg \min_X \hspace{0.2cm} \nnorm{X} + \frac{\beta}{2}\tr\Big(X^TX - X^TW^{(k)} -\\
+            &\hspace{2cm} (W^{(k)})^TX + (W^{(k)})^TW^{(k)} + \frac{2}{\beta}(Y^{(k)})^TX \Big).
 \end{align*}
-Lahko je videti, da velja
+Z namenom faktorizacije dodamo konstantne člene 
+\[-(W^{(k)})^T\frac{1}{\beta}(Y^{(k)}) + (\frac{1}{\beta}(Y^{(k)}))^T(-W^{(k)} + \frac{1}{\beta}(Y^{(k)}))\] 
+in dobimo
+\begin{align*}
+     & \arg \min_X \hspace{0.2cm} \nnorm{X} + \frac{\beta}{2}\tr\Big(X^T\big(X - W^{(k)} + \frac{1}{\beta}Y^{(k)}\big) - (W^{(k)})^T \big(X - W^{(k)} + \frac{1}{\beta}Y^{(k)}\big) \\
+     &\hspace{2cm} +\frac{1}{\beta}\big(Y^{(k)})^T(X - W^{(k)} + \frac{1}{\beta}Y^{(k)}\big)\Big)                                                               \\
+     & = \arg \min_X \hspace{0.2cm} \nnorm{X} + \frac{\beta}{2} \fnorm{X-W^{(k)} + \frac{1}{\beta}Y^{(k)}}^2                                       \\
+     & = \arg \min_X \hspace{0.2cm} \frac{1}{\beta}\nnorm{X} +  \frac{1}{2}\fnorm{X-(W^{(k)} - \frac{1}{\beta}Y^{(k)})}^2
+\end{align*}
+Po izreku \ref{1907-2240} \CR{uporabljenem za $X=...$, $Y=...$. $\tau=...$} pa sledi
 \[
-    W^{k+1} = X^{k+1} + \frac{1}{\beta}(A_l^T B_l + Y_k)
+    X^{(k+1)} = \shrink_\frac{1}{\beta}(W^{(k)} - \frac{1}{\beta} Y^{(k)}).
 \]
-Zaradi pogoja $\proj(W) = \proj(M)$ pa tiste elemente, ki poznamo, popravimo. \cite{TNNM-HZYLH12}\todo{malo spremenjeno iz clanka}
+Matriko $W^{(k+1)}$ podobno izračunamo kot
+\begin{align*}
+    W^{(k+1)} & = \arg \min_{W} \mathcal{L}(X^{(k+1)}, Y^{(k)}, W, \beta)                                       \\
+            & = \arg \min_W \frac{\beta}{2} \fnorm{W - (X^{(k+1)} + \frac{1}{\beta}(A^T B + Y^{(k)})) }^2
+\end{align*}
+\CG{Očitno je}
+\[
+    W^{(k+1)} = X^{(k+1)} + \frac{1}{\beta}(A^T B + Y^{(k)})
+\]
+Sedaj uporabimo še pogoj $\proj(W^{(k+1)}) = \proj(M)$ in tiste elemente, ki jih poznamo, popravimo.
 \begin{equation}
     \label{2906-1248}
-    W_{k+1} = W_{k+1} + \proj(M - W_{k+1})
+    W^{(k+1)} = W^{(k+1)} + \proj(M - W^{(k+1)})
 \end{equation}
-\CG{Korak preprosto spremeni mesta, kjer vrednosti poznamo na znane vrednosti, ostale pa pusti, kakršne so.}
+Z besedami, predpis \eqref{2906-1248}
+preprosto spremeni mesta $W^{(k+1)}$, kjer vrednosti poznamo, na znane vrednosti, ostalih pa ne spremeni.

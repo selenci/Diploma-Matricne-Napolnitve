@@ -160,7 +160,7 @@ V tem razdelku bomo preizkušali učinkovitost algoritmov na slikah, kjer se že
 Ponovno lahko opazimo, da je najboljši rezultat vrnil algoritem TNNM. Pri algoritmu SVT lahko opazimo sledi besedila, zaradi česar je tudi sama napaka pri tem algoritmu večja. Algoritem LMaFit ni skonvergiral za vrednosti parametra ranga večje od 16, zaradi česar je sam rezultat produkta matrik $X$ in $Y$ slab. Opazimo lahko, da po rekonstrukciji  manjkajočih vrednosti večina slike izgleda pravilno, še vedno pa je mogoče opaziti obrise besedila.
 Rezultati teh testov nam pokažejo pomembnost vrste šuma, saj kljub velikemu deležu znanih podatkov, algoritmi večine podatkov ne morejo kakovostno uporabiti.
 
-\section{Primerjava rezultatov z algoritmom za reševanje Poissonovih enačb} \label{1307-2255} \todo{Preveri}
+\section{Primerjava rezultatov z algoritmom za reševanje Poissonovih enačb} \label{1307-2255}
 \CG{Diplomsko delo \cite{ERZAR_2023} opisuje ter preizkusi postopek rekonstrukcije slik z reševanjem sistemov Poissonovih enačb. Ta način rekonstrukcije je v praksi pogosto uporabljen, sploh na zašumljenih slikah ter odstranjevanju motivov s slik. Smiselno je primerjati rezultate naših metod s sistemi za reševanje Poissonovih enačb.  Poissonova enačba je definirana kot}
 \[
     -\frac{\partial^2v(x, y)}{x^2} - \frac{\partial^2v(x, y)}{y^2} = f(x,y).

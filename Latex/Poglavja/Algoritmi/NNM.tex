@@ -1,50 +1,66 @@
 \section{Algoritem minimizacije nuklearne norme} \label{1707-1755}
-Ker je minimizacija ranga matrike NP-poln problem \cite{NNM-PHD}, so se razvile druge metode, ki samo kompleksnost problema zmanjšujejo. Minimizacija nuklearne norme (NNM) uporabi idejo, da je rang matrike povezan z \textbf{nuklearno normo} matrike.
-
-Dokazano je bilo \cite{NNM-PHD}, da nuklearna norma predstavlja konveksno ovojnico funkcije ranga. \todo{poglej razliko convex hull in lower envelope} \CG{\textbf{Konveksna ovojnica funkcije} $f : \mathbb{R}^{n_1 \times n_2} \rightarrow \mathbb{R}$ je definirana kot \[
-    \tilde{f}(x) = \sup\{g(x) \mid g \text{ je konveksna in } \forall x: g(x) \leq f(x) \}.
-\]}
-Problem minimizacije nuklearne norme je možno pretvoriti v optimizacijski problem iz področja semidefinitnega programiranja (SDP), za katere obstajajo različna orodja za reševanje, na primer SeDuMi \cite{SeDuMi}.
-
-\textbf{Standardna oblika semidefinitnega programa} je podana kot
+Ker je minimizacija ranga matrike NP-poln problem \cite{NNM-PHD}, algoritmi matričnih napolnitev temeljijo na metodah, ki rešujejo sorodne, hkrati pa bistveno enostavnejše probleme. \textbf{Algoritem minimizacije nuklearne norme (NNM)} uporabi idejo, da je rang matrike tesno povezan z njeno nuklearno normo.
+Izkaže se \cite{NNM-PHD}, da je nuklearna norma konveksna ovojnica funkcije ranga. \todo{poglej razliko convex hull in lower envelope} \textbf{Konveksna ovojnica funkcije} $f : \mathbb{R}^{n_1 \times n_2} \rightarrow \mathbb{R}$ je definirana kot 
 \begin{align*}
-    \min_Y \hspace{0.5cm}             & \trOp{C}{Y}                                                                         \\
-    \text{pri pogojih} \hspace{0.5cm} & \trOp{A_k}{Y} = b_k, \hspace{0.5cm} k = 1, \hdots , l \numberthis \label{1007-1829} \\
+    \tilde{f}(A) 
+    &= \sup\{g(A) \mid g:\mathbb R^{n_1\times n_2}\to \mathbb R \text{ je konveksna funkcija in }\\ 
+    &\hspace{3cm}\forall A\in \mathbb R^{n_1\times n_2}: g(A) \leq f(A) \}.
+\end{align*}
+Problem minimizacije nuklearne norme je možno pretvoriti v optimizacijski problem s področja \textbf{semidefinitnega programiranja (SDP)}, ki ga lahko rešujemo z učinkovitimi orodji, npr.\ knjižnico SeDuMi \cite{SeDuMi} v Matlabu.
+
+Naj bodo $C,A_1,\ldots,A_\ell \in \mathbb{R}^{n \times n}$ dane matrike in $b_1,\ldots,b_\ell\in \mathbb R$ dana števila.
+\textbf{Standardna oblika semidefinitnega programa} je
+\begin{align}
+\label{1007-1829} 
+\begin{split}
+    \min_{Y\in \mathbb R^{n\times n}} \hspace{0.5cm}             & \trOp{C}{Y},                                                                         \\
+    \text{pri pogojih} \hspace{0.5cm} & \trOp{A_k}{Y} = b_k, \hspace{0.5cm} k = 1, \hdots , \ell,\\
                                       & Y \succeq 0
-\end{align*}
-Kjer je $C \in \mathbb{R}^{n_1 \times n_2}$ dana matrika, $\{A_k \in \mathbb{R}^{n_1 \times n_2} \}$ in $\{b_k\}$ pa množici matrik in števil.
+\end{split}
+\end{align}
 
+Vrnimo se k našemu problemu. Naj bo $M \in \mathbb{R}^{n_1 \times n_2}$ zašumljena matrika (tj.\ matrika z nekaterimi neznanimi vhodi), $\Omega$ pa množica urejenih parov, ki predstavljajo mesta, kjer vrednosti matrike poznamo.
 Problem minimizacije nuklearne norme lahko zapišemo kot
-\begin{align*}
-    \min_{X, t} \hspace{0.5cm}        & t                                               \\
-    \text{pri pogojih} \hspace{0.5cm} & \nnorm{X} \leq t, \numberthis \label{1007-1830} \\
+\begin{align}
+\label{1007-1830}
+\begin{split}
+    \min_{\substack{X\in \mathbb R^{n_1\times n_2},\\ t\in \mathbb R}} \hspace{0.5cm}        & t,                                               \\
+    \text{pri pogojih} \hspace{0.5cm} & \nnorm{X} \leq t,  \\
                                       & \proj(X) = \proj(M),
-\end{align*}
-\CG{kjer je $M \in \mathbb{R}^{n_1 \times n_2}$ zašumljena matrika, $\Omega$ pa množica urejenih parov, ki predstavljajo mesta, kjer vrednosti matrike poznamo.}
-Dokazano je bilo \cite{NNM-PHD}, da za matriko $X \in \mathbb{R}^{n_1 \times n_2}$ in $t \in \mathbb{R}$
-velja $\nnorm{X} \leq t \iff \exists W_1\in \mathbb{R}^{n_1 \times n_1}, W_2 \in \mathbb{R}^{n_2 \times n_2}$ tako da
-\begin{align*}
-     & Y = \begin{bmatrix}
+\end{split}
+\end{align}
+\CB{Hitro se da videti} \cite{NNM-PHD}, da za matriko $X \in \mathbb{R}^{n_1 \times n_2}$ in $t \in \mathbb{R}$
+velja 
+\begin{align}
+\label{2407-1644}
+\begin{split}
+\nnorm{X} \leq t &\iff \exists W_1\in \mathbb{R}^{n_1 \times n_1}, W_2 \in \mathbb{R}^{n_2 \times n_2}:\\
+&\hspace{2cm}
+Y = \begin{bmatrix}
                W_1 & X                     \\
-               X^T & W_2 \label{1007-1835}
-           \end{bmatrix},            \\
-     & Y \succeq 0, \hspace{0.2cm} \tr(Y) \leq 2t
-\end{align*}
-Minimizacijski problem \eqref{1007-1830} lahko tako redefiniramo kot
-\begin{align*}
-    \min_{Y,t}     \hspace{0.5cm} & 2t                        \\
-    \text{tako da} \hspace{0.5cm} & \tr(Y) \leq 2t,           \\
+               X^T & W_2 
+           \end{bmatrix},\;       Y \succeq 0,\; \tr(Y) \leq 2t.
+\end{split}
+\end{align}
+Minimizacijski problem \eqref{1007-1830} lahko z uporabo \eqref{2407-1644} zapišemo kot
+\begin{align}
+\label{2407-1649}
+\begin{split}
+    \min_{\substack{Y\in \mathbb R^{(n_1+n_2)\times (n_1+n_2)},\\ t\in \mathbb R}}     \hspace{0.5cm} & 2t,                        \\
+    \text{pri pogojih} \hspace{0.5cm} & \tr(Y) \leq 2t,           \\
                                   & Y \succeq 0,              \\
-                                  & \trOp{Y}{A_{ab}} = c_{ab}
-\end{align*}
-kjer je $A_{ab} \in \mathbb{R}^{(n_1 + n_2) \times (n_1 + n_2)}$ matrika v množici $A$. Velja
-$A_{ab} \in A \iff (a, b) \in \Omega$. Matrika $A_{ab}$ ima vse elemente ničelne, razen na mestu $(a, n_1 + b)$, kjer ima vrednost $1$.
-Podobno je definiran tudi $c_{ab} \in \mathbb{R}$, ki ima vrednost $M_{ab}$.
+                                  & \trOp{Y}{A_{ab}} = M_{ab},\quad (a,b)\in \Omega,
+\end{split}
+\end{align}
+kjer so $A_{ab} \in \mathbb{R}^{(n_1 + n_2) \times (n_1 + n_2)}$ matrike, ki imajo vse elemente ničelne, razen tistega na mestu $(a, n_1 + b)$, ki ima vrednost $1$.
+\iffalse
 Ker velja
 \[
     \trOp{A}{B} = \sum_{i}^{n_1} \sum_{j}^{n_2} a_{ij}b_{ij}
-\] je lahko videti, da je tak pogoj smiselen. Programi za reševanje SDP pa lahko tako obliko že sprejmejo.
-\cite{Survey-NKS19}
+\] je lahko videti, da je tak pogoj smiselen. 
+\fi
+Programi za reševanje SDP-jev pa lahko sprejmejo in rešujejo probleme v obliki \eqref{2407-1649}
+\cite{Survey-NKS19}.
 
 
 % Za SVD razcep matrike $X = U\Sigma V^T$ velja 

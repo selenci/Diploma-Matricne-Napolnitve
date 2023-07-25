@@ -1,42 +1,51 @@
 \section{Izmenjajoč gradientni spust}
-Ker je računanje SVD razcepa zahtevna operacija, saj ima časovno zahtevnost
-$O(n^3)$, je bilo predlaganih nekaj algoritmov, ki za svoje delovanje ne potrebujejo SVD-ja. Algoritem Izmenjajočega gradientnega spusta, oziroma v nadaljevnu ASD sloni na računanju gradienta in premikanja po njem. Ideja algoritma je najti dve matriki $X \in \mathbb{R}^{n_1 \times r}$ ter $Y \in \mathbb{R}^{r \times n_2}$, tako da velja $\proj(M) = \proj(XY)$. Vidimo lahko, da ponovno potrebujemo informacijo o rangu matrike, ki jo rekonstruiramo. Ker imata tako $X$ in $Y$ kvečjemu rang $r$, vemo, da tudi njun produkt $XY$ ne bo imel ranga večjega od $r$. 
+Računanje SVD razcepa je zahtevna operacija, saj ima časovno zahtevnost
+$O(n^3)$, kar je lahko za veliko matrike zelo počasno. Zato je bilo izpeljanih nekaj algoritmov, ki za svoje delovanje ne potrebujejo SVD-ja. \textbf{Algoritem izmenjajočega gradientnega spusta (ASD)} \cite{AST-TK15} 
+temelji na izračunu gradienta in premiku
+v smeri tega za nek korak. Ideja algoritma je poiskati matriki $X \in \mathbb{R}^{n_1 \times r}$ ter $Y \in \mathbb{R}^{r \times n_2}$, tako da velja $\proj(M) = \proj(XY)$. Tudi tu potrebujemo informacijo o rangu matrike, ki jo rekonstruiramo. Ker imata $X$ in $Y$ rang največ $r$, tudi njun produkt $XY$ ne bo imel ranga večjega od $r$. 
 
-Cilj algoritma je minimizirati
+Cilj algoritma je rešiti optimizacijski problem
 \[
-    \min_{X, Y} \hspace{0.5cm} \frac{1}{2}\, \fnorm{\proj(M) - \proj(XY)}^2
+    \min_{\substack{X\CR{\in ....}, \\Y\CR{\in...}}} \hspace{0.5cm} \frac{1}{2}\, \fnorm{\proj(M) - \proj(XY)}^2
 \] 
-Algoritem minimizacijo razdeli na dve, nato pa izmenično rešuje eno in nato drugo kot \cite{AST-TK15}
-\begin{align*}
-    X_{i+1} &= \arg \min_{X} \hspace{0.3cm} \fnorm{\proj(M) - \proj(XY_i)}^2 \\
+Algoritem problem minimizacije razdeli na dva optimizacijska podproblema, ki ju rešuje izmenično s pomočjo iterativnega postopka
+\CR{Popraviti indekse $X_i\to X^{(i)}$.}
+\begin{align}
+\label{2507-0927}
+    X_{i+1} &= \arg \min_{X} \hspace{0.3cm} \fnorm{\proj(M) - \proj(XY_i)}^2, \\
+\label{2507-0928}
     Y_{i+1} &= \arg \min_{Y} \hspace{0.3cm} \fnorm{\proj(M) - \proj(X_{i+1}Y)}^2
-\end{align*}
+\end{align}
 
 
-Za uporabo algoritma ASD potrebujemo odvoda funkcije $f(X,Y) = \frac{1}{2}\, \fnorm{\proj(M) - \proj(XY)}^2$, ki ga izračunamo za vsak element posebej.
-\begin{align*}
-    \frac{\partial}{\partial x_{a,b}} f &= \frac{\partial}{\partial x_{a,b}} \frac{1}{2}\, \fnorm{\proj(M) - \proj(XY)}^2  \\
-    &= \frac{\partial}{\partial x_{a,b}} \frac{1}{2}\, \sum_{i}^{n_1}\sum_{j}^{n_2}(\delta_{i,j}m_{i,j} - \delta_{i,j}\sum_{k}^{r}(x_{i,k}y_{k,j}))^2  \\
-    &= \, \sum_{j}^{n_2}(\delta_{a,j}m_{a,j} - \delta_{i,j}\sum_{k}^{r}(x_{a,k}y_{k,j}))(-y_{b,j}) \\
-    &\implies \frac{\partial}{\partial X}f = -(\proj(M) - \proj(XY))Y^T
-    % &= \sum_{i,j}(\delta_{i,j}m_{i,j} - \delta_{i,j}\sum_{k}(x_{i,k}y_{k,j}))
-    % (\sum_{k}y_{k,j}) = \\
-    % &= (P(M) - P(XY))Y^T
-\end{align*}
-kjer 
+Za uporabo algoritma ASD potrebujemo gradienta funkcije $f(X,Y) = \frac{1}{2}\, \fnorm{\proj(M) - \proj(XY)}^2$ \CG{po obeh spremenljivkah}, ki ju izračunamo za vsak element posebej.
+Za reševanje \eqref{2507-0927} so spremenljivke elementi matrike $X$,
+za reševanje \eqref{2507-0928} pa elementi matrike $Y$. \CG{Zaradi enostavnosti definiramo dve pomožni funkciji. Funkcija $f_Y(X)$ je enaka funkciji $f(X, Y)$, le da vrednost $Y$ jemljemo kot konstanto. Simetrično definiramo $f_X(Y)$, kjer jemljemo vrednost $X$ funkcije $f(X, Y)$ za konstantno.} Prav tako nam bo prav prišla definicija $\delta_{i, j}$, definirana kot
 \[
     \delta_{i,j} = \begin{cases}
         1, (i, j) \in \Omega \\
         0, (i, j) \notin \Omega
     \end{cases}
 \]
-Na podoben način bi lahko pokazali tudi
+\CG{Za gradient funkcije $f_Y(X)$ po spremenljivki X, označen z $\nabla f_Y(X)$ velja}
+\begin{align*}
+    \nabla f_Y(X)_{a,b} &= \frac{\partial}{\partial x_{a,b}} \frac{1}{2}\, \fnorm{\proj(M) - \proj(XY)}^2  \\
+    &= \frac{\partial}{\partial x_{a,b}} \frac{1}{2}\, \sum_{i=1}^{n_1}\sum_{j=1}^{n_2}(\delta_{i,j}m_{i,j} - \delta_{i,j}\sum_{k=1}^{r}(x_{i,k}y_{k,j}))^2  \\
+    &= \, \sum_{j=1}^{n_2}(\delta_{a,j}m_{a,j} - \delta_{i,j}\sum_{k=1}^{r}(x_{a,k}y_{k,j}))(-y_{b,j}) \\
+    \implies &\nabla f_Y(X) = -(\proj(M) - \proj(XY))Y^T
+    % &= \sum_{i,j}(\delta_{i,j}m_{i,j} - \delta_{i,j}\sum_{k}(x_{i,k}y_{k,j}))
+    % (\sum_{k}y_{k,j}) = \\
+    % &= (P(M) - P(XY))Y^T
+\end{align*}
+
+Na podoben način \CG{lahko pokažemo še}
 \[
-    \frac{\partial}{\partial Y} = -X^T (\proj(M) - \proj(XY))
+    \frac{\partial}{\partial Y}f = -X^T (\proj(M) - \proj(XY))
 \]
 Poiščimo še najboljši korak gradientnega spusta.
 Cilj je pokazati, da je premik po gradientu s korakom $t_x$ najboljši.
 Najprej definirajmo sam premik, kot
+\CR{Spet menjava indeksov $i,k$.}
 \[
     X^{k+1} = X^k - t_X \nabla f_Y(X)
 \]
@@ -47,11 +56,11 @@ Ker želimo, da bodo znane vrednosti produkta $X^{k+1}Y^{k}$ kar se da podobne z
 \begin{align*}
     g(t) &= \frac{1}{2} \fnorm{\proj(M) - \proj((X - t\nabla f_Y(X))Y)}^2
 \end{align*}
-\CG{Kot v \cite{AST-TK15} se izkaže}
+Kot v \cite{AST-TK15} se izkaže
 \[
-  g'(t) = -\fnorm{\nabla f_Y(X)}^2 + t\fnorm{\proj(f_Y(X)Y)}^2 
+  g'(t) = -\fnorm{\nabla f_Y(X)}^2 + t\fnorm{\proj(f_Y(X)Y)}^2. 
 \]
-vidimo, da funkcija $g(t)$ doseže minimum pri 
+Od tod sklepamo, da funkcija $g(t)$ doseže minimum pri 
 \[
   t_x = \frac{\fnorm{\nabla f_Y(X)}^2}{\fnorm{\proj(\nabla f_Y(X)Y)}^2}  
 \]
@@ -59,3 +68,7 @@ Podobno velja za korak v smeri gradientnega spusta matrike $Y$, kjer
 \[
   t_y = \frac{\fnorm{\nabla f_X(Y)}^2}{\fnorm{\proj(X \nabla f_X(Y))}^2}  
 \]
+
+\CR{Predlagam, da pred računanjem napišeš trditev, kjer poveš, kaj so
+$\frac{\partial}{\partial X}f$, $\frac{\partial}{\partial Y}f$, 
+$t_x$, $t_y$, vse izpeljave pa daš v okolje dokaz. Tako bo lažje sledljivo, kaj potrebuješ iz izpeljav, dokaz pa je opcijski in ga bralec lahko tudi preskoči.}

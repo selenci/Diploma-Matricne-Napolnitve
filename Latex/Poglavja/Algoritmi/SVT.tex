@@ -1,94 +1,115 @@
 \section{Algoritem praga singularnih vrednosti}
-Algoritem praga singularnih vrednosti, oziroma v nadaljevanju SVT uporabi idejo, da imamo pri matrikah z majhnim rangom nekaj velikih singularnih vrednosti, ostale pa blizu 0. Za svoje delovanje uvede dva nova pomembna koncepta, prvi je premik, drugi pa prag, potreben za uporabo operatorja $\shrink_\tau$ \eqref{1007-1959}. Algoritem temelji na iteraciji
-\[
-    \begin{cases}
-        X^k = \shrink_\tau(Y^{k-1}) \\
-        Y^k = Y^{k-1} + \delta_k \proj(M - X^k) 
-    \end{cases}
-\]
-kjer je $\tau > 0$ izbran prag, $\delta_k$ izbran premik, $X^0 = 0 \in \mathbb{R}^{n_1 \times n_2}$ ter
-$Y^0 = 0 \in \mathbb{R}^{n_1 \times n_2}$. \cite{CCS}
+\textbf{Algoritem praga singularnih vrednosti (SVT)} \cite{CCS}, uporabi idejo, da imajo matrike z majhnim rangom nekaj velikih singularnih vrednosti, ostale pa 0 ali pa vsaj blizu 0. Ključna parametra v SVT-ju sta \textit{izbira premika} in \textit{izbira praga},  
+%Za svoje delovanje uvede dva nova pomembna koncepta, prvi je premik, drugi pa prag, potreben za uporabo operatorja $\shrink_\tau$ \eqref{1007-1959}. 
+algoritem pa temelji na iteraciji
+\begin{align}
+\label{2407-1910}
+        X^{(k)} &= \shrink_\tau(Y^{(k-1)}), \\
+        Y^{(k)} &= Y^{(k-1)} + \delta_k \proj(M - X^{(k)}), 
+\end{align}
+kjer so $\tau > 0$ izbran prag, $\delta_k$ izbran premik, $X^{(0)} = 0 \in \mathbb{R}^{n_1 \times n_2}$ in
+$Y^{(0)} = 0 \in \mathbb{R}^{n_1 \times n_2}$. \cite{CCS}
 
-V nadaljevanju bomo opisali glavno idejo zgornje iteracije. V grobem pa temelji na uporabi metode za iskanje vezanih ekstremov, kjer elementi matrik $Y^k$ predstavljajo Lagrangove množitelje. 
+V nadaljevanju bomo opisali glavno idejo zgornje iteracije. V grobem pa temelji na uporabi metode za iskanje vezanih ekstremov, kjer elementi matrik $Y^{(k)}$ predstavljajo Lagrangove množitelje. 
 
 Uvedimo funkcijo 
 \begin{align}
     \label{1007-2007}
     f_\tau(X) = \tau\nnorm{X} + \frac{1}{2}\fnorm{X}^2
 \end{align}
-Problem lahko tako zapišemo kot 
+in optimizacijski problem
 \begin{align}
 \label{2706-0957}
 \begin{split}
-    \textrm{min} & \hspace{0.5cm} f_\tau(X) \\
-    \textrm{pri pogojih} & \hspace{0.5cm} \proj(X) = \proj(M)
+    \min_{X\in \mathbb R^{n_1\times n_2}} & \hspace{0.5cm} f_\tau(X), \\
+    \textrm{pri pogojih} & \hspace{0.5cm} \proj(X) = \proj(M).
 \end{split}
 \end{align}
-Opazimo lahko, da za velike vrednosti $\tau$ velja $f_\tau(X) \approx \tau\nnorm{X}$, kar pomeni, da bo s primerno izbranim $\tau$, algoritem res minimiziral nuklearno normo.
+Opazimo lahko, da za velike vrednosti $\tau$ velja $f_\tau(X) \approx \tau\nnorm{X}$, kar pomeni, da bo s primerno izbranim $\tau$, optimizacijski problem minimiziral nuklearno normo.
 
-Definirajmo Lagrangeovo funkcijo 
-\[\mathcal{L}(x, \lambda) = f(x) + \lambda \cdot g(x),\]
-kjer je $f(x)$ \eqref{2706-0957} funkcija, ki jo minimiziramo, pod pogojem, da velja $g(x) = 0$. Naš problem tako prevedemo v
+Denimo, da želimo poiskati minimum funkcije $f(x)$ pri pogojih $g_1(x)=g_2(x)=\ldots=g_{k}(x)=0$.
+V teoriji vezanih ekstremov se za tovrstne probleme uvede \textbf{Lagrangeovo funkcijo}
+\[\mathcal{L}(x, \lambda_1,\lambda_2,\ldots,\lambda_k) = f(x) + \lambda_1 g_1(x)+\lambda_2g_2(x)+\ldots+\lambda_kg_k(x),\]
+nato pa išče ekstreme med njenimi stacionarnimi točkami.
+Problemu \eqref{2706-0957} lahko priredimo Lagrangeovo funkcijo
 \[
-    \mathcal{L}(X, Y) = f_\tau(X) + \left< Y, \proj(M - X) \right>
+    \mathcal{L}(X, Y) = f_\tau(X) + \left< Y, \proj(M - X) \right>,
 \] 
-S pomočjo tako imenovanega Uzawoega algoritma \cite{CCS}, pa lahko problem pretvorimo v iterativni algoritem. 
+nato pa iščemo njene stacionarne točke.
+Zaradi velikega števila parametrov pa ta pristop navadno ni izvedljiv, zato se v SVT-ju uporabi za iskanje ekstremov $\mathcal{L}(X, Y)$ t.i.\ \textit{Uzawa algoritem} \cite{CCS}. Ta ekstreme išče prek iterativnega postopka:
 \begin{align}
-        X^k =  \arg \min_{X} \mathcal{L}(X^k, Y^{k-1}) \label{1007-2018}\\
-        Y^k = Y^{k-1} + \delta_k \proj(M - X^k) \label{1007-2019}
+        X^{(k)} &=  \arg \min_{X} \hspace{0.2cm}\mathcal{L}(X^{(k)}, Y^{(k-1)}) \label{1007-2018},\\
+        Y^{(k)} &= Y^{(k-1)} + \delta_k \proj(M - X^{(k)}) \label{1007-2019}
 \end{align}
-Izkaže se, da je rešitev \eqref{1007-2018} enaka $\shrink_\tau(Y^{k-1})$.
 
-\begin{theorem}
+\CR{$\arg\min$ ni tako pogost pojem, tako da dodaj definicijo.}
+
+Izkaže se, da je rešitev \eqref{1007-2018} enaka $\shrink_\tau(Y^{k-1})$. To spodaj dokažemo, še prej pa izpeljimo pomožen rezultat.
+
+\begin{trditev}
+Velja:
 \begin{align}
     \arg \min_X \hspace{0.2cm} \mathcal{L}(X, Y)
     = \arg \min_X \hspace{0.2cm} \tau\nnorm{X} + \frac{1}{2}\fnorm{X - Y}^2
 \end{align}
-\end{theorem}
+\end{trditev}
 
 \begin{proof}
+Trditev sledi iz krajšega računa:
 \begin{align*}
     &\arg \min_X \hspace{0.2cm} \tau\nnorm{X} + \frac{1}{2}\fnorm{X - Y}^2 \\
-    &\arg \min_X \hspace{0.2cm} \tau\nnorm{X} + \frac{1}{2}\trOp{X - Y}{X - Y}\\
-    &\arg \min_X \hspace{0.2cm} \tau\nnorm{X} + \frac{1}{2}(\fnorm{X}^2 - 2\trOp{X}{Y} + \fnorm{Y}^2) \\ 
-    &\arg \min_X \hspace{0.2cm} \tau\nnorm{X} + \frac{1}{2}\fnorm{X}^2 - \trOp{X} {\proj(Y)} \numberthis \label{1907-2012}\\
-    &\arg \min_X \hspace{0.2cm} \tau\nnorm{X} + \frac{1}{2}\fnorm{X}^2 + \tr(- \proj(X)Y^T) + \tr(\proj(M)Y^T)\\
-    &\arg \min_X \hspace{0.2cm} \tau\nnorm{X} + \frac{1}{2}\fnorm{X}^2 + \tr(\proj(M - X)Y^T)\\
-    &\arg \min_X \tau\nnorm{X} + \frac{1}{2}\fnorm{X}^2 + \trOp{Y}{\proj(M - X)} = \arg \min_X \hspace{0.2cm} \mathcal{L}(X, Y)
+    &=\arg \min_X \hspace{0.2cm} \tau\nnorm{X} + \frac{1}{2}\trOp{X - Y}{X - Y}\\
+    &=\arg \min_X \hspace{0.2cm} \tau\nnorm{X} + \frac{1}{2}(\fnorm{X}^2 - 2\trOp{X}{Y} + \fnorm{Y}^2) \\ 
+    &=\arg \min_X \hspace{0.2cm} \tau\nnorm{X} + \frac{1}{2}\fnorm{X}^2 - \trOp{X} {\proj(Y)}\\
+    &=\arg \min_X \hspace{0.2cm} \tau\nnorm{X} + \frac{1}{2}\fnorm{X}^2 + \tr(- \proj(X)Y^T) + \tr(\proj(M)Y^T)\\
+    &=\arg \min_X \hspace{0.2cm} \tau\nnorm{X} + \frac{1}{2}\fnorm{X}^2 + \tr(\proj(M - X)Y^T)\\
+    &=\arg \min_X \hspace{0.2cm} \tau\nnorm{X} + \frac{1}{2}\fnorm{X}^2 + \trOp{Y}{\proj(M - X)}\\ 
+    &= \arg \min_X \hspace{0.2cm} \mathcal{L}(X, Y)
 \end{align*}
-\CG{kjer je korak \eqref{1907-2012} dovoljen, saj velja $\proj(Y^k) = Y^k$ za vse $k \in \mathbb{N}$. To je razvidno iz koraka \eqref{1007-2019}, velja pa $Y^0 = 0$. Prav tako velja $\trOp{X}{\proj(Y)} = \trOp{\proj(X)}{Y}$, kar je lahko videti, ko se spomnimo, da za skalarni produkt $\trOp{A}{B}$ matrik $A, B \in \mathbb{R}^{n_1 \times n_2}$ velja 
+kjer smo v prvi enakosti uporabili definicijo Frobeniusove norme, v drugi bilinearnost skalarnega produkta, 
+v tretji smo ignorirali konstanto $\fnorm{Y}^2$, saj ne vpliva na rezultat, 
+in upoštevali $\proj(Y^{(k)}) = Y^{(k)}$ za vse $k \in \mathbb{N}$. Zadnje dejstvo sledi iz definicije \eqref{1007-2019} in $Y^{(0)} = 0$. V četrti enakosti smo upoštevali $\trOp{X}{\proj(Y)} = \trOp{\proj(X)}{Y}$, kar je lahko videti, ko se spomnimo, da za skalarni produkt $\trOp{A}{B}$ matrik $A, B \in \mathbb{R}^{n_1 \times n_2}$ velja 
 \[
-    \trOp{A}{B} = \sum_{i = 1}^{n_1}\sum_{j = 1}^{n_2} a_{ij}b_{ij}
+    \trOp{A}{B} = \sum_{i = 1}^{n_1}\sum_{j = 1}^{n_2} a_{ij}b_{ij}.
 \]
-}
+Prišteli smo tudi konstanto $\tr(\proj(M)Y^T)$, ki ne vpliva na rezultat.
+V peti enakosti smo upoštevali linearnost sledi in aditivnost operatorja $P_\Omega$,
+v šesti definicijo skalarnega produkta in v zadnji definicijo Lagrangeove funkcije.
 \end{proof}
 \begin{theorem} \label{1907-2240}
+\CG{Za matriki $X \in \mathbb{R}^{n_1 \times n_2}, Y \in \mathbb{R}^{n_1 \times n_2}$} velja:
 \begin{align}
     \label{2906-1056}
-    \shrink_\tau(Y) = \arg \min_{X} \{ \frac{1}{2} \fnorm{X-Y}^2 + \tau\nnorm{X} \}
+    \shrink_\tau(Y) = \arg \min_{X} \hspace{0.2cm}\frac{1}{2} \fnorm{X-Y}^2 + \tau\nnorm{X} 
 \end{align}
 \end{theorem}
 
-\begin{proof} \todo{Ali je treba pokazati da odvod $||A - B||_F^2 = 2(A - B)$}
-Ker je $h(X) := \frac{1}{2} \fnorm{X-Y}^2 + \tau\nnorm{X} $ strogo konveksna funkcija, lahko za subgradient $Z$ v točki $X_0$ rečemo, da velja $\forall X: f(X) \geq  f(X_0) + \left< Z, X - X_0 \right>$. \CG{Ali drugače povedano, premica na točko $X_0$ s smernim koeficientom $Z$ je povsod na ali pod funkcijo $h(X)$.} To velja po sami definiciji, saj je to zahtevan pogoj subgradienta v neki točki.
+\begin{proof} 
+\todo{Ali potrebujem strogo konveksnost}
+\CR{Po čem odvajaš normo?}
+\CG{Najprej se spomnimo definicije konveksne funkcije. Funkcija $f$ je konveksna, če za katerikoli dve točki $x_1, x_2$ v domeni funkcije $f$ velja, da je premica čez ti dve točki na odseku med tema dvema točkama večja ali enaka funkciji $f$.}
+\CG{Funkcija $h(X) := \frac{1}{2} \fnorm{X-Y}^2 + \tau\nnorm{X} $ je konveksna funkcija, saj potreben pogoj trikotniške neenakosti matričnih norm zagotavlja, da je matrična norma konveksna funkcija. Vsota konveksnih funkcij pa je prav tako konveksna funkcija. \todo{ali je potrebno citirati} Zaradi konveksnosti lahko tako uporabimo definicijo subgradienta $Z$ v točki $X_0$. Ta je definiran kot: \[\forall X: f(X) \geq  f(X_0) + \trOp{Z}{X - X_0}\] Ali drugače povedano, premica na točko $X_0$ s smernim koeficientom $Z$ je povsod na ali pod funkcijo $h(X)$.}
 
-Pri iskanju minimuma torej iščemo tako točko $X'$, da bo subgradient v točki $X'$ enak 0. Problem sedaj zapišemo kot $0 \in X' - Y + \tau \partial\nnorm{X'}$. Izkaže se, da je množica subgradientov nuklearne norme definirana kot
+Pri iskanju minimuma torej iščemo tako točko $X'$, da bo
+\CG{eden izmed subgradientov po spremenljivki $X$} v točki $X'$ enak 0.  Izkaže se \cite{CCS}, da je množica subgradientov nuklearne norme definirana kot
 \[
     \partial\nnorm{X} = \{UV^* + W: W \in \mathbb{R}^{n_1 \times n_2}, U^*W = 0, WV = 0, \norm{W}_2 \leq 1 \}.
 \]
-kjer $U \Sigma V^T$ predstavlja SVD razcep matrike X. \cite{CCS}
+kjer $U \Sigma V^T$ predstavlja SVD razcep matrike $X$. \CG{Prav tako pa vemo, da velja $\frac{\partial}{\partial X}\fnorm{X-Y}^2 = 2(X - Y)$.} \todo{kaj citiram, ali dokazem?} Problem sedaj zapišemo kot $0 \in X' - Y + \tau \partial\nnorm{X'}$. 
 
-Cilj dokaza je pokazati, da velja $X' = \shrink_\tau(Y)$ Najprej razčlenimo SVD razcep matrike $Y$ kot 
+Trditev izreka bo sledila, če pokažemo, da velja $X' = \shrink_\tau(Y)$. Najprej razčlenimo SVD razcep matrike $Y$ kot 
 \[
     Y = U_0\Sigma_0V_0^T + U_1\Sigma_1V_1^T
 \]
-kjer $U_0, \Sigma_0$ in $V_0$ predstavljajo lastne vrednosti ter njihove lastne vektorje večje od $\tau$, $U_1, \Sigma_1$ in $V_1$ pa tiste manjše od $\tau$. Ustrezno je torej pokazati, da velja 
+kjer $U_0, \Sigma_0$ in $V_0$ predstavljajo singularne vrednosti in pripadajoče singularne vektorje večje od $\tau$, $U_1, \Sigma_1$ in $V_1$ pa tiste manjše od $\tau$. Pokazati želimo, da velja 
 \[
-    X' = U_0(\Sigma_0 - \tau I)V_0^T
-\] Gre preprosto za drugačen zapis operatorja $\shrink_\tau(Y)$.
+    X' = U_0(\Sigma_0 - \tau I)V_0^T.
+\] 
+\todo{ali moram to pokazati}V nadaljevanju bomo videli, da je to samo alternativen zapis operatorja $\shrink_\tau(Y)$.
+\CR{Tega nadaljevanja povsem ne razumem. Kako prideš do preoblikovanja, prek katerega iščeš matriko $W$, mi ni jasno.}
 Če zapis vstavimo v prejšnji podan pogoj dobimo
 \begin{align*}
-    0 = X' - Y + \tau \partial \nnorm{X}\\
+    0 = X' - Y + \tau \partial \nnorm{X'}\\
     Y- X' = \tau (U_0 V_0^T + W)
 \end{align*}
 primerna izbira za $W = \tau^{-1} U_1 \Sigma_1 V_1^T$, saj
@@ -104,9 +125,14 @@ in
 \end{align*}
 
 Sedaj je zgolj potrebno pokazati, da veljajo potrebne lastnosti matrike $W$.
-Po sami definiciji SVD vemo, da so vsi stolpci matrik U in V ortogonalni. Torej velja $U_0^TW = 0$ in $WV_0 = 0$. Ker pa ima matrika $\Sigma_1$ vse elemente manjše od $\tau$ velja tudi $\norm{W}_2 \leq 1$. S tem smo pokazali, da $Y - X' \in \tau \partial \nnorm{X'}$.
+Po sami definiciji SVD vemo, da so vsi stolpci matrik U in V ortogonalni. Torej velja $U_0^TW = 0$ in $WV_0 = 0$. Ker pa ima matrika $\Sigma_1$ vse elemente manjše od $\tau$ velja tudi $\norm{W}_2 \leq 1$. \CG{$\norm{A}_2$ je namreč definirana kot največja singularna vrednost matrike $A$}. S tem smo pokazali, da $Y - X' \in \tau \partial \nnorm{X'}$.
 \end{proof}
-
+Z uporabo \eqref{1007-2018}, \eqref{1007-2019}
+in izreka \ref{1907-2240}
+res pridemo do iteracije
+\eqref{2407-1910}, ki jo uporablja algoritem SVT.
+\iffalse
+Tako res pridemo 
 Po trditvi lahko sedaj zapišemo algoritem \eqref{1007-2018} - \eqref{1007-2019} kot \cite{CCS}
 \[
     \begin{cases}
@@ -114,19 +140,33 @@ Po trditvi lahko sedaj zapišemo algoritem \eqref{1007-2018} - \eqref{1007-2019}
         Y^k = Y^{k-1} + \delta_k \proj(M - X^k) 
     \end{cases}
 \]
+\fi
 
 \subsection{Nastavljanje parametrov $\tau$ in $\delta$} \label{1907-1648}
-Opazimo lahko, da algoritem SVT potrebuje dva parametra, $\tau$ in $\delta$, ki ju moramo izbrati v naprej.
+Opazimo lahko, da algoritem SVT potrebuje dva parametra, $\tau$ in $\delta$, ki ju moramo izbrati 
+že pred vstopom v algoritem.
 
+Po priporočilih \cite{CCS}
+sta primerni izbiri za $\delta$ in $\tau$
+enaki 
+\[
+    \delta = 1.2\, \dfrac{n_1 n_2}{m}\qquad\text{in}\qquad
+    \tau = 5n,
+\]
+pri čemer je $\tau$ naveden za kvadratne $n\times n$ matrike.
+V poglavju z rezultati smo prvotno uporabljali ti dve konstanti, pri 
+čemer smo zaradi
+pravokotnosti $n_1\times n_2$ matrik uporabljali
+$\tau = 5\frac{n_1+n_2}{2}$.
+\iffalse
 Medtem, ko so koraki v samem algoritmu definirani kot množica korakov, 
 smo v okviru rezultatov diplomske naloge, prvotno za premik uporabljali konstanto, ter korak nastavili na 
-\[
-    \delta = 1.2\, \dfrac{n_1 n_2}{m}
-\] po priporočilih \cite{CCS}. 
-
+ po priporočilih \cite{CCS}. 
+ \fi
+\iffalse
 Prav tako članek \cite{CCS} navaja, da je za matrike velikosti $\mathbb{R}^{n \times n}$ smiselno nastaviti $\tau = 5n$, vendar sem v moji implementaciji zaradi posploševanja na nekvadratne matrike, za matrike velikosti $\mathbb{R}^{n_1 \times n_2}$ parameter nastavil na
 \[
     \tau = 5\, \frac{n_1+n_2}{2}
 \]
-
-\CG{Medtem, ko so taki parametri dobri za večje matrike, bomo v razdelku \ref{1307-2251} videli, da moramo pri manjših matrikah pogosto zmanjšati premik in povečati prag.}
+\fi
+V naših testiranjih se je izkazalo, da sta taka parametra dobra za večje matrike. V razdelku \ref{1307-2251} pa bomo videli, da moramo pri manjših matrikah pogosto zmanjšati premik in povečati prag.
