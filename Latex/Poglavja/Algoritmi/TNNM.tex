@@ -5,32 +5,32 @@ Osrednjo vlogo v algoritmu ima \textbf{$r$-prirezana nuklearna norma}, ki za dan
 \[
     \norm{X}_r = \sum^{\min(n_1, n_2)}_{i = r + 1} \sigma_i(X).
 \]
-TNNM rešuje optimizacijski problem 
+TNNM rešuje optimizacijski problem
 \begin{align}
-\label{1107-1305}
-\begin{split}
-    \min_{X\in  \mathbb{R}^{n_1 \times n_2}}              & \hspace{0.5cm} \norm{X}_r, \\
-    \textrm{pri pogoju} & \hspace{0.5cm} \proj(X) = \proj(M).
+    \label{1107-1305}
+    \begin{split}
+        \min_{X\in  \mathbb{R}^{n_1 \times n_2}}              & \hspace{0.5cm} \norm{X}_r, \\
+        \textrm{pri pogoju} & \hspace{0.5cm} \proj(X) = \proj(M).
     \end{split}
 \end{align}
 Cilj algoritma je torej čim bolj zmanjšati najmanjše singularne vrednosti, medtem ko velikih ne omejujemo. S tem problem minimizacije omilimo.
 
-Problem \eqref{1107-1305} lahko zapišemo v ekvivalentni obliki
+Problem \eqref{1107-1305} lahko zapišemo v ekvivalentni obliki \todo{ali tukaj tudi oklepaje}
 \begin{align}
-\label{2507-0835}
-\begin{split}
-    \min_{X\in  \mathbb{R}^{n_1 \times n_2}}              & \hspace{0.5cm} \nnorm{X} - \sum_{i=1}^{r} \sigma_i(X), \\
-    \textrm{pri pogojih} & \hspace{0.5cm} \proj(X) = \proj(M)
-\end{split}
+    \label{2507-0835}
+    \begin{split}
+        \min_{X\in  \mathbb{R}^{n_1 \times n_2}}              & \hspace{0.5cm} \nnorm{X} - \sum_{i=1}^{r} \sigma_i(X), \\
+        \textrm{pri pogojih} & \hspace{0.5cm} \proj(X) = \proj(M)
+    \end{split}
 \end{align}
 V izpeljavah, ki sledijo, bomo potrebovali naslednji izrek.
 
 \begin{theorem}
-\label{2507-0850}
+    \label{2507-0850}
     Za matrike $X \in \mathbb{R}^{n_1 \times n_2}$, $A \in \mathbb{R}^{r \times n_1}$ in $B \in \mathbb{R}^{r \times n_2}$,
     ter naravno število $r \in \mathbb{N}$, ki zadoščajo pogojem $r \leq \min(n_1, n_2)$, $AA^T = I_{r}$  in $BB^T = I_{r}$, velja neenakost
     \begin{align}
-    \label{2507-0836}
+        \label{2507-0836}
         \tr(AXB^T) \leq \sum_{i=1}^{r} \sigma_i(X)
     \end{align}
 \end{theorem}
@@ -38,14 +38,14 @@ V izpeljavah, ki sledijo, bomo potrebovali naslednji izrek.
 \begin{proof}
     Velja
     \begin{align}
-    \label{2507-0839}
+        \label{2507-0839}
         \tr(AXB^T) = \tr(XB^TA) \leq \sum^{\min(n_1, n_2)}_{i=1} \sigma_i(X) \sigma_i(B^TA),
     \end{align}
     kjer smo v enakosti uporabili komutativnost $\tr(ZW)=\tr(WZ)$ sledi,
     v neenakosti pa von Neumannovo neenakost za sled \cite{TNNM-HZYLH12}.
 
-    Po definiciji so singularne vrednosti matrike $Y$ enake korenom lastnih vrednosti matrike $Y^TY$. Torej so singularne vrednosti matrike $B^TA$ enake korenom lastnih vrednosti matrike $A^TBB^TA=A^TI_rA = A^TA$. 
-    %https://shorturl.at/pqrRX
+    Po definiciji so singularne vrednosti matrike $Y$ enake korenom lastnih vrednosti matrike $Y^TY$. Torej so singularne vrednosti matrike $B^TA$ enake korenom lastnih vrednosti matrike $A^TBB^TA=A^TI_rA = A^TA$.
+    %https://cutt.ly/UwaPOfaK
     Ker imata matriki $XY$ in $YX$ enake neničelne lastne vrednosti in po predpostavki velja $AA^T = I_r$, lahko
     od tod sklepamo, da ima produkt $B^TA$ $r$ singularnih vrednosti enakih 1.
     Zato velja
@@ -58,12 +58,12 @@ V izpeljavah, ki sledijo, bomo potrebovali naslednji izrek.
 \end{proof}
 
 \begin{theorem}
-\label{2507-0851}
+    \label{2507-0851}
     Naj bo $X = U \Sigma V^T$
     SVD razcep matrike $X$.
     Naj bosta $A$ in $B$ matriki, sestavljeni
     iz prvih $r$ stolpcev matrik $U$ in $V$.
-    Velja 
+    Velja
     \[\tr(AXB^T) = \sum^{r}_{i=1} \sigma_i(X).\]
 \end{theorem}
 
@@ -73,97 +73,97 @@ V izpeljavah, ki sledijo, bomo potrebovali naslednji izrek.
     kjer je $u_i$ $i$-ti stolpec matrike $U$ ter $v_i$ $i$-ti stolpec
     matrike $V$.
     \begin{align*}
-        \tr(AXB^T) & = \tr\big((u_1, \hdots , u_r)^T X (u_1, \hdots , u_r)^T\big)                                                                                                                                                                   \\
-                   & = \tr\big((u_1, \hdots , u_r)^T U \Sigma V^T (u_1, \hdots , u_r)^T\big)                                                                                                                                                        \\
-                   & =\tr\Big( \begin{bmatrix} I_r & 0 \\ 0 & 0 \end{bmatrix} \Sigma \begin{bmatrix} I_r & 0 \\ 0 & 0 \end{bmatrix}\Big)                                                                                                                 \\
+        \tr(AXB^T) & = \tr\big((u_1, \hdots , u_r)^T X (u_1, \hdots , u_r)^T\big)                                                                                                      \\
+                   & = \tr\big((u_1, \hdots , u_r)^T U \Sigma V^T (u_1, \hdots , u_r)^T\big)                                                                                           \\
+                   & =\tr\Big( \begin{bmatrix} I_r & 0 \\ 0 & 0 \end{bmatrix} \Sigma \begin{bmatrix} I_r & 0 \\ 0 & 0 \end{bmatrix}\Big)                                               \\
                    & = \tr\Big(\begin{bmatrix} \sigma_1 \\[-8pt] & \ddots & & \\[-8pt] & & \sigma_r \\[-8pt] & &  & 0 \\[-8pt]  & & & & \ddots \\[-8pt] & & & & & 0 \end{bmatrix}\Big) \\
-                   &= \sum_{i = 1}^{r} \sigma_i(X),
+                   & = \sum_{i = 1}^{r} \sigma_i(X),
     \end{align*}
-kar dokaže trditev izreka.
+    kar dokaže trditev izreka.
 \end{proof}
 Po izrekih \ref{2507-0850} in \ref{2507-0851}
 velja
 \[
     \max_{
-    \substack{AA^T = I,\\ BB^T = I}} \tr(AXB^T) = \sum^{r}_{i = 1} \sigma_i(X)
+        \substack{AA^T = I,\\ BB^T = I}} \tr(AXB^T) = \sum^{r}_{i = 1} \sigma_i(X)
 \]
 Torej je optimizacijski problem
 \eqref{2507-0835} ekvivalenten
 problemu
 \begin{align*}
-    \min_{X\in  \mathbb{R}^{n_1 \times n_2}}\hspace{0.5cm}             & \nnorm{X} - \max_{\substack{AA^T = I,\\ BB^T = I}} \tr(AXB^T), \\
-    \text{pri pogoju} \hspace{0.5cm} & \proj(X) = \proj(M).
+    \min_{X\in  \mathbb{R}^{n_1 \times n_2}}\hspace{0.5cm} & \nnorm{X} - \max_{\substack{AA^T = I, \\ BB^T = I}} \tr(AXB^T), \\
+    \text{pri pogoju} \hspace{0.5cm}                       & \proj(X) = \proj(M).
 \end{align*}
 
 Sedaj lahko opišemo idejo algoritma TNNM:
 \begin{enumerate}
     \item Izračunamo $X^{(0)} = \proj(M)$.
     \item Za $k=0,1,2,\ldots$ ponavljamo iteracijo:
-    \begin{enumerate}
-        \item Izračunamo SVD razcep
-            $X^{(k)} = U^{(k)} \Sigma^{(k)} (V^{(k)})^T$.
-        \item $A^{(k)}$ definiramo kot prvih    $r$ stolpcev matrike $U^{(k)}$,   
-            $B^{(k)}$ pa kot prvih    
-            $r$ stolpcev matrike $V^{(k)}$.
-        \item $X^{(k+1)}$ je enak rešitvi 
-            optimizacijskega problema 
-    \begin{align}
-    \label{2507-0900}
-    \begin{split}
-    \min_{X\in  \mathbb{R}^{n_1 \times n_2}} \hspace{0.5cm}         & \nnorm{X} - \tr(A^{(k)}X(B^{(k)})^T), \\
-    \text{pri pogoju} \hspace{0.5cm} & \proj(X) = \proj(M).
-    \end{split}
-    \end{align}
-    \end{enumerate}
+          \begin{enumerate}
+              \item Izračunamo SVD razcep
+                    $X^{(k)} = U^{(k)} \Sigma^{(k)} (V^{(k)})^T$.
+              \item $A^{(k)}$ definiramo kot prvih    $r$ stolpcev matrike $U^{(k)}$,
+                    $B^{(k)}$ pa kot prvih
+                    $r$ stolpcev matrike $V^{(k)}$.
+              \item $X^{(k+1)}$ je enak rešitvi
+                    optimizacijskega problema
+                    \begin{align}
+                        \label{2507-0900}
+                        \begin{split}
+                            \min_{X\in  \mathbb{R}^{n_1 \times n_2}} \hspace{0.5cm}         & \nnorm{X} - \tr(A^{(k)}X(B^{(k)})^T), \\
+                            \text{pri pogoju} \hspace{0.5cm} & \proj(X) = \proj(M).
+                        \end{split}
+                    \end{align}
+          \end{enumerate}
 \end{enumerate}
-Z nadaljnjim preoblikovanjem problema 
-\eqref{2507-0900} v ekvivalentnega 
+Z nadaljnjim preoblikovanjem problema
+\eqref{2507-0900} v ekvivalentnega
 \todo{iz kje pride izracun $Y^{i+1}$}
 \begin{align}
-\label{1307-1527} 
-\begin{split}
-    \min_{X\in  \mathbb{R}^{n_1 \times n_2}}  \hspace{0.5cm}         & \nnorm{X} - \tr(A^{(k)}W(B^{(k)})^T),  \\
-    \text{pri pogojih} \hspace{0.5cm} & W=X, \hspace{0.2cm} \proj(W) = \proj(M),
-\end{split}
+    \label{1307-1527}
+    \begin{split}
+        \min_{X\in  \mathbb{R}^{n_1 \times n_2}}  \hspace{0.5cm}         & \nnorm{X} - \tr(A^{(k)}W(B^{(k)})^T),  \\
+        \text{pri pogojih} \hspace{0.5cm} & W=X, \hspace{0.2cm} \proj(W) = \proj(M),
+    \end{split}
 \end{align}
 lahko za reševanje uporabimo \textbf{algoritem ADMM} \cite{TNNM-HZYLH12}.
 
-Gre za reševanje problema vezanih ekstremov, ki ga lahko zapišemo s pomočjo Lagrangeove funkcije, pri čemer algoritem ADMM doda še 
-člen, pomnožen z \textit{regularizacijskim parametrom} $\beta$. 
+Gre za reševanje problema vezanih ekstremov, ki ga lahko zapišemo s pomočjo Lagrangeove funkcije, pri čemer algoritem ADMM doda še
+člen, pomnožen z \textit{regularizacijskim parametrom} $\beta$.
 \[
     \mathcal{L}(X, Y, W, \beta) = \nnorm{X} - \tr(A W B^T) + \frac{\beta}{2} \fnorm{X - W}^2 + \tr(Y^T(X-W)).
 \]
-\CG{Matriki $A$ in $B$ sta v okviru algoritma ADMM konstantni. Ti na začetku nastavimo na vrednost $A^{(k)}$ in $B^{(k)}$ prejšnjega iterativnega algoritma.} Opazimo lahko, da funkcija upošteva zgolj pogoj $X = W$. Videli bomo, da algoritem pogoj $\proj(X) = \proj(M)$ definira posredno, s popravljanjem znanih vrednosti (korak \eqref{2906-1248} spodaj).%\todo{ali lahko citiram naprej}
+Matriki $A$ in $B$ sta v okviru algoritma ADMM konstantni. Ti na začetku nastavimo na vrednost $A^{(k)}$ in $B^{(k)}$ iz prejšnje iteracije. Opazimo lahko, da funkcija upošteva zgolj pogoj $X = W$. Videli bomo, da algoritem pogoj $\proj(X) = \proj(M)$ definira posredno, s popravljanjem znanih vrednosti (korak \eqref{2906-1248} spodaj).%\todo{ali lahko citiram naprej}
 
 Matriko $X^{(k+1)}$ definiramo kot
 \[
-    X^{(k+1)} = \arg \min_X \mathcal{L}(X, Y^{(k)}, W^{(k)}, \beta)
+    X^{(k+1)} = \argmin_X \mathcal{L}(X, Y^{(k)}, W^{(k)}, \beta)
 \]
 Z ignoriranjem konstantnih členov, pa lahko zapišemo
 \begin{align*}
-    X^{(k+1)} & = \arg \min_X \hspace{0.2cm} \nnorm{X} + \frac{\beta}{2}\trOp{X-W^{(k)}}{X-W^{(k)}} + \frac{\beta}{2}\trOp{\frac{2}{\beta}Y}{X}       \\
-            & = \arg \min_X \hspace{0.2cm} \nnorm{X} + \frac{\beta}{2}\tr\Big(X^TX - X^TW^{(k)} -\\
-            &\hspace{2cm} (W^{(k)})^TX + (W^{(k)})^TW^{(k)} + \frac{2}{\beta}(Y^{(k)})^TX \Big).
+    X^{(k+1)} & = \argmin_X \Big( \nnorm{X} + \frac{\beta}{2}\trOp{X-W^{(k)}}{X-W^{(k)}} + \frac{\beta}{2}\trOp{\frac{2}{\beta}Y}{X} \Big) \\
+              & = \argmin_X \Big( \nnorm{X} + \frac{\beta}{2}\tr\Big(X^TX - X^TW^{(k)} -                                                   \\
+              & \hspace{2cm} (W^{(k)})^TX + (W^{(k)})^TW^{(k)} + \frac{2}{\beta}(Y^{(k)})^TX \Big)\Big).
 \end{align*}
-Z namenom faktorizacije dodamo konstantne člene 
-\[-(W^{(k)})^T\frac{1}{\beta}(Y^{(k)}) + (\frac{1}{\beta}(Y^{(k)}))^T(-W^{(k)} + \frac{1}{\beta}(Y^{(k)}))\] 
+Z namenom faktorizacije dodamo konstantne člene
+\[-(W^{(k)})^T\frac{1}{\beta}(Y^{(k)}) + (\frac{1}{\beta}(Y^{(k)}))^T(-W^{(k)} + \frac{1}{\beta}(Y^{(k)}))\]
 in dobimo
 \begin{align*}
-     & \arg \min_X \hspace{0.2cm} \nnorm{X} + \frac{\beta}{2}\tr\Big(X^T\big(X - W^{(k)} + \frac{1}{\beta}Y^{(k)}\big) - (W^{(k)})^T \big(X - W^{(k)} + \frac{1}{\beta}Y^{(k)}\big) \\
-     &\hspace{2cm} +\frac{1}{\beta}\big(Y^{(k)})^T(X - W^{(k)} + \frac{1}{\beta}Y^{(k)}\big)\Big)                                                               \\
-     & = \arg \min_X \hspace{0.2cm} \nnorm{X} + \frac{\beta}{2} \fnorm{X-W^{(k)} + \frac{1}{\beta}Y^{(k)}}^2                                       \\
-     & = \arg \min_X \hspace{0.2cm} \frac{1}{\beta}\nnorm{X} +  \frac{1}{2}\fnorm{X-(W^{(k)} - \frac{1}{\beta}Y^{(k)})}^2
+     & \argmin_X \Big( \nnorm{X} + \frac{\beta}{2}\tr\Big(X^T\big(X - W^{(k)} + \frac{1}{\beta}Y^{(k)}\big) - (W^{(k)})^T \big(X - W^{(k)} + \frac{1}{\beta}Y^{(k)}\big) \\
+     & \hspace{2cm} +\frac{1}{\beta}\big(Y^{(k)})^T(X - W^{(k)} + \frac{1}{\beta}Y^{(k)}\big)\Big) \Big)                                                                 \\
+     & = \argmin_X \Big( \nnorm{X} + \frac{\beta}{2} \fnorm{X-W^{(k)} + \frac{1}{\beta}Y^{(k)}}^2 \Big)                                                                        \\
+     & = \argmin_X \Big( \frac{1}{\beta}\nnorm{X} +  \frac{1}{2}\fnorm{X-(W^{(k)} - \frac{1}{\beta}Y^{(k)})}^2\Big)  
 \end{align*}
-Po izreku \ref{1907-2240} \CR{uporabljenem za $X=...$, $Y=...$. $\tau=...$} pa sledi
+Po izreku \ref{1907-2240} \CG{uporabljenem za $X=X$, $Y=W - \frac{1}{\beta}Y$, $\tau=\frac{1}{\beta}$} pa sledi
 \[
     X^{(k+1)} = \shrink_\frac{1}{\beta}(W^{(k)} - \frac{1}{\beta} Y^{(k)}).
 \]
 Matriko $W^{(k+1)}$ podobno izračunamo kot
 \begin{align*}
-    W^{(k+1)} & = \arg \min_{W} \mathcal{L}(X^{(k+1)}, Y^{(k)}, W, \beta)                                       \\
-            & = \arg \min_W \frac{\beta}{2} \fnorm{W - (X^{(k+1)} + \frac{1}{\beta}(A^T B + Y^{(k)})) }^2
+    W^{(k+1)} & = \argmin_{W} \mathcal{L}(X^{(k+1)}, Y^{(k)}, W, \beta)                                   \\
+              & = \argmin_W \frac{\beta}{2} \fnorm{W - (X^{(k+1)} + \frac{1}{\beta}(A^T B + Y^{(k)})) }^2
 \end{align*}
-\CG{Očitno je}
+Očitno je
 \[
     W^{(k+1)} = X^{(k+1)} + \frac{1}{\beta}(A^T B + Y^{(k)})
 \]

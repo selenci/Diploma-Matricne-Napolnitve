@@ -11,7 +11,7 @@ V razdelku \ref{1307-2250} primerjamo algoritme na problemu rekonstrukcije zašu
 Zgoščen šum je v našem primeru dodano besedilo na sliki, ki ga želimo odstraniti. Razdelek \ref{1307-2255} pa primerja algoritme z drugačno metodo rekonstrukcije slik, ki neznane piksle določa prek reševanja Poissonove parcialne diferencialne enačbe. Razdelek \ref{2107-1444} strne ugotovitve, predstavljene v ostalih razdelkih.
 
 
-Vse slike si je mogoče v boljši kakovosti ogledati na povezavi \url{https://tinyurl.com/yb7cjdv7}.
+Vse slike si je mogoče v boljši kakovosti ogledati na povezavi \url{https://cutt.ly/matricne-napolnitve}.
 
 \section{Velika črno-bela slika} \label{1307-2250}
 Algoritme najprej testiramo na veliki, črno-beli sliki, velikosti $1000\times1000$ pikslov. Velika slika je bila izbrana, ker omogoča lažje vizualno ocenjevanje delovanja in pravilnosti algoritmov.
@@ -30,13 +30,13 @@ Algoritem NNM smo med rezultati izpustili, saj je zaradi velikega števila matri
     \centering
     \begin{tabular}{|c|c|c|c|c|}
         \hline
-        \diagbox{\CG{OZP}}{Algoritem}
+        \diagbox{OZP}{Algoritem}
              & SVT                & TNNM               & LMAFIT             & ASD                  \\ \hline
         35\% & $4.69 \times 10^4$ & $7.70 \times 10^3$ & $7.50 \times 10^3$ & $3.9743 \times 10^7$ \\ \hline
         45\% & $3.15 \times 10^4$ & $5.30 \times 10^3$ & $5.87 \times 10^3$ & $6.0910 \times 10^7$ \\ \hline
         60\% & $1.25 \times 10^4$ & $3.58 \times 10^3$ & $4.20 \times 10^3$ & -                    \\ \hline
     \end{tabular}
-    \caption{Napake algoritmov izračunane v Frobeniusovi normi.}
+    \caption{Napake algoritmov izračunane v Frobeniusovi normi. \CG{Kratica OZP stoji za odstotek znanih podatkov}}
 \end{table}
 \begin{figure}[!ht]
     \centering
@@ -182,10 +182,10 @@ Vidimo, da je algoritem tako hitrejši, kot bolj točen. Vendar je pri primerjav
 Medtem ko so algoritmi SVT, TNNM in LMaFit sliko rekonstruirali točno, je algoritem za reševanje Poissonove enačbe, kot pričakovano, tu imel več težav. Prav tako je algoritem za reševanje v večini primerov potreboval več časa.
 
 \CG{\section{Povzetek ugotovitev}} \label{2107-1444}
-V tem poglavju smo testirali algoritme za reševanje problema matričnih napolnitev, ter  odgovarjali na različna vprašanja o rekonstrukciji slike. Najprej smo algoritme testirali na veliki sliki, ter ugotovili, da algoritem ASD na zašumljenih slikah ne deluje najbolje.  
+Tekom poglavja smo predstavili in interpretirali rezultate številnih testov algoritmov ter odgovarjali na različna vprašanja o rekonstrukciji slike. Postopoma smo predstavljali ugotovitve, ki jih v tem razdelku povzamemo.
 
-V razdelku \ref{1307-2251} smo testirali razliko v rekonstrukciji preproste in kompleksne slike. Ugotovili smo, da je rekonstrukcija preprostega motiva pri vseh algoritmih točnejša. Videli smo tudi, da je pri algoritmu SVT pomembna izbira praga, saj je ob istem pragu preprost motiv potreboval veliko več časa do konvergence. V tem razdelku smo opisali tudi, kako odstotek znanih podatkov vpliva na čas izvajanja. Videli smo, da algoritem TNNM konvergira hitreje, kadar ima več poznanih podatkov, medtem ko se algoritem SVT upočasni. Omenili smo tudi, da je algoritmu LMaFit težko določiti pravilo o času izvajanja. Ta ugotovitev je pomembna, kadar izbiramo algoritem za rekonstrukcijo.
+Najprej smo algoritme testirali na veliki sliki, ter ugotovili, da algoritem ASD na zašumljenih slikah ne deluje najbolje. Testiranju tega algoritma smo se v nadaljnjih razdelkih zato izogibali. V razdelku \ref{1307-2251} smo testirali razliko v rekonstrukciji preproste in kompleksne slike. Ugotovili smo, da je rekonstrukcija preprostega motiva pri vseh algoritmih točnejša. Videli smo tudi, da je pri algoritmu SVT pomembna izbira praga, saj je ob istem pragu preprost motiv potreboval veliko več časa do konvergence. V tem razdelku smo opisali tudi, kako odstotek znanih podatkov vpliva na čas izvajanja. Videli smo, da algoritem TNNM konvergira hitreje, kadar ima več poznanih podatkov, medtem ko se algoritem SVT upočasni. Omenili smo tudi, da je algoritmu LMaFit težko določiti pravilo o času izvajanja. Ta ugotovitev je pomembna, kadar izbiramo algoritem za rekonstrukcijo.
 
-V razdelku \ref{1307-2252} smo preverili, kako rekonstruirati barvne slike. Ugotovili smo, da je zaradi časa izvajanja bolje ločiti neodvisne podatke in jih rekonstruirati posebej. Preverili smo tudi pomembnost parametra povezanega z rangom algoritmov (razdelek \ref{1307-2253}). Ta parameter uporabljata algoritem TNNM in LMaFit. Videli smo, da je za dobre rezultate dobra izbira parametra ključna. Prednost algoritma SVT je torej tudi, da takega parametra ne potrebuje. Če o rangu nezašumljene matrike ne vemo ničesar, je torej smiselno razmisliti o uporabi tega algoritma. V okviru razdelka \ref{1307-2254} smo preizkusili še drugačno vrsto šuma, saj smo rekonstruirali besedilo. Videli smo, da kljub velikem številu znanih podatkov, rezultati niso bili preveč dobri, saj je del besedila po rekonstrukciji še vedno viden. S tem smo pokazali, da vrsta šuma vpliva na samo rekonstrukcijo.
+V razdelku \ref{1307-2252} smo preverili, kako rekonstruirati barvne slike. Ugotovili smo, da je zaradi časa izvajanja bolje ločiti neodvisne podatke (različne barvne kanale) in jih rekonstruirati posebej. Preverili smo tudi pomembnost parametra, povezanega z rangom algoritmov (razdelek \ref{1307-2253}). Ta parameter uporabljata algoritem TNNM in LMaFit. Videli smo, da je za dobre rezultate dobra izbira parametra ključna. Prednost algoritma SVT je torej tudi, da takega parametra ne potrebuje. Če o rangu nezašumljene matrike ne vemo ničesar, je torej smiselno razmisliti o uporabi tega algoritma. V okviru razdelka \ref{1307-2254} smo preizkusili še drugačno vrsto šuma, saj smo iz slike odstranjevali besedilo. Videli smo, da kljub velikem številu znanih podatkov, rezultati niso bili preveč dobri, saj je del besedila po rekonstrukciji še vedno viden. S tem smo pokazali, da tudi sama vrsta šuma vpliva na rekonstrukcijo.
 
 Poglavje smo zaključili z razdelkom \ref{1307-2255}, kjer smo primerjali rekonstrukcijo naših algoritmov z algoritmom za reševanje Poissonovih enačb. Opazili smo, da je ta metoda boljša, vendar pokazali tudi primer, kjer zanašanje na lokalno podobnost vrne slab rezultat. Rekonstrukcija slik je bila v okviru diplomskega dela izbrana, ker smo lahko rezultate ocenili tako numerično kot vizualno. Seveda pa so opisani algoritmi bolj uporabni na drugih področjih, npr. priporočilnih sistemih, kjer so lahko podatki v sosednjih vrsticah povsem neodvisni.  
