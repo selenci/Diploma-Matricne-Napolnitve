@@ -40,21 +40,6 @@ numpages = {5}
   urldate = {2023-03-12}
 }
 
-@book{D97,
-  added-at = {2016-10-21T03:01:06.000+0200},
-  author = {Demmel, James W.},
-  biburl = {https://www.bibsonomy.org/bibtex/2e173b16b7e9211fdff422d592920739c/ytyoun},
-  doi = {10.1137/1.9781611971446},
-  interhash = {14289df57fa476cd6c2092037ceeee57},
-  intrahash = {e173b16b7e9211fdff422d592920739c},
-  keywords = {courant-fischer eigenvalues linear.algebra matrix numerical.analysis textbook},
-  month = jan,
-  publisher = {SIAM},
-  timestamp = {2016-10-21T03:01:06.000+0200},
-  title = {Applied Numerical Linear Algebra},
-  year = 1997
-}
-
 @article{SeDuMi,
   author = {Sturm, Jos F.},
   title = {Using SeDuMi 1.02, A {MATLAB} toolbox for optimization over symmetric cones},
@@ -68,12 +53,16 @@ numpages = {5}
 }
 
 @misc{CCS,
-      title={A Singular Value Thresholding Algorithm for Matrix Completion}, 
-      author={Jian-Feng Cai and Emmanuel J. Candes and Zuowei Shen},
-      year={2008},
-      eprint={0810.3286},
-      archivePrefix={arXiv},
-      primaryClass={math.OC}
+author = {Cai, Jian-Feng and Cand\`{e}s, Emmanuel J. and Shen, Zuowei},
+title = {A Singular Value Thresholding Algorithm for Matrix Completion},
+journal = {SIAM Journal on Optimization},
+volume = {20},
+number = {4},
+pages = {1956-1982},
+year = {2010},
+doi = {10.1137/080738970},
+URL = {https://doi.org/10.1137/080738970},
+eprint = {https://doi.org/10.1137/080738970}
 }
 
 @ARTICLE{TNNM-HZYLH12,
@@ -174,7 +163,7 @@ doi = {10.1007/s12532-012-0044-1}
   publisher = {SIAM},
   timestamp = {2016-10-21T03:01:06.000+0200},
   title = {Applied Numerical Linear Algebra},
-  year = 1997
+  year = 1997,
 }
 
 @phdthesis{ERZAR_2023, 
@@ -201,4 +190,121 @@ abstract={We consider a problem of considerable practical interest: the recovery
 issn={1615-3383},
 doi={10.1007/s10208-009-9045-5},
 url={https://doi.org/10.1007/s10208-009-9045-5}
+}
+
+@article{moorePenroseLeastSquares,
+  title={The moore-penrose inverse and least squares},
+  author={MacAusland, Ross},
+  journal={Math 420: Advanced Topics in Linear Algebra},
+  pages={1--10},
+  year={2014},
+  publisher={Univ. Puget Sound}
+}
+
+@inproceedings{reccData,
+     title={The Network Data Repository with Interactive Graph Analytics and Visualization},
+     author={Ryan A. Rossi and Nesreen K. Ahmed},
+     booktitle={AAAI},
+     url={https://networkrepository.com},
+     year={2015}
+}
+
+@book{boyd2004convex,
+  title={Convex optimization},
+  author={Boyd, Stephen P and Vandenberghe, Lieven},
+  year={2004},
+  publisher={Cambridge university press}
+}
+
+
+@book{matrixAnalysis,
+  added-at = {2014-05-06T16:17:59.000+0200},
+  address = {Cambridge; New York},
+  author = {Horn, Roger A. and Johnson, Charles R.},
+  biburl = {https://www.bibsonomy.org/bibtex/2877667023e20122bfdb0760d2ca5788c/ytyoun},
+  edition = {2nd},
+  interhash = {42e630e87524c0309673c0fd71d9c610},
+  intrahash = {877667023e20122bfdb0760d2ca5788c},
+  isbn = {9780521839402},
+  keywords = {courant-fischer eigenvalues linear.algebra matrix textbook},
+  publisher = {Cambridge University Press},
+  refid = {849499908},
+  timestamp = {2016-10-20T13:34:42.000+0200},
+  title = {Matrix Analysis},
+  year = 2013
+}
+
+@book{Woerdeman,
+ ISBN = {9780691128894},
+ abstract = {Intensive research in matrix completions, moments, and sums of Hermitian squares has yielded a multitude of results in recent decades. This book provides a comprehensive account of this quickly developing area of mathematics and applications and gives complete proofs of many recently solved problems. With MATLAB codes and more than 200 exercises, the book is ideal for a special topics course for graduate or advanced undergraduate students in mathematics or engineering, and will also be a valuable resource for researchers.Often driven by questions from signal processing, control theory, and quantum information, the subject of this book has inspired mathematicians from many subdisciplines, including linear algebra, operator theory, measure theory, and complex function theory. In turn, the applications are being pursued by researchers in areas such as electrical engineering, computer science, and physics.The book is self-contained, has many examples, and for the most part requires only a basic background in undergraduate mathematics, primarily linear algebra and some complex analysis. The book also includes an extensive discussion of the literature, with close to 600 references from books and journals from a wide variety of disciplines.},
+ author = {Mihály Bakonyi and Hugo J. Woerdeman},
+ publisher = {Princeton University Press},
+ title = {Matrix Completions, Moments, and Sums of Hermitian Squares},
+ year = {2011}
+}
+
+@article{Dancis,
+author = {Cohen, Nir and Dancis, Jerome},
+title = {Inertias of Block Band Matrix Completions},
+journal = {SIAM Journal on Matrix Analysis and Applications},
+volume = {19},
+number = {3},
+pages = {583-612},
+year = {1998},
+doi = {10.1137/S0895479895296471},
+URL = {https://doi.org/10.1137/S0895479895296471},
+abstract = { This paper classifies the ranks and inertias of hermitian completion for the partially specified 3 x 3 block band hermitian matrix (also known as a "bordered matrix") P=\pmatrix{A\&B\&?\cr B^*\&C\&D\cr ?\&D^*\&E}. The full set of completion inertias is described in terms of seven linear inequalities involving inertias and ranks of specified submatrices. The minimal completion rank for P is computed.We study the completion inertias of partially specified hermitian block band matrices, using a block generalization of the Dym--Gohberg algorithm. At each inductive step, we use our classification of the possible inertias for hermitian completions of bordered matrices. We show that when all the maximal specified submatrices are invertible, any inertia consistent with Poincaré's inequalities is obtainable. These results generalize the nonblock band results of Dancis [SIAM J. Matrix Anal. Appl., 14 (1993), pp. 813--829]. All our results remain valid for real symmetric completions. }
+}
+
+@article{Barret,
+title = {Determinantal formulae for matrix completions associated with chordal graphs},
+journal = {Linear Algebra and its Applications},
+volume = {121},
+pages = {265-289},
+year = {1989},
+issn = {0024-3795},
+doi = {https://doi.org/10.1016/0024-3795(89)90706-4},
+url = {https://www.sciencedirect.com/science/article/pii/0024379589907064},
+author = {Wayne W. Barrett and Charles R. Johnson and Michael Lundquist},
+abstract = {Let A be a partial positive definite Hermitian matrix, and let G(A) be the undirected graph of the specified off-diagonal entries of A. When G(A) is a chordal graph, we present an explicit determinantal formula for the (unique) determinant-maximizing positive definite completion (maximum-entropy completion) of A. In order to do this, we first give a characterization of a chordal graph in terms of the existence of a proper spanning tree T of the intersection graph of its set of maximal cliques. The formula for the maximum determinant is then a quotient of products of specified principal minors of A, in which each minor in the numerator corresponds to a maximal clique of G(A) while each minor in the denominator corresponds to the intersection of two maximal cliques associated with an edge of T. We next show that the denominator terms can be identified graph-theoretically with the minimal vertex separators of G(A), and that these terms are independent of the particular proper spanning tree T. Then an alternative formula is given for the maximum determinant as an “inclusion-exclusion”-like ratio of principal minors associated with the maximal cliques of G(A). Finally, we show that the entries of the determinant-maximizing completion may be calculated by solving a sequence of simple one-variable maximization problems.}
+}
+
+@ARTICLE{admira,
+  author={Lee, Kiryung and Bresler, Yoram},
+  journal={IEEE Transactions on Information Theory}, 
+  title={ADMiRA: Atomic Decomposition for Minimum Rank Approximation}, 
+  year={2010},
+  volume={56},
+  number={9},
+  pages={4402-4416},
+  doi={10.1109/TIT.2010.2054251}}
+
+@article{Riemannian,
+  title={Fixed-rank matrix factorizations and Riemannian low-rank optimization},
+  author={Mishra, Bamdev and Meyer, Gilles and Bonnabel, Silvere and Sepulchre, Rodolphe},
+  journal={Computational Statistics},
+  volume={29},
+  pages={591--621},
+  year={2014},
+  publisher={Springer}
+}
+
+@INPROCEEDINGS{SETalgo,
+  author={Dai, Wei and Milenkovic, Olgica},
+  booktitle={2010 IEEE International Conference on Acoustics, Speech and Signal Processing}, 
+  title={SET: An algorithm for consistent matrix completion}, 
+  year={2010},
+  volume={},
+  number={},
+  pages={3646-3649},
+  doi={10.1109/ICASSP.2010.5495899}}
+
+@article{admmForNNM,
+  title={Linearized augmented Lagrangian and alternating direction methods for nuclear norm minimization},
+  author={Yang, Junfeng and Yuan, Xiaoming},
+  journal={Mathematics of computation},
+  volume={82},
+  number={281},
+  pages={301--329},
+  year={2013}
 }

@@ -1,6 +1,6 @@
-\section{Izmenjajoč gradientni spust}
+\section{Izmenjujoč gradientni spust} \label{2707-1337}
 Računanje SVD razcepa je zahtevna operacija, saj ima časovno zahtevnost
-$O(n^3)$, kar je lahko za veliko matrike zelo počasno. Zato je bilo izpeljanih nekaj algoritmov, ki za svoje delovanje ne potrebujejo SVD-ja. \textbf{Algoritem izmenjajočega gradientnega spusta (ASD)} \cite{AST-TK15} 
+$O(n^3)$, kar je lahko za veliko matrike zelo počasno. Zato je bilo izpeljanih nekaj algoritmov, ki za svoje delovanje ne potrebujejo SVD-ja. \textbf{Algoritem izmenjujočega gradientnega spusta (ASD)} \cite{AST-TK15} 
 temelji na izračunu gradienta in premiku
 v smeri tega za nek korak. Ideja algoritma je poiskati matriki $X \in \mathbb{R}^{n_1 \times r}$ ter $Y \in \mathbb{R}^{r \times n_2}$, tako da velja $\proj(M) = \proj(XY)$. Tudi tu potrebujemo informacijo o rangu matrike, ki jo rekonstruiramo. Ker imata $X$ in $Y$ rang največ $r$, tudi njun produkt $XY$ ne bo imel ranga večjega od $r$. 
 
@@ -19,24 +19,24 @@ Algoritem problem minimizacije razdeli na dva optimizacijska podproblema, ki ju 
 
 Za uporabo algoritma ASD potrebujemo gradienta funkcije $f(X,Y) = \frac{1}{2}\, \fnorm{\proj(M) - \proj(XY)}^2$ po obeh spremenljivkah, ki ju izračunamo za vsak element posebej.
 Za reševanje \eqref{2507-0927} so spremenljivke elementi matrike $X$,
-za reševanje \eqref{2507-0928} pa elementi matrike $Y$. Zaradi enostavnosti definiramo dve pomožni funkciji. Funkcija $f_Y(X)$ je enaka funkciji $f(X, Y)$, le da vrednost $Y$ jemljemo kot konstanto. Simetrično definiramo $f_X(Y)$, kjer jemljemo vrednost $X$ funkcije $f(X, Y)$ za konstantno. \CG{Sedaj preprosto poiščemo oba gradienta pomožnih funkcij, označena z $\nabla f_Y(X)$ in $\nabla f_X(Y)$ ter najboljša premika po gradientih, označena s $t_x$ in $t_y$. Sam algoritem se potem preprosto premika po gradientih za določen premik. Koraka algoritma bomo v vsaki iteraciji definirali kot
+za reševanje \eqref{2507-0928} pa elementi matrike $Y$. Zaradi enostavnosti definiramo dve pomožni funkciji. Funkcija $f_Y(X)$ je enaka funkciji $f(X, Y)$, le da vrednost $Y$ jemljemo kot konstanto. Simetrično definiramo $f_X(Y)$, kjer jemljemo vrednost $X$ funkcije $f(X, Y)$ za konstantno. Sedaj preprosto poiščemo oba gradienta pomožnih funkcij, označena z $\nabla f_Y(X)$ in $\nabla f_X(Y)$ ter najboljša premika po gradientih, označena s $t_x$ in $t_y$. Sam algoritem se potem preprosto premika po gradientih za določen premik. Koraka algoritma bomo v vsaki iteraciji definirali kot
 \begin{align*}
     X^{(k+1)} = X^{(k)} - t_{x^{(k)}} \nabla f_{Y^{(k)}}(X^{(k)}) \numberthis \label{2607-1726},\\
     Y^{(k+1)} = Y^{(k)} - t_{y^{(k)}} \nabla f_{X^{(k+1)}}(Y^{(k)}).
-\end{align*}}
+\end{align*}
 
 \begin{theorem}
 Velja
 \begin{align*}
-    \nabla f_Y(X) &= -(\proj(M) - \proj(XY))Y^T\\
-    \nabla f_X(Y) &= -X^T (\proj(M) - \proj(XY))\\
-    t_x &= \frac{\fnorm{\nabla f_Y(X)}^2}{\fnorm{\proj(\nabla f_Y(X)Y)}^2}  \\
-    t_y &= \frac{\fnorm{\nabla f_X(Y)}^2}{\fnorm{\proj(X \nabla f_X(Y))}^2}  
+    \nabla f_Y(X) &= -(\proj(M) - \proj(XY))Y^T,\\
+    \nabla f_X(Y) &= -X^T (\proj(M) - \proj(XY)),\\
+    t_x &= \frac{\fnorm{\nabla f_Y(X)}^2}{\fnorm{\proj(\nabla f_Y(X)Y)}^2},  \\
+    t_y &= \frac{\fnorm{\nabla f_X(Y)}^2}{\fnorm{\proj(X \nabla f_X(Y))}^2}. 
 \end{align*}
 \end{theorem}
 
 \begin{proof}
-\CG{Pri tem dokazu} nam bo prav prišla \CR{definicija} $\delta_{i, j}$, definirana kot
+\CG{Pri tem dokazu} nam bo prav prišla \CG{Diracova $\Omega$ -} $\delta_{i, j}$, definirana kot
 \[
     \delta_{i,j} = 
     \left\{
@@ -69,10 +69,10 @@ Cilj je pokazati, da je premik po gradientu s korakom $t_x$ najboljši.
 \]
 Ker želimo, da bodo znane vrednosti produkta $X^{(k+1)}Y^{(k)}$ kar se da podobne znanim vrednostim matrike $M$, nastavimo $t_x$ kot 
 \begin{align*}
-    t_x &= \argmin_t g(t)
+    t_x &= \argmin_t g(t),
 \end{align*} kjer je
 \begin{align*}
-    g(t) &= \frac{1}{2} \fnorm{\proj(M) - \proj((X - t\nabla f_Y(X))Y)}^2
+    g(t) &= \frac{1}{2} \fnorm{\proj(M) - \proj((X - t\nabla f_Y(X))Y)}^2.
 \end{align*}
 Kot v \cite{AST-TK15} se izkaže, da velja
 \[

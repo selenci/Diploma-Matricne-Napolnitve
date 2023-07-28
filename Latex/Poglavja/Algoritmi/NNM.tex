@@ -1,6 +1,6 @@
 \section{Algoritem minimizacije nuklearne norme} \label{1707-1755}
 Ker je minimizacija ranga matrike NP-poln problem \cite{NNM-PHD}, algoritmi matričnih napolnitev temeljijo na metodah, ki rešujejo sorodne, hkrati pa bistveno enostavnejše probleme. \textbf{Algoritem minimizacije nuklearne norme (NNM)} uporabi idejo, da je rang matrike tesno povezan z njeno nuklearno normo.
-Izkaže se \cite{NNM-PHD}, da je nuklearna norma konveksna ovojnica funkcije ranga. \todo{poglej razliko convex hull in lower envelope} \textbf{Konveksna ovojnica funkcije} $f : \mathbb{R}^{n_1 \times n_2} \rightarrow \mathbb{R}$ je definirana kot 
+Izkaže se \cite{NNM-PHD}, da je nuklearna norma konveksna ovojnica funkcije ranga. \textbf{Konveksna ovojnica funkcije} $f : \mathbb{R}^{n_1 \times n_2} \rightarrow \mathbb{R}$ je definirana kot 
 \begin{align*}
     \tilde{f}(A) 
     &= \sup\{g(A) \mid g:\mathbb R^{n_1\times n_2}\to \mathbb R \text{ je konveksna funkcija in }\\ 
@@ -19,7 +19,7 @@ Naj bodo $C,A_1,\ldots,A_\ell \in \mathbb{R}^{n \times n}$ dane matrike in $b_1,
 \end{split}
 \end{align}
 
-Vrnimo se k našemu problemu. Naj bo $M \in \mathbb{R}^{n_1 \times n_2}$ zašumljena matrika (tj.\ matrika z nekaterimi neznanimi vhodi), $\Omega$ pa množica urejenih parov, ki predstavljajo mesta, kjer vrednosti matrike poznamo.
+Vrnimo se k našemu problemu. Naj bo $M \in \mathbb{R}^{n_1 \times n_2}$ hitrozašumljena matrika (tj.\ matrika z nekaterimi neznanimi vhodi), $\Omega$ pa množica urejenih parov, ki predstavljajo mesta, kjer vrednosti matrike poznamo.
 Problem minimizacije nuklearne norme lahko zapišemo kot
 \begin{align}
 \label{1007-1830}
@@ -29,7 +29,7 @@ Problem minimizacije nuklearne norme lahko zapišemo kot
                                       & \proj(X) = \proj(M),
 \end{split}
 \end{align}
-Hitro se da videti \cite{NNM-PHD}, da za matriko $X \in \mathbb{R}^{n_1 \times n_2}$ in $t \in \mathbb{R}$
+Hitro se da videti \cite[lema 2]{NNM-PHD}, da za matriko $X \in \mathbb{R}^{n_1 \times n_2}$ in $t \in \mathbb{R}$
 velja 
 \begin{align}
 \label{2407-1644}

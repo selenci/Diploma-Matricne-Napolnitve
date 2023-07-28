@@ -1,4 +1,4 @@
-\section{Algoritem praga singularnih vrednosti}
+\section{Algoritem praga singularnih vrednosti}\label{2807-1441}
 \textbf{Algoritem praga singularnih vrednosti (SVT)} \cite{CCS}, uporabi idejo, da imajo matrike z majhnim rangom nekaj velikih singularnih vrednosti, ostale pa 0 ali pa vsaj blizu 0. Ključna parametra v SVT-ju sta \textit{izbira premika} in \textit{izbira praga},  
 %Za svoje delovanje uvede dva nova pomembna koncepta, prvi je premik, drugi pa prag, potreben za uporabo operatorja $\shrink_\tau$ \eqref{1007-1959}. 
 algoritem pa temelji na iteraciji
@@ -42,9 +42,7 @@ Zaradi velikega števila parametrov pa ta pristop navadno ni izvedljiv, zato se 
         Y^{(k)} &= Y^{(k-1)} + \delta_k \proj(M - X^{(k)}) \label{1007-2019}
 \end{align}
 
-\CR{Še pri stilu trditve bo potrebno poenotiti označevanje, tako kot pri izrekih. To lahko na koncu dorečeva, saj se samo spremeni v preambuli.}
-
-Izkaže se, da je rešitev \eqref{1007-2018} enaka $\shrink_\tau(Y^{k-1})$. To spodaj dokažemo, še prej pa izpeljimo pomožen rezultat.
+Izkaže se, da je rešitev \eqref{1007-2018} enaka $\shrink_\tau(Y^{(k-1)})$. To spodaj dokažemo, še prej pa izpeljimo pomožen rezultat.
 
 \begin{trditev}
 Velja:
@@ -91,12 +89,12 @@ Funkcija $h(X) := \frac{1}{2} \fnorm{X-Y}^2 + \tau\nnorm{X} $ je konveksna funkc
 %\todo{ali je potrebno citirati} 
 Zaradi konveksnosti funkcije $f$ je 
 subgradient v vsaki točki iz domene dobro definiran.
-\CG{Tega smo definirali v razdelku \ref{2607-1502}.} \CR{
+Tega smo definirali v razdelku \ref{2607-1502}.
 Matrika $Z\in \mathbb R^{n_1\times n_2}$ je subgradient funkcije $f$ v točki 
 $X_0\in \mathbb R^{n_1\times n_2}$,
 če velja 
 \[\forall X\in \mathbb R^{n_1\times n_2}: 
-f(X) \geq  f(X_0) + \trOp{Z}{X - X_0}.\]}
+f(X) \geq  f(X_0) + \trOp{Z}{X - X_0}.\]
 Iz definicije subgradienta sledi, da bo imela funkcija $f$ minimum v točki $X'$ natanko tedaj,
 ko bo ničelna matrika $\mathbf{0}$ eden izmed subgradientov funkcije $f$ v točki $X_0$.
 \iffalse 
@@ -105,35 +103,34 @@ V minimumu funkcije $f$ bo eden od subgradientov iščemo minimum $X'$ funkcije 
 \fi 
 
 Izkaže se \cite{CCS}, da je množica subgradientov nuklearne norme v točki $X$ enaka
-\[
+\begin{equation}  \label{2807-0932}  
     \partial\nnorm{X} = \{UV^* + W: W \in \mathbb{R}^{n_1 \times n_2}, U^*W = \mathbf{0}, WV = \mathbf{0}, \norm{W}_2 \leq 1 \}.
-\]
+\end{equation}
 kjer $U \Sigma V^T$ predstavlja SVD razcep matrike $X$. S krajšim računom lahko preverimo, da za vsak par $(i,j)$ velja $\frac{\partial}{\partial X_{ij}}\fnorm{X-Y}^2 = 2(X_{ij} - Y_{ij})$. 
-Če te parcialne odvode zložimo v matriko, dobimo $2(X-Y)$. Od tod sledi, da je $X-Y$ eden od subgradientov funkcije $h_1(X):=\frac{1}{2}\fnorm{X-Y}^2$ v točki $X$.
+Če te parcialne odvode zložimo v matriko, dobimo $2(X-Y)$. Od tod sledi, da je $X-Y$ eden od subgradientov funkcije $h_1(X):=\frac{1}{2}\fnorm{X-Y}^2$ v točki $X$ \cite[razdel. 3.1.3]{boyd2004convex}.
 Iz teh dveh premislekov sledi, da bo $X'$ minimum $h$ natanko tedaj, ko velja 
-    $$\mathbf{0} \in X' - Y + \tau \partial\nnorm{X'}.$$ 
+\begin{equation} \label{2807-0940}
+    \mathbf{0} \in X' - Y + \tau \partial\nnorm{X'}.
+\end{equation}
 Trditev izreka bo sledila, če pokažemo, da velja $X' = \shrink_\tau(Y)$. Najprej razčlenimo SVD razcep matrike $Y$ kot 
 \[
     Y = U_0\Sigma_0V_0^T + U_1\Sigma_1V_1^T
 \]
 kjer $U_0, \Sigma_0$ in $V_0$ predstavljajo singularne vrednosti in pripadajoče singularne vektorje večje od $\tau$, $U_1, \Sigma_1$ in $V_1$ pa tiste manjše od $\tau$. Pokazati želimo, da velja 
 \[
-    X' = U_0(\Sigma_0 - \tau I)V_0^T.
+    X' = U_0(\Sigma_0 - \tau I)V_0^T,
 \] 
-%\todo{ali moram to pokazati}V nadaljevanju bomo videli, da je to samo alternativen zapis operatorja $\shrink_\tau(Y)$.
-%\CR{Tega nadaljevanja povsem ne razumem. Kako prideš do preoblikovanja, prek katerega iščeš matriko $W$, mi ni jasno.}
-Če zapis vstavimo v prejšnji podan pogoj, dobimo
-\begin{align*}
-    \mathbf{0} = X' - Y + \tau \partial \nnorm{X'},\\
-    Y- X' = \tau (U_0 V_0^T + W),
-\end{align*}
-primerna izbira za $W$ pa je $W= \tau^{-1} U_1 \Sigma_1 V_1^T$. 
-Res,
+\CG{kar je natanko enako $\shrink_\tau(Y)$. S pretvorbo \eqref{2807-0940} pridemo do zapisa}
+\begin{equation} \label{2807-0934}
+    Y- X' \in \tau \partial \nnorm{X'}.
+\end{equation}
+\CG{Sedaj iščemo tako matriko $W$, da bodo zanjo držali potrebni pogoji, podani v \eqref{2807-0932}, prav tako pa bo po \eqref{2807-0934} držalo $Y - X' = \tau (U_0V_0^T + W)$.} Primerna izbira za $W$  je $W= \tau^{-1} U_1 \Sigma_1 V_1^T$. 
+\CG{Zadošča, da pokažemo }
 \begin{align*}
     Y-X' &= U_0\Sigma_0V_0^T + U_1\Sigma_1V_1^T - U_0(\Sigma_0 - \tau I)V_0^T \\ 
-    &= U_0V_0^T(\Sigma_0 - \Sigma_0 + \tau I) + U_1\Sigma_1 V_1^T  \\
+    &= U_0(\Sigma_0 - \Sigma_0 + \tau I)V_0^T + U_1\Sigma_1 V_1^T  \\
     &= \tau U_0 V_0^T + U_1\Sigma_1 V_1^T
-\end{align*} \todo{$U_0(\Sigma_0 - \Sigma_0 + \tau I)V_0^T$}
+\end{align*}
 in 
 \begin{align*}
     \tau(U_0 V_0^T + W) &= \tau(U_0V_0^T + \tau^{-1} U_1 \Sigma_1 V_1^T)\\ 
@@ -141,7 +138,7 @@ in
 \end{align*}
 
 Sedaj je zgolj potrebno pokazati, da veljajo potrebne lastnosti matrike $W$.
-Po sami definiciji SVD vemo, da so vsi stolpci matrik U in V ortogonalni. Torej velja $U_0^TW = 0$ in $WV_0 = 0$. Ker pa ima matrika $\Sigma_1$ vse elemente manjše od $\tau$ velja tudi $\norm{W}_2 \leq 1$. $\norm{A}_2$ je namreč definirana kot največja singularna vrednost matrike $A$. S tem smo pokazali, da $Y - X' \in \tau \partial \nnorm{X'}$.
+Po sami definiciji SVD vemo, da so vsi stolpci matrik $U$ in $V$ ortogonalni. Torej velja $U_0^TW = 0$ in $WV_0 = 0$. Ker pa ima matrika $\Sigma_1$ vse elemente manjše od $\tau$ velja tudi $\norm{W}_2 \leq 1$. $\norm{A}_2$ je namreč definirana kot največja singularna vrednost matrike $A$. S tem smo pokazali, da $Y - X' \in \tau \partial \nnorm{X'}$.
 \end{proof}
 Z uporabo \eqref{1007-2018}, \eqref{1007-2019}
 in izreka \ref{1907-2240}

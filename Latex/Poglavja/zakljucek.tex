@@ -1,5 +1,22 @@
 \chapter{Zaključek}\label{1407-1013}
 
-Tekom diplomskega dela smo si ogledali 5 različnih algoritmov, za reševanje matričnih napolnitev. Komentirali smo njihovo delovanje ter se spoznali z definicijami, ki so pomembne in pogoste na tem področju. Nato smo pregledali in primerjali rezultate algoritmov, ter jih interpretirali, glede na delovanje algoritmov. Poskušali smo odgovoriti na vprašanja, ki so pri rekonstrukciji pomembna. Prav tako smo algoritme primerjali z drugim popularnim algoritmom za rekonstrukcijo, predstavili razliko v njegovem delovanju, ter podali primer, kjer algoritmi matričnih napolnitev vrnejo boljši rezultat.
+V tem diplomskem delu smo si ogledali pet različnih algoritmov - NNM, SVT, TNNM, LMaFit, ASD - za reševanje problema matričnih napolnitev, pri čemer vsak temelji na drugačnih matematičnih orodjih.
+NNM ključno uporablja orodja iz semidefinitne optimizacije, 
+SVT in TNNM se opreta na lastnosti singularnega razcepa matrik, 
+LMaFit in ASD pa uporabita reševanje minimizacijskega problema po metodi najmanjših kvadratov, pri čemer prvi rešuje eksaktno, drugi pa s pomočjo verzije gradientnega spusta.
+V poglavju \ref{1407-1011} smo podrobno predstavili matematično ozadje vsakega izmed algoritmov
+in dokazali nekatere pomembne trditve, na katerih temeljijo ideje teh algoritmov.
+Nato smo se v poglavju \ref{1407-1012}
+osredotočili na testiranje in primerjavo delovanja algoritmov na primeru rekonstrukcije slik. Zanimala nas je kakovost rekonstruiranih slik, čas za rekonstrukcijo in vpliv ter težavnost izbire parametrov, ki so vhodni podatki v posamezni algoritem.
+Analizirali smo več vidikov rekonstrukcije, pri čemer smo se osredotočali na vprašanja, ki so pri rekonstrukciji pomembna. Na koncu smo algoritme primerjali s precej bolj uveljavljenim algoritmom za rekonstrukcijo,
+ki temelji na reševanju Laplaceove diferencialne enačbe. 
 
-Ker je področje matričnih napolnitev široko, bi lahko delo diplomske naloge še razširili. Algoritmi TNNM, LMaFit in ASD imajo še druge, bolj napredne različice implementacije, ki bi jih lahko preizkusili. Seveda pa obstajajo tudi drugi algoritmi, katerih se v tem delu nismo dotaknili. V razdelku \ref{1307-2251} smo omenili, da bi lahko algoritem LMaFit razširili tako, da bi začeli z več pari matrik $X$ in $Y$. \CG{Prav tako pa bi bilo algoritme smiselno preizkusiti še na drugih podatkih, ki niso slike. Ker imajo slike lokalne podatke podobne, na kar pa se pri problemu matričnih napolnitvah ne moremo zanašati, obstajajo boljši algoritmi za rekonstrukcijo slik. Literatura pogosto testira algoritme na naključno generiranih podatkih.}
+Glavni prispevki tega diplomskega dela so 
+predstavitev matematičnega ozadja različnih algoritmov za reševanje problema matričnih napolnitev,
+implementacija teh algoritmov v programu Matlab in raziskava kakovosti ter časovne zahtevnosti njihovega delovanja na problemu rekonstrukcije zašumljenih slik.
+
+Področje matričnih napolnitev je zelo obsežno, zato bi v prihodnosti ugotovitve tega dela lahko razširili v veliko smeri.
+Delovanje algoritmov bi lahko preizkusili še na drugih področjih njihove uporabe, npr.\ rekonstrukcija zašumljenih signalov, \CG{kompresija}, priporočilni sistemi in problemi napolnitev matrik razdalje \cite{Survey-NKS19}.
+Ker so podatki v slikah lokalno podobni, česar problem matričnih napolnitev ne more upoštevati, pričakujemo, da bi algoritmi delovali še veliko bolje na tistih področjih uporabe, kjer lokalna podobnost podatkov ni pomembna (npr.\ priporočilni sistemi).
+Predstavljeni algoritmi TNNM, LMaFit in ASD imajo še alternativne verzije, ki posamezne korake algoritma izvedejo na alternativne načine. Lahko bi testirali delovanje teh alternativnih različic. Poleg tega obstajajo tudi številne izpeljanke teh algoritmov,
+pa tudi algoritmi, ki uporabljajo povsem drugačna matematična orodja. Vir \cite{Survey-NKS19} navaja še algoritme IRLS, ADMiRA in algoritem optimizacije na gladki Riemannovi mnogoterosti. Kot smo navedli v razdelku \ref{1307-2251}, bi lahko izpeljali tudi svoje različice algoritmov, kjer bi kakšen korak naredili na nov način. LMaFit bi zaradi velike odvisnosti od začetnega približka lahko razširili tako, da bi začeli z več naključno generiranimi začetnimi približki in po nekaj prvotnih korakih izmed njih izbrali tistega, ki bi najhitreje konvergiral. Zanimivo bi bilo klasificirati vhodne probleme glede na to, katerega od algoritmom bi bilo smiselno najprej uporabiti za napolnitev in kako nastaviti vhodne parametre. Seveda je nemogoče pričakovati, da bi bila taka klasifikacija eksaktna, kar kažejo tudi naša testiranja, kljub vsemu pa bi lahko generirali neko lestvico priporočil, ki bi uporabniku omogočala smiselno zaporedje izbiranja algoritmov in parametrov v njih.

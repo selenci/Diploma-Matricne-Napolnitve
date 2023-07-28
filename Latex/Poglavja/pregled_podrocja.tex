@@ -1,10 +1,19 @@
 \chapter{Pregled področja} \label{1407-1010}
-Področje matričnih napolnitev je trenutno zelo aktivno, s številnimi raziskovalci, ki na danem področju raziskujejo in iščejo nove načine reševanja problema. Algoritmi, ki problem rešujejo, so zaradi splošnosti problema zelo uporabni, kar pojasnjuje motivacijo po iskanju učinkovitih algoritmov.
 
-Eno prvih del, ki sam problem opisuje je \cite{MCPAS}. Delo opisuje sam problem in njegovo naravo, vendar se ne osredotoča zgolj na napolnjevanje s ciljem minimalnega ranga. Delo opisuje tudi ideje za napolnitve matrik tako, da je napolnjena matrika pozitivno semidefinitna, kot tudi maksimizacijo determinante napolnjene matrike.
+Raziskovanje problema matričnih napolnitev (PMN) je še vedno zelo aktivno, saj se pojavljajo številni članki z novimi pristopi in izboljšavami obstoječih metod.  Splošnost problema in številne uporabe pojasnjuje motivacijo po iskanju še učinkovitejših algoritmov od mnogih že obstoječih.
 
-Doktorska disertacija \cite{NNM-PHD} podaja pomembne opise pretvorbe problema minimizacije ranga v problem iz področja semidefinitnega programiranja. Ideje in dokazi tega dela služijo kot temelj za algoritme, ki so se razvili v zadnjih letih. 
+Eno prvih del, ki obravnava PMN, je \cite{MCPAS}. Delo opiše problem in njegovo naravo, poleg napolnjevanja s ciljem minimalnega ranga napolnitve pa se osredotoči še na druge zahteve za napolnitev. Obravnavane so tudi metode za napolnjevanje matrik s ciljem pozitivne semidefinitnosti napolnitve ali pa s ciljem maksimizacije determinante. Oba problema sta bila obsežno študirana v zadnjih dveh desetletjih prejšnjega 20.\ stoletja. \cite{Barret, Dancis,Woerdeman}
 
-Članki \cite{CCS,TNNM-HZYLH12,AST-TK15,LMaFit-WY12} opisujejo določene algoritme, ter predstavijo nadgradnjo del in idej pred njimi. Glavne ugotovitve člankov so v tem delu povzete v njihovih razdelkih poglavja \ref{1407-1011}. Ta dela so bila ključna za samo implementacijo algoritmov.
+Doktorska disertacija \cite{NNM-PHD} podaja pomembne opise pretvorbe problema minimizacije ranga v problem iz področja semidefinitnega programiranja. Ideje in dokazi tega dela služijo kot temelj za algoritme, ki so se razvili v zadnjih letih.
+\CG{
+Članek \cite{CCS} opisuje algoritem SVT, ki za svoje delovanje uvede operator praga, ki ignorira singularne vrednosti manjše od praga. Članek tudi pokaže, zakaj je tak način reševanja smiselen.
+Članek \cite{TNNM-HZYLH12} opisuje algoritem TNNM, ki uporabi informacijo o rangu nezašumljene matrike, ter problem rešuje s pomočjo algoritma ADMM \cite{admmForNNM}. 
+Vir \cite{AST-TK15} opisuje algoritem ASD, ki išče matriki $X$ in $Y$, katerih produkt bo enak napolnjeni matriki. Matriki išče z uporabo gradientnega spusta, ter izračunom optimalnega koraka po gradientu v vsaki iteraciji.  
+Algoritem LMaFit, opisan v \cite{LMaFit-WY12} podobno išče produkt dveh matrik, vendar ta za iskanje uporablja Moore-Penroseov inverz, ki v vsaki iteraciji najde rezultat z metodo najmanjših kvadratov.
+Obstajajo še številne tudi druge metode, ki slonijo na drugih idejah \cite{admira,Riemannian,SETalgo}. Zaradi obsežnosti, si teh v tem diplomskem delu ne bomo pogledali. 
+} 
 
-Vodilna literatura tekom pisanja diplomske naloge je bil članek \cite{Survey-NKS19}, ki opisuje problem, ter mnoge algoritme. Medtem ko opisi pogosto niso bili dovolj podrobni, da bi lahko začel algoritme implementirati, je članek ponujal dobro razumljive opise algoritmov, kot tudi navedel vire, ki so pomagali pri implementaciji. Prav tako je članek podal pomembno primerjavo rezultatov različnih algoritmov.
+Glavna literatura pri nastajanju diplomske naloge je bil pregledni članek \cite{Survey-NKS19}, ki opiše problem ter v grobem predstavi več algoritmov in jih primerja. Medtem ko opisi pogosto niso bili dovolj podrobni, da bi lahko začel algoritme implementirati, je članek ponujal dobro razumljive opise algoritmov, kot tudi navedel vire, ki so pomagali pri implementaciji. Prav tako je članek podal pomembno primerjavo rezultatov različnih algoritmov.
+
+Kot smo videli zgoraj, obstajajo številni članki s področja PMN. Večina člankov predstavi neko novo metodo, razloži idejo v ozadju, izpelje nekaj konvergenčnih rezultatov in testiranj na izbranem problemu.
+Zelo malo pa je literature, ki različne metode primerja med seboj in poskuša klasificirati algoritme glede na to, za kateri problem so najprimernejši. Prav tako je navadno pomanjkljivo razloženo, zakaj je bilo testiranje narejeno ravno na izbranih podatkih. Ponekod gre za naključno generirane podatke iz točno določene porazdelitve s točno določeno strukturo, pri čemer od tod ni moč sklepati, kako bi se algoritem obnesel na nekoliko drugačnih podatkih, ki ne bi bili pridobljeni ravno na tovrsten način. V delu se zato želimo osredotočiti tudi na ta vidik, tj.\ na implementacijo algoritmov in testiranja na podatkih istega tipa.

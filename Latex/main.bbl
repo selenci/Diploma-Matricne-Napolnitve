@@ -19,6 +19,83 @@
 
 \refsection{0}
   \datalist[entry]{nty/global//global/global}
+    \entry{Woerdeman}{book}{}
+      \name{author}{2}{}{%
+        {{hash=befc483715dd36624fe500932a6d2724}{%
+           family={Bakonyi},
+           familyi={B\bibinitperiod},
+           given={Mihály},
+           giveni={M\bibinitperiod}}}%
+        {{hash=146a051160cdbb9f2576929a30db6dcf}{%
+           family={Woerdeman},
+           familyi={W\bibinitperiod},
+           given={Hugo\bibnamedelima J.},
+           giveni={H\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Princeton University Press}%
+      }
+      \strng{namehash}{4bb87bb7c07d5e16906886f4358c5e9d}
+      \strng{fullhash}{4bb87bb7c07d5e16906886f4358c5e9d}
+      \strng{bibnamehash}{4bb87bb7c07d5e16906886f4358c5e9d}
+      \strng{authorbibnamehash}{4bb87bb7c07d5e16906886f4358c5e9d}
+      \strng{authornamehash}{4bb87bb7c07d5e16906886f4358c5e9d}
+      \strng{authorfullhash}{4bb87bb7c07d5e16906886f4358c5e9d}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Intensive research in matrix completions, moments, and sums of Hermitian squares has yielded a multitude of results in recent decades. This book provides a comprehensive account of this quickly developing area of mathematics and applications and gives complete proofs of many recently solved problems. With MATLAB codes and more than 200 exercises, the book is ideal for a special topics course for graduate or advanced undergraduate students in mathematics or engineering, and will also be a valuable resource for researchers.Often driven by questions from signal processing, control theory, and quantum information, the subject of this book has inspired mathematicians from many subdisciplines, including linear algebra, operator theory, measure theory, and complex function theory. In turn, the applications are being pursued by researchers in areas such as electrical engineering, computer science, and physics.The book is self-contained, has many examples, and for the most part requires only a basic background in undergraduate mathematics, primarily linear algebra and some complex analysis. The book also includes an extensive discussion of the literature, with close to 600 references from books and journals from a wide variety of disciplines.}
+      \field{isbn}{9780691128894}
+      \field{title}{Matrix Completions, Moments, and Sums of Hermitian Squares}
+      \field{year}{2011}
+    \endentry
+    \entry{Barret}{article}{}
+      \name{author}{3}{}{%
+        {{hash=0fa91fe6502172ceb9c7dd7bf1713a27}{%
+           family={Barrett},
+           familyi={B\bibinitperiod},
+           given={Wayne\bibnamedelima W.},
+           giveni={W\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+        {{hash=dac60894a8d7e4e7a13519d50f5fbf9a}{%
+           family={Johnson},
+           familyi={J\bibinitperiod},
+           given={Charles\bibnamedelima R.},
+           giveni={C\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+        {{hash=d9fc89ca35416696b927c4e18d14e2ff}{%
+           family={Lundquist},
+           familyi={L\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{2ae068b7f46edbf6cf6a1c2f14b72a69}
+      \strng{fullhash}{2ae068b7f46edbf6cf6a1c2f14b72a69}
+      \strng{bibnamehash}{2ae068b7f46edbf6cf6a1c2f14b72a69}
+      \strng{authorbibnamehash}{2ae068b7f46edbf6cf6a1c2f14b72a69}
+      \strng{authornamehash}{2ae068b7f46edbf6cf6a1c2f14b72a69}
+      \strng{authorfullhash}{2ae068b7f46edbf6cf6a1c2f14b72a69}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Let A be a partial positive definite Hermitian matrix, and let G(A) be the undirected graph of the specified off-diagonal entries of A. When G(A) is a chordal graph, we present an explicit determinantal formula for the (unique) determinant-maximizing positive definite completion (maximum-entropy completion) of A. In order to do this, we first give a characterization of a chordal graph in terms of the existence of a proper spanning tree T of the intersection graph of its set of maximal cliques. The formula for the maximum determinant is then a quotient of products of specified principal minors of A, in which each minor in the numerator corresponds to a maximal clique of G(A) while each minor in the denominator corresponds to the intersection of two maximal cliques associated with an edge of T. We next show that the denominator terms can be identified graph-theoretically with the minimal vertex separators of G(A), and that these terms are independent of the particular proper spanning tree T. Then an alternative formula is given for the maximum determinant as an “inclusion-exclusion”-like ratio of principal minors associated with the maximal cliques of G(A). Finally, we show that the entries of the determinant-maximizing completion may be calculated by solving a sequence of simple one-variable maximization problems.}
+      \field{issn}{0024-3795}
+      \field{journaltitle}{Linear Algebra and its Applications}
+      \field{title}{Determinantal formulae for matrix completions associated with chordal graphs}
+      \field{volume}{121}
+      \field{year}{1989}
+      \field{pages}{265\bibrangedash 289}
+      \range{pages}{25}
+      \verb{doi}
+      \verb https://doi.org/10.1016/0024-3795(89)90706-4
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/0024379589907064
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/0024379589907064
+      \endverb
+    \endentry
     \entry{UnsplashGora}{online}{}
       \name{author}{1}{}{%
         {{hash=1aaa17a0f734a674f1d4a42e3105f800}{%
@@ -49,6 +126,35 @@
       \verb https://unsplash.com/photos/5ulmc8IHdLc
       \endverb
     \endentry
+    \entry{boyd2004convex}{book}{}
+      \name{author}{2}{}{%
+        {{hash=5cd9791a43b8812be4e3f9d64521947a}{%
+           family={Boyd},
+           familyi={B\bibinitperiod},
+           given={Stephen\bibnamedelima P},
+           giveni={S\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+        {{hash=2608d599a0bc2a784c301329a8da5f7b}{%
+           family={Vandenberghe},
+           familyi={V\bibinitperiod},
+           given={Lieven},
+           giveni={L\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Cambridge university press}%
+      }
+      \strng{namehash}{51b5c5e76e19784bb7c212d8d9235828}
+      \strng{fullhash}{51b5c5e76e19784bb7c212d8d9235828}
+      \strng{bibnamehash}{51b5c5e76e19784bb7c212d8d9235828}
+      \strng{authorbibnamehash}{51b5c5e76e19784bb7c212d8d9235828}
+      \strng{authornamehash}{51b5c5e76e19784bb7c212d8d9235828}
+      \strng{authorfullhash}{51b5c5e76e19784bb7c212d8d9235828}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Convex optimization}
+      \field{year}{2004}
+    \endentry
     \entry{CCS}{misc}{}
       \name{author}{3}{}{%
         {{hash=5dfd9c597425ebbe4330801e972b5b56}{%
@@ -56,8 +162,8 @@
            familyi={C\bibinitperiod},
            given={Jian-Feng},
            giveni={J\bibinithyphendelim F\bibinitperiod}}}%
-        {{hash=204f23c4cd71374a68afa533fd9c9d74}{%
-           family={Candes},
+        {{hash=ae404faac8c8429af059d0185dcc9643}{%
+           family={Candès},
            familyi={C\bibinitperiod},
            given={Emmanuel\bibnamedelima J.},
            giveni={E\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
@@ -67,22 +173,34 @@
            given={Zuowei},
            giveni={Z\bibinitperiod}}}%
       }
-      \strng{namehash}{1531a91a33fd4da7ca15dba2b4b7cf86}
-      \strng{fullhash}{1531a91a33fd4da7ca15dba2b4b7cf86}
-      \strng{bibnamehash}{1531a91a33fd4da7ca15dba2b4b7cf86}
-      \strng{authorbibnamehash}{1531a91a33fd4da7ca15dba2b4b7cf86}
-      \strng{authornamehash}{1531a91a33fd4da7ca15dba2b4b7cf86}
-      \strng{authorfullhash}{1531a91a33fd4da7ca15dba2b4b7cf86}
+      \strng{namehash}{ce24728138f091bafdc43e40c4c2d93b}
+      \strng{fullhash}{ce24728138f091bafdc43e40c4c2d93b}
+      \strng{bibnamehash}{ce24728138f091bafdc43e40c4c2d93b}
+      \strng{authorbibnamehash}{ce24728138f091bafdc43e40c4c2d93b}
+      \strng{authornamehash}{ce24728138f091bafdc43e40c4c2d93b}
+      \strng{authorfullhash}{ce24728138f091bafdc43e40c4c2d93b}
       \field{sortinit}{C}
       \field{sortinithash}{4d103a86280481745c9c897c925753c0}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{eprintclass}{math.OC}
-      \field{eprinttype}{arXiv}
+      \field{journaltitle}{SIAM Journal on Optimization}
+      \field{number}{4}
       \field{title}{A Singular Value Thresholding Algorithm for Matrix Completion}
-      \field{year}{2008}
+      \field{volume}{20}
+      \field{year}{2010}
+      \field{pages}{1956\bibrangedash 1982}
+      \range{pages}{27}
+      \verb{doi}
+      \verb 10.1137/080738970
+      \endverb
       \verb{eprint}
-      \verb 0810.3286
+      \verb https://doi.org/10.1137/080738970
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1137/080738970
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1137/080738970
       \endverb
     \endentry
     \entry{NNM-Candes}{article}{}
@@ -127,6 +245,108 @@
       \verb{url}
       \verb https://doi.org/10.1007/s10208-009-9045-5
       \endverb
+    \endentry
+    \entry{Dancis}{article}{}
+      \name{author}{2}{}{%
+        {{hash=de7c7d0ea80411bab2d7bec8b3608089}{%
+           family={Cohen},
+           familyi={C\bibinitperiod},
+           given={Nir},
+           giveni={N\bibinitperiod}}}%
+        {{hash=eaad774ef87fec94383970201f2cd625}{%
+           family={Dancis},
+           familyi={D\bibinitperiod},
+           given={Jerome},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{097c78d40c6cb21c2e55a11d7a341035}
+      \strng{fullhash}{097c78d40c6cb21c2e55a11d7a341035}
+      \strng{bibnamehash}{097c78d40c6cb21c2e55a11d7a341035}
+      \strng{authorbibnamehash}{097c78d40c6cb21c2e55a11d7a341035}
+      \strng{authornamehash}{097c78d40c6cb21c2e55a11d7a341035}
+      \strng{authorfullhash}{097c78d40c6cb21c2e55a11d7a341035}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{This paper classifies the ranks and inertias of hermitian completion for the partially specified 3 x 3 block band hermitian matrix (also known as a "bordered matrix") P=\pmatrix{A\&B\&?\cr B^*\&C\&D\cr ?\&D^*\&E}. The full set of completion inertias is described in terms of seven linear inequalities involving inertias and ranks of specified submatrices. The minimal completion rank for P is computed.We study the completion inertias of partially specified hermitian block band matrices, using a block generalization of the Dym--Gohberg algorithm. At each inductive step, we use our classification of the possible inertias for hermitian completions of bordered matrices. We show that when all the maximal specified submatrices are invertible, any inertia consistent with Poincaré's inequalities is obtainable. These results generalize the nonblock band results of Dancis [SIAM J. Matrix Anal. Appl., 14 (1993), pp. 813--829]. All our results remain valid for real symmetric completions.}
+      \field{journaltitle}{SIAM Journal on Matrix Analysis and Applications}
+      \field{number}{3}
+      \field{title}{Inertias of Block Band Matrix Completions}
+      \field{volume}{19}
+      \field{year}{1998}
+      \field{pages}{583\bibrangedash 612}
+      \range{pages}{30}
+      \verb{doi}
+      \verb 10.1137/S0895479895296471
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1137/S0895479895296471
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1137/S0895479895296471
+      \endverb
+    \endentry
+    \entry{SETalgo}{inproceedings}{}
+      \name{author}{2}{}{%
+        {{hash=9df66f26414e5a0bebb294d519fa5f56}{%
+           family={Dai},
+           familyi={D\bibinitperiod},
+           given={Wei},
+           giveni={W\bibinitperiod}}}%
+        {{hash=e17cf8a6d0fc10a4abd8d14f0116d149}{%
+           family={Milenkovic},
+           familyi={M\bibinitperiod},
+           given={Olgica},
+           giveni={O\bibinitperiod}}}%
+      }
+      \strng{namehash}{a1203c42752e523f49cc8ab172daa20b}
+      \strng{fullhash}{a1203c42752e523f49cc8ab172daa20b}
+      \strng{bibnamehash}{a1203c42752e523f49cc8ab172daa20b}
+      \strng{authorbibnamehash}{a1203c42752e523f49cc8ab172daa20b}
+      \strng{authornamehash}{a1203c42752e523f49cc8ab172daa20b}
+      \strng{authorfullhash}{a1203c42752e523f49cc8ab172daa20b}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2010 IEEE International Conference on Acoustics, Speech and Signal Processing}
+      \field{title}{SET: An algorithm for consistent matrix completion}
+      \field{year}{2010}
+      \field{pages}{3646\bibrangedash 3649}
+      \range{pages}{4}
+      \verb{doi}
+      \verb 10.1109/ICASSP.2010.5495899
+      \endverb
+    \endentry
+    \entry{demmel97}{book}{}
+      \name{author}{1}{}{%
+        {{hash=e695aa321898b526ee50457fe1e0e9cc}{%
+           family={Demmel},
+           familyi={D\bibinitperiod},
+           given={James\bibnamedelima W.},
+           giveni={J\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {SIAM}%
+      }
+      \strng{namehash}{e695aa321898b526ee50457fe1e0e9cc}
+      \strng{fullhash}{e695aa321898b526ee50457fe1e0e9cc}
+      \strng{bibnamehash}{e695aa321898b526ee50457fe1e0e9cc}
+      \strng{authorbibnamehash}{e695aa321898b526ee50457fe1e0e9cc}
+      \strng{authornamehash}{e695aa321898b526ee50457fe1e0e9cc}
+      \strng{authorfullhash}{e695aa321898b526ee50457fe1e0e9cc}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{1}
+      \field{title}{Applied Numerical Linear Algebra}
+      \field{year}{1997}
+      \verb{doi}
+      \verb 10.1137/1.9781611971446
+      \endverb
+      \keyw{courant-fischer eigenvalues linear.algebra matrix numerical.analysis textbook}
     \endentry
     \entry{ERZAR_2023}{thesis}{}
       \name{author}{1}{}{%
@@ -246,6 +466,41 @@
       \verb https://unsplash.com/photos/bIZrEK-Z_cI
       \endverb
     \endentry
+    \entry{matrixAnalysis}{book}{}
+      \name{author}{2}{}{%
+        {{hash=472bb8160d835c69b57bcf72a2e976f2}{%
+           family={Horn},
+           familyi={H\bibinitperiod},
+           given={Roger\bibnamedelima A.},
+           giveni={R\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=dac60894a8d7e4e7a13519d50f5fbf9a}{%
+           family={Johnson},
+           familyi={J\bibinitperiod},
+           given={Charles\bibnamedelima R.},
+           giveni={C\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Cambridge; New York}%
+      }
+      \list{publisher}{1}{%
+        {Cambridge University Press}%
+      }
+      \strng{namehash}{eecf59942273a63031b3fcbcfd5fa22f}
+      \strng{fullhash}{eecf59942273a63031b3fcbcfd5fa22f}
+      \strng{bibnamehash}{eecf59942273a63031b3fcbcfd5fa22f}
+      \strng{authorbibnamehash}{eecf59942273a63031b3fcbcfd5fa22f}
+      \strng{authornamehash}{eecf59942273a63031b3fcbcfd5fa22f}
+      \strng{authorfullhash}{eecf59942273a63031b3fcbcfd5fa22f}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{2nd}
+      \field{isbn}{9780521839402}
+      \field{title}{Matrix Analysis}
+      \field{year}{2013}
+      \keyw{courant-fischer eigenvalues linear.algebra matrix textbook}
+    \endentry
     \entry{TNNM-HZYLH12}{article}{}
       \name{author}{5}{}{%
         {{hash=ff7d1e4dfbba21607e36a4a60f476055}{%
@@ -320,6 +575,83 @@
       \field{pages}{171\bibrangedash 198}
       \range{pages}{28}
     \endentry
+    \entry{admira}{article}{}
+      \name{author}{2}{}{%
+        {{hash=ab26fddf0ff4967d2254d6f4b3b88f71}{%
+           family={Lee},
+           familyi={L\bibinitperiod},
+           given={Kiryung},
+           giveni={K\bibinitperiod}}}%
+        {{hash=13dc7d6804d74463207a25b729ce0f82}{%
+           family={Bresler},
+           familyi={B\bibinitperiod},
+           given={Yoram},
+           giveni={Y\bibinitperiod}}}%
+      }
+      \strng{namehash}{3e79776ece34205b4ed0353986ccb329}
+      \strng{fullhash}{3e79776ece34205b4ed0353986ccb329}
+      \strng{bibnamehash}{3e79776ece34205b4ed0353986ccb329}
+      \strng{authorbibnamehash}{3e79776ece34205b4ed0353986ccb329}
+      \strng{authornamehash}{3e79776ece34205b4ed0353986ccb329}
+      \strng{authorfullhash}{3e79776ece34205b4ed0353986ccb329}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Transactions on Information Theory}
+      \field{number}{9}
+      \field{title}{ADMiRA: Atomic Decomposition for Minimum Rank Approximation}
+      \field{volume}{56}
+      \field{year}{2010}
+      \field{pages}{4402\bibrangedash 4416}
+      \range{pages}{15}
+      \verb{doi}
+      \verb 10.1109/TIT.2010.2054251
+      \endverb
+    \endentry
+    \entry{Riemannian}{article}{}
+      \name{author}{4}{}{%
+        {{hash=4c1b56723248e01272459ed277cc4435}{%
+           family={Mishra},
+           familyi={M\bibinitperiod},
+           given={Bamdev},
+           giveni={B\bibinitperiod}}}%
+        {{hash=a3a7178591703f78daf58de7f84b896d}{%
+           family={Meyer},
+           familyi={M\bibinitperiod},
+           given={Gilles},
+           giveni={G\bibinitperiod}}}%
+        {{hash=59b817f224393aa579d65cb93d5902d5}{%
+           family={Bonnabel},
+           familyi={B\bibinitperiod},
+           given={Silvere},
+           giveni={S\bibinitperiod}}}%
+        {{hash=0dfd29560d972684e45872242d7ebfb8}{%
+           family={Sepulchre},
+           familyi={S\bibinitperiod},
+           given={Rodolphe},
+           giveni={R\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{3eb3f333e9ef4dc672fbbcd6236011ac}
+      \strng{fullhash}{b9648e17355986c6e706169f71246334}
+      \strng{bibnamehash}{3eb3f333e9ef4dc672fbbcd6236011ac}
+      \strng{authorbibnamehash}{3eb3f333e9ef4dc672fbbcd6236011ac}
+      \strng{authornamehash}{3eb3f333e9ef4dc672fbbcd6236011ac}
+      \strng{authorfullhash}{b9648e17355986c6e706169f71246334}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Computational Statistics}
+      \field{title}{Fixed-rank matrix factorizations and Riemannian low-rank optimization}
+      \field{volume}{29}
+      \field{year}{2014}
+      \field{pages}{591\bibrangedash 621}
+      \range{pages}{31}
+    \endentry
     \entry{Survey-NKS19}{article}{}
       \name{author}{3}{}{%
         {{hash=b4428b4f1db590618fbdc233f8e797f9}{%
@@ -356,6 +688,39 @@
       \range{pages}{23}
       \verb{doi}
       \verb 10.1109/ACCESS.2019.2928130
+      \endverb
+    \endentry
+    \entry{reccData}{inproceedings}{}
+      \name{author}{2}{}{%
+        {{hash=b532fc783eaa51cbc0ac370944eb54bb}{%
+           family={Rossi},
+           familyi={R\bibinitperiod},
+           given={Ryan\bibnamedelima A.},
+           giveni={R\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=b29b659629068c77fb375c338f11a2b4}{%
+           family={Ahmed},
+           familyi={A\bibinitperiod},
+           given={Nesreen\bibnamedelima K.},
+           giveni={N\bibinitperiod\bibinitdelim K\bibinitperiod}}}%
+      }
+      \strng{namehash}{f2365b264ba81d1f80abdc24a6f742e1}
+      \strng{fullhash}{f2365b264ba81d1f80abdc24a6f742e1}
+      \strng{bibnamehash}{f2365b264ba81d1f80abdc24a6f742e1}
+      \strng{authorbibnamehash}{f2365b264ba81d1f80abdc24a6f742e1}
+      \strng{authornamehash}{f2365b264ba81d1f80abdc24a6f742e1}
+      \strng{authorfullhash}{f2365b264ba81d1f80abdc24a6f742e1}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{AAAI}
+      \field{title}{The Network Data Repository with Interactive Graph Analytics and Visualization}
+      \field{year}{2015}
+      \verb{urlraw}
+      \verb https://networkrepository.com
+      \endverb
+      \verb{url}
+      \verb https://networkrepository.com
       \endverb
     \endentry
     \entry{SeDuMi}{article}{}
@@ -472,6 +837,37 @@
       \verb{doi}
       \verb 10.1007/s12532-012-0044-1
       \endverb
+    \endentry
+    \entry{admmForNNM}{article}{}
+      \name{author}{2}{}{%
+        {{hash=b31f5ef99c10b52d454e9e3257df66b1}{%
+           family={Yang},
+           familyi={Y\bibinitperiod},
+           given={Junfeng},
+           giveni={J\bibinitperiod}}}%
+        {{hash=cd7a82326fc914852567cba1544ff622}{%
+           family={Yuan},
+           familyi={Y\bibinitperiod},
+           given={Xiaoming},
+           giveni={X\bibinitperiod}}}%
+      }
+      \strng{namehash}{da9fa302f3aadc28c09e7b962503e3b2}
+      \strng{fullhash}{da9fa302f3aadc28c09e7b962503e3b2}
+      \strng{bibnamehash}{da9fa302f3aadc28c09e7b962503e3b2}
+      \strng{authorbibnamehash}{da9fa302f3aadc28c09e7b962503e3b2}
+      \strng{authornamehash}{da9fa302f3aadc28c09e7b962503e3b2}
+      \strng{authorfullhash}{da9fa302f3aadc28c09e7b962503e3b2}
+      \field{sortinit}{Y}
+      \field{sortinithash}{fd67ad5a9ef0f7456bdd9aab10fe1495}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Mathematics of computation}
+      \field{number}{281}
+      \field{title}{Linearized augmented Lagrangian and alternating direction methods for nuclear norm minimization}
+      \field{volume}{82}
+      \field{year}{2013}
+      \field{pages}{301\bibrangedash 329}
+      \range{pages}{29}
     \endentry
   \enddatalist
 \endrefsection

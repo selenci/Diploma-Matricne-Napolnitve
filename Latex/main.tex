@@ -53,12 +53,12 @@ sorting=nty,
 %	DIPLOMA INFO
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\ttitle}{Algoritmi za reševanje problema matričnih napolnitev}
-\newcommand{\ttitleEn}{Diploma thesis template}
+\newcommand{\ttitleEn}{Algorithms for solving the matrix completion problem}
 \newcommand{\tsubject}{\ttitle}
 \newcommand{\tsubjectEn}{\ttitleEn}
 \newcommand{\tauthor}{Matej Klančar}
-\newcommand{\tkeywords}{računalnik, računalnik, računalnik}
-\newcommand{\tkeywordsEn}{computer, computer, computer}
+\newcommand{\tkeywords}{matrične napolnitve, minimizacija ranga, rekonstrukcija slik}
+\newcommand{\tkeywordsEn}{matrix completion, rank minimization, image reconstruction}
 \newcommand{\nnorm}[1]{\lVert#1\rVert_*}
 \newcommand{\fnorm}[1]{\lVert#1\rVert_F}
 \newcommand{\norm}[1]{\lVert#1\rVert}
@@ -111,7 +111,8 @@ sorting=nty,
 % konstrukti
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
 \newtheorem{izrek}{Izrek}[chapter]
-\newtheorem{trditev}{Trditev}[izrek]
+\newtheorem{theorem}{Izrek}[chapter]
+\newtheorem{trditev}[theorem]{Trditev}
 \newenvironment{dokaz}{\emph{Dokaz.}\ }{\hspace{\fill}{$\Box$}}
 
 \newcommand{\CR}[1]{\begin{color}{red}#1\end{color}}
@@ -125,7 +126,6 @@ sorting=nty,
 \newcommand{\trOp}[2]{\langle #1, #2 \rangle}
 \newcommand{\mapa}{Poglavja}
 
-\newtheorem{theorem}{Izrek}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% PDF-A
@@ -296,17 +296,18 @@ sorting=nty,
 
 \bigskip
 \noindent\textbf{Opis:}\\
-Besedilo teme diplomskega dela študent prepiše iz študijskega informacijskega sistema, kamor ga je vnesel mentor.
-V nekaj stavkih bo opisal, kaj pričakuje od kandidatovega diplomskega dela.
-Kaj so cilji, kakšne metode naj uporabi, morda bo zapisal tudi ključno literaturo.
+V diplomskem delu 
+predstavite nekaj različnih algoritmov za reševanje problema matričnih napolnitev. Seznanite se z uporabljenimi matematičnimi orodji. Algoritme implementirajte in testirajte na izbranem problemu uporabe.
+Primerjajte algoritme glede na kakovost napolnitev, časovno zahtevnost in pojasnite ugotovitve z navezavo na teoretično podlago algoritmov. Na koncu predlagajte možne nadaljnje izboljšave.
 
 \bigskip
 \noindent\textbf{Title:} Algorithms for solving matrix completion problem
 
 \bigskip
 \noindent\textbf{Description:}\\
-opis diplome v angleščini
-
+In the thesis, 
+present a few different algorithms for solving the matrix completion problem.
+Study the underlying mathematical methods. Implement the algorithms and test them on a selected applied problem. Compare the algorithms in terms of quality of the completion, computational cost, and explain the results referring to the theoretical background of the algorithms. Finally, suggest possible improvements to the methods presented.
 \vfill
 
 
@@ -357,8 +358,7 @@ Na tem mestu zapišite, komu se zahvaljujete za pomoč pri izdelavi diplomske na
     {\bf TNNM}    & Truncated nuclear norm minimization & Minimizacija prirezane nuklearne norme \\
     {\bf ASD}     & Alternating Steepest Descent        & Izmenjajoč gradientni spust            \\
     {\bf NP}     & Nondeterministic polynomial time       & Nedeterministični polinomni čas            \\
-    {\bf SDP}     & Semidefinite programming        & Semidefinitno programiranje            \\
-    \CG{\bf OZP}     &         & \CG{Odstotek znanih podatkov}            \\
+    {\bf SDP}     & Semidefinite programming        & Semidefinitno programiranje            
     %  \dots & \dots & \dots \\
 \end{tabular}
 
@@ -379,8 +379,7 @@ Na tem mestu zapišite, komu se zahvaljujete za pomoč pri izdelavi diplomske na
 \bigskip
 
 %\noindent\textbf{Povzetek:} 
-\noindent V vzorcu je predstavljen postopek priprave diplomskega dela z uporabo okolja \LaTeX. Vaš povzetek mora sicer vsebovati približno 100 besed, ta tukaj je odločno prekratek.
-Dober povzetek vključuje: (1) kratek opis obravnavanega problema, (2) kratek opis vašega pristopa za reševanje tega problema in (3) (najbolj uspešen) rezultat ali prispevek diplomske naloge.
+\noindent \CG{Pri problemu matričnih napolnitev obravnavamo matriko, pri kateri nekaterih elementov ne poznamo. Cilj je poiskati take elemente, da bo rang napolnjene matrike minimalen. V diplomskem delu si pogledamo teoretično ozadje petih algoritmov, ki ta problem rešujejo (NNM, SVT, TNNM, ASD, LMaFit), ter jih testiramo. Pri testiranju algoritmov se osredotočamo na rekonstrukcijo slik, kjer vrednosti nekaterih pikslov ne poznamo. Med testiranjem poskušamo odgovarjati na različna vprašanja, ki se nam pri reševanju problema porodijo, ter rezultate interpretirati s predstavljenim matematičnim ozadjem. Prav tako rezultate primerjamo z bolj pogosto metodo rekonstrukcije slik - algoritmom reševanja Laplaceove diferencialne enačbe.}
 
 \bigskip
 
@@ -402,8 +401,9 @@ Dober povzetek vključuje: (1) kratek opis obravnavanega problema, (2) kratek op
 \bigskip
 
 %\noindent\textbf{Abstract:} 
-\noindent This sample document presents an approach to typesetting your BSc thesis using \LaTeX.
-A proper abstract should contain around 100 words which makes this one way too short.
+\noindent \CG{
+    The matrix completion problem considers a matrix in which some elements are unknown. The goal is to find such elements, that the rank of the filled matrix will be minimal. In the bachelor's thesis, we look at the theoretical background of five algorithms used to solve this problem (NNM, SVT, TNNM, ASD, LMaFit) and test them. When testing algorithms, we focus on the reconstruction of images where the values of some pixels are unknown. During testing, we try to answer various questions that arise when solving the problem and interpret the results with the presented mathematical background. We also compare the results with a more common method of image reconstruction - the algorithm for solving the Laplace differential equations.
+}
 \bigskip
 
 \noindent\textbf{Keywords:} \tkeywordsEn.

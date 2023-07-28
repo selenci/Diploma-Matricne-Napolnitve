@@ -1,5 +1,5 @@
-\section{LMaFit}
-\textbf{LMaFit} je algoritem, ki podobno kot ASD, rešuje problem matričnih napolnitev z uporabo dveh manjših matrik $X^{n_1 \times r}$ in $Y^{n_1 \times r}$.
+\section{LMaFit} \label{2807-1447}
+\textbf{LMaFit} \cite{LMaFit-WY12} je algoritem, ki podobno kot ASD, rešuje problem matričnih napolnitev z uporabo dveh manjših matrik $X^{n_1 \times r}$ in $Y^{n_1 \times r}$.
 Optimizacijski problem, ki ga rešuje LMaFit je
 \begin{align*}
     \min_{X, Y, Z}& \hspace{0.5cm} \frac{1}{2}\fnorm{XY - Z}^2,\\
@@ -18,7 +18,7 @@ LMaFit izmenično posodablja matrike $X, Y$ in $Z$, pri čemer eno spreminja, pr
     X^{i+1} = Z^{i}(Y^i)^\dagger,
 \end{align*}
 pri čemer uporablja dejstvo, da množenje z MP inverzom z desne 
-da najboljši rezultat po metodi najmanjših kvadratov \CR{Lahko dodaš citat.}
+da najboljši rezultat po metodi najmanjših kvadratov \cite[pogl. 3]{demmel97}.
 Podobno posodobimo matriko $Y$.
 \begin{align*}
     \hspace{0.5cm} X^{i+1}Y^{i+1} &= Z^{i}    \qquad 

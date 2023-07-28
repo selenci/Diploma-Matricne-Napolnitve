@@ -1,7 +1,14 @@
 \chapter{Algoritmi} \label{1407-1011}
 
-\CG{V tem poglavju predstavimo teoretično ozadje algoritmov za reševanje problema matričnih napolnitev. V posameznih razdelkih predstavimo različne algoritme, povzamemo idejo algoritma za iskanje rešitve, ter razložimo, zakaj deluje. Vrstni red predstavitve algoritmov je postavljen tako, da kjer algoritem razširja idejo prejšnjega, tega predstavimo kasneje. }
+V tem poglavju predstavimo teoretično ozadje algoritmov za reševanje problema matričnih napolnitev. V posameznih razdelkih predstavimo različne algoritme, povzamemo idejo algoritma za iskanje rešitve, ter razložimo, zakaj deluje. Vrstni red predstavitve algoritmov je postavljen tako, da kjer algoritem razširja idejo prejšnjega, tega predstavimo kasneje.
 
+\CG{
+Razdelek \ref{2607-1502} predstavi definicije in oznake, ki se čez celotno poglavje pojavljajo. Razdelek \ref{1707-1755} na kratko predstavi algoritem minimizacije nuklearne norme (NNM), ter predstavi, kako problem pretvorimo v problem semidefinitnega programiranja.
+Razdelek \ref{2807-1441} opiše algoritem praga singularnih vrednosti (SVT), ter predstavi idejo za algoritmom. 
+V razdelku \ref{2807-1442} predstavimo algoritem minimizacije prirezane nuklearne norme (TNNM), ter algoritem ADMM, ki ga algoritem TNNM uporablja.
+Razdelek \ref{2707-1337} opisuje, kako algoritem izmenjujočega gradientnega spusta (ASD) uporablja gradient in optimalni korak za iskanje primerne rešitve.
+V razdelku \ref{2807-1447} pa opišemo algoritem LMaFit, ki za svoje delovanje uporablja Moore-Penroseov inverz. 
+}
 \section{Definicije in oznake} \label{2607-1502}
 V tem razdelku uvedemo definicije in oznake, ki se bodo pojavljale v preostanku dela.
 \begin{enumerate}
@@ -50,7 +57,7 @@ V tem razdelku uvedemo definicije in oznake, ki se bodo pojavljale v preostanku 
           \nnorm{A} = \sum_{i = 1}^{n} \sigma_i(A),
         \] pri čemer $\sigma_i(A)$ označuje $i$-to največjo singularno vrednost matrike $A$.
         %https://angms.science/doc/LA/KyFanNorm.pdf
-        \CR{Premisliti, zakaj je to res norma, tj. zakaj zadošča trikotniški neenakosti. To ni čisto očitno in bi lahko kdo v komisiji vprašal. Če je dokaz kratek, lahko dodaš.}
+        \CG{Dokaz, zakaj nuklearna norma upošteva potrebne pogoje norme je opisan v \cite[teorem 5.6.18]{matrixAnalysis}. Definicija $\norm{\cdot}_1$ je ekvivalentna nuklearni normi.}
   \item Matrika $A \in \mathbb{R}^{n \times n}$ je \textbf{pozitivno semidefinitna}, če velja $x^TAx \ge 0 \text{ za vsak } x \in \mathbb{R}^n$. To lastnost matrike $A$ označimo z $A \succeq 0$.
         Spomnimo se še, da je $A \succeq 0$ ekvivalentno dejstvu, da so vse  lastne vrednosti matrike $A$ nenegativne.
   \item Vektor $c\in \mathbb R^n$ je \textbf{subgradient} konveksne funkcije $f: \mathbb{R}^n \rightarrow \mathbb{R}$ v točki $x_0$, če velja

@@ -1,4 +1,4 @@
-\section{Algoritem minimizacije prirezane nuklearne norme}
+\section{Algoritem minimizacije prirezane nuklearne norme} \label{2807-1442}
 Kot nam že samo ime pove, je \textbf{algoritem minimizacije prirezane nuklearne norme (TNNM)} \cite{TNNM-HZYLH12} soroden algoritmu NNM. Dodatna informacija, ki pa jo uporabi TNNM, je rang $r$ originalne, nezašumljene matrike.
 
 Osrednjo vlogo v algoritmu ima \textbf{$r$-prirezana nuklearna norma}, ki za dano matriko $X \in \mathbb{R}^{n_1 \times n_2}$ vrne vsoto njenih $\min(n_1,n_2) - r$ najmanjših singularnih vrednosti:
@@ -15,12 +15,12 @@ TNNM rešuje optimizacijski problem
 \end{align}
 Cilj algoritma je torej čim bolj zmanjšati najmanjše singularne vrednosti, medtem ko velikih ne omejujemo. S tem problem minimizacije omilimo.
 
-Problem \eqref{1107-1305} lahko zapišemo v ekvivalentni obliki \todo{ali tukaj tudi oklepaje}
+Problem \eqref{1107-1305} lahko zapišemo v ekvivalentni obliki
 \begin{align}
     \label{2507-0835}
     \begin{split}
         \min_{X\in  \mathbb{R}^{n_1 \times n_2}}              & \hspace{0.5cm} \nnorm{X} - \sum_{i=1}^{r} \sigma_i(X), \\
-        \textrm{pri pogojih} & \hspace{0.5cm} \proj(X) = \proj(M)
+        \textrm{pri pogojih} & \hspace{0.5cm} \proj(X) = \proj(M).
     \end{split}
 \end{align}
 V izpeljavah, ki sledijo, bomo potrebovali naslednji izrek.
@@ -118,7 +118,6 @@ Sedaj lahko opišemo idejo algoritma TNNM:
 \end{enumerate}
 Z nadaljnjim preoblikovanjem problema
 \eqref{2507-0900} v ekvivalentnega
-\todo{iz kje pride izracun $Y^{i+1}$}
 \begin{align}
     \label{1307-1527}
     \begin{split}
@@ -154,7 +153,7 @@ in dobimo
      & = \argmin_X \Big( \nnorm{X} + \frac{\beta}{2} \fnorm{X-W^{(k)} + \frac{1}{\beta}Y^{(k)}}^2 \Big)                                                                        \\
      & = \argmin_X \Big( \frac{1}{\beta}\nnorm{X} +  \frac{1}{2}\fnorm{X-(W^{(k)} - \frac{1}{\beta}Y^{(k)})}^2\Big)  
 \end{align*}
-Po izreku \ref{1907-2240} \CG{uporabljenem za $X=X$, $Y=W - \frac{1}{\beta}Y$, $\tau=\frac{1}{\beta}$} pa sledi
+Po izreku \ref{1907-2240} \CG{uporabljenem za $X=X^{(k+1)}$, $Y=W^{(k)} - \frac{1}{\beta}Y^{(k)}$ in $\tau=\frac{1}{\beta}$} pa sledi
 \[
     X^{(k+1)} = \shrink_\frac{1}{\beta}(W^{(k)} - \frac{1}{\beta} Y^{(k)}).
 \]
@@ -170,7 +169,14 @@ Očitno je
 Sedaj uporabimo še pogoj $\proj(W^{(k+1)}) = \proj(M)$ in tiste elemente, ki jih poznamo, popravimo.
 \begin{equation}
     \label{2906-1248}
-    W^{(k+1)} = W^{(k+1)} + \proj(M - W^{(k+1)})
+    W^{(k+1)} = W^{(k+1)} + \proj(M - W^{(k+1)}).
 \end{equation}
 Z besedami, predpis \eqref{2906-1248}
 preprosto spremeni mesta $W^{(k+1)}$, kjer vrednosti poznamo, na znane vrednosti, ostalih pa ne spremeni.
+
+\CG{
+Po algoritmu ADMM \cite{admmForNNM} na koncu iteracije preprosto posodobimo matriko $Y$, kot
+\[
+    Y^{(k+1)} = Y^{(k)} + \beta(X^{(k+1) - W^{k+1}}).
+\]
+}
