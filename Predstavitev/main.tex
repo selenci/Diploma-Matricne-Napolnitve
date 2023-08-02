@@ -1,4 +1,32 @@
 \documentclass{beamer}
+\usepackage[slovene]{babel}
+
+\newcommand{\ttitle}{Algoritmi za reševanje problema matričnih napolnitev}
+\newcommand{\ttitleEn}{Algorithms for solving the matrix completion problem}
+\newcommand{\tsubject}{\ttitle}
+\newcommand{\tsubjectEn}{\ttitleEn}
+\newcommand{\tauthor}{Matej Klančar}
+\newcommand{\tkeywords}{matrične napolnitve, minimizacija ranga, rekonstrukcija slik, priporočilni sistemi}
+\newcommand{\tkeywordsEn}{matrix completion, rank minimization, image reconstruction,
+recommendation systems}
+\newcommand{\nnorm}[1]{\lVert#1\rVert_*}
+\newcommand{\fnorm}[1]{\lVert#1\rVert_F}
+\newcommand{\norm}[1]{\lVert#1\rVert}
+\newcommand{\CR}[1]{\begin{color}{red}#1\end{color}}
+\newcommand{\CB}[1]{\begin{color}{blue}#1\end{color}}
+\newcommand{\CG}[1]{\begin{color}{green}#1\end{color}}
+
+\newcommand{\proj}{\mathcal{P}_\Omega}
+\newcommand{\shrink}{\mathcal{D}}
+%\newcommand{\tr}{\text{Tr}}
+\newcommand{\numberthis}{\addtocounter{equation}{1}\tag{\theequation}}
+\newcommand{\trOp}[2]{\langle #1, #2 \rangle}
+\newcommand{\mapa}{Poglavja}
+
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\tr}{Tr}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
 %Information to be included in the title page:
 \title{Algoritmi za reševanje problema matričnih napolnitev}
 \author[Matej Klančar]{Matej Klančar \\ \vspace{0.2cm} Mentor: doc.\ dr.\ Aljaž Zalar}
@@ -7,6 +35,7 @@
 
 \definecolor{colorTheme}{rgb}{0.19, 0.73, 0.56} % UBC Blue (primary)
 \usecolortheme[named=colorTheme]{structure}
+\setbeamercolor{alerted text}{fg=colorTheme}
 
 
 \makeatletter
@@ -28,16 +57,98 @@
 }
 \makeatother
 
-
+\AtBeginSection[]
+{
+    \begin{frame}
+        \frametitle{Kazalo}
+        \tableofcontents[currentsection]
+    \end{frame}
+}
 
 \begin{document}
-
+\selectlanguage{slovene}
 \frame{\titlepage}
+\section{Predstavitev problema}
+
+\section{Algoritmi}
+\begin{frame}
+  \frametitle{Algoritem NNM}
+  \begin{itemize}
+    \item Minimizira \alert{nuklearno normo} \[
+      \nnorm{A} = \sum_{i = 1}^{n} \sigma_i(A)
+    \]
+    \item Rešuje problem semidefinitega programiranja
+    \item Lahko rešujemo s primernimi orodji za reševanje takih problemov (npr. Sedumi)
+  \end{itemize}
+\end{frame}
 
 \begin{frame}
-\frametitle{Sample frame tiatle}
-This is some text in the first frame. This is some text in the first frame. This is some text in the first frame.
+  \frametitle{Algoritem SVT}
+  \begin{itemize}
+    \item Problem definira z Lagrangeovo funkcijo \[
+      \mathcal{L}(X, Y) = \tau \nnorm{X} + \frac{1}{2}\fnorm{X}^2 + \trOp{Y}{\proj(M-X)} 
+    \]
+    \item Uporabimo t.i. Uzawa algoritem, rešujemo iterativno
+    \begin{align*}
+              X^{(k)} &= \shrink_\tau(Y^{(k-1)}), \\
+              Y^{(k)} &= Y^{(k-1)} + \delta_k \proj(M - X^{(k)}), 
+      \end{align*}
+      \item \alert{Operator praga} $\shrink_\tau: \mathbb{R}^{n_1 \times n_2} \rightarrow \mathbb{R}^{n_1 \times n_2}$ je definiran kot
+      \begin{align*}
+          \shrink_\tau(A) &:= U \shrink_\tau(\Sigma) V^T, \\ \shrink_\tau(\Sigma) &= \diag\big(\max(\sigma_1 - \tau, 0),
+          \max(\sigma_2-\tau,0),\ldots,\\
+          &\hspace{1.5cm}
+          \max(\sigma_{\min(n_1,n_2)}-\tau,0)\big)
+      \end{align*}
+      \item Uporabi idejo, da ima matrika majhnega ranga le nekaj velikih singularnih vrednosti.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Algoritem TNNM}
+  \begin{itemize}
+    \item Minimizira \alert{prirezano nuklearno normo} \[
+      \norm{X}_r = \sum_{i = r + 1}^{\min(n_1, n_2)} \sigma_i(X)
+    \]
+    \item Uporabi $A_l, B_l$, sestavljeni iz lastnih vektorjev $X$ 
+    \item Uporablja iterativni algoritem ADMM, definira pomožni matriki $W, Y$ 
+    \begin{align*}
+        X^{(k+1)} &= \shrink_\frac{1}{\beta}(W^{(k)} - \frac{1}{\beta} Y^{(k)})\\
+        W^{(k+1)} &= X^{(k+1)} + \frac{1}{\beta}(A_l^T B_l + Y^{(k)})\\
+        Y^{(k+1)} &= Y^{(k)} + \beta(X^{(k+1)}- W^{(k+1)})
+      \end{align*}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Algoritem ASD}
+  \begin{itemize}
+    \item Išče matriki $X, Y$ katerih produkt bo enak rekonstrukciji
+    \item Uporablja \alert{gradientni spust} nad funkcijo \[
+      f(X, Y) = \frac{1}{2}\, \fnorm{\proj(M) - \proj(XY)}^2  
+    \]
+    \item Z uporabo gradienta in optimalnega koraka izvaja premik 
+    \begin{align*}
+      X^{(k+1)} = X^{(k)} - t_{x^{(k)}} \nabla f_{Y^{(k)}}(X^{(k)}) \\
+      Y^{(k+1)} = Y^{(k)} - t_{y^{(k)}} \nabla f_{X^{(k+1)}}(Y^{(k)})
+  \end{align*}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Algoritem LMaFit}
+  \begin{itemize}
+    \item Uporablja Moore-Penrose inverz
+    \item Množenje rešuje po metodi najmanjših kvadratov
+    \begin{align*}
+      X^{(k+1)} &= Z^{(k)}(Y^{(k)})^\dagger \\
+      Y^{(k+1)} &= (X^{(k+1)})^\dagger Z^{(k)} \\
+      Z^{(k+1)} &= X^{(k+1)}Y^{(k+1)} + \proj(M - X^{(k+1)}Y^{(k+1)})
+    \end{align*}
+  \end{itemize}
 \end{frame}
 
 
+\section{Rezultati}
+\section{Zaključek}
 \end{document}
