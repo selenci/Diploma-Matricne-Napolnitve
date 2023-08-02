@@ -1,5 +1,5 @@
 \section{LMaFit} \label{2807-1447}
-\textbf{LMaFit} \cite{LMaFit-WY12} je algoritem, ki podobno kot ASD, rešuje problem matričnih napolnitev z uporabo dveh manjših matrik $X^{n_1 \times r}$ in $Y^{n_1 \times r}$.
+\textbf{LMaFit} \cite{LMaFit-WY12} je algoritem, ki podobno kot ASD, rešuje problem matričnih napolnitev z uporabo dveh manjših matrik $X^{n_1 \times r}$ in $Y^{r \times n_2}$.
 Optimizacijski problem, ki ga rešuje LMaFit je
 \begin{align*}
     \min_{X, Y, Z}& \hspace{0.5cm} \frac{1}{2}\fnorm{XY - Z}^2,\\
@@ -11,24 +11,24 @@ Moore-Penroseov (MP) inverz. V nadaljevanju bomo MP inverz matrike $A$ označeva
 Očitno bo imela funkcija $f(X,Y,Z) = \frac{1}{2}\fnorm{XY - Z}^2$ najmanjšo vrednost natanko tedaj, ko bo $XY = Z$. 
 LMaFit izmenično posodablja matrike $X, Y$ in $Z$, pri čemer eno spreminja, preostali dve pa fiksira. Matriko $X$ posodobi po formuli
 \begin{align*}
-    X^{i+1}Y^{i}&= Z^{i}
+    X^{(k+1)}Y^{(k)}&= Z^{(k)}
     \qquad 
     \Rightarrow
     \qquad
-    X^{i+1} = Z^{i}(Y^i)^\dagger,
+    X^{(k+1)} = Z^{(k)}(Y^{(k)})^\dagger,
 \end{align*}
 pri čemer uporablja dejstvo, da množenje z MP inverzom z desne 
 da najboljši rezultat po metodi najmanjših kvadratov \cite[pogl. 3]{demmel97}.
 Podobno posodobimo matriko $Y$.
 \begin{align*}
-    \hspace{0.5cm} X^{i+1}Y^{i+1} &= Z^{i}    \qquad 
+    \hspace{0.5cm} X^{(k+1)}Y^{(k+1)} &= Z^{(k)}    \qquad 
     \Rightarrow
     \qquad
-    Y^{i+1} = (X^{i+1})^\dagger Z^{i}.
+    Y^{(k+1)} = (X^{(k+1)})^\dagger Z^{(k)}.
 \end{align*}
 
 Na koncu le še posodobimo matriko $Z$, kot
 \[
-    Z^{i+1} = X^{i+1}Y^{i+1} + \proj(M - X^{i+1}Y^{i+1}).
+    Z^{(k+1)} = X^{(k+1)}Y^{(k+1)} + \proj(M - X^{(k+1)}Y^{(k+1)}).
 \]
-Torej podobno kot prej poskušamo doseči $XY = Z$, vendar zaradi omejitve znanih vrednosti matrike $M$, na tistem mestu vrednosti popravimo.
+Torej podobno kot prej poskušamo doseči $XY = Z$, vendar zaradi omejitev znanih vrednosti matrike $M$, na znanih mestih vrednosti popravimo.

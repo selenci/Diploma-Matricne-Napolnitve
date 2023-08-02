@@ -2,13 +2,12 @@
 
 V tem poglavju predstavimo teoretično ozadje algoritmov za reševanje problema matričnih napolnitev. V posameznih razdelkih predstavimo različne algoritme, povzamemo idejo algoritma za iskanje rešitve, ter razložimo, zakaj deluje. Vrstni red predstavitve algoritmov je postavljen tako, da kjer algoritem razširja idejo prejšnjega, tega predstavimo kasneje.
 
-\CG{
-Razdelek \ref{2607-1502} predstavi definicije in oznake, ki se čez celotno poglavje pojavljajo. Razdelek \ref{1707-1755} na kratko predstavi algoritem minimizacije nuklearne norme (NNM), ter predstavi, kako problem pretvorimo v problem semidefinitnega programiranja.
-Razdelek \ref{2807-1441} opiše algoritem praga singularnih vrednosti (SVT), ter predstavi idejo za algoritmom. 
-V razdelku \ref{2807-1442} predstavimo algoritem minimizacije prirezane nuklearne norme (TNNM), ter algoritem ADMM, ki ga algoritem TNNM uporablja.
-Razdelek \ref{2707-1337} opisuje, kako algoritem izmenjujočega gradientnega spusta (ASD) uporablja gradient in optimalni korak za iskanje primerne rešitve.
-V razdelku \ref{2807-1447} pa opišemo algoritem LMaFit, ki za svoje delovanje uporablja Moore-Penroseov inverz. 
-}
+Razdelek \ref{2607-1502} uvede definicije in oznake, ki se pojavljajo čez celotno poglavje. Razdelek \ref{1707-1755} na kratko predstavi \textit{algoritem minimizacije nuklearne norme (NNM)} in pretvori problem v problem semidefinitnega programiranja.
+Razdelek \ref{2807-1441} opiše \textit{algoritem praga singularnih vrednosti (SVT)} in izpelje idejo, na kateri temelji. 
+V razdelku \ref{2807-1442} predstavimo \textit{algoritem minimizacije prirezane nuklearne norme (TNNM)} in \textit{algoritem ADMM}, ki je ključen v implementaciji algoritma TNNM.
+Razdelek \ref{2707-1337} opisuje, kako \textit{algoritem izmenjujočega gradientnega spusta (ASD)} uporablja gradient in kako išče optimalni korak v smeri gradienta za iskanje najboljše rešitve.
+V razdelku \ref{2807-1447} pa opišemo \textit{algoritem LMaFit}, ki za problem minimizacije po metodi najmanjših kvadratov uporablja Moore-Penroseov inverz. 
+
 \section{Definicije in oznake} \label{2607-1502}
 V tem razdelku uvedemo definicije in oznake, ki se bodo pojavljale v preostanku dela.
 \begin{enumerate}
@@ -57,14 +56,15 @@ V tem razdelku uvedemo definicije in oznake, ki se bodo pojavljale v preostanku 
           \nnorm{A} = \sum_{i = 1}^{n} \sigma_i(A),
         \] pri čemer $\sigma_i(A)$ označuje $i$-to največjo singularno vrednost matrike $A$.
         %https://angms.science/doc/LA/KyFanNorm.pdf
-        \CG{Dokaz, zakaj nuklearna norma upošteva potrebne pogoje norme je opisan v \cite[teorem 5.6.18]{matrixAnalysis}. Definicija $\norm{\cdot}_1$ je ekvivalentna nuklearni normi.}
+        Omenimo, da je dokaz izpolnjevanja pogojev za matrično normo \cite[izrek 5.6.18]{matrixAnalysis}. Poleg tega definicija nuklearne norme sovpada z bolj uveljavljeno $1$--matrično normo $\norm{\cdot}_1$.
   \item Matrika $A \in \mathbb{R}^{n \times n}$ je \textbf{pozitivno semidefinitna}, če velja $x^TAx \ge 0 \text{ za vsak } x \in \mathbb{R}^n$. To lastnost matrike $A$ označimo z $A \succeq 0$.
         Spomnimo se še, da je $A \succeq 0$ ekvivalentno dejstvu, da so vse  lastne vrednosti matrike $A$ nenegativne.
   \item Vektor $c\in \mathbb R^n$ je \textbf{subgradient} konveksne funkcije $f: \mathbb{R}^n \rightarrow \mathbb{R}$ v točki $x_0$, če velja
         \[
           \forall x\in\mathbb R^n: f(x) - f(x_0) \geq c^T(x - x_0).
         \]
-        Z besedami: $c$ je subgradient funkcije $f$ v točki $x_0$, če premica skozi točko $(x_0,f(x_0))$ s smernim koeficientom $c$ leži pod grafom funkcije $f$ (in se ga dotika v točki $(x_0,f(x_0))$).
+        Z besedami: $c$ je subgradient funkcije $f$ v točki $x_0$, če premica skozi točko $(x_0,f(x_0))$ s smernim koeficientom $c$ leži pod \CG{ali na grafu} funkcije $f$.
+        %(in se ga dotika v točki $(x_0,f(x_0))$)
   \item Z oznako
         $\displaystyle\argmin_x f(x)$
         označimo tisto točko iz domene funkcije $f$, za katero je vrednost funkcije najmanjša možna.

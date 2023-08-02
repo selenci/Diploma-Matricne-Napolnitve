@@ -15,18 +15,18 @@ Naj bodo $C,A_1,\ldots,A_\ell \in \mathbb{R}^{n \times n}$ dane matrike in $b_1,
 \begin{split}
     \min_{Y\in \mathbb R^{n\times n}} \hspace{0.5cm}             & \trOp{C}{Y},                                                                         \\
     \text{pri pogojih} \hspace{0.5cm} & \trOp{A_k}{Y} = b_k, \hspace{0.5cm} k = 1, \hdots , \ell,\\
-                                      & Y \succeq 0
+                                      & Y \succeq 0.
 \end{split}
 \end{align}
 
-Vrnimo se k našemu problemu. Naj bo $M \in \mathbb{R}^{n_1 \times n_2}$ hitrozašumljena matrika (tj.\ matrika z nekaterimi neznanimi vhodi), $\Omega$ pa množica urejenih parov, ki predstavljajo mesta, kjer vrednosti matrike poznamo.
+Vrnimo se k našemu problemu. Naj bo $M \in \mathbb{R}^{n_1 \times n_2}$ zašumljena matrika (tj.\ matrika z nekaterimi neznanimi vhodi), $\Omega$ pa množica urejenih parov, ki predstavljajo mesta, kjer vrednosti matrike poznamo.
 Problem minimizacije nuklearne norme lahko zapišemo kot
 \begin{align}
 \label{1007-1830}
 \begin{split}
     \min_{\substack{X\in \mathbb R^{n_1\times n_2},\\ t\in \mathbb R}} \hspace{0.5cm}        & t,                                               \\
     \text{pri pogojih} \hspace{0.5cm} & \nnorm{X} \leq t,  \\
-                                      & \proj(X) = \proj(M),
+                                      & \proj(X) = \proj(M).
 \end{split}
 \end{align}
 Hitro se da videti \cite[lema 2]{NNM-PHD}, da za matriko $X \in \mathbb{R}^{n_1 \times n_2}$ in $t \in \mathbb{R}$
@@ -61,7 +61,7 @@ Ker velja
 \fi
 Programi za reševanje SDP-jev pa lahko sprejmejo in rešujejo probleme v obliki \eqref{2407-1649}
 \cite{Survey-NKS19}.
-
+ 
 
 % Za SVD razcep matrike $X = U\Sigma V^T$ velja 
 % \[

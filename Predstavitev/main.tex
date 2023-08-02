@@ -1,0 +1,43 @@
+\documentclass{beamer}
+%Information to be included in the title page:
+\title{Algoritmi za reševanje problema matričnih napolnitev}
+\author[Matej Klančar]{Matej Klančar \\ \vspace{0.2cm} Mentor: doc.\ dr.\ Aljaž Zalar}
+\usetheme{Madrid}
+\date{2023}
+
+\definecolor{colorTheme}{rgb}{0.19, 0.73, 0.56} % UBC Blue (primary)
+\usecolortheme[named=colorTheme]{structure}
+
+
+\makeatletter
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\insertshortauthor\expandafter\beamer@ifempty\expandafter{\beamer@shortinstitute}{}{~~(\insertshortinstitute)}
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshorttitle
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+    \insertframenumber{} / \inserttotalframenumber\hspace*{2ex} 
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\makeatother
+
+
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}
+\frametitle{Sample frame tiatle}
+This is some text in the first frame. This is some text in the first frame. This is some text in the first frame.
+\end{frame}
+
+
+\end{document}

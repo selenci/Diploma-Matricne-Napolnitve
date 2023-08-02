@@ -41,7 +41,7 @@ V izpeljavah, ki sledijo, bomo potrebovali naslednji izrek.
         \label{2507-0839}
         \tr(AXB^T) = \tr(XB^TA) \leq \sum^{\min(n_1, n_2)}_{i=1} \sigma_i(X) \sigma_i(B^TA),
     \end{align}
-    kjer smo v enakosti uporabili komutativnost $\tr(ZW)=\tr(WZ)$ sledi,
+    kjer smo v enakosti uporabili komutativnost sledi $\tr(ZW)=\tr(WZ)$,
     v neenakosti pa von Neumannovo neenakost za sled \cite{TNNM-HZYLH12}.
 
     Po definiciji so singularne vrednosti matrike $Y$ enake korenom lastnih vrednosti matrike $Y^TY$. Torej so singularne vrednosti matrike $B^TA$ enake korenom lastnih vrednosti matrike $A^TBB^TA=A^TI_rA = A^TA$.
@@ -52,7 +52,7 @@ V izpeljavah, ki sledijo, bomo potrebovali naslednji izrek.
     \[
         \sum^{\min(n_1, n_2)}_{i=1} \sigma_i(X) \sigma_i(B^TA) = \sum^{r}_{i=1} \sigma_i(X),
     \]
-    kar skupaj z \eqref{2507-0839}
+    kar skupaj s \eqref{2507-0839}
     dokaže neenakost \eqref{2507-0836}
     v izreku.
 \end{proof}
@@ -85,7 +85,7 @@ Po izrekih \ref{2507-0850} in \ref{2507-0851}
 velja
 \[
     \max_{
-        \substack{AA^T = I,\\ BB^T = I}} \tr(AXB^T) = \sum^{r}_{i = 1} \sigma_i(X)
+        \substack{AA^T = I,\\ BB^T = I}} \tr(AXB^T) = \sum^{r}_{i = 1} \sigma_i(X).
 \]
 Torej je optimizacijski problem
 \eqref{2507-0835} ekvivalenten
@@ -138,7 +138,7 @@ Matriko $X^{(k+1)}$ definiramo kot
 \[
     X^{(k+1)} = \argmin_X \mathcal{L}(X, Y^{(k)}, W^{(k)}, \beta)
 \]
-Z ignoriranjem konstantnih členov, pa lahko zapišemo
+Z ignoriranjem konstantnih členov pa lahko zapišemo
 \begin{align*}
     X^{(k+1)} & = \argmin_X \Big( \nnorm{X} + \frac{\beta}{2}\trOp{X-W^{(k)}}{X-W^{(k)}} + \frac{\beta}{2}\trOp{\frac{2}{\beta}Y}{X} \Big) \\
               & = \argmin_X \Big( \nnorm{X} + \frac{\beta}{2}\tr\Big(X^TX - X^TW^{(k)} -                                                   \\
@@ -153,7 +153,7 @@ in dobimo
      & = \argmin_X \Big( \nnorm{X} + \frac{\beta}{2} \fnorm{X-W^{(k)} + \frac{1}{\beta}Y^{(k)}}^2 \Big)                                                                        \\
      & = \argmin_X \Big( \frac{1}{\beta}\nnorm{X} +  \frac{1}{2}\fnorm{X-(W^{(k)} - \frac{1}{\beta}Y^{(k)})}^2\Big)  
 \end{align*}
-Po izreku \ref{1907-2240} \CG{uporabljenem za $X=X^{(k+1)}$, $Y=W^{(k)} - \frac{1}{\beta}Y^{(k)}$ in $\tau=\frac{1}{\beta}$} pa sledi
+Po izreku \ref{1907-2240}, uporabljenim za $X=X^{(k+1)}$, $Y=W^{(k)} - \frac{1}{\beta}Y^{(k)}$ in $\tau=\frac{1}{\beta}$ pa sledi
 \[
     X^{(k+1)} = \shrink_\frac{1}{\beta}(W^{(k)} - \frac{1}{\beta} Y^{(k)}).
 \]
@@ -174,9 +174,8 @@ Sedaj uporabimo še pogoj $\proj(W^{(k+1)}) = \proj(M)$ in tiste elemente, ki ji
 Z besedami, predpis \eqref{2906-1248}
 preprosto spremeni mesta $W^{(k+1)}$, kjer vrednosti poznamo, na znane vrednosti, ostalih pa ne spremeni.
 
-\CG{
-Po algoritmu ADMM \cite{admmForNNM} na koncu iteracije preprosto posodobimo matriko $Y$, kot
+Po algoritmu ADMM \cite{admmForNNM} na koncu iteracije preprosto posodobimo matriko $Y$ kot
 \[
-    Y^{(k+1)} = Y^{(k)} + \beta(X^{(k+1) - W^{k+1}}).
+    Y^{(k+1)} = Y^{(k)} + \beta(X^{(k+1)}- W^{(k+1)}).
 \]
-}
+

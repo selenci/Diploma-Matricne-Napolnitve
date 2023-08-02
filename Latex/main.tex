@@ -57,8 +57,9 @@ sorting=nty,
 \newcommand{\tsubject}{\ttitle}
 \newcommand{\tsubjectEn}{\ttitleEn}
 \newcommand{\tauthor}{Matej Klančar}
-\newcommand{\tkeywords}{matrične napolnitve, minimizacija ranga, rekonstrukcija slik}
-\newcommand{\tkeywordsEn}{matrix completion, rank minimization, image reconstruction}
+\newcommand{\tkeywords}{matrične napolnitve, minimizacija ranga, rekonstrukcija slik, priporočilni sistemi}
+\newcommand{\tkeywordsEn}{matrix completion, rank minimization, image reconstruction,
+recommendation systems}
 \newcommand{\nnorm}[1]{\lVert#1\rVert_*}
 \newcommand{\fnorm}[1]{\lVert#1\rVert_F}
 \newcommand{\norm}[1]{\lVert#1\rVert}
@@ -298,7 +299,7 @@ sorting=nty,
 \noindent\textbf{Opis:}\\
 V diplomskem delu 
 predstavite nekaj različnih algoritmov za reševanje problema matričnih napolnitev. Seznanite se z uporabljenimi matematičnimi orodji. Algoritme implementirajte in testirajte na izbranem problemu uporabe.
-Primerjajte algoritme glede na kakovost napolnitev, časovno zahtevnost in pojasnite ugotovitve z navezavo na teoretično podlago algoritmov. Na koncu predlagajte možne nadaljnje izboljšave.
+Primerjajte algoritme glede na kakovost napolnitve, časovno zahtevnost in pojasnite ugotovitve z navezavo na teoretično podlago algoritmov. Na koncu predlagajte možne nadaljnje izboljšave.
 
 \bigskip
 \noindent\textbf{Title:} Algorithms for solving matrix completion problem
@@ -307,7 +308,7 @@ Primerjajte algoritme glede na kakovost napolnitev, časovno zahtevnost in pojas
 \noindent\textbf{Description:}\\
 In the thesis, 
 present a few different algorithms for solving the matrix completion problem.
-Study the underlying mathematical methods. Implement the algorithms and test them on a selected applied problem. Compare the algorithms in terms of quality of the completion, computational cost, and explain the results referring to the theoretical background of the algorithms. Finally, suggest possible improvements to the methods presented.
+Study the underlying mathematical methods. Implement the algorithms and test them on a selected applied problem. Compare the algorithms in terms of quality of the completions, computational cost, and explain the results referring to the theoretical background of the algorithms. Finally, suggest possible improvements to the methods presented.
 \vfill
 
 
@@ -320,10 +321,9 @@ Study the underlying mathematical methods. Implement the algorithms and test the
 % zahvala
 \thispagestyle{empty}\mbox{}\vfill\null\it%
 \noindent
-\CG{
-Velika zahvala za nastanek diplomskega dela gre mentorju doc. dr. Aljažu Zalarju, ki mi je pri pisanju diplomske naloge skrbno pomagal s številnimi nasveti, idejami in popravki.
+Velika zahvala za nastanek diplomskega dela gre mentorju doc.\ dr.\ Aljažu Zalarju, ki mi je pri pisanju diplomske naloge skrbno pomagal s številnimi nasveti, idejami in popravki.
 Zahvaljujem se tudi družini in prijateljem, ki so me vzpodbujali in mi tekom študija dajali podporo in motivacijo.
-}
+
 \rm\normalfont
 
 % prazna stran
@@ -359,8 +359,8 @@ Zahvaljujem se tudi družini in prijateljem, ki so me vzpodbujali in mi tekom š
     {\bf SVT }    & Singular Value Thresholding         & Prag singularnih vrednosti             \\
     {\bf NNM}     & Nuclear norm minimization           & Minimizacija nuklearne norme           \\
     {\bf TNNM}    & Truncated nuclear norm minimization & Minimizacija prirezane nuklearne norme \\
-    {\bf ASD}     & Alternating Steepest Descent        & Izmenjajoč gradientni spust            \\
-    {\bf NP}     & Nondeterministic polynomial time       & Nedeterministični polinomni čas            \\
+    {\bf ASD}     & Alternating Steepest Descent        & Izmenjujoč gradientni spust            \\
+    {\bf NP}     & Nondeterministic polynomial time       & Nedeterministični polinomski čas            \\
     {\bf SDP}     & Semidefinite programming        & Semidefinitno programiranje            
     %  \dots & \dots & \dots \\
 \end{tabular}
@@ -382,7 +382,8 @@ Zahvaljujem se tudi družini in prijateljem, ki so me vzpodbujali in mi tekom š
 \bigskip
 
 %\noindent\textbf{Povzetek:} 
-\noindent \CG{Pri problemu matričnih napolnitev obravnavamo matriko, pri kateri nekaterih elementov ne poznamo. Cilj je poiskati take elemente, da bo rang napolnjene matrike minimalen. V diplomskem delu si pogledamo teoretično ozadje petih algoritmov, ki ta problem rešujejo (NNM, SVT, TNNM, ASD, LMaFit), ter jih testiramo. Pri testiranju algoritmov se osredotočamo na rekonstrukcijo slik, kjer vrednosti nekaterih pikslov ne poznamo. Med testiranjem poskušamo odgovarjati na različna vprašanja, ki se nam pri reševanju problema porodijo, ter rezultate interpretirati s predstavljenim matematičnim ozadjem. Prav tako rezultate primerjamo z bolj pogosto metodo rekonstrukcije slik - algoritmom reševanja Laplaceove diferencialne enačbe.}
+\noindent Problem matričnih napolnitev sprejme matriko, ki nima določenih vrednosti vseh elementov, cilj pa je določiti vrednosti teh elementov tako, da bo rang napolnjene matrike najmanjši možen. V diplomskem delu predstavimo teoretično ozadje petih različnih algoritmov, ki rešujejo ta problem (NNM, SVT, TNNM, ASD, LMaFit), in jih testiramo. Pri testiranju se osredotočimo na problem rekonstrukcije slik, kjer vrednosti nekaterih pikslov ne poznamo. Analiziramo različne vidike rekonstrukcij, rezultate
+pa interpretiramo prek matematičnega ozadja algoritmov. Rezultate primerjamo tudi z uveljavljeno metodo rekonstrukcije slik, ki temelji na reševanju Laplaceove diferencialne enačbe.
 
 \bigskip
 
@@ -404,9 +405,10 @@ Zahvaljujem se tudi družini in prijateljem, ki so me vzpodbujali in mi tekom š
 \bigskip
 
 %\noindent\textbf{Abstract:} 
-\noindent \CG{
-    The matrix completion problem considers a matrix in which some elements are unknown. The goal is to find such elements, that the rank of the filled matrix will be minimal. In the bachelor's thesis, we look at the theoretical background of five algorithms used to solve this problem (NNM, SVT, TNNM, ASD, LMaFit) and test them. When testing algorithms, we focus on the reconstruction of images where the values of some pixels are unknown. During testing, we try to answer various questions that arise when solving the problem and interpret the results with the presented mathematical background. We also compare the results with a more common method of image reconstruction - the algorithm for solving the Laplace differential equations.
-}
+\noindent 
+    The matrix completion problem considers a matrix in which some elements are unknown. The goal is to determine the elements, such that the rank of the filled matrix is minimal. In this thesis, we present the theoretical background of five different algorithms used to solve this problem (NNM, SVT, TNNM, ASD, LMaFit) and test them. In testing, we focus on the reconstruction of images where the values of some pixels are unknown.
+    We analyze different aspects of the reconstructions and interpret the results 
+    referring to the mathematical background of the algorithms. We also compare the results with a more common method of image reconstruction, based on solving the Laplace differential equations.
 \bigskip
 
 \noindent\textbf{Keywords:} \tkeywordsEn.
