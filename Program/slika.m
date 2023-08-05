@@ -1,6 +1,8 @@
+%nalozimo sliko
 img = imread('dvobarvna.png');
 znanihVrednosti = 0.6;
 
+%pretvorimo v crno belo
 img = rgb2gray(img);
 norma = norm(cast(img,"double"), "fro")
 [n1, n2] = size(img)
@@ -9,6 +11,7 @@ M = zeros(n1, n2);
 
 for i = 1:n1
     for j = 1:n2
+        %z verjetnostjo znanihVrednosti piksel poznamo
         if(rand() <= znanihVrednosti)
             A(i, j) = img(i, j);
             M(i, j) = 1;
@@ -16,22 +19,15 @@ for i = 1:n1
     end
 end
 
+%zazenemo na poljubnem algoritmu, tic meri cas
 tic
-Y = solver(A, M, "lmafit", 1);
+Y = solver(A, M, "tnnm", 1);
 casIzvajanja = toc
 
+%izracun napak
 napaka = norm(Y - cast(img,"double") , "fro")
-% bestNapaka = inf
-% bestInd = 0
-% for i = 8:100
-%     Y = solver(A, M, "tnnm", i);
-%     napaka = norm(Y - cast(img,"double") , "fro")
-%     if(napaka < bestNapaka)
-%         bestNapaka = napaka
-%         bestInd = i
-%     end
-% end
 
+%prikazemo slike
 Aimg = cast(A, "uint8");
 Yimg = cast(Y, "uint8");
 

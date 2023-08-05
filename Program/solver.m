@@ -1,18 +1,16 @@
-% A = [0 0 -1 0 0 ; 0 0 0 1 0; 1 1 -1 1 -1 ; 1 0 0 0 -1; 0 0 -1 0 0]
-% M = [0 0 1 0 0; 0 0 0 1 0; 1 1 1 1 1 ; 1 0 0 0 1 ; 0 0 1 0 0]
-
-% A = [1 0 3 4 0 ; 1 1 0 0 1; 0 3 0 5 0; 0 0 0 1 1; 3 0 5 0 7]
-% M = [1 0 1 1 0; 1 1 0 0 1; 0 1 0 1 0 ; 0 0 0 1 1 ; 1 0 1 0 1]
-
 function Y = matrixMinimization(data, mask, method, rank)
 
+    %vedno moramo podati vsaj data in mask
     if nargin < 2
         error('Zahtevani matriki s podatki in maska')
     end
+
+    %ce metoda ni podana privzamemo algoritem nnm
     if nargin < 3
         method =   'nnm'
     end
 
+    %ce je izbrana metoda nnm ali svt, klicemo primerne funkcije
     switch method 
         case 'nnm'
             Y = nnm(data, mask);
@@ -22,11 +20,12 @@ function Y = matrixMinimization(data, mask, method, rank)
             return
     end
 
-
+    %ce izbrana metoda ni nnm ali svt je potrebno podati informacijo o rangu
     if nargin < 4
-        error('Ali ste pozabili podati rank')
+        error('Ali ste pozabili podati rang')
     end
 
+    %izberemo primeren algoritem ali obvestimo da ne obstaja
     switch method 
         case 'tnnm'
             Y = tnnm(data, mask, rank);

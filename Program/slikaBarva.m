@@ -1,3 +1,4 @@
+%nalozimo sliko
 img = imread('mesto.jpg');
 znanihVrednosti = 0.35;
 [n1, n2, n3] = size(img)
@@ -6,6 +7,7 @@ M = zeros(n1*n3, n2);
 
 for i = 1:n1
     for j = 1:n2
+        %z verjetnostjo znanihVrednosti piksel poznamo, matriko pretvorimo v pokoncno
         if(rand() <= znanihVrednosti)
             for z = 0:(n3 - 1)
                 A(i + n1*z, j) = img(i, j, z + 1);
@@ -17,28 +19,22 @@ end
 
 
 
-
+%sliko pretvorimo v 3D matriko
 Aimg = transform(A, n3);
 
+%zazenemo na poljubmen algoritmu
 tic
 Y = solver(sparse(A), sparse(M), "lmafit", 22);
 casIzvajanja = toc
 
+%rezultat pretvorimo v 3D matriko
 Yimg = transform(Y, n3);
+
+%izracunamo napako
 napaka = norm(Yimg - cast(img, "double"), "fro")
 
-% bestNapaka = inf
-% bestInd = 0
-% for r = 21:100
-%     Y = solver(sparse(A), sparse(M), "lmafit", r);
-%     Yimg = transform(Y, n3);
-%     napaka = norm(Yimg - cast(img, "double"), "fro")
-%     if(napaka < bestNapaka)
-%         bestNapaka = napaka
-%         bestInd = r
-%     end
-% end
 
+%slike prikazemo
 Aimg = cast(Aimg, "uint8");
 Yimg = cast(Yimg, "uint8");
 
