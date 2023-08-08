@@ -1,6 +1,6 @@
 \chapter{Algoritmi} \label{1407-1011}
 
-V tem poglavju predstavimo teoretično ozadje algoritmov za reševanje problema matričnih napolnitev. V posameznih razdelkih predstavimo različne algoritme, povzamemo idejo algoritma za iskanje rešitve, ter razložimo, zakaj deluje. Vrstni red predstavitve algoritmov je postavljen tako, da kjer algoritem razširja idejo prejšnjega, tega predstavimo kasneje.
+V tem poglavju predstavimo teoretično ozadje algoritmov za reševanje problema matričnih napolnitev. V posameznih razdelkih predstavimo različne algoritme in  razložimo glavne ideje v ozadju. Vrstni red predstavitve algoritmov je izbran glede na (ne)odvisnost algoritma od prejšnjih.
 
 Razdelek \ref{2607-1502} uvede definicije in oznake, ki se pojavljajo čez celotno poglavje. Razdelek \ref{1707-1755} na kratko predstavi \textit{algoritem minimizacije nuklearne norme (NNM)} in pretvori problem v problem semidefinitnega programiranja.
 Razdelek \ref{2807-1441} opiše \textit{algoritem praga singularnih vrednosti (SVT)} in izpelje idejo, na kateri temelji. 
@@ -12,7 +12,7 @@ V razdelku \ref{2807-1447} pa opišemo \textit{algoritem LMaFit}, ki za problem 
 V tem razdelku uvedemo definicije in oznake, ki se bodo pojavljale v preostanku dela.
 \begin{enumerate}
   \item Z $\mathbb{R}^{n_1\times n_2}$ označujemo množico $n_1\times n_2$ realnih matrik. Matriko $A\in \mathbb{R}^{n_1\times n_2}$ pišemo kot $A=[a_{ij}]_{i,j}$.
-  \item $\Omega$ je podmnožica množice vseh urejenih parov $\{ (i, j) : i = 1, \hdots , n_1, \hspace{0.3cm} j = 1, \hdots, n_2 \}.$ V delu je imenujemo \textbf{množica znanih vrednosti}.
+  \item $\Omega$ je podmnožica množice vseh urejenih parov $\{ (i, j) : i = 1, \hdots , n_1, \hspace{0.3cm} j = 1, \hdots, n_2 \}.$ V delu jo imenujemo \textbf{množica znanih vrednosti}.
   \item
         Z $\proj:\mathbb{R}^{n_1\times n_2}\to \mathbb{R}^{n_1\times n_2}$
         označimo preslikavo, definirano kot
@@ -21,9 +21,9 @@ V tem razdelku uvedemo definicije in oznake, ki se bodo pojavljale v preostanku 
             0,      & \text{sicer}.
           \end{cases}
         \]
-        Z besedami, preslikava $\proj$ ohrani vrednosti matrike na mestih iz množice $\Omega$, ostale pa postavi na 0.
+        Z besedami: preslikava $\proj$ ohrani vrednosti matrike na mestih iz množice $\Omega$, ostale pa postavi na 0.
   \item Naj bo $\tau > 0$ pozitivno realno število.
-        \textbf{Operator praga} (\cite{CCS}) $\shrink_\tau: \mathbb{R}^{n_1 \times n_2} \rightarrow \mathbb{R}^{n_1 \times n_2}$ je definiran kot
+        \textbf{Operator praga} \cite{CCS} $\shrink_\tau: \mathbb{R}^{n_1 \times n_2} \rightarrow \mathbb{R}^{n_1 \times n_2}$ je definiran kot
         \begin{align}
           \label{1007-1959}
           \begin{split}
@@ -63,7 +63,7 @@ V tem razdelku uvedemo definicije in oznake, ki se bodo pojavljale v preostanku 
         \[
           \forall x\in\mathbb R^n: f(x) - f(x_0) \geq c^T(x - x_0).
         \]
-        Z besedami: $c$ je subgradient funkcije $f$ v točki $x_0$, če premica skozi točko $(x_0,f(x_0))$ s smernim koeficientom $c$ leži pod \CG{ali na grafu} funkcije $f$.
+        Z besedami: $c$ je subgradient funkcije $f$ v točki $x_0$, če premica skozi točko $(x_0,f(x_0))$ s smernim koeficientom $c$ leži pod ali na grafu funkcije $f$.
         %(in se ga dotika v točki $(x_0,f(x_0))$)
   \item Z oznako
         $\displaystyle\argmin_x f(x)$

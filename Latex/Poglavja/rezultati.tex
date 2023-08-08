@@ -1,27 +1,28 @@
 \chapter{Rezultati}\label{1407-1012}
 
 V tem poglavju opišemo rezultate, ki smo jih pridobili med testiranjem algoritmov. Kot smo omenili v uvodu, smo predstavljene algoritme za matrične napolnitve testirali na slikah z manjkajočimi piksli. 
-Pri surovih podatkih pomena numeričnih vrednosti namreč ni tako enostavno interpretirati, zaradi česar težje ovrednotimo koristnost algoritmov.
+Pri naključno generiranih podatkih bi lahko koristnost algoritmov primerjali zgolj na podlagi numeričnih vrednosti, tu pa bomo imeli še vizualno primerjavo.
 
-Poleg točnosti rezultatov različnih metod merimo tudi čas njihovega izvajanja. Metode testiramo na različnih tipih zašumljenih slik, tj.\ na slikah, ki so zašumljene enakomerno, pa tudi slikah, pri katerih šum predstavlja besedilo, napisano čez sliko.
+Poleg točnosti rezultatov različnih metod merimo tudi čas njihovega izvajanja. Metode testiramo na različnih tipih zašumljenih slik, tj.\ na slikah, ki so zašumljene enakomerno, pa tudi na slikah, pri katerih šum predstavlja besedilo, napisano čez sliko.
 
 V tem odstavku opišemo strukturo poglavja.
 V razdelku \ref{1307-2250} primerjamo algoritme na problemu rekonstrukcije zašumljene velike, črno-bele slike. V razdelku \ref{1307-2251} raziščemo vpliv kompleksnosti motivov na slikah na rezultate algoritmov. V razdelku \ref{1307-2252} preizkusimo in primerjamo dva načina rekonstrukcije podatkov, kjer so nekateri podatki med seboj neodvisni. Iz poglavja \ref{1407-1011} vemo, da nekateri algoritmi (TNNM, ASD, LMaFit) za svoje delovanje potrebujejo informacijo o rangu nezašumljenih podatkov. V razdelku \ref{1307-2253} raziščemo vpliv informacije o rangu na rezultate. V razdelku \ref{1307-2254} preverjamo delovanje algoritmov na slikah, kjer so neznani podatki zgoščeni.
-Zgoščen šum je v našem primeru dodano besedilo na sliki, ki ga želimo odstraniti. Razdelek \ref{1307-2255} pa primerja algoritme z drugačno metodo rekonstrukcije slik, ki neznane piksle določa prek reševanja Poissonove parcialne diferencialne enačbe. 
+Zgoščen šum je v našem primeru dodano besedilo na sliki, ki ga želimo odstraniti. Razdelek \ref{1307-2255} pa primerja algoritme z drugačno metodo rekonstrukcije slik, ki neznane piksle določa prek reševanja Laplaceove parcialne diferencialne enačbe. 
 \iffalse
 \CG{V razdelku \ref{1307-2255} bomo videli, da metoda matričnih napolnitev ni najboljša za rekonstrukcijo slik. Za testiranje na slikah smo se odločili, ker lahko problem lažje vizualiziramo, kot če bi testirali na naključno generiranih podatkih.}
 \fi
 Razdelek \ref{2107-1444} strne ugotovitve, predstavljene v ostalih razdelkih.
 
 
-Vse slike si je mogoče v boljši kakovosti ogledati na povezavi \url{https://cutt.ly/matricne-napolnitve}. Sama implementacija algoritmov pa je dostopna na GitHub repozitoriju \url{https://github.com/selenci/Diploma-Matricne-Napolnitev}.
+Vse slike si je mogoče v boljši kakovosti ogledati na povezavi \url{https://cutt.ly/matricne-napolnitve}. Sama implementacija algoritmov pa je dostopna na GitHub repozitoriju \url{https://github.com/selenci/Diploma-Matricne-Napolnitve}.
+Testiranje smo izvajali na osebnem računalniku, ki uporablja 3.6 GHz šestjederni AMD Ryzen 5 procesor.
 
 \section{Velika črno-bela slika} \label{1307-2250}
 Algoritme najprej testiramo na veliki, črno-beli sliki, velikosti $1000\times1000$ pikslov. Velika slika je bila izbrana, ker omogoča lažje vizualno ocenjevanje delovanja in pravilnosti algoritmov.
-Medtem ko se v sledečih razdelkih osredotočamo na bolj specifična vprašanja o kakovosti rekonstrukcij, je cilj tega razdelka pridobiti osnovno informacijo o delovanju algoritmov. 
+V sledečih razdelkih se osredotočamo na bolj specifična vprašanja o kakovosti rekonstrukcij, cilj tega razdelka pa je pridobiti osnovno informacijo o delovanju algoritmov. 
 To je tudi vodilo za vprašanja, ki
 jih naslovimo v naslednjih razdelkih, kjer
-se zaradi velike časovne zahtevnosti osredotočimo na manjše slike. Algoritme preizkušamo trikrat, na podatkih z deleži znanih vrednosti 0.35, 0.45  in 0.60.
+se zaradi velike časovne zahtevnosti osredotočimo na manjše slike. Algoritme preizkušamo trikrat, tj.\ na podatkih z deleži znanih vrednosti 0.35, 0.45  in 0.60.
 \input{Poglavja/Rezultati/grayscale1000.tex}
 
 \FloatBarrier
@@ -87,7 +88,7 @@ Vsi testi v tej fazi so bili izvedeni na podatkih, kjer imamo poznanih 35\% info
         Trojna rekonstrukcija & $1.66\times 10^4$  & $9.79\times 10^3$ & $1.06 \times 10^4$ \\
         \hline
     \end{tabular}
-    \caption{Napake algoritmov izračunane v Frobeniusovi normi.}
+    \caption{Napake algoritmov, izračunane v Frobeniusovi normi.}
     \label{1307-1550}
 \end{table}
 
@@ -113,7 +114,7 @@ prav tako tudi vizualno med rezultati težko opazimo razlike.
 Hkrati pa vidimo, da je rekonstrukcija pri vseh testiranih algoritmih hitrejša, če ločene barvne kanale rekonstruiramo posebej.  Zaključimo lahko, da je smiselno med seboj neodvisne podatke ločiti in jih obravnavati samostojno. Rezultat je smiseln, saj nam iskanje podobnosti med nepodobnimi podatki poveča količino dela.
 
 \section{Vpliv podatka o rangu na rezultate LMaFit in TNNM} \label{1307-2253}
-Spomnimo se, da algoritma TNNM in LMaFit za svoje izvajanje potrebujeta informacijo o rangu (v nadaljevanju jo bomo imenovali \textit{parameter}). V tem podpoglavju bomo poskušali odgovoriti na vprašanje, kako pri obeh algoritmih ta informacija vpliva na rezultate in hitrost izvajanja. Za namene testiranja smo algoritem na isti sliki pognali večkrat, pri čemer smo postopoma povečevali parameter. Ponovno smo teste izvajali na sliki mesta, z znanim deležem podatkov enakim 0.35.
+Spomnimo se, da algoritma TNNM in LMaFit za svoje izvajanje potrebujeta informacijo o rangu (v nadaljevanju jo bomo imenovali \textit{parameter}). V tem razdelku bomo poskušali odgovoriti na vprašanje, kako pri obeh algoritmih ta informacija vpliva na rezultate in hitrost izvajanja. Za namene testiranja smo algoritem na isti sliki pognali večkrat, pri čemer smo postopoma povečevali parameter. Ponovno smo teste izvajali na sliki mesta, z znanim deležem podatkov enakim 0.35.
 
 \subsection{LMaFit}
 Algoritem LMaFit smo testirali šestkrat, s parametrom nastavljenim na
@@ -129,7 +130,7 @@ V algoritmu namreč omejimo samo ranga nastopajočih matrik $A_l$ in $B_l$, prek
 \FloatBarrier
 
 
-Sami rezultati vizualno med seboj delujejo podobno. Numerični izračun napak sicer pokaže, da se napaka počasi zmanjšuje s povečevanjem ranga, vendar pa se čas reševanja zelo hitro povečuje. Zato se je potrebno odločiti, kako dober rezultat potrebujemo in ali smo točnost pripravljani kompenzirati z bistveno večjo časovno zahtevnostjo rekonstrukcije. Seveda pa velja povedati, da je že pri parametru $1$ TNNM dosegel najboljše rezultate izmed vseh algoritmov, obravnavanih v tej diplomski nalogi.
+Sami rezultati vizualno med seboj delujejo podobno. Numerični izračun napak sicer pokaže, da se napaka počasi zmanjšuje s povečevanjem ranga, vendar pa se čas reševanja zelo hitro povečuje. Zato se je potrebno odločiti, kako dober rezultat potrebujemo in ali smo točnost pripravljeni kompenzirati z bistveno večjo časovno zahtevnostjo rekonstrukcije. Seveda pa velja napisati, da je že pri parametru $1$ TNNM dosegel najboljše rezultate izmed vseh algoritmov, obravnavanih v tej diplomski nalogi.
 
 \section{Rekonstrukcija slike z besedilom} \label{1307-2254}
 V tem razdelku bomo preizkušali učinkovitost algoritmov na slikah, kjer se želimo znebiti nekega besedila na sliki. Gre za drugačno vrsto šuma, kjer so namesto enakomerne razporeditve neznani podatki zgoščeni na določenem delu slike. V našem primeru je bil odstotek znanih podatkov enak 92\%, kar je bistveno več kot v primerih, ki smo si jih ogledali doslej.
@@ -142,7 +143,7 @@ Rezultati teh testov nam pokažejo pomembnost vrste šuma, saj kljub velikemu de
 Diplomsko delo \cite{ERZAR_2023} se ukvarja z rekonstrukcijo slik prek reševanja sistemov Laplaceovih diferencialnih enačb.
 Ta način rekonstrukcije je v praksi pogosto uporabljen, še posebej na zašumljenih slikah in pri odstranjevanju motivov s slik. Zato je smiselno primerjati rezultate takšne rekonstrukcije z metodami rekostrukcij, ki temeljijo na problemu matričnih napolnitev.  Laplaceova enačba je definirana kot
 \[
-    -\frac{\partial^2v(x, y)}{x^2} - \frac{\partial^2v(x, y)}{y^2} = 0.
+    -\frac{\partial^2v(x, y)}{x^2} - \frac{\partial^2v(x, y)}{y^2} = 0,
 \]
 kjer je $v(x,y)$ vrednost piksla v točki $(x, y)$. To je parcialna diferencialna enačba, ki se jo običajno rešuje z uporabo metode \textit{končnih diferenc}. Pri tej metodi odvode aproksimiramo z uporabo diferenčnega kvocienta kot
 \begin{align*}
@@ -156,7 +157,7 @@ Z uporabo \textit{Jacobijeve iteracije} \cite[pogl. 6]{demmel97} lahko problem r
 Zaradi lastnosti vrstične diagonalne dominantnosti matrike Jacobijeve iteracije velja, da bo iteracija konvergirala. Spodaj si lahko ogledamo rezultate rekonstrukcij zašumljene slike mesta.
 \input{Poglavja/Rezultati/poisson.tex}
 \FloatBarrier
-Vidimo, da je algoritem tako hitrejši, kot bolj točen. Vendar je pri primerjavi potrebno upoštevati, da se tak algoritem zanaša na lokalno podobnost podatkov, tj.\ sosedne točke imajo podobne vrednosti barvnih kanalov. Pri problemu minimizacije ranga matrik pa se na take podobnosti ne moremo zanašati. Omenili smo že, da je pomembna uporaba algoritmov matričnih napolnitev v priporočilnih sistemih. V takem primeru sosednost nima pomena, saj imata lahko uporabnika v sosednjih vrsticah povsem različne preference. Prav tako si je lahko zamisliti sliko, kjer bi reševanje Laplaceove enačbe vrnilo slab rezultat. Tak primer je lahko preprosta dvobarvna slika, sestavljena iz več pasov. Očitno je, da ima originalna slika rang 1.
+Vidimo, da je algoritem tako hitrejši, kot bolj točen. Vendar je pri primerjavi potrebno upoštevati, da se tak algoritem zanaša na lokalno podobnost podatkov, tj.\ sosednje točke imajo podobne vrednosti barvnih kanalov. Pri problemu minimizacije ranga matrik pa se na take podobnosti ne moremo zanašati. Omenili smo že, da je pomembna uporaba algoritmov matričnih napolnitev v priporočilnih sistemih. V takem primeru sosednost nima pomena, saj imata lahko uporabnika v sosednjih vrsticah povsem različne preference. Prav tako si je lahko zamisliti sliko, kjer bi reševanje Laplaceove enačbe vrnilo slab rezultat. Tak primer je lahko preprosta dvobarvna slika, sestavljena iz več pasov. Očitno je, da ima originalna slika rang 1.
 \input{Poglavja/Rezultati/dvobarvna.tex}
 Medtem ko so algoritmi SVT, TNNM in LMaFit sliko rekonstruirali točno, je algoritem prek reševanja Laplaceove enačbe, kot pričakovano, tu imel več težav. Prav tako je v večini primerov potreboval več časa.
 
@@ -164,7 +165,7 @@ Medtem ko so algoritmi SVT, TNNM in LMaFit sliko rekonstruirali točno, je algor
 \label{2107-1444}
 Tekom poglavja smo predstavili in interpretirali rezultate številnih testov algoritmov matričnih napolnitev ter analizirali različna vprašanja o rekonstrukciji slik. Postopoma smo predstavljali ugotovitve, ki jih v tem razdelku povzamemo.
 
-Najprej smo algoritme testirali na veliki sliki, ter ugotovili, da algoritem ASD na zašumljenih slikah ne deluje najbolje.  V razdelku \ref{1307-2251} smo testirali razliko v rekonstrukciji preproste in kompleksne slike. Ugotovili smo, da je rekonstrukcija preprostega motiva pri vseh algoritmih točnejša. Videli smo tudi, da je pri algoritmu SVT pomembna izbira praga, saj je ob istem pragu preprost motiv potreboval veliko več časa do konvergence. V istem razdelku smo opisali tudi, kako odstotek znanih podatkov vpliva na čas izvajanja. Videli smo, da algoritem TNNM konvergira hitreje, kadar ima več poznanih podatkov, medtem ko se algoritem SVT upočasni. Ugotovili smo tudi, da je algoritmu LMaFit težko določiti pravilo o času izvajanja. 
+Najprej smo algoritme testirali na veliki sliki in ugotovili, da algoritem ASD na zašumljenih slikah ne deluje najbolje.  V razdelku \ref{1307-2251} smo testirali razliko v rekonstrukciji preproste in kompleksne slike. Ugotovili smo, da je rekonstrukcija preprostega motiva pri vseh algoritmih točnejša. Videli smo tudi, da je pri algoritmu SVT pomembna izbira praga, saj je ob istem pragu preprost motiv potreboval veliko več časa do konvergence. V istem razdelku smo opisali tudi, kako odstotek znanih podatkov vpliva na čas izvajanja. Videli smo, da algoritem TNNM konvergira hitreje, kadar ima več poznanih podatkov, medtem ko se algoritem SVT upočasni. Ugotovili smo še, da je algoritmu LMaFit težko določiti pravilo o času izvajanja. 
 %Ta ugotovitev je pomembna, kadar izbiramo algoritem za rekonstrukcijo.
 
 V razdelku \ref{1307-2252} smo preverili, kako rekonstruirati barvne slike. Ugotovili smo, da je zaradi časa izvajanja bolje ločiti neodvisne podatke (različne barvne kanale) in jih rekonstruirati posebej. Preverili smo tudi pomembnost parametra, povezanega z rangom algoritmov (razdelek \ref{1307-2253}). Ta parameter uporabljata algoritma TNNM in LMaFit. Videli smo, da je za dobre rezultate dobra izbira parametra ključna. Prednost algoritma SVT je ta, da ne zahteva izbiranja parametra. Če o rangu nezašumljene matrike ne vemo ničesar, je torej smiselno razmisliti o uporabi tega algoritma. V okviru razdelka \ref{1307-2254} smo preizkusili še drugačno vrsto šuma, saj smo iz slike odstranjevali besedilo. Videli smo, da kljub visokemu deležu znanih podatkov, rezultati niso bili preveč dobri, saj je del besedila po rekonstrukciji še vedno viden. S tem smo pokazali, da tudi sama vrsta šuma vpliva na rekonstrukcijo.

@@ -8,9 +8,9 @@ algoritem pa temelji na iteraciji
         Y^{(k)} &= Y^{(k-1)} + \delta_k \proj(M - X^{(k)}), 
 \end{align}
 kjer so $\tau > 0$ izbran prag, $\delta_k$ izbran premik, $X^{(0)} = 0 \in \mathbb{R}^{n_1 \times n_2}$ in
-$Y^{(0)} = 0 \in \mathbb{R}^{n_1 \times n_2}$. \cite{CCS}
+$Y^{(0)} = 0 \in \mathbb{R}^{n_1 \times n_2}$. 
 
-V nadaljevanju bomo opisali glavno idejo zgornje iteracije. V grobem pa temelji na uporabi metode za iskanje vezanih ekstremov, kjer elementi matrik $Y^{(k)}$ predstavljajo Lagrangove množitelje. 
+V nadaljevanju bomo opisali glavno idejo zgornje iteracije. V grobem pa temelji na uporabi metode za iskanje vezanih ekstremov, kjer elementi matrik $Y^{(k)}$ predstavljajo Lagrangeove množitelje. 
 
 Uvedimo funkcijo 
 \begin{align}
@@ -25,7 +25,7 @@ in optimizacijski problem
     \textrm{pri pogojih} & \hspace{0.5cm} \proj(X) = \proj(M).
 \end{split}
 \end{align}
-Opazimo lahko, da za velike vrednosti $\tau$ velja $f_\tau(X) \approx \tau\nnorm{X}$, kar pomeni, da bo s primerno izbranim $\tau$, optimizacijski problem minimiziral nuklearno normo.
+Opazimo lahko, da za velike vrednosti $\tau$ velja $f_\tau(X) \approx \tau\nnorm{X}$, kar pomeni, da bo s primerno izbranim $\tau$, optimizacijski problem \eqref{2706-0957} minimiziral nuklearno normo.
 
 Denimo, da želimo poiskati minimum funkcije $f(x)$ pri pogojih $g_1(x)=g_2(x)=\ldots=g_{k}(x)=0$.
 V teoriji vezanih ekstremov se za tovrstne probleme uvede \textbf{Lagrangeovo funkcijo}
@@ -53,16 +53,16 @@ Velja:
 \end{trditev}
 
 \begin{proof}
-Trditev sledi iz krajšega računa:
+Trditev sledi iz naslednjega računa:
 \begin{align*}
     &\argmin_X  \Big(\tau\nnorm{X} + \frac{1}{2}\fnorm{X - Y}^2\Big) \\
-    &=\argmin_X \Big(\tau\nnorm{X} + \frac{1}{2}\trOp{X - Y}{X - Y}\Big)\\
-    &=\argmin_X \Big(\tau\nnorm{X} + \frac{1}{2}(\fnorm{X}^2 - 2\trOp{X}{Y} + \fnorm{Y}^2)\Big) \\ 
-    &=\argmin_X \Big(\tau\nnorm{X} + \frac{1}{2}\fnorm{X}^2 - \trOp{X} {\proj(Y)}\Big)\\
-    &=\argmin_X \Big(\tau\nnorm{X} + \frac{1}{2}\fnorm{X}^2 + \tr(- \proj(X)Y^T) + \tr(\proj(M)Y^T)\Big)\\
-    &=\argmin_X \Big(\tau\nnorm{X} + \frac{1}{2}\fnorm{X}^2 + \tr(\proj(M - X)Y^T)\Big)\\
-    &=\argmin_X \Big(\tau\nnorm{X} + \frac{1}{2}\fnorm{X}^2 + \trOp{Y}{\proj(M - X)}\Big)\\ 
-    &= \argmin_X \mathcal{L}(X, Y)
+    &=^1\argmin_X \Big(\tau\nnorm{X} + \frac{1}{2}\trOp{X - Y}{X - Y}\Big)\\
+    &=^2\argmin_X \Big(\tau\nnorm{X} + \frac{1}{2}(\fnorm{X}^2 - 2\trOp{X}{Y} + \fnorm{Y}^2)\Big) \\ 
+    &=^3\argmin_X \Big(\tau\nnorm{X} + \frac{1}{2}\fnorm{X}^2 - \trOp{X} {\proj(Y)}\Big)\\
+    &=^4\argmin_X \Big(\tau\nnorm{X} + \frac{1}{2}\fnorm{X}^2 + \tr(- \proj(X)Y^T) + \tr(\proj(M)Y^T)\Big)\\
+    &=^5\argmin_X \Big(\tau\nnorm{X} + \frac{1}{2}\fnorm{X}^2 + \tr(\proj(M - X)Y^T)\Big)\\
+    &=^6\argmin_X \Big(\tau\nnorm{X} + \frac{1}{2}\fnorm{X}^2 + \trOp{Y}{\proj(M - X)}\Big)\\ 
+    &=^7 \argmin_X \mathcal{L}(X, Y)
 \end{align*}
 kjer smo v prvi enakosti uporabili definicijo Frobeniusove norme, v drugi bilinearnost skalarnega produkta, 
 v tretji smo ignorirali konstanto $\fnorm{Y}^2$, saj ne vpliva na rezultat, 
@@ -84,7 +84,7 @@ $Y \in \mathbb{R}^{n_1 \times n_2}$ velja:
 \end{theorem}
 
 \begin{proof} 
-Najprej se spomnimo definicije konveksne funkcije. Funkcija $f$ je konveksna, če za katerikoli dve točki $x_1, x_2$ v domeni funkcije $f$ velja, da je premica čez ti dve točki na odseku med tema dvema točkama nad grafom funkcije $f$.
+Najprej se spomnimo definicije konveksne funkcije. Funkcija $f$ je konveksna, če za katerikoli dve točki $x_1, x_2$ v domeni funkcije $f$ velja, da je premica čez ti dve točki, na odseku med tema dvema točkama, nad grafom funkcije $f$.
 Funkcija $h(X) := \frac{1}{2} \fnorm{X-Y}^2 + \tau\nnorm{X} $ je konveksna funkcija, saj potreben pogoj trikotniške neenakosti matričnih norm zagotavlja, da je matrična norma konveksna funkcija. Vsota konveksnih funkcij pa je prav tako konveksna funkcija. 
 %\todo{ali je potrebno citirati} 
 Zaradi konveksnosti funkcije $f$ je 
@@ -104,27 +104,60 @@ V minimumu funkcije $f$ bo eden od subgradientov iščemo minimum $X'$ funkcije 
 
 Izkaže se \cite{CCS}, da je množica subgradientov nuklearne norme v točki $X$ enaka
 \begin{equation}  \label{2807-0932}  
-    \partial\nnorm{X} = \{UV^* + W: W \in \mathbb{R}^{n_1 \times n_2}, U^*W = \mathbf{0}, WV = \mathbf{0}, \norm{W}_2 \leq 1 \},
+    \partial\nnorm{X} = \{UV^T + W: W \in \mathbb{R}^{n_1 \times n_2}, U^TW = \mathbf{0}, WV = \mathbf{0}, \norm{W}_2 \leq 1 \},
 \end{equation}
 kjer $U \Sigma V^T$ predstavlja SVD razcep matrike $X$. S krajšim računom lahko preverimo, da za vsak par $(i,j)$ velja $\frac{\partial}{\partial X_{ij}}\fnorm{X-Y}^2 = 2(X_{ij} - Y_{ij})$. 
 Če te parcialne odvode zložimo v matriko, dobimo $2(X-Y)$. Od tod sledi, da je $X-Y$ eden od subgradientov funkcije $h_1(X):=\frac{1}{2}\fnorm{X-Y}^2$ v točki $X$ \cite[3.1.3]{boyd2004convex}.
 Iz teh dveh premislekov sledi, da bo $X'$ minimum $h$ natanko tedaj, ko velja 
-\begin{equation} \label{2807-0940}
+\begin{equation*}
     \mathbf{0} \in X' - Y + \tau \partial\nnorm{X'}.
+\end{equation*}
+Trditev izreka bo sledila, če pokažemo, da velja 
+\begin{equation*} 
+    \mathbf{0} \in \shrink_\tau(Y) - Y + \tau \partial\nnorm{\shrink_\tau(Y)},
+\end{equation*}
+oz.\ ekvivalentno
+\begin{equation} \label{0508-1746}
+    Y-\shrink_\tau(Y) \in \tau \partial\nnorm{\shrink_\tau(Y)},
 \end{equation}
-Trditev izreka bo sledila, če pokažemo, da velja $X' = \shrink_\tau(Y)$. Najprej razčlenimo SVD razcep matrike $Y$ kot 
-\[
+Sedaj razčlenimo SVD razcep matrike $Y$ kot 
+\begin{equation} \label{0508-1752}
     Y = U_0\Sigma_0V_0^T + U_1\Sigma_1V_1^T,
-\]
-kjer se $U_0, \Sigma_0$ in $V_0$ nanaša na singularne vrednosti in pripadajoče singularne vektorje večje od $\tau$, $U_1, \Sigma_1$ in $V_1$ pa tiste manjše od $\tau$. Pokazati želimo, da velja 
+\end{equation}
+kjer se $U_0, \Sigma_0$ in $V_0$ nanašajo na singularne vrednosti in pripadajoče singularne vektorje, večje od $\tau$, $U_1, \Sigma_1$ in $V_1$ pa na tiste, manjše od $\tau$. 
+Spomnimo se definicije 
+\begin{equation} \label{0508-1757}
+\shrink_\tau(Y)=U_0(\Sigma_0 - \tau I)V_0^T.
+\end{equation}
+Upoštevamo \eqref{0508-1752} in \eqref{0508-1757}  v \eqref{0508-1746}, s čimer preostane dokazati
+\begin{equation} \label{0508-1755}
+    U_1\Sigma_1V_1^T+\tau U_0 V_0^T\in
+    \tau \partial\nnorm{\shrink_\tau(Y)}.
+\end{equation}
+\iffalse
+Pokazati želimo, da velja 
 \[
     X' = U_0(\Sigma_0 - \tau I)V_0^T,
 \] 
-kar pa je po definiciji natanko enako operatorju $\shrink_\tau(Y)$. S pretvorbo \eqref{2807-0940} pridemo do zapisa
+kar pa je po definiciji natanko enako operatorju $\shrink_\tau(Y)$.
+S pretvorbo \eqref{2807-0940} pridemo do zapisa
 \begin{equation} \label{2807-0934}
     Y- X' \in \tau \partial \nnorm{X'}.
 \end{equation}
-Sedaj iščemo tako matriko $W$, da bodo zanjo držali pogoji, podani v \eqref{2807-0932}, prav tako pa bo po \eqref{2807-0934} držalo $Y - X' = \tau (U_0V_0^T + W)$. Spodaj bomo preverili, da je primerna izbira za $W$ enaka $W= \tau^{-1} U_1 \Sigma_1 V_1^T$. 
+\fi
+Sedaj iščemo tako matriko $W$, da bodo zanjo držali pogoji, podani v \eqref{2807-0932}, uporabljeni za $X=\shrink_\tau(Y)$, prav tako pa bo po veljala enakost
+\begin{equation} \label{0508-1804}
+    U_1\Sigma_1V_1^T+\tau U_0 V_0^T
+    =
+    \tau(U_0V_0^T +W).
+\end{equation}
+V zadnji enakosti smo upoštevali, da je SVD razcep matrike $\shrink_\tau(Y)$ enak \eqref{0508-1757}.
+Definirajmo
+\begin{equation} \label{0508-1807}
+    W= \tau^{-1} U_1 \Sigma_1 V_1^T
+\end{equation}
+in preverimo, da je to prava izbira za $W$.
+\iffalse
 Veljavnost željene enakosti
 preverimo s kratkima računoma:
 \begin{align*}
@@ -133,13 +166,17 @@ preverimo s kratkima računoma:
     &= \tau U_0 V_0^T + U_1\Sigma_1 V_1^T
 \end{align*}
 in 
+\fi
+Če upoštevamo \eqref{0508-1807} na desni strani \eqref{0508-1804}, dobimo
 \begin{align*}
     \tau(U_0 V_0^T + W) &= \tau(U_0V_0^T + \tau^{-1} U_1 \Sigma_1 V_1^T)\\ 
-    &= \tau U_0 V_0^T + U_1 \Sigma_1 V_1^T. 
+    &= \tau U_0 V_0^T + U_1 \Sigma_1 V_1^T, 
 \end{align*}
-Sedaj je zgolj potrebno pokazati, da veljajo potrebne lastnosti matrike $W$.
-Po sami definiciji SVD vemo, da so stolpci matrik $U$ in $V$ ortogonalni. Torej velja $U_0^TW = 0$ in $WV_0 = 0$. Ker pa ima matrika $\Sigma_1$ vse elemente manjše od $\tau$, velja tudi $\norm{W}_2 \leq 1$. $\norm{A}_2$ je namreč definirana kot največja singularna vrednost matrike $A$. S tem smo pokazali, da je $Y - X' \in \tau \partial \nnorm{X'}$.
+kar je ravno leva stran \eqref{0508-1804}.
+Sedaj je zgolj potrebno pokazati, da veljajo potrebne lastnosti matrike $W$ iz \eqref{2807-0932}. 
+Iz definicije matrik $U_0,U_1,V_0,V_1$ sledi $U_0^T U_1=V_1^TV_0=0$. Torej veljata enakosti $U_0^TW = 0$ in $WV_0 = 0$. Ker pa ima matrika $\Sigma_1$ vse elemente manjše od $\tau$, velja tudi $\norm{W}_2 \leq 1$. $\norm{W}_2$ je namreč enaka največji singularni vrednosti matrike $W$, ki jo razberemo iz diagonale matrike $\tau^{-1}\Sigma_1$. S tem smo preverili veljavnost \eqref{0508-1746}, kar konča dokaz izreka.
 \end{proof}
+
 Z uporabo \eqref{1007-2018}, \eqref{1007-2019}
 in izreka \ref{1907-2240}
 res pridemo do iteracije
@@ -158,7 +195,6 @@ Po trditvi lahko sedaj zapišemo algoritem \eqref{1007-2018} - \eqref{1007-2019}
 \subsection{Nastavljanje parametrov $\tau$ in $\delta$} \label{1907-1648}
 Opazimo lahko, da algoritem SVT potrebuje dva parametra, $\tau$ in $\delta$, ki ju moramo izbrati 
 že pred vstopom v algoritem.
-
 Po priporočilih \cite{CCS}
 sta primerni izbiri za $\delta$ in $\tau$
 enaki 
@@ -182,4 +218,4 @@ Prav tako članek \cite{CCS} navaja, da je za matrike velikosti $\mathbb{R}^{n \
     \tau = 5\, \frac{n_1+n_2}{2}
 \]
 \fi
-V naših testiranjih se je izkazalo, da sta taka parametra dobra za večje matrike. V razdelku \ref{1307-2251} pa bomo videli, da moramo pri manjših matrikah pogosto zmanjšati premik in povečati prag.
+V naših testiranjih se je izkazalo, da sta tako izbrana parametra dobri izbiri za večje matrike. V razdelku \ref{1307-2251} pa bomo videli, da moramo pri manjših matrikah pogosto zmanjšati premik in povečati prag.

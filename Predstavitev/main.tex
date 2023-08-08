@@ -132,7 +132,7 @@ recommendation systems}
     \item Minimizira \alert{prirezano nuklearno normo} \[
             \norm{X}_r = \sum_{i = r + 1}^{\min(n_1, n_2)} \sigma_i(X)
           \]
-    \item Uporabi $A_l, B_l$, sestavljeni iz \alert{lastnih vektorjev} $X$
+    \item Uporabi $A_l, B_l$, sestavljeni iz \alert{singularnih vektorjev} $X$
     \item Uporablja iterativni algoritem \alert{ADMM}, definira pomožni matriki $W, Y$
           \begin{align*}
             X^{(k+1)} & = \shrink_\frac{1}{\beta}(W^{(k)} - \frac{1}{\beta} Y^{(k)}) \\
@@ -145,7 +145,7 @@ recommendation systems}
 \begin{frame}
   \frametitle{Algoritem ASD}
   \begin{itemize}
-    \item Išče matriki $X, Y$ katerih \alert{produkt} bo enak rekonstrukciji
+    \item Išče matriki $X \in \mathbb{R}^{n_1 \times r}, Y \in \mathbb{R}^{r \times n_2}$ katerih \alert{produkt} bo enak rekonstrukciji
     \item Uporablja \alert{gradientni spust} nad funkcijo \[
             f(X, Y) = \frac{1}{2}\, \fnorm{\proj(M) - \proj(XY)}^2
           \]

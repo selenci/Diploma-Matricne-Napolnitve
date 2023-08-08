@@ -1,6 +1,6 @@
 \section{LMaFit} \label{2807-1447}
 \textbf{LMaFit} \cite{LMaFit-WY12} je algoritem, ki podobno kot ASD, rešuje problem matričnih napolnitev z uporabo dveh manjših matrik $X^{n_1 \times r}$ in $Y^{r \times n_2}$.
-Optimizacijski problem, ki ga rešuje LMaFit je
+Optimizacijski problem, ki ga rešuje LMaFit, je
 \begin{align*}
     \min_{X, Y, Z}& \hspace{0.5cm} \frac{1}{2}\fnorm{XY - Z}^2,\\
     \text{pri pogoju}& \hspace{0.5cm} \proj(M) = \proj(Z).
@@ -8,7 +8,8 @@ Optimizacijski problem, ki ga rešuje LMaFit je
 LMaFit za rešrevanje tega problema uporabi
 Moore-Penroseov (MP) inverz. V nadaljevanju bomo MP inverz matrike $A$ označevali z $A^\dagger$.
 
-Očitno bo imela funkcija $f(X,Y,Z) = \frac{1}{2}\fnorm{XY - Z}^2$ najmanjšo vrednost natanko tedaj, ko bo $XY = Z$. 
+Očitno bo imela funkcija 
+$$f(X,Y,Z) = \frac{1}{2}\fnorm{XY - Z}^2$$ najmanjšo vrednost natanko tedaj, ko bo $XY = Z$. 
 LMaFit izmenično posodablja matrike $X, Y$ in $Z$, pri čemer eno spreminja, preostali dve pa fiksira. Matriko $X$ posodobi po formuli
 \begin{align*}
     X^{(k+1)}Y^{(k)}&= Z^{(k)}
@@ -17,8 +18,8 @@ LMaFit izmenično posodablja matrike $X, Y$ in $Z$, pri čemer eno spreminja, pr
     \qquad
     X^{(k+1)} = Z^{(k)}(Y^{(k)})^\dagger,
 \end{align*}
-pri čemer uporablja dejstvo, da množenje z MP inverzom z desne 
-da najboljši rezultat po metodi najmanjših kvadratov \cite[pogl. 3]{demmel97}.
+pri čemer uporablja dejstvo, da pri množenju z MP inverzom z desne 
+dobimo najboljši rezultat po metodi najmanjših kvadratov \cite[pogl. 3]{demmel97}.
 Podobno posodobimo matriko $Y$.
 \begin{align*}
     \hspace{0.5cm} X^{(k+1)}Y^{(k+1)} &= Z^{(k)}    \qquad 
@@ -27,7 +28,7 @@ Podobno posodobimo matriko $Y$.
     Y^{(k+1)} = (X^{(k+1)})^\dagger Z^{(k)}.
 \end{align*}
 
-Na koncu le še posodobimo matriko $Z$, kot
+Na koncu le še posodobimo matriko $Z$ kot
 \[
     Z^{(k+1)} = X^{(k+1)}Y^{(k+1)} + \proj(M - X^{(k+1)}Y^{(k+1)}).
 \]

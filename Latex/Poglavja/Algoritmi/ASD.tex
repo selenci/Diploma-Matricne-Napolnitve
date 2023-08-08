@@ -2,11 +2,11 @@
 Računanje SVD razcepa je zahtevna operacija, saj ima časovno zahtevnost
 $O(n^3)$, kar je lahko za velike matrike zelo počasno. Zato je bilo izpeljanih nekaj algoritmov, ki za svoje delovanje ne potrebujejo SVD-ja. \textbf{Algoritem izmenjujočega gradientnega spusta (ASD)} \cite{AST-TK15} 
 temelji na izračunu gradienta in premiku
-v smeri tega za nek korak. Ideja algoritma je poiskati matriki $X \in \mathbb{R}^{n_1 \times r}$ ter $Y \in \mathbb{R}^{r \times n_2}$, tako da velja $\proj(M) = \proj(XY)$. Tudi tu potrebujemo informacijo o rangu matrike, ki jo rekonstruiramo. Ker imata $X$ in $Y$ rang največ $r$, tudi njun produkt $XY$ ne bo imel ranga večjega od $r$. 
+v smeri tega za nek korak. Ideja algoritma je poiskati matriki $X \in \mathbb{R}^{n_1 \times r}$ in $Y \in \mathbb{R}^{r \times n_2}$, tako da velja $\proj(M) = \proj(XY)$. Tudi tu potrebujemo informacijo o rangu matrike, ki jo rekonstruiramo. Ker imata $X$ in $Y$ rang največ $r$, tudi njun produkt $XY$ ne bo imel ranga večjega od $r$. 
 
 Cilj algoritma je rešiti optimizacijski problem
 \[
-    \min_{\substack{X\in \mathbb{R}^{n_1 \times r}, \\Y \in \mathbb{R}^{r \times n_2}}} \hspace{0.5cm} \frac{1}{2}\, \fnorm{\proj(M) - \proj(XY)}^2
+    \min_{\substack{X\in \mathbb{R}^{n_1 \times r}, \\Y \in \mathbb{R}^{r \times n_2}}} \hspace{0.5cm} \frac{1}{2}\, \fnorm{\proj(M) - \proj(XY)}^2.
 \] 
 Algoritem problem minimizacije razdeli na dva optimizacijska podproblema, ki ju rešuje izmenično s pomočjo iterativnega postopka
 \begin{align}
@@ -17,12 +17,14 @@ Algoritem problem minimizacije razdeli na dva optimizacijska podproblema, ki ju 
 \end{align}
 
 
-Za uporabo algoritma ASD potrebujemo gradienta funkcije $f(X,Y) = \frac{1}{2}\, \fnorm{\proj(M) - \proj(XY)}^2$ po obeh spremenljivkah, ki ju izračunamo za vsak element posebej.
+Za uporabo algoritma ASD potrebujemo gradienta funkcije 
+    $$f(X,Y) = \frac{1}{2}\, \fnorm{\proj(M) - \proj(XY)}^2$$ 
+po obeh spremenljivkah, ki ju izračunamo za vsak element posebej.
 Za reševanje \eqref{2507-0927} so spremenljivke elementi matrike $X$,
-za reševanje \eqref{2507-0928} pa elementi matrike $Y$. Zaradi enostavnosti definiramo dve pomožni funkciji. Funkcija $f_Y(X)$ je enaka funkciji $f(X, Y)$, le da vrednost $Y$ jemljemo kot konstanto. Simetrično definiramo $f_X(Y)$, kjer jemljemo vrednost $X$ funkcije $f(X, Y)$ za konstantno. Sedaj preprosto poiščemo oba gradienta pomožnih funkcij, označena z $\nabla f_Y(X)$ in $\nabla f_X(Y)$, ter najboljša premika po gradientih, označena s $t_x$ in $t_y$. Sam algoritem se potem preprosto premika po gradientih za določen premik. Koraka algoritma bomo v vsaki iteraciji definirali kot
+za reševanje \eqref{2507-0928} pa elementi matrike $Y$. Zaradi enostavnosti definiramo dve pomožni funkciji. Funkcija $f_Y(X)$ je enaka funkciji $f(X, Y)$, le da vrednost $Y$ obravnavamo kot konstanto. Simetrično definiramo $f_X(Y)$, kjer obravnavamo vrednost $X$ funkcije $f(X, Y)$ za konstantno. Sedaj preprosto poiščemo oba gradienta pomožnih funkcij, označena z $\nabla f_Y(X)$ in $\nabla f_X(Y)$, ter najboljša premika po gradientih, označena s $t_x$ in $t_y$. Sam algoritem se potem preprosto premika po gradientih za izračunan premik. Koraka algoritma bomo v vsaki iteraciji definirali kot
 \begin{align}
     \begin{split} \label{2607-1726}
-    X^{(k+1)} = X^{(k)} - t_{x^{(k)}} \nabla f_{Y^{(k)}}(X^{(k)}) \\
+    X^{(k+1)} = X^{(k)} - t_{x^{(k)}} \nabla f_{Y^{(k)}}(X^{(k)}), \\[0.2em]
     Y^{(k+1)} = Y^{(k)} - t_{y^{(k)}} \nabla f_{X^{(k+1)}}(Y^{(k)}).
     \end{split}
 \end{align}
@@ -30,15 +32,15 @@ za reševanje \eqref{2507-0928} pa elementi matrike $Y$. Zaradi enostavnosti def
 \begin{theorem}
 Veljajo naslednje enakosti:
 \begin{align*}
-    \nabla f_Y(X) &= -(\proj(M) - \proj(XY))Y^T,\\
-    \nabla f_X(Y) &= -X^T (\proj(M) - \proj(XY)),\\
-    t_x &= \frac{\fnorm{\nabla f_Y(X)}^2}{\fnorm{\proj(\nabla f_Y(X)Y)}^2},  \\
+    \nabla f_Y(X) &= -(\proj(M) - \proj(XY))Y^T,\\[0.2em]
+    \nabla f_X(Y) &= -X^T (\proj(M) - \proj(XY)),\\[0.2em]
+    t_x &= \frac{\fnorm{\nabla f_Y(X)}^2}{\fnorm{\proj(\nabla f_Y(X)Y)}^2},  \\[0.2em]
     t_y &= \frac{\fnorm{\nabla f_X(Y)}^2}{\fnorm{\proj(X \nabla f_X(Y))}^2}. 
 \end{align*}
 \end{theorem}
 
 \begin{proof}
-Pri tem dokazu nam bo prav prišla pomožna funkcija $\delta_{i, j}$, definirana kot
+V dokazu nam bo prav prišla pomožna funkcija $\delta_{i, j}$, definirana kot
 \[
     \delta_{i,j} = 
     \left\{

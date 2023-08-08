@@ -1,15 +1,16 @@
 \chapter{Uvod}
 \section{Motivacija}
-\textit{Problem matričnih napolnitev (PMN)} sprejme matriko, v kateri nekaterih elementov ne poznamo in sprašuje po določitvi vrednosti neznanih elementov. Napolnjeni matriki pravimo tudi \textit{napolnitev}. Običajen kriterij za določanje neznanih vrednosti je, da bo rang napolnitve najmanjši možen.
-Ta kriterij je smiseln, ker želimo, da se napolnitev čim bolj prilega znanim podatkom. To pa dosežemo ravno z minimizacijo ranga, saj bo v tem primeru največ vrstic oz.\ stolpcev linearno odvisnih od preostalih.
+\textit{Problem matričnih napolnitev (PMN)} sprejme matriko, v kateri nekaterih elementov ne poznamo in sprašuje po določitvi vrednosti neznanih elementov. Napolnjeni matriki pravimo tudi \textit{napolnitev}. Običajen cilj pri določanju neznanih vrednosti je minimizirati rang napolnitve.
+Ta cilj je smiseln, ker želimo, da se napolnitev čim bolj prilega znanim podatkom. To pa dosežemo ravno z minimizacijo ranga, saj bo v tem primeru največ vrstic oz.\ stolpcev linearno odvisnih od preostalih.
 Ker pa je to zelo zahteven optimizacijski problem, ki spada v razred \textit{NP-polnih} problemov \cite{Survey-NKS19},
 obstaja veliko različnih poenostavitev.
 Te poenostavitve rešujejo sorodne lažje probleme, pri čemer je cilj najti dovolj dober približek prave rešitve prvotnega problema. 
 
 PMN je zaradi uporabe na številnih področjih zelo
-popularen in dobro študiran, tako na področju matematike kot računalništva.
-Uporabe segajo na področje priporočilnih sistemih, rekonstrukcije signalov, rekonstrukcije in kompresije slik ter računanje razdalj med napravami.
-Ker gre pri različnih uporabah za probleme različnih dimenzij, med algoritmi ne obstaja tak, ki bi vedno dajal najbolj kakovostne rezultate in bil najhitrejši. Zato je izbira algoritma zelo odvisna tudi od problema samega. 
+popularen in obsežno študiran, tako na področju matematike kot računalništva.
+Uporabe segajo na številna področja, npr.\ priporočilne sisteme, rekonstrukcije signalov, rekonstrukcije in kompresije slik 
+ in določanje razdalj med napravami.
+Ker gre pri tovrstnih uporabah za probleme različnih dimenzij, med algoritmi ne obstaja tak, ki bi vedno vračal najbolj kakovostne rezultate in bi hkrati deloval najhitreje. Zato je izbira algoritma zelo odvisna tudi od problema samega. 
 
 \iffalse
 \CG{Algoritme testiramo in primerjamo na problemih razreševanja neznanih pikslov v slikah. Videli bomo, da poznamo boljše algoritme, ki rešujejo ta problem. Ker pa potrebujemo za izračun napake nezašumljeno matriko, je ta vrsta podatkov primerna. Tudi literatura za namene testiranja uporablja slike ali pa naključno generirane podatke. Ker pa lahko slike tudi vizualno opazujemo, se v diplomskem delu osredotočamo na te.} 
@@ -24,11 +25,11 @@ diplomskega dela se je seznaniti z nekaj različnimi algoritmi
 za reševanje PMN, pri čemer 
 želimo spoznati čim več različnih matematičnih orodij.
 Podrobno bi radi razumeli matematično ozadje predstavljenih algoritmov, saj samo tako lahko dobro interpretiramo opažanja pri testiranju na primerih.
-Študirane algoritme želimo implementirati in testirati njihovo delovanje na izbranih primerih uporabe. Po opravljenih testiranjih in interpretaciji ugotovitev bi hoteli predlagati možne izboljšave, ali nov algoritem, ki bi odpravil pomanjkljivosti, opažene pri testiranjih. 
+Študirane algoritme želimo implementirati in testirati njihovo delovanje na izbranih primerih uporabe. Po opravljenih testiranjih in interpretaciji ugotovitev je naš cilj predlagati možne izboljšave, ki bi odpravile pomanjkljivosti, ugotovljene pri testiranjih. 
 
 Glavni prispevki tega diplomskega dela so 
 predstavitev matematičnega ozadja petih različnih algoritmov za reševanje PMN - s kraticami NNM, SVT, TNNM, LMaFit, ASD,
-implementacija teh algoritmov v programu Matlab, analiza izbire vhodnih parametrov v algoritem in analiza kakovosti ter časovne zahtevnosti njihovega delovanja na  problemu rekonstrukcije zašumljenih slik. Koda implementacij je na voljo na javnem GitHub repozitoriju \url{https://github.com/selenci/Diploma-Matricne-Napolnitev}.
+implementacija teh algoritmov v programu Matlab, analiza izbire vhodnih parametrov v algoritme in analiza kakovosti ter časovne zahtevnosti njihovega delovanja na  problemu rekonstrukcije zašumljenih slik. Koda implementacij je na voljo na javnem GitHub repozitoriju \url{https://github.com/selenci/Diploma-Matricne-Napolnitve}.
 
 \iffalse
 Cilj diplomske naloge je predstaviti uporabnost algoritmov, ter razložiti zakaj delujejo. Ideje različnih algoritmov ter njihove pristope do problema poskušamo kar se da jasno predstaviti in interpretirati.
@@ -40,4 +41,4 @@ Glavni prispevki te diplomske naloge so implementacija vseh omenjenih algoritmov
 
 \section{Struktura diplomskega dela}
 
-V poglavju \ref{1407-1010} podamo pregled sorodnih dela o iz področja matričnih napolnitev. V poglavju \ref{1407-1011} predstavimo matematično ozadje izbranih algoritmov in izpeljemo glavne korake, na katerih temeljijo ti algoritmi. V poglavju \ref{1407-1012} predstavimo rezultate naše analize izbranih algoritmov, uporabljenih na problemu rekonstrukcije zašumljenih slikah. Poglavje je razdeljeno na razdelke, v katerih poskušamo odgovoriti na različna vprašanja, ki se porajajo med rekonstrukcijo. V poglavju \ref{1407-1013} diplomsko delo strnemo in navedemo nekaj idej za nadaljnje delo.
+V poglavju \ref{1407-1010} podamo pregled sorodnih del iz področja matričnih napolnitev. V poglavju \ref{1407-1011} predstavimo matematično ozadje izbranih algoritmov in izpeljemo glavne korake, na katerih temeljijo ti algoritmi. V poglavju \ref{1407-1012} predstavimo rezultate naše analize izbranih algoritmov, uporabljenih na problemu rekonstrukcije zašumljenih slikah. Poglavje je razdeljeno na razdelke, v katerih poskušamo odgovoriti na različna vprašanja, ki se pojavijo med rekonstrukcijo. V poglavju \ref{1407-1013} diplomsko delo strnemo in navedemo nekaj idej za nadaljnje delo.
